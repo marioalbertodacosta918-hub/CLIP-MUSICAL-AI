@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Projeto — CLIP MUSICAL AI</title>
+<title>CLIP MUSICAL AI</title>
 
 <style>
 
@@ -20,28 +19,28 @@ body{
 background:#0b0b12;
 color:white;
 min-height:100vh;
-}
-
-header{
-background:linear-gradient(135deg,#15152a,#25114a);
-padding:22px 18px;
-border-bottom:1px solid #333;
-}
-
-header h1{
-font-size:25px;
-margin-bottom:6px;
-}
-
-header p{
-color:#bdbdc9;
-font-size:13px;
+padding:20px;
 }
 
 .container{
-max-width:800px;
+max-width:700px;
 margin:auto;
-padding:22px 16px 50px;
+}
+
+header{
+text-align:center;
+padding:25px 10px;
+}
+
+header h1{
+font-size:30px;
+margin-bottom:10px;
+}
+
+header p{
+color:#aaaab8;
+font-size:14px;
+line-height:1.5;
 }
 
 .card{
@@ -61,42 +60,35 @@ margin-bottom:10px;
 color:#aaaab8;
 font-size:13px;
 line-height:1.5;
-margin-bottom:15px;
 }
 
-.project-info{
-display:grid;
-gap:10px;
-}
-
-.info{
-background:#0d0d15;
-border:1px solid #30303d;
-padding:13px;
-border-radius:10px;
-}
-
-.info strong{
+label{
 display:block;
-color:#aaaab8;
-font-size:12px;
-margin-bottom:5px;
+font-size:14px;
+font-weight:bold;
+margin-bottom:8px;
 }
 
-.info span{
-font-size:14px;
+input,
+textarea,
+select{
+width:100%;
+padding:13px;
+margin-bottom:15px;
+border-radius:10px;
+border:1px solid #363644;
+background:#0d0d15;
+color:white;
 }
 
 textarea{
-width:100%;
-min-height:160px;
-background:#0d0d15;
-color:white;
-border:1px solid #363644;
-border-radius:12px;
-padding:13px;
+min-height:150px;
 resize:vertical;
 line-height:1.5;
+}
+
+input[type="file"]{
+padding:10px;
 }
 
 .button{
@@ -109,55 +101,14 @@ color:white;
 font-size:16px;
 font-weight:bold;
 cursor:pointer;
-margin-top:10px;
+margin-top:8px;
 }
 
 .button:active{
 transform:scale(.98);
 }
 
-.secondary{
-background:#22222e;
-border:1px solid #3b3b4a;
-}
-
-.scene{
-background:#0d0d15;
-border:1px solid #30303d;
-border-radius:14px;
-padding:15px;
-margin-top:12px;
-}
-
-.scene-title{
-font-weight:bold;
-margin-bottom:8px;
-}
-
-.scene p{
-margin:0;
-}
-
-.tag{
-display:inline-block;
-padding:5px 9px;
-border-radius:20px;
-background:#262033;
-color:#d8b4fe;
-font-size:11px;
-margin-top:8px;
-margin-right:5px;
-}
-
-#roteiro{
-display:none;
-}
-
-#geracao{
-display:none;
-}
-
-#mensagem{
+.status{
 display:none;
 background:#111827;
 border:1px solid #374151;
@@ -166,68 +117,27 @@ padding:14px;
 margin-top:15px;
 text-align:center;
 color:#d1d5db;
-line-height:1.5;
 }
 
-.progress{
-height:10px;
-background:#272733;
-border-radius:10px;
-overflow:hidden;
-margin-top:15px;
+.summary{
 display:none;
-}
-
-.progress-bar{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#7c3aed,#ec4899);
-transition:width .4s;
-}
-
-.preview{
-display:none;
-background:#050507;
-border:1px solid #383845;
-border-radius:16px;
-padding:20px;
-margin-top:18px;
-text-align:center;
-}
-
-.preview-box{
-aspect-ratio:16/9;
-background:linear-gradient(135deg,#111827,#312e81,#581c87);
+background:#111827;
+border:1px solid #374151;
 border-radius:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:42px;
-margin-bottom:15px;
+padding:15px;
+margin-top:15px;
 }
 
-.preview h3{
+.summary div{
 margin-bottom:8px;
 }
 
-.preview p{
-margin:0;
+.summary div:last-child{
+margin-bottom:0;
 }
 
-#videoArea{
-display:none;
-margin-top:20px;
-}
-
-video{
-width:100%;
-border-radius:12px;
-background:#000;
-margin-top:12px;
-}
-
-.download{
-background:linear-gradient(135deg,#059669,#10b981);
+.summary strong{
+color:#d8b4fe;
 }
 
 .footer{
@@ -235,6 +145,7 @@ text-align:center;
 color:#777;
 font-size:12px;
 margin-top:25px;
+padding-bottom:20px;
 }
 
 </style>
@@ -242,269 +153,208 @@ margin-top:25px;
 
 <body>
 
+<div class="container">
+
 <header>
 
 <h1>🎬 CLIP MUSICAL AI</h1>
 
-<p>Painel de criação do seu clipe</p>
+<p>
+Transforme sua música em um clipe com inteligência artificial.
+</p>
 
 </header>
 
-<div class="container">
+
+<!-- MÚSICA -->
+
+<div class="card">
+
+<h2>🎵 1. Sua música</h2>
+
+<p>
+Envie a música que será usada no seu clipe.
+</p>
+
+<br>
+
+<input
+type="file"
+id="musica"
+accept="audio/*"
+>
+
+</div>
+
+
+<!-- IMAGENS -->
+
+<div class="card">
+
+<h2>🖼️ 2. Imagens de referência</h2>
+
+<p>
+Adicione imagens para servir como referência visual.
+</p>
+
+<br>
+
+<input
+type="file"
+id="imagens"
+accept="image/*"
+multiple
+>
+
+</div>
+
+
+<!-- LETRA -->
+
+<div class="card">
+
+<h2>📝 3. Letra da música</h2>
+
+<p>
+Cole a letra para ajudar a criar a narrativa do clipe.
+</p>
+
+<br>
+
+<textarea
+id="letra"
+placeholder="Cole aqui a letra da sua música..."
+></textarea>
+
+</div>
+
+
+<!-- ESTILO -->
+
+<div class="card">
+
+<h2>🎨 4. Estilo do clipe</h2>
+
+<select id="estilo">
+
+<option value="Cinematográfico">
+Cinematográfico
+</option>
+
+<option value="3D">
+3D
+</option>
+
+<option value="Realista">
+Realista
+</option>
+
+<option value="Animação">
+Animação
+</option>
+
+<option value="Épico">
+Épico
+</option>
+
+</select>
+
+
+<h2>📐 5. Formato</h2>
+
+<select id="formato">
+
+<option value="16:9">
+16:9 — YouTube
+</option>
+
+<option value="9:16">
+9:16 — Shorts/TikTok
+</option>
+
+<option value="1:1">
+1:1 — Instagram
+</option>
+
+</select>
+
+</div>
+
 
 <!-- RESUMO -->
 
-<div class="card">
+<div
+class="card"
+id="resumo"
+style="display:none;"
+>
 
 <h2>📋 Resumo do projeto</h2>
 
-<div class="project-info">
+<div class="summary" style="display:block;">
 
-<div class="info">
-<strong>🎵 Música</strong>
-<span id="nomeMusica">Nenhuma música informada</span>
+<div>
+🎵 Música:
+<strong id="resumoMusica">
+Nenhuma
+</strong>
 </div>
 
-<div class="info">
-<strong>🖼️ Imagens</strong>
-<span id="quantidadeImagens">0 imagens</span>
+<div>
+🖼️ Imagens:
+<strong id="resumoImagens">
+0
+</strong>
 </div>
 
-<div class="info">
-<strong>🎨 Estilo</strong>
-<span id="estiloProjeto">Cinematográfico</span>
+<div>
+🎨 Estilo:
+<strong id="resumoEstilo">
+Cinematográfico
+</strong>
 </div>
 
-<div class="info">
-<strong>📐 Formato</strong>
-<span id="formatoProjeto">16:9</span>
+<div>
+📐 Formato:
+<strong id="resumoFormato">
+16:9
+</strong>
 </div>
 
 </div>
 
 </div>
 
-<!-- ROTEIRO -->
+
+<!-- CRIAR PROJETO -->
 
 <div class="card">
 
-<h2>📝 Roteiro do clipe</h2>
+<h2>🚀 6. Criar projeto</h2>
 
 <p>
-A IA usará a música, a letra e as imagens como referências
-para criar a narrativa visual.
-</p>
-
-<textarea
-id="roteiroManual"
-placeholder="Escreva aqui alguma ideia para a história do clipe..."
-></textarea>
-
-<button
-class="button"
-onclick="gerarRoteiro()"
->
-
-✨ GERAR ROTEIRO COM IA
-
-</button>
-
-<div
-class="progress"
-id="progress"
->
-
-<div
-class="progress-bar"
-id="progressBar"
-></div>
-
-</div>
-
-<div id="mensagem"></div>
-
-</div>
-
-<!-- ESTRUTURA -->
-
-<div
-class="card"
-id="roteiro"
->
-
-<h2>🎞️ Estrutura do clipe</h2>
-
-<div class="scene">
-
-<div class="scene-title">
-🎬 Cena 1 — Introdução
-</div>
-
-<p>
-José é apresentado como um jovem sonhador,
-em um ambiente cinematográfico inspirado em Gênesis 37.
-</p>
-
-<span class="tag">Introdução</span>
-<span class="tag">Movimento suave</span>
-
-</div>
-
-<div class="scene">
-
-<div class="scene-title">
-🌾 Cena 2 — O sonho
-</div>
-
-<p>
-José contempla os campos e recebe uma visão
-que representa os sonhos que Deus colocou em seu coração.
-</p>
-
-<span class="tag">Narrativa</span>
-<span class="tag">Sonho</span>
-
-</div>
-
-<div class="scene">
-
-<div class="scene-title">
-🔥 Cena 3 — Conflito
-</div>
-
-<p>
-Os irmãos de José demonstram ciúmes,
-criando o momento de maior tensão da história.
-</p>
-
-<span class="tag">Drama</span>
-<span class="tag">Impacto</span>
-
-</div>
-
-<div class="scene">
-
-<div class="scene-title">
-🌙 Cena 4 — Provação
-</div>
-
-<p>
-José passa por um período difícil,
-mas continua caminhando em direção ao propósito.
-</p>
-
-<span class="tag">Emoção</span>
-<span class="tag">Superação</span>
-
-</div>
-
-<div class="scene">
-
-<div class="scene-title">
-✨ Cena 5 — Esperança
-</div>
-
-<p>
-O clipe termina mostrando José olhando para o futuro,
-representando a realização do sonho e a fidelidade de Deus.
-</p>
-
-<span class="tag">Clímax</span>
-<span class="tag">Esperança</span>
-
-</div>
-
-<button
-class="button"
-onclick="gerarClipe()"
->
-
-🎬 GERAR CLIPE
-
-</button>
-
-</div>
-
-<!-- GERAÇÃO -->
-
-<div
-class="card"
-id="geracao"
->
-
-<h2>🎥 Gerando seu clipe</h2>
-
-<div id="statusGeracao">
-Preparando as cenas...
-</div>
-
-<div
-class="progress"
-style="display:block;"
->
-
-<div
-class="progress-bar"
-id="barraClipe"
-></div>
-
-</div>
-
-<div
-class="preview"
-id="preview"
->
-
-<div class="preview-box">
-🎬
-</div>
-
-<h3>
-✅ Prévia preparada!
-</h3>
-
-<p>
-O projeto visual foi preparado com suas cenas,
-música e formato 16:9.
+Depois de preencher os dados, avance para a segunda parte
+para criar o roteiro e preparar o clipe.
 </p>
 
 <button
 class="button"
-onclick="finalizarClipe()"
+onclick="criarProjeto()"
 >
 
-▶️ VER PRÉVIA
+🎬 CONTINUAR PARA O PROJETO
 
 </button>
 
-</div>
-
-<!-- ÁREA DO VÍDEO -->
-
-<div id="videoArea">
-
-<h3>
-🎥 Vídeo
-</h3>
-
-<video
-id="videoPreview"
-controls
-playsinline
-></video>
-
-<button
-class="button download"
-onclick="baixarVideo()"
+<div
+id="status"
+class="status"
 >
-
-⬇️ BAIXAR VÍDEO
-
-</button>
-
+⏳ Preparando projeto...
 </div>
 
 </div>
+
 
 <div class="footer">
 
@@ -514,423 +364,35 @@ CLIP MUSICAL AI — Sistema de criação de clipes
 
 </div>
 
+
 <script>
 
-let videoURL = null;
 
-
-// ==========================
-// PARÂMETROS
-// ==========================
-
-const parametros =
-new URLSearchParams(
-window.location.search
-);
+function criarProjeto(){
 
 const musica =
-parametros.get("musica");
+document.getElementById("musica").files[0];
 
 const imagens =
-parametros.get("imagens");
+document.getElementById("imagens").files;
+
+const letra =
+document.getElementById("letra").value;
 
 const estilo =
-parametros.get("estilo");
+document.getElementById("estilo").value;
 
 const formato =
-parametros.get("formato");
-
-
-if(musica){
-
-document.getElementById(
-"nomeMusica"
-).textContent=musica;
-
-}
-
-if(imagens){
-
-document.getElementById(
-"quantidadeImagens"
-).textContent=
-imagens+" imagens";
-
-}
-
-if(estilo){
-
-document.getElementById(
-"estiloProjeto"
-).textContent=estilo;
-
-}
-
-if(formato){
-
-document.getElementById(
-"formatoProjeto"
-).textContent=formato;
-
-}
-
-
-// ==========================
-// ROTEIRO
-// ==========================
-
-function gerarRoteiro(){
-
-const mensagem =
-document.getElementById(
-"mensagem"
-);
-
-const progress =
-document.getElementById(
-"progress"
-);
-
-const bar =
-document.getElementById(
-"progressBar"
-);
-
-const roteiro =
-document.getElementById(
-"roteiro"
-);
-
-mensagem.style.display="block";
-
-progress.style.display="block";
-
-mensagem.innerHTML=
-"🧠 Analisando a música...";
-
-let porcentagem=0;
-
-const intervalo =
-setInterval(()=>{
-
-porcentagem+=20;
-
-bar.style.width=
-porcentagem+"%";
-
-
-if(porcentagem===40){
-
-mensagem.innerHTML=
-"🎵 Identificando os momentos principais...";
-
-}
-
-
-if(porcentagem===60){
-
-mensagem.innerHTML=
-"🖼️ Relacionando as imagens com a história...";
-
-}
-
-
-if(porcentagem===80){
-
-mensagem.innerHTML=
-"🎬 Montando as cenas do clipe...";
-
-}
-
-
-if(porcentagem>=100){
-
-clearInterval(intervalo);
-
-mensagem.innerHTML=
-"✅ Roteiro criado com sucesso!";
-
-roteiro.style.display="block";
-
-}
-
-},500);
-
-}
-
-
-// ==========================
-// GERAR CLIPE
-// ==========================
-
-function gerarClipe(){
-
-const geracao =
-document.getElementById(
-"geracao"
-);
-
-const barra =
-document.getElementById(
-"barraClipe"
-);
+document.getElementById("formato").value;
 
 const status =
-document.getElementById(
-"statusGeracao"
-);
+document.getElementById("status");
 
-const preview =
-document.getElementById(
-"preview"
-);
 
-geracao.style.display="block";
-
-preview.style.display="none";
-
-let progresso=0;
-
-barra.style.width="0%";
-
-window.scrollTo({
-
-top:document.body.scrollHeight,
-
-behavior:"smooth"
-
-});
-
-
-const intervalo =
-setInterval(()=>{
-
-progresso+=10;
-
-barra.style.width=
-progresso+"%";
-
-
-if(progresso===20){
-
-status.innerHTML=
-"🖼️ Preparando as imagens...";
-
-}
-
-
-if(progresso===40){
-
-status.innerHTML=
-"🎬 Criando os movimentos das cenas...";
-
-}
-
-
-if(progresso===60){
-
-status.innerHTML=
-"🎵 Sincronizando a música...";
-
-}
-
-
-if(progresso===80){
-
-status.innerHTML=
-"✨ Finalizando o clipe...";
-
-}
-
-
-if(progresso>=100){
-
-clearInterval(intervalo);
-
-status.innerHTML=
-"✅ Clipe preparado!";
-
-preview.style.display="block";
-
-}
-
-},500);
-
-}
-
-
-// ==========================
-// CRIAR VÍDEO
-// ==========================
-
-function finalizarClipe(){
-
-const videoArea =
-document.getElementById(
-"videoArea"
-);
-
-const video =
-document.getElementById(
-"videoPreview"
-);
-
-const canvas =
-document.createElement(
-"canvas"
-);
-
-canvas.width=1280;
-
-canvas.height=720;
-
-const ctx =
-canvas.getContext("2d");
-
-
-ctx.fillStyle="#111827";
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-
-ctx.fillStyle="white";
-
-ctx.textAlign="center";
-
-ctx.font="bold 55px Arial";
-
-ctx.fillText(
-"🎬 CLIP MUSICAL AI",
-canvas.width/2,
-300
-);
-
-
-ctx.font="30px Arial";
-
-ctx.fillText(
-"Prévia do seu clipe",
-canvas.width/2,
-360
-);
-
-
-ctx.font="22px Arial";
-
-ctx.fillText(
-"Projeto visual preparado",
-canvas.width/2,
-410
-);
-
-
-const stream =
-canvas.captureStream(30);
-
-
-const recorder =
-new MediaRecorder(
-stream,
-{
-mimeType:"video/webm"
-}
-);
-
-
-const partes=[];
-
-
-recorder.ondataavailable =
-function(event){
-
-if(event.data.size>0){
-
-partes.push(event.data);
-
-}
-
-};
-
-
-recorder.onstop =
-function(){
-
-const blob =
-new Blob(
-partes,
-{
-type:"video/webm"
-}
-);
-
-
-if(videoURL){
-
-URL.revokeObjectURL(
-videoURL
-);
-
-}
-
-
-videoURL =
-URL.createObjectURL(
-blob
-);
-
-
-video.src =
-videoURL;
-
-
-videoArea.style.display="block";
-
-
-videoArea.scrollIntoView({
-behavior:"smooth"
-});
-
-};
-
-
-recorder.start();
-
-
-// Grava aproximadamente 5 segundos
-
-setTimeout(
-function(){
-
-if(
-recorder.state!=="inactive"
-){
-
-recorder.stop();
-
-}
-
-},
-5000
-);
-
-}
-
-
-// ==========================
-// BAIXAR
-// ==========================
-
-function baixarVideo(){
-
-if(!videoURL){
+if(!musica){
 
 alert(
-"O vídeo ainda não está pronto."
+"🎵 Envie sua música primeiro."
 );
 
 return;
@@ -938,29 +400,124 @@ return;
 }
 
 
-const link =
-document.createElement("a");
+if(imagens.length === 0){
 
-link.href =
-videoURL;
+alert(
+"🖼️ Adicione pelo menos uma imagem de referência."
+);
 
-link.download =
-"clip-musical-ai.webm";
+return;
 
-document.body.appendChild(link);
+}
 
-link.click();
 
-setTimeout(
-function(){
+if(!letra.trim()){
 
-document.body.removeChild(link);
+alert(
+"📝 Coloque a letra da música."
+);
 
-},
-1000
+return;
+
+}
+
+
+status.style.display="block";
+
+status.innerHTML=
+"⏳ Preparando seu projeto...";
+
+
+/*
+Neste momento usamos os nomes dos arquivos
+para passar as informações para projeto.html.
+
+A música e as imagens continuarão disponíveis
+na primeira etapa. A segunda etapa receberá
+as informações do projeto.
+*/
+
+
+const parametros =
+new URLSearchParams();
+
+
+parametros.set(
+"musica",
+musica.name
+);
+
+
+parametros.set(
+"imagens",
+imagens.length
+);
+
+
+parametros.set(
+"estilo",
+estilo
+);
+
+
+parametros.set(
+"formato",
+formato
+);
+
+
+/*
+Guardamos a letra temporariamente
+para a segunda etapa.
+*/
+
+try{
+
+sessionStorage.setItem(
+"clip_letra",
+letra
+);
+
+sessionStorage.setItem(
+"clip_musica",
+musica.name
+);
+
+sessionStorage.setItem(
+"clip_estilo",
+estilo
+);
+
+sessionStorage.setItem(
+"clip_formato",
+formato
+);
+
+sessionStorage.setItem(
+"clip_imagens",
+imagens.length.toString()
+);
+
+}catch(e){
+
+console.log(
+"Não foi possível salvar os dados:",
+e
 );
 
 }
+
+
+setTimeout(function(){
+
+window.location.href =
+"projeto.html?" +
+parametros.toString();
+
+},1000);
+
+}
+
 
 </script>
 
