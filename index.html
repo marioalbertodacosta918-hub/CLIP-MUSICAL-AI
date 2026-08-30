@@ -468,10 +468,7 @@ música e formato.
 class="button"
 onclick="finalizarClipe()"
 >
-▶️ eview"
-controls
-playsinline
-preload="VER PRÉVIA
+▶️ VER PRÉVIA
 </button>
 
 </div>
@@ -479,7 +476,31 @@ preload="VER PRÉVIA
 
 <!-- VÍDEO -->
 
-<div id="videoArea">
+<div
+id="videoArea"
+>
+
+<h3>
+🎥 Seu clipe
+</h3>
+
+<video
+id="videoPreview"
+controls
+playsinline
+preload="auto"
+>
+Seu navegador não suporta vídeo.
+</video>
+
+<button
+class="button download"
+onclick="baixarVideo()"
+>
+⬇️ BAIXAR VÍDEO
+</button>
+
+</div>
 
 <h3>
 🎥 Seu clipe
