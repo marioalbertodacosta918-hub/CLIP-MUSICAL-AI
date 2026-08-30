@@ -780,32 +780,8 @@ document.getElementById("preview");
 const canvas =
 document.createElement("canvas");
 
-const formatoAtual =
-formato ||
-document.getElementById("formatoProjeto").textContent;
-
-
-/* FORMATO */
-
-if(formatoAtual === "9:16"){
-
-canvas.width = 720;
-canvas.height = 1280;
-
-}
-else if(formatoAtual === "1:1"){
-
-canvas.width = 1080;
-canvas.height = 1080;
-
-}
-else{
-
 canvas.width = 1280;
 canvas.height = 720;
-
-}
-
 
 const ctx =
 canvas.getContext("2d");
@@ -829,8 +805,7 @@ ctx.fillStyle = "white";
 
 ctx.textAlign = "center";
 
-ctx.font =
-"bold 55px Arial";
+ctx.font = "bold 55px Arial";
 
 ctx.fillText(
 "🎬 CLIP MUSICAL AI",
@@ -838,8 +813,7 @@ canvas.width / 2,
 canvas.height / 2 - 40
 );
 
-ctx.font =
-"30px Arial";
+ctx.font = "30px Arial";
 
 ctx.fillText(
 "Prévia do seu clipe",
@@ -847,8 +821,7 @@ canvas.width / 2,
 canvas.height / 2 + 20
 );
 
-ctx.font =
-"22px Arial";
+ctx.font = "22px Arial";
 
 ctx.fillText(
 "Projeto visual preparado",
@@ -857,34 +830,21 @@ canvas.height / 2 + 65
 );
 
 
-/* STREAM */
+/* CRIAR STREAM */
 
 const stream =
 canvas.captureStream(30);
 
 
-/* RECORDER */
+/* VERIFICAR RECORDER */
 
-let options = {};
+if(typeof MediaRecorder === "undefined"){
 
-if(
-MediaRecorder.isTypeSupported(
-"video/webm;codecs=vp9"
-)
-){
+alert(
+"Seu navegador não suporta criação de vídeo."
+);
 
-options.mimeType =
-"video/webm;codecs=vp9";
-
-}
-else if(
-MediaRecorder.isTypeSupported(
-"video/webm"
-)
-){
-
-options.mimeType =
-"video/webm";
+return;
 
 }
 
@@ -894,16 +854,13 @@ let recorder;
 try{
 
 recorder =
-new MediaRecorder(
-stream,
-options
-);
+new MediaRecorder(stream);
 
 }
 catch(error){
 
 alert(
-"Seu navegador não conseguiu criar o vídeo."
+"Não foi possível criar o vídeo neste navegador."
 );
 
 return;
@@ -938,27 +895,32 @@ type:"video/webm"
 );
 
 
-if(videoURL){
+if(window.videoURL){
 
 URL.revokeObjectURL(
-videoURL
+window.videoURL
 );
 
 }
 
 
-videoURL =
+window.videoURL =
 URL.createObjectURL(blob);
 
 
 video.src =
-videoURL;
+window.videoURL;
 
 video.load();
 
 
 videoArea.style.display =
 "block";
+
+
+preview.style.display =
+"block";
+
 
 videoArea.scrollIntoView({
 behavior:"smooth"
@@ -967,15 +929,15 @@ behavior:"smooth"
 };
 
 
-recorder.start(250);
+recorder.start();
 
 
-/* DURAÇÃO DA PRÉVIA */
+/* GRAVAR 5 SEGUNDOS */
 
-setTimeout(function(){
+setTimeout(
+function(){
 
 if(
-recorder &&
 recorder.state !== "inactive"
 ){
 
@@ -983,16 +945,20 @@ recorder.stop();
 
 }
 
+
 stream.getTracks().forEach(
 function(track){
+
 track.stop();
+
 }
 );
 
-},5000);
+},
+5000
+);
 
 }
-
 
 /* ==========================
    BAIXAR VÍDEO
