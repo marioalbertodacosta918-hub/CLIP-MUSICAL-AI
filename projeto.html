@@ -986,16 +986,32 @@ if (!canvas.captureStream) {
 }
 const stream = canvas.captureStream(30);
 
-let mimeType = "video/webm";
+let mimeType = "";
 
-if(
-    MediaRecorder.isTypeSupported(
-        "video/webm;codecs=vp9"
-    )
-){
-    mimeType = "video/webm;codecs=vp9";
+const formatos = [
+    "video/webm;codecs=vp8",
+    "video/webm",
+    "video/mp4"
+];
+
+for(const formato of formatos){
+
+    if(MediaRecorder.isTypeSupported(formato)){
+
+        mimeType = formato;
+        break;
+
+    }
+
 }
 
+if(!mimeType){
+
+    alert("❌ Este navegador não encontrou um formato de vídeo compatível.");
+    return;
+
+}
+r
 const recorder = new MediaRecorder(
     stream,
     {
