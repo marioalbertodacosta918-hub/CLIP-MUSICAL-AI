@@ -1,423 +1,436 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLIP MUSICAL AI</title>
 
-<title>CLIP MUSICAL AI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
+    body {
+      background: #111827;
+      color: white;
+      padding: 20px;
+    }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-font-family:Arial,sans-serif;
-}
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
 
-body{
-background:#0b0b12;
-color:white;
-min-height:100vh;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-header{
-padding:25px 20px;
-text-align:center;
-background:linear-gradient(135deg,#15152a,#25114a);
-border-bottom:1px solid #333;
-}
+    .subtitulo {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
 
-header h1{
-font-size:28px;
-margin-bottom:8px;
-}
+    .card {
+      background: #1f2937;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
 
-header p{
-color:#bdbdc9;
-font-size:14px;
-}
+    h2 {
+      margin-bottom: 15px;
+    }
 
-.container{
-max-width:700px;
-margin:auto;
-padding:25px 18px 50px;
-}
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: none;
+      background: #374151;
+      color: white;
+    }
 
-.card{
-background:#15151f;
-border:1px solid #292936;
-border-radius:18px;
-padding:20px;
-margin-bottom:18px;
-}
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
 
-.card h2{
-font-size:18px;
-margin-bottom:8px;
-}
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #7c3aed;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+    }
 
-.card p{
-color:#aaaab8;
-font-size:13px;
-margin-bottom:15px;
-}
+    button:hover {
+      opacity: 0.9;
+    }
 
-input[type="file"],
-textarea,
-select{
-width:100%;
-background:#0d0d15;
-color:white;
-border:1px solid #363644;
-border-radius:10px;
-padding:12px;
-margin-top:8px;
-}
+    .status {
+      display: none;
+      background: #374151;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      text-align: center;
+    }
 
-textarea{
-min-height:140px;
-resize:vertical;
-}
+    #resultado {
+      display: none;
+      background: #111827;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: center;
+    }
 
-.formats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
+    video {
+      width: 100%;
+      max-height: 400px;
+      border-radius: 10px;
+      margin-top: 15px;
+      background: black;
+    }
 
-.format{
-background:#0d0d15;
-border:1px solid #363644;
-border-radius:12px;
-padding:15px;
-cursor:pointer;
-text-align:center;
-}
+    .sucesso {
+      color: #4ade80;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-.format input{
-margin-right:6px;
-}
-
-.button{
-width:100%;
-padding:17px;
-border:none;
-border-radius:14px;
-background:linear-gradient(135deg,#7c3aed,#ec4899);
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
-}
-
-.button:active{
-transform:scale(.98);
-}
-
-#status{
-display:none;
-margin-top:20px;
-padding:15px;
-border-radius:12px;
-background:#111827;
-border:1px solid #374151;
-text-align:center;
-line-height:1.5;
-}
-
-.preview{
-margin-top:15px;
-display:none;
-}
-
-.preview img{
-width:100%;
-max-height:300px;
-object-fit:cover;
-border-radius:12px;
-margin-top:10px;
-}
-
-.footer{
-text-align:center;
-color:#777;
-font-size:12px;
-margin-top:25px;
-}
-
-</style>
+    .aviso {
+      color: #fbbf24;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-
-<h1>🎬 CLIP MUSICAL AI</h1>
-
-<p>
-Transforme sua música em vídeos e clipes com inteligência artificial.
-</p>
-
-</header>
-
 <div class="container">
 
-<div class="card">
+  <h1>🎬 CLIP MUSICAL AI</h1>
+  <p class="subtitulo">
+    Transforme sua música em um clipe com inteligência artificial.
+  </p>
 
-<h2>🎵 1. Sua música</h2>
+  <div class="card">
+    <h2>🎵 1. Sua música</h2>
+    <input type="file" id="musica" accept="audio/*">
+  </div>
 
-<p>
-Envie a música que será usada para criar o clipe.
-</p>
+  <div class="card">
+    <h2>🖼️ 2. Imagens de referência</h2>
+    <input type="file" id="imagens" accept="image/*" multiple>
+  </div>
 
-<input
-type="file"
-id="musica"
-accept="audio/*"
->
+  <div class="card">
+    <h2>📝 3. Letra da música</h2>
+    <textarea
+      id="letra"
+      placeholder="Cole aqui a letra da sua música..."
+    ></textarea>
+  </div>
 
-</div>
+  <div class="card">
+    <h2>🎨 4. Estilo do clipe</h2>
 
-<div class="card">
+    <select id="estilo">
+      <option value="Cinematográfico">Cinematográfico</option>
+      <option value="3D">3D</option>
+      <option value="Realista">Realista</option>
+      <option value="Animação">Animação</option>
+      <option value="Épico">Épico</option>
+    </select>
 
-<h2>🖼️ 2. Imagens de referência</h2>
+    <h2>📐 5. Formato</h2>
 
-<p>
-Adicione fotos e imagens para a IA usar como referência visual.
-</p>
+    <select id="formato">
+      <option value="16:9">16:9 — YouTube</option>
+      <option value="9:16">9:16 — Shorts/TikTok</option>
+      <option value="1:1">1:1 — Instagram</option>
+    </select>
+  </div>
 
-<input
-type="file"
-id="imagens"
-accept="image/*"
-multiple
->
+  <div class="card">
 
-<div
-class="preview"
-id="preview">
-</div>
+    <h2>🚀 6. Criar clipe</h2>
 
-</div>
+    <button onclick="gerarClipe()">
+      🎬 GERAR CLIPE
+    </button>
 
-<div class="card">
+    <div id="status" class="status">
+      ⏳ Preparando seu clipe...
+    </div>
 
-<h2>📝 3. Letra da música</h2>
+  </div>
 
-<p>
-Cole a letra para ajudar a IA a entender a história da música.
-</p>
+  <!-- RESULTADO PERMANENTE -->
+  <div id="resultado">
 
-<textarea
-id="letra"
-placeholder="Cole aqui a letra da sua música..."
-></textarea>
+    <div class="sucesso">
+      ✅ CLIPE PRONTO!
+    </div>
 
-</div>
+    <p>
+      Sua prévia está disponível abaixo.
+    </p>
 
-<div class="card">
+    <video id="videoPreview" controls playsinline>
+      Seu navegador não suporta vídeo.
+    </video>
 
-<h2>🎨 4. Estilo do clipe</h2>
+    <button onclick="abrirVideo()">
+      ▶️ VER PRÉVIA
+    </button>
 
-<select id="estilo">
+    <button onclick="baixarVideo()">
+      ⬇️ BAIXAR CLIPE
+    </button>
 
-<option value="cinematografico">
-🎬 Cinematográfico
-</option>
+    <p class="aviso">
+      A prévia permanece disponível nesta tela.
+    </p>
 
-<option value="worship">
-🙏 Worship
-</option>
-
-<option value="romantico">
-❤️ Romântico
-</option>
-
-<option value="inspirador">
-🌅 Inspirador
-</option>
-
-<option value="urbano">
-🌃 Urbano
-</option>
-
-<option value="dramatico">
-🔥 Dramático
-</option>
-
-<option value="fantasia">
-✨ Fantasia
-</option>
-
-<option value="realista">
-📸 Realista
-</option>
-
-</select>
-
-</div>
-
-<div class="card">
-
-<h2>📐 5. Formato do vídeo</h2>
-
-<div class="formats">
-
-<label class="format">
-
-<input
-type="radio"
-name="formato"
-value="16:9"
-checked
->
-
-YouTube<br>
-16:9
-
-</label>
-
-<label class="format">
-
-<input
-type="radio"
-name="formato"
-value="9:16"
->
-
-TikTok / Reels<br>
-9:16
-
-</label>
-
-</div>
-
-</div>
-
-<button
-class="button"
-onclick="criarClipe()"
->
-
-✨ CRIAR MEU CLIPE
-
-</button>
-
-<div id="status">
-
-⏳ Preparando seu projeto...
-
-</div>
-
-<div class="footer">
-
-CLIP MUSICAL AI — Primeira versão
-
-</div>
+  </div>
 
 </div>
 
 <script>
 
-const imagensInput =
-document.getElementById("imagens");
+let videoURL = null;
 
-const preview =
-document.getElementById("preview");
+function gerarClipe() {
 
-imagensInput.addEventListener(
-"change",
-function(){
+  const musica = document.getElementById("musica").files[0];
+  const imagens = document.getElementById("imagens").files;
+  const letra = document.getElementById("letra").value;
+  const estilo = document.getElementById("estilo").value;
+  const formato = document.getElementById("formato").value;
 
-preview.innerHTML="";
+  const status = document.getElementById("status");
+  const resultado = document.getElementById("resultado");
 
-if(this.files.length>0){
+  if (!musica) {
+    alert("Envie a música primeiro.");
+    return;
+  }
 
-preview.style.display="block";
+  status.style.display = "block";
+  resultado.style.display = "none";
 
-Array.from(this.files).forEach(
-file=>{
+  status.innerHTML = "⏳ Preparando o clipe...";
 
-const img =
-document.createElement("img");
+  setTimeout(() => {
 
-img.src =
-URL.createObjectURL(file);
+    status.innerHTML = "🎬 Gerando cenas...";
 
-preview.appendChild(img);
+  }, 1500);
 
-});
+  setTimeout(() => {
+
+    status.innerHTML = "🎵 Sincronizando música...";
+
+  }, 3000);
+
+  setTimeout(() => {
+
+    status.innerHTML = "✨ Finalizando clipe...";
+
+  }, 4500);
+
+  setTimeout(() => {
+
+    criarVideoPreview(musica);
+
+    status.innerHTML = "✅ Clipe gerado com sucesso!";
+
+    resultado.style.display = "block";
+
+    resultado.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }, 6000);
+}
+
+
+function criarVideoPreview(musica) {
+
+  /*
+    Nesta versão de teste criamos uma prévia usando
+    a própria música enviada.
+
+    Depois vamos conectar a geração real de vídeo por IA.
+  */
+
+  const canvas = document.createElement("canvas");
+
+  canvas.width = 1280;
+  canvas.height = 720;
+
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#111827";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+
+  ctx.font = "bold 60px Arial";
+  ctx.fillText(
+    "🎬 CLIP MUSICAL AI",
+    canvas.width / 2,
+    300
+  );
+
+  ctx.font = "32px Arial";
+  ctx.fillText(
+    "Prévia do seu clipe",
+    canvas.width / 2,
+    370
+  );
+
+  const stream = canvas.captureStream(30);
+
+  const audio = document.createElement("audio");
+
+  audio.src = URL.createObjectURL(musica);
+
+  audio.loop = false;
+
+  const audioContext =
+    new AudioContext();
+
+  const source =
+    audioContext.createMediaElementSource(audio);
+
+  const destination =
+    audioContext.createMediaStreamDestination();
+
+  source.connect(destination);
+
+  const combinedStream =
+    new MediaStream([
+      ...stream.getVideoTracks(),
+      ...destination.stream.getAudioTracks()
+    ]);
+
+  const recorder =
+    new MediaRecorder(combinedStream);
+
+  const partes = [];
+
+  recorder.ondataavailable = function(event) {
+
+    if (event.data.size > 0) {
+      partes.push(event.data);
+    }
+
+  };
+
+  recorder.onstop = function() {
+
+    const blob =
+      new Blob(partes, {
+        type: "video/webm"
+      });
+
+    videoURL =
+      URL.createObjectURL(blob);
+
+    document.getElementById(
+      "videoPreview"
+    ).src = videoURL;
+
+  };
+
+  audio.onended = function() {
+
+    recorder.stop();
+
+    audioContext.close();
+
+  };
+
+  recorder.start();
+
+  audio.play().catch(() => {
+
+    alert(
+      "Toque na tela para iniciar a prévia."
+    );
+
+  });
 
 }
 
-});
 
-function criarClipe(){
+function abrirVideo() {
 
-const musica =
-document.getElementById("musica").files[0];
+  if (!videoURL) {
 
-const imagens =
-document.getElementById("imagens").files;
+    alert(
+      "A prévia ainda está sendo preparada."
+    );
 
-const letra =
-document.getElementById("letra").value;
+    return;
+  }
 
-const estilo =
-document.getElementById("estilo").value;
+  const video =
+    document.getElementById("videoPreview");
 
-const formato =
-document.querySelector(
-'input[name="formato"]:checked'
-).value;
+  video.scrollIntoView({
+    behavior: "smooth"
+  });
 
-if(!musica){
-
-alert(
-"🎵 Primeiro envie sua música."
-);
-
-return;
+  video.play();
 
 }
 
-if(imagens.length===0){
 
-alert(
-"🖼️ Adicione pelo menos uma imagem."
-);
+function baixarVideo() {
 
-return;
+  if (!videoURL) {
 
-}
+    alert(
+      "O vídeo ainda não está pronto."
+    );
 
-const status =
-document.getElementById("status");
+    return;
+  }
 
-status.style.display="block";
+  const link =
+    document.createElement("a");
 
-status.innerHTML =
-"⏳ Preparando seu projeto...";
+  link.href = videoURL;
 
-setTimeout(()=>{
+  link.download =
+    "meu-clipe-musical.webm";
 
-const url =
-"projeto.html" +
-"?musica=" +
-encodeURIComponent(musica.name) +
-"&imagens=" +
-encodeURIComponent(imagens.length) +
-"&estilo=" +
-encodeURIComponent(estilo) +
-"&formato=" +
-encodeURIComponent(formato);
+  document.body.appendChild(link);
 
-window.location.href=url;
+  link.click();
 
-},1000);
+  document.body.removeChild(link);
 
 }
 
