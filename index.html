@@ -1,256 +1,427 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLIP MUSICAL AI</title>  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background: #0b0b12;
-      color: white;
-      min-height: 100vh;
-    }
+<title>CLIP MUSICAL AI</title>
 
-    header {
-      padding: 25px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #15152a, #25114a);
-      border-bottom: 1px solid #333;
-    }
+<style>
 
-    header h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
 
-    header p {
-      color: #bdbdc9;
-      font-size: 14px;
-    }
+body{
+background:#0b0b12;
+color:white;
+min-height:100vh;
+}
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-      padding: 25px 18px 50px;
-    }
+header{
+padding:25px 20px;
+text-align:center;
+background:linear-gradient(135deg,#15152a,#25114a);
+border-bottom:1px solid #333;
+}
 
-    .card {
-      background: #15151f;
-      border: 1px solid #292936;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-    }
+header h1{
+font-size:28px;
+margin-bottom:8px;
+}
 
-    .card h2 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
+header p{
+color:#bdbdc9;
+font-size:14px;
+}
 
-    .card p {
-      color: #aaaab8;
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
+.container{
+max-width:700px;
+margin:auto;
+padding:25px 18px 50px;
+}
 
-    input[type="file"],
-    textarea,
-    select {
-      width: 100%;
-      background: #0d0d15;
-      color: white;
-      border: 1px solid #363644;
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 8px;
-    }
+.card{
+background:#15151f;
+border:1px solid #292936;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+}
 
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
+.card h2{
+font-size:18px;
+margin-bottom:8px;
+}
 
-    .formats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+.card p{
+color:#aaaab8;
+font-size:13px;
+margin-bottom:15px;
+}
 
-    .format {
-      background: #0d0d15;
-      border: 1px solid #363644;
-      border-radius: 12px;
-      padding: 15px;
-      cursor: pointer;
-      text-align: center;
-    }
+input[type="file"],
+textarea,
+select{
+width:100%;
+background:#0d0d15;
+color:white;
+border:1px solid #363644;
+border-radius:10px;
+padding:12px;
+margin-top:8px;
+}
 
-    .format input {
-      margin-right: 6px;
-    }
+textarea{
+min-height:140px;
+resize:vertical;
+}
 
-    .button {
-      width: 100%;
-      padding: 17px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #7c3aed, #ec4899);
-      color: white;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+.formats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
 
-    .button:active {
-      transform: scale(0.98);
-    }
+.format{
+background:#0d0d15;
+border:1px solid #363644;
+border-radius:12px;
+padding:15px;
+cursor:pointer;
+text-align:center;
+}
 
-    #status {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 12px;
-      background: #111827;
-      border: 1px solid #374151;
-      text-align: center;
-    }
+.format input{
+margin-right:6px;
+}
 
-    .preview {
-      margin-top: 15px;
-      display: none;
-    }
+.button{
+width:100%;
+padding:17px;
+border:none;
+border-radius:14px;
+background:linear-gradient(135deg,#7c3aed,#ec4899);
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
 
-    .preview img {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-top: 10px;
-    }
+.button:active{
+transform:scale(.98);
+}
 
-    .footer {
-      text-align: center;
-      color: #777;
-      font-size: 12px;
-      margin-top: 25px;
-    }
-  </style></head><body><header>
-  <h1>🎬 CLIP MUSICAL AI</h1>
-  <p>Transforme sua música em vídeos e clipes com inteligência artificial.</p>
-</header><div class="container">  <div class="card">
-    <h2>🎵 1. Sua música</h2>
-    <p>Envie a música que será usada para criar o clipe.</p><input type="file" id="musica" accept="audio/*">
+#status{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:12px;
+background:#111827;
+border:1px solid #374151;
+text-align:center;
+line-height:1.5;
+}
 
-  </div>  <div class="card">
-    <h2>🖼️ 2. Imagens de referência</h2>
-    <p>Adicione fotos e imagens para a IA usar como referência visual.</p><input type="file" id="imagens" accept="image/*" multiple>
+.preview{
+margin-top:15px;
+display:none;
+}
 
-<div class="preview" id="preview"></div>
+.preview img{
+width:100%;
+max-height:300px;
+object-fit:cover;
+border-radius:12px;
+margin-top:10px;
+}
 
-  </div>  <div class="card">
-    <h2>📝 3. Letra da música</h2>
-    <p>Cole a letra para ajudar a IA a entender a história da música.</p><textarea id="letra" placeholder="Cole aqui a letra da sua música..."></textarea>
+.footer{
+text-align:center;
+color:#777;
+font-size:12px;
+margin-top:25px;
+}
 
-  </div>  <div class="card">
-    <h2>🎨 4. Estilo do clipe</h2><select id="estilo">
-  <option value="cinematografico">🎬 Cinematográfico</option>
-  <option value="worship">🙏 Worship</option>
-  <option value="romantico">❤️ Romântico</option>
-  <option value="inspirador">🌅 Inspirador</option>
-  <option value="urbano">🌃 Urbano</option>
-  <option value="dramatico">🔥 Dramático</option>
-  <option value="fantasia">✨ Fantasia</option>
-  <option value="realista">📸 Realista</option>
-</select>
+</style>
+</head>
 
-  </div>  <div class="card">
-    <h2>📐 5. Formato do vídeo</h2><div class="formats">
+<body>
 
-  <label class="format">
-    <input type="radio" name="formato" value="16:9" checked>
-    YouTube<br>
-    16:9
-  </label>
+<header>
 
-  <label class="format">
-    <input type="radio" name="formato" value="9:16">
-    TikTok / Reels<br>
-    9:16
-  </label>
+<h1>🎬 CLIP MUSICAL AI</h1>
+
+<p>
+Transforme sua música em vídeos e clipes com inteligência artificial.
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🎵 1. Sua música</h2>
+
+<p>
+Envie a música que será usada para criar o clipe.
+</p>
+
+<input
+type="file"
+id="musica"
+accept="audio/*"
+>
 
 </div>
 
-  </div>  <button class="button" onclick="criarClipe()">
-    ✨ CRIAR MEU CLIPE
-  </button>  <div id="status">
-    ⏳ Preparando seu projeto...
-  </div>  <div class="footer">
-    CLIP MUSICAL AI — Primeira versão
-  </div></div><script>
+<div class="card">
 
-  const imagensInput = document.getElementById("imagens");
-  const preview = document.getElementById("preview");
+<h2>🖼️ 2. Imagens de referência</h2>
 
-  imagensInput.addEventListener("change", function() {
+<p>
+Adicione fotos e imagens para a IA usar como referência visual.
+</p>
 
-    preview.innerHTML = "";
+<input
+type="file"
+id="imagens"
+accept="image/*"
+multiple
+>
 
-    if (this.files.length > 0) {
-      preview.style.display = "block";
+<div
+class="preview"
+id="preview">
+</div>
 
-      Array.from(this.files).forEach(file => {
+</div>
 
-        const img = document.createElement("img");
+<div class="card">
 
-        img.src = URL.createObjectURL(file);
+<h2>📝 3. Letra da música</h2>
 
-        preview.appendChild(img);
+<p>
+Cole a letra para ajudar a IA a entender a história da música.
+</p>
 
-      });
-    }
+<textarea
+id="letra"
+placeholder="Cole aqui a letra da sua música..."
+></textarea>
 
-  });
+</div>
 
-  function criarClipe() {
+<div class="card">
 
-    const musica = document.getElementById("musica").files[0];
-    const imagens = document.getElementById("imagens").files;
-    const letra = document.getElementById("letra").value;
-    const estilo = document.getElementById("estilo").value;
+<h2>🎨 4. Estilo do clipe</h2>
 
-    const formato = document.querySelector(
-      'input[name="formato"]:checked'
-    ).value;
+<select id="estilo">
 
-    const status = document.getElementById("status");
+<option value="cinematografico">
+🎬 Cinematográfico
+</option>
 
-    if (!musica) {
-      alert("🎵 Primeiro envie sua música.");
-      return;
-    }
+<option value="worship">
+🙏 Worship
+</option>
 
-    if (imagens.length === 0) {
-      alert("🖼️ Adicione pelo menos uma imagem.");
-      return;
-    }
+<option value="romantico">
+❤️ Romântico
+</option>
 
-    status.style.display = "block";
+<option value="inspirador">
+🌅 Inspirador
+</option>
 
-    status.innerHTML =
-      "✅ Projeto recebido!<br><br>" +
-      "🎵 Música: " + musica.name + "<br>" +
-      "🖼️ Imagens: " + imagens.length + "<br>" +
-      "🎨 Estilo: " + estilo + "<br>" +
-      "📐 Formato: " + formato + "<br><br>" +
-      "🚧 O motor de IA será conectado na próxima etapa.";
+<option value="urbano">
+🌃 Urbano
+</option>
 
-  }
+<option value="dramatico">
+🔥 Dramático
+</option>
 
-</script></body>
+<option value="fantasia">
+✨ Fantasia
+</option>
+
+<option value="realista">
+📸 Realista
+</option>
+
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>📐 5. Formato do vídeo</h2>
+
+<div class="formats">
+
+<label class="format">
+
+<input
+type="radio"
+name="formato"
+value="16:9"
+checked
+>
+
+YouTube<br>
+16:9
+
+</label>
+
+<label class="format">
+
+<input
+type="radio"
+name="formato"
+value="9:16"
+>
+
+TikTok / Reels<br>
+9:16
+
+</label>
+
+</div>
+
+</div>
+
+<button
+class="button"
+onclick="criarClipe()"
+>
+
+✨ CRIAR MEU CLIPE
+
+</button>
+
+<div id="status">
+
+⏳ Preparando seu projeto...
+
+</div>
+
+<div class="footer">
+
+CLIP MUSICAL AI — Primeira versão
+
+</div>
+
+</div>
+
+<script>
+
+const imagensInput =
+document.getElementById("imagens");
+
+const preview =
+document.getElementById("preview");
+
+imagensInput.addEventListener(
+"change",
+function(){
+
+preview.innerHTML="";
+
+if(this.files.length>0){
+
+preview.style.display="block";
+
+Array.from(this.files).forEach(
+file=>{
+
+const img =
+document.createElement("img");
+
+img.src =
+URL.createObjectURL(file);
+
+preview.appendChild(img);
+
+});
+
+}
+
+});
+
+function criarClipe(){
+
+const musica =
+document.getElementById("musica").files[0];
+
+const imagens =
+document.getElementById("imagens").files;
+
+const letra =
+document.getElementById("letra").value;
+
+const estilo =
+document.getElementById("estilo").value;
+
+const formato =
+document.querySelector(
+'input[name="formato"]:checked'
+).value;
+
+if(!musica){
+
+alert(
+"🎵 Primeiro envie sua música."
+);
+
+return;
+
+}
+
+if(imagens.length===0){
+
+alert(
+"🖼️ Adicione pelo menos uma imagem."
+);
+
+return;
+
+}
+
+const status =
+document.getElementById("status");
+
+status.style.display="block";
+
+status.innerHTML =
+"⏳ Preparando seu projeto...";
+
+setTimeout(()=>{
+
+const url =
+"projeto.html" +
+"?musica=" +
+encodeURIComponent(musica.name) +
+"&imagens=" +
+encodeURIComponent(imagens.length) +
+"&estilo=" +
+encodeURIComponent(estilo) +
+"&formato=" +
+encodeURIComponent(formato);
+
+window.location.href=url;
+
+},1000);
+
+}
+
+</script>
+
+</body>
 </html>
