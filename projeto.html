@@ -1,419 +1,562 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projeto — CLIP MUSICAL AI</title>  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background: #0b0b12;
-      color: white;
-      min-height: 100vh;
-    }
+<title>Projeto — CLIP MUSICAL AI</title>
 
-    header {
-      background: linear-gradient(135deg, #15152a, #25114a);
-      padding: 22px 18px;
-      border-bottom: 1px solid #333;
-    }
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
 
-    header h1 {
-      font-size: 25px;
-      margin-bottom: 6px;
-    }
+body{
+background:#0b0b12;
+color:white;
+min-height:100vh;
+}
 
-    header p {
-      color: #bdbdc9;
-      font-size: 13px;
-    }
+header{
+background:linear-gradient(135deg,#15152a,#25114a);
+padding:22px 18px;
+border-bottom:1px solid #333;
+}
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 22px 16px 50px;
-    }
+header h1{
+font-size:25px;
+margin-bottom:6px;
+}
 
-    .card {
-      background: #15151f;
-      border: 1px solid #292936;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-    }
+header p{
+color:#bdbdc9;
+font-size:13px;
+}
 
-    .card h2 {
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
+.container{
+max-width:800px;
+margin:auto;
+padding:22px 16px 50px;
+}
 
-    .card p {
-      color: #aaaab8;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-bottom: 15px;
-    }
+.card{
+background:#15151f;
+border:1px solid #292936;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+}
 
-    .project-info {
-      display: grid;
-      gap: 10px;
-    }
+.card h2{
+font-size:19px;
+margin-bottom:10px;
+}
 
-    .info {
-      background: #0d0d15;
-      border: 1px solid #30303d;
-      padding: 13px;
-      border-radius: 10px;
-    }
+.card p{
+color:#aaaab8;
+font-size:13px;
+line-height:1.5;
+margin-bottom:15px;
+}
 
-    .info strong {
-      display: block;
-      color: #aaaab8;
-      font-size: 12px;
-      margin-bottom: 5px;
-    }
+.project-info{
+display:grid;
+gap:10px;
+}
 
-    .info span {
-      font-size: 14px;
-    }
+.info{
+background:#0d0d15;
+border:1px solid #30303d;
+padding:13px;
+border-radius:10px;
+}
 
-    textarea {
-      width: 100%;
-      min-height: 160px;
-      background: #0d0d15;
-      color: white;
-      border: 1px solid #363644;
-      border-radius: 12px;
-      padding: 13px;
-      resize: vertical;
-      line-height: 1.5;
-    }
+.info strong{
+display:block;
+color:#aaaab8;
+font-size:12px;
+margin-bottom:5px;
+}
 
-    .button {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 13px;
-      background: linear-gradient(135deg, #7c3aed, #ec4899);
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+.info span{
+font-size:14px;
+}
 
-    .button:active {
-      transform: scale(0.98);
-    }
+textarea{
+width:100%;
+min-height:160px;
+background:#0d0d15;
+color:white;
+border:1px solid #363644;
+border-radius:12px;
+padding:13px;
+resize:vertical;
+line-height:1.5;
+}
 
-    .secondary {
-      background: #22222e;
-      border: 1px solid #3b3b4a;
-    }
+.button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:13px;
+background:linear-gradient(135deg,#7c3aed,#ec4899);
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
 
-    .scene {
-      background: #0d0d15;
-      border: 1px solid #30303d;
-      border-radius: 14px;
-      padding: 15px;
-      margin-top: 12px;
-    }
+.button:active{
+transform:scale(.98);
+}
 
-    .scene-title {
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
+.secondary{
+background:#22222e;
+border:1px solid #3b3b4a;
+}
 
-    .scene p {
-      margin: 0;
-    }
+.scene{
+background:#0d0d15;
+border:1px solid #30303d;
+border-radius:14px;
+padding:15px;
+margin-top:12px;
+}
 
-    .tag {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      background: #262033;
-      color: #d8b4fe;
-      font-size: 11px;
-      margin-top: 8px;
-      margin-right: 5px;
-    }
+.scene-title{
+font-weight:bold;
+margin-bottom:8px;
+}
 
-    #roteiro {
-      display: none;
-    }
+.scene p{
+margin:0;
+}
 
-    #mensagem {
-      display: none;
-      background: #111827;
-      border: 1px solid #374151;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 15px;
-      text-align: center;
-      color: #d1d5db;
-      line-height: 1.5;
-    }
+.tag{
+display:inline-block;
+padding:5px 9px;
+border-radius:20px;
+background:#262033;
+color:#d8b4fe;
+font-size:11px;
+margin-top:8px;
+margin-right:5px;
+}
 
-    .progress {
-      height: 8px;
-      background: #272733;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 15px;
-      display: none;
-    }
+#roteiro{
+display:none;
+}
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #7c3aed, #ec4899);
-      transition: width 0.4s;
-    }
+#geracao{
+display:none;
+}
 
-    .footer {
-      text-align: center;
-      color: #777;
-      font-size: 12px;
-      margin-top: 25px;
-    }
-  </style></head><body><header>
-  <h1>🎬 CLIP MUSICAL AI</h1>
-  <p>Painel de criação do seu clipe</p>
-</header><div class="container">  <div class="card">
-    <h2>📋 Resumo do projeto</h2><div class="project-info">
+#mensagem{
+display:none;
+background:#111827;
+border:1px solid #374151;
+border-radius:12px;
+padding:14px;
+margin-top:15px;
+text-align:center;
+color:#d1d5db;
+line-height:1.5;
+}
 
-  <div class="info">
-    <strong>🎵 Música</strong>
-    <span id="nomeMusica">Nenhuma música informada</span>
-  </div>
+.progress{
+height:10px;
+background:#272733;
+border-radius:10px;
+overflow:hidden;
+margin-top:15px;
+display:none;
+}
 
-  <div class="info">
-    <strong>🖼️ Imagens</strong>
-    <span id="quantidadeImagens">0 imagens</span>
-  </div>
+.progress-bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#7c3aed,#ec4899);
+transition:width .4s;
+}
 
-  <div class="info">
-    <strong>🎨 Estilo</strong>
-    <span id="estiloProjeto">Cinematográfico</span>
-  </div>
+.preview{
+display:none;
+background:#050507;
+border:1px solid #383845;
+border-radius:16px;
+padding:20px;
+margin-top:18px;
+text-align:center;
+}
 
-  <div class="info">
-    <strong>📐 Formato</strong>
-    <span id="formatoProjeto">16:9</span>
-  </div>
+.preview-box{
+aspect-ratio:16/9;
+background:linear-gradient(135deg,#111827,#312e81,#581c87);
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+margin-bottom:15px;
+}
 
+.preview h3{
+margin-bottom:8px;
+}
+
+.preview p{
+margin:0;
+}
+
+.footer{
+text-align:center;
+color:#777;
+font-size:12px;
+margin-top:25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎬 CLIP MUSICAL AI</h1>
+<p>Painel de criação do seu clipe</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📋 Resumo do projeto</h2>
+
+<div class="project-info">
+
+<div class="info">
+<strong>🎵 Música</strong>
+<span id="nomeMusica">Nenhuma música informada</span>
 </div>
 
-  </div>  <div class="card">
-    <h2>📝 Roteiro do clipe</h2><p>
-  A IA usará a música, a letra e as imagens como referências
-  para criar a narrativa visual.
+<div class="info">
+<strong>🖼️ Imagens</strong>
+<span id="quantidadeImagens">0 imagens</span>
+</div>
+
+<div class="info">
+<strong>🎨 Estilo</strong>
+<span id="estiloProjeto">Cinematográfico</span>
+</div>
+
+<div class="info">
+<strong>📐 Formato</strong>
+<span id="formatoProjeto">16:9</span>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
+<h2>📝 Roteiro do clipe</h2>
+
+<p>
+A IA usará a música, a letra e as imagens como referências
+para criar a narrativa visual.
 </p>
 
 <textarea id="roteiroManual"
-  placeholder="Você também pode escrever aqui alguma ideia para a história do clipe..."></textarea>
+placeholder="Escreva aqui alguma ideia para a história do clipe..."></textarea>
 
 <button class="button" onclick="gerarRoteiro()">
-  ✨ GERAR ROTEIRO COM IA
+✨ GERAR ROTEIRO COM IA
 </button>
 
 <div class="progress" id="progress">
-  <div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div>
 </div>
 
 <div id="mensagem"></div>
 
-  </div>  <div class="card" id="roteiro"><h2>🎞️ Estrutura sugerida</h2>
+</div>
+
+<div class="card" id="roteiro">
+
+<h2>🎞️ Estrutura do clipe</h2>
 
 <div class="scene">
-  <div class="scene-title">🎬 Cena 1 — Introdução</div>
-  <p>
-    Apresentação visual baseada nas imagens de referência,
-    criando o clima inicial da música.
-  </p>
-  <span class="tag">Introdução</span>
-  <span class="tag">Movimento suave</span>
+<div class="scene-title">🎬 Cena 1 — Introdução</div>
+<p>
+José é apresentado como um jovem sonhador,
+em um ambiente cinematográfico inspirado em Gênesis 37.
+</p>
+<span class="tag">Introdução</span>
+<span class="tag">Movimento suave</span>
 </div>
 
 <div class="scene">
-  <div class="scene-title">🎤 Cena 2 — Primeiro verso</div>
-  <p>
-    As imagens começam a ganhar movimento e são utilizadas
-    para representar a história apresentada na música.
-  </p>
-  <span class="tag">Narrativa</span>
-  <span class="tag">Cinemático</span>
+<div class="scene-title">🌾 Cena 2 — O sonho</div>
+<p>
+José contempla os campos e recebe uma visão
+que representa os sonhos que Deus colocou em seu coração.
+</p>
+<span class="tag">Narrativa</span>
+<span class="tag">Sonho</span>
 </div>
 
 <div class="scene">
-  <div class="scene-title">🔥 Cena 3 — Refrão</div>
-  <p>
-    Momento de maior impacto visual, acompanhando a parte
-    mais forte da música.
-  </p>
-  <span class="tag">Refrão</span>
-  <span class="tag">Impacto</span>
+<div class="scene-title">🔥 Cena 3 — Conflito</div>
+<p>
+Os irmãos de José demonstram ciúmes,
+criando o momento de maior tensão da história.
+</p>
+<span class="tag">Drama</span>
+<span class="tag">Impacto</span>
 </div>
 
 <div class="scene">
-  <div class="scene-title">🎵 Cena 4 — Segundo verso</div>
-  <p>
-    Continuação da narrativa com novas combinações das
-    imagens e movimentos visuais.
-  </p>
-  <span class="tag">Continuação</span>
+<div class="scene-title">🌙 Cena 4 — Provação</div>
+<p>
+José passa por um período difícil,
+mas continua caminhando em direção ao propósito.
+</p>
+<span class="tag">Emoção</span>
+<span class="tag">Superação</span>
 </div>
 
 <div class="scene">
-  <div class="scene-title">✨ Cena 5 — Refrão final</div>
-  <p>
-    Clímax do clipe com as imagens principais e encerramento
-    visual marcante.
-  </p>
-  <span class="tag">Clímax</span>
-  <span class="tag">Final</span>
+<div class="scene-title">✨ Cena 5 — Esperança</div>
+<p>
+O clipe termina mostrando José olhando para o futuro,
+representando a realização do sonho e a fidelidade de Deus.
+</p>
+<span class="tag">Clímax</span>
+<span class="tag">Esperança</span>
 </div>
 
 <button class="button" onclick="gerarClipe()">
-  🎬 GERAR CLIPE
+🎬 GERAR CLIPE
 </button>
-
-  </div>  <div class="card">
-    <h2>📱 Conteúdo para divulgação</h2><p>
-  Depois do clipe completo, o sistema poderá criar automaticamente
-  versões curtas para TikTok, Reels e YouTube Shorts.
-</p>
-
-<button class="button secondary" onclick="mostrarDivulgacao()">
-  🚀 PREPARAR DIVULGAÇÃO
-</button>
-
-<div id="divulgacao" style="display:none; margin-top:15px;">
-
-  <div class="scene">
-    <div class="scene-title">📱 Short 1</div>
-    <p>Trecho de maior impacto da música.</p>
-  </div>
-
-  <div class="scene">
-    <div class="scene-title">📱 Short 2</div>
-    <p>Trecho emocional com suas imagens.</p>
-  </div>
-
-  <div class="scene">
-    <div class="scene-title">📱 Short 3</div>
-    <p>Vídeo vertical focado no refrão.</p>
-  </div>
 
 </div>
 
-  </div>  <div class="footer">
-    CLIP MUSICAL AI — Motor de criação em desenvolvimento
-  </div></div><script>
+<div class="card" id="geracao">
 
-  const parametros = new URLSearchParams(window.location.search);
+<h2>🎥 Gerando seu clipe</h2>
 
-  const musica = parametros.get("musica");
-  const imagens = parametros.get("imagens");
-  const estilo = parametros.get("estilo");
-  const formato = parametros.get("formato");
+<div id="statusGeracao">
+Preparando as cenas...
+</div>
 
-  if (musica) {
-    document.getElementById("nomeMusica").textContent = musica;
-  }
+<div class="progress" style="display:block;">
+<div class="progress-bar" id="barraClipe"></div>
+</div>
 
-  if (imagens) {
-    document.getElementById("quantidadeImagens").textContent =
-      imagens + " imagens";
-  }
+<div class="preview" id="preview">
 
-  if (estilo) {
-    document.getElementById("estiloProjeto").textContent = estilo;
-  }
+<div class="preview-box">
+🎬
+</div>
 
-  if (formato) {
-    document.getElementById("formatoProjeto").textContent = formato;
-  }
+<h3>✅ Prévia preparada!</h3>
 
-  function gerarRoteiro() {
+<p>
+O projeto visual foi preparado com suas cenas,
+música e formato 16:9.
+</p>
 
-    const mensagem = document.getElementById("mensagem");
-    const progress = document.getElementById("progress");
-    const bar = document.getElementById("progressBar");
-    const roteiro = document.getElementById("roteiro");
+<button class="button" onclick="finalizarClipe()">
+▶️ VER PRÉVIA
+</button>
 
-    mensagem.style.display = "block";
-    progress.style.display = "block";
+</div>
 
-    mensagem.innerHTML =
-      "🧠 Analisando a estrutura da música...";
+</div>
 
-    let porcentagem = 0;
+<div class="footer">
+CLIP MUSICAL AI — Sistema de criação de clipes
+</div>
 
-    const intervalo = setInterval(() => {
+</div>
 
-      porcentagem += 20;
+<script>
 
-      bar.style.width = porcentagem + "%";
+const parametros =
+new URLSearchParams(window.location.search);
 
-      if (porcentagem === 40) {
-        mensagem.innerHTML =
-          "🎵 Identificando os momentos principais da música...";
-      }
+const musica =
+parametros.get("musica");
 
-      if (porcentagem === 60) {
-        mensagem.innerHTML =
-          "🖼️ Relacionando imagens com a narrativa...";
-      }
+const imagens =
+parametros.get("imagens");
 
-      if (porcentagem === 80) {
-        mensagem.innerHTML =
-          "🎬 Montando a sequência de cenas...";
-      }
+const estilo =
+parametros.get("estilo");
 
-      if (porcentagem >= 100) {
+const formato =
+parametros.get("formato");
 
-        clearInterval(intervalo);
+if(musica){
+document.getElementById("nomeMusica").textContent=musica;
+}
 
-        mensagem.innerHTML =
-          "✅ Roteiro criado! Confira a estrutura abaixo.";
+if(imagens){
+document.getElementById("quantidadeImagens").textContent=
+imagens+" imagens";
+}
 
-        roteiro.style.display = "block";
-      }
+if(estilo){
+document.getElementById("estiloProjeto").textContent=estilo;
+}
 
-    }, 500);
-  }
+if(formato){
+document.getElementById("formatoProjeto").textContent=formato;
+}
 
-  function gerarClipe() {
+function gerarRoteiro(){
 
-    const mensagem = document.getElementById("mensagem");
+const mensagem=
+document.getElementById("mensagem");
 
-    mensagem.style.display = "block";
+const progress=
+document.getElementById("progress");
 
-    mensagem.innerHTML =
-      "🎬 Projeto preparado para geração do clipe.<br><br>" +
-      "🚧 O motor de geração de vídeo por IA será conectado na próxima etapa.";
+const bar=
+document.getElementById("progressBar");
 
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth"
-    });
-  }
+const roteiro=
+document.getElementById("roteiro");
 
-  function mostrarDivulgacao() {
+mensagem.style.display="block";
 
-    const divulgacao = document.getElementById("divulgacao");
+progress.style.display="block";
 
-    divulgacao.style.display =
-      divulgacao.style.display === "none"
-        ? "block"
-        : "none";
-  }
+mensagem.innerHTML=
+"🧠 Analisando a música...";
 
-</script></body>
+let porcentagem=0;
+
+const intervalo=setInterval(()=>{
+
+porcentagem+=20;
+
+bar.style.width=
+porcentagem+"%";
+
+if(porcentagem===40){
+
+mensagem.innerHTML=
+"🎵 Identificando os momentos principais...";
+}
+
+if(porcentagem===60){
+
+mensagem.innerHTML=
+"🖼️ Relacionando as imagens com a história...";
+}
+
+if(porcentagem===80){
+
+mensagem.innerHTML=
+"🎬 Montando as cenas do clipe...";
+}
+
+if(porcentagem>=100){
+
+clearInterval(intervalo);
+
+mensagem.innerHTML=
+"✅ Roteiro criado com sucesso!";
+
+roteiro.style.display="block";
+
+}
+
+},500);
+
+}
+
+function gerarClipe(){
+
+const geracao=
+document.getElementById("geracao");
+
+const barra=
+document.getElementById("barraClipe");
+
+const status=
+document.getElementById("statusGeracao");
+
+const preview=
+document.getElementById("preview");
+
+geracao.style.display="block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+let progresso=0;
+
+const intervalo=setInterval(()=>{
+
+progresso+=10;
+
+barra.style.width=
+progresso+"%";
+
+if(progresso===20){
+
+status.innerHTML=
+"🖼️ Preparando as imagens...";
+}
+
+if(progresso===40){
+
+status.innerHTML=
+"🎬 Criando os movimentos das cenas...";
+}
+
+if(progresso===60){
+
+status.innerHTML=
+"🎵 Sincronizando a música...";
+}
+
+if(progresso===80){
+
+status.innerHTML=
+"✨ Finalizando o clipe...";
+}
+
+if(progresso>=100){
+
+clearInterval(intervalo);
+
+status.innerHTML=
+"✅ Clipe preparado!";
+
+preview.style.display="block";
+
+}
+
+},500);
+
+}
+
+function finalizarClipe(){
+
+alert(
+"🎬 A prévia do clipe está pronta para a próxima etapa de integração com o motor de vídeo por IA."
+);
+
+}
+
+</script>
+
+</body>
 </html>
