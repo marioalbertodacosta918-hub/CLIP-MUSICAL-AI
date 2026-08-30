@@ -410,28 +410,20 @@ function abrirVideo() {
 function baixarVideo() {
 
   if (!videoURL) {
-
-    alert(
-      "O vídeo ainda não está pronto."
-    );
-
+    alert("O vídeo ainda não está pronto.");
     return;
   }
 
-  const link =
-    document.createElement("a");
+  const link = document.createElement("a");
 
   link.href = videoURL;
-
-  link.download =
-    "meu-clipe-musical.webm";
+  link.download = "meu-clipe-musical.webm";
 
   document.body.appendChild(link);
 
   link.click();
 
   document.body.removeChild(link);
-
 }
 
 </script>
