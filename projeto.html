@@ -900,201 +900,181 @@ box.innerHTML=
 
 function finalizarClipe(){
 
-const videoArea =
-document.getElementById("videoArea");
+    const videoArea = document.getElementById("videoArea");
+    const video = document.getElementById("videoPreview");
+    const formatoAtual = document.getElementById("formatoProjeto").textContent;
 
-const video =
-document.getElementById("videoPreview");
+    let largura = 1280;
+    let altura = 720;
 
-const formatoAtual =
-document.getElementById("formatoProjeto").textContent;
-
-let largura = 1280;
-let altura = 720;
-
-if(formatoAtual === "9:16"){
-    largura = 720;
-    altura = 1280;
-}
-
-if(formatoAtual === "1:1"){
-    largura = 1080;
-    altura = 1080;
-}
-
-const canvas = document.createElement("canvas");
-
-canvas.width = largura;
-canvas.height = altura;
-
-const ctx = canvas.getContext("2d");
-
-let inicio = null;
-const duracao = 5000;
-
-function desenhar(timestamp){
-
-    if(!inicio){
-        inicio = timestamp;
+    if(formatoAtual === "9:16"){
+        largura = 720;
+        altura = 1280;
     }
 
-    const tempo = timestamp - inicio;
-
-    ctx.fillStyle = "#111827";
-    ctx.fillRect(0, 0, largura, altura);
-
-    ctx.fillStyle = "white";
-    ctx.textAlign = "center";
-
-    ctx.font = "bold 50px Arial";
-
-    ctx.fillText(
-        "🎬 CLIP MUSICAL AI",
-        largura / 2,
-        altura / 2 - 40
-    );
-
-    ctx.font = "28px Arial";
-
-    ctx.fillText(
-        "Prévia do seu clipe",
-        largura / 2,
-        altura / 2 + 20
-    );
-
-    ctx.font = "20px Arial";
-
-    ctx.fillText(
-        "Projeto visual preparado",
-        largura / 2,
-        altura / 2 + 60
-    );
-
-    if(tempo < duracao){
-        requestAnimationFrame(desenhar);
+    if(formatoAtual === "1:1"){
+        largura = 1080;
+        altura = 1080;
     }
 
-}
-if (!window.MediaRecorder) {
-    alert("❌ Este navegador não suporta gravação de vídeo.");
-    return;
-}
+    const canvas = document.createElement("canvas");
+    canvas.width = largura;
+    canvas.height = altura;
 
-if (!canvas.captureStream) {
-    alert("❌ Este navegador não suporta captura do canvas.");
-    return;
-}
-const stream = canvas.captureStream(30);
+    const ctx = canvas.getContext("2d");
 
-let mimeType = "";
+    let imagem = null;
 
-const formatos = [
-    "video/webm;codecs=vp8",
-    "video/webm",
-    "video/mp4"
-];
+    const imagemSalva =
+        sessionStorage.getItem("clip_imagem_preview");
 
-for(const formato of formatos){
+    if(imagemSalva){
 
-    if(MediaRecorder.isTypeSupported(formato)){
+        imagem = new Image();
 
-        mimeType = formato;
-        break;
+        imagem.onload = function(){
+
+            iniciarVideoPreview();
+
+        };
+
+        imagem.src = imagemSalva;
+
+    }else{
+
+        iniciarVideoPreview();
 
     }
 
-}
+    function desenharCena(){
 
-if(!mimeType){
+        ctx.fillStyle = "#111827";
 
-    alert("❌ Este navegador não encontrou um formato de vídeo compatível.");
-    return;
-
-}
-r
-const recorder = new MediaRecorder(
-    stream,
-    {
-        mimeType: mimeType
-    }
-);
-
-const partes = [];
-
-recorder.ondataavailable = function(event){
-
-    if(event.data && event.data.size > 0){
-        partes.push(event.data);
-    }
-
-};
-
-recorder.onerror = function(){
-
-    alert(
-        "Não foi possível criar o vídeo neste navegador."
-    );
-
-};
-
-recorder.onstop = function(){
-
-    const blob = new Blob(
-        partes,
-        {
-            type: "video/webm"
-        }
-    );
-
-    if(!blob.size){
-
-        alert(
-            "O vídeo foi criado vazio. Tente novamente."
+        ctx.fillRect(
+            0,
+            0,
+            largura,
+            altura
         );
 
-        return;
+        if(imagem && imagem.complete){
+
+            const escala = Math.max(
+                largura / imagem.width,
+                altura / imagem.height
+            );
+
+            const w = imagem.width * escala;
+            const h = imagem.height * escala;
+
+            const x = (largura - w) / 2;
+            const y = (altura - h) / 2;
+
+            ctx.drawImage(
+                imagem,
+                x,
+                y,
+                w,
+                h
+            );
+
+        }
+
+        ctx.fillStyle = "rgba(0,0,0,.35)";
+
+        ctx.fillRect(
+            0,
+            0,
+            largura,
+            altura
+        );
+
+        ctx.fillStyle = "white";
+
+        ctx.textAlign = "center";
+
+        ctx.font = "bold 42px Arial";
+
+        ctx.fillText(
+            "🎬 CLIP MUSICAL AI",
+            largura / 2,
+            altura / 2 - 20
+        );
+
+        ctx.font = "24px Arial";
+
+        ctx.fillText(
+            "Prévia do seu clipe",
+            largura / 2,
+            altura / 2 + 30
+        );
+
     }
 
-    if(videoURL){
-        URL.revokeObjectURL(videoURL);
+    function iniciarVideoPreview(){
+
+        desenharCena();
+
+        videoArea.style.display = "block";
+
+        video.style.display = "block";
+
+        /*
+         * Cria um vídeo simples de demonstração
+         * usando um único frame como imagem.
+         */
+
+        canvas.toBlob(
+            function(blob){
+
+                if(!blob){
+
+                    alert(
+                        "Não foi possível preparar a prévia."
+                    );
+
+                    return;
+
+                }
+
+                if(videoURL){
+
+                    URL.revokeObjectURL(videoURL);
+
+                }
+
+                videoURL =
+                    URL.createObjectURL(blob);
+
+                /*
+                 * Usamos a imagem como fonte visual
+                 * da prévia.
+                 */
+
+                video.poster = videoURL;
+
+                video.removeAttribute("src");
+
+                video.load();
+
+                video.controls = false;
+
+                video.style.display = "none";
+
+                videoArea.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+                alert(
+                    "✅ Prévia preparada! A imagem do seu clipe está pronta."
+                );
+
+            },
+            "image/jpeg",
+            0.95
+        );
+
     }
-
-    videoURL =
-        URL.createObjectURL(blob);
-
-    video.src = videoURL;
-
-    video.controls = true;
-
-    video.playsInline = true;
-
-    video.style.display = "block";
-
-    videoArea.style.display = "block";
-
-    video.load();
-
-    videoArea.scrollIntoView({
-        behavior: "smooth"
-    });
-
-};
-
-recorder.start();
-
-requestAnimationFrame(desenhar);
-
-setTimeout(function(){
-
-    if(recorder.state !== "inactive"){
-        recorder.stop();
-    }
-
-    stream.getTracks().forEach(function(track){
-        track.stop();
-    });
-
-}, duracao + 500);
 
 }
 
