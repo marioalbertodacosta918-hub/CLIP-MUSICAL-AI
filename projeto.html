@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Projeto — CLIP MUSICAL AI</title>
+<title>CLIP MUSICAL AI</title>
 
 <style>
 
@@ -150,7 +150,7 @@ margin-top:8px;
 margin-right:5px;
 }
 
-#roteiro{
+#estrutura{
 display:none;
 }
 
@@ -219,7 +219,6 @@ width:100%;
 border-radius:12px;
 background:#000;
 margin-top:15px;
-display:none;
 }
 
 .download{
@@ -239,6 +238,12 @@ font-size:12px;
 margin-top:10px;
 }
 
+.status{
+text-align:center;
+padding:10px;
+color:#d1d5db;
+}
+
 </style>
 
 </head>
@@ -253,9 +258,7 @@ margin-top:10px;
 
 </header>
 
-
 <div class="container">
-
 
 <!-- RESUMO -->
 
@@ -267,36 +270,27 @@ margin-top:10px;
 
 <div class="info">
 <strong>🎵 Música</strong>
-<span id="nomeMusica">
-Nenhuma música informada
-</span>
+<span id="nomeMusica">Nenhuma música informada</span>
 </div>
 
 <div class="info">
 <strong>🖼️ Imagens</strong>
-<span id="quantidadeImagens">
-0 imagens
-</span>
+<span id="quantidadeImagens">0 imagens</span>
 </div>
 
 <div class="info">
 <strong>🎨 Estilo</strong>
-<span id="estiloProjeto">
-Cinematográfico
-</span>
+<span id="estiloProjeto">Cinematográfico</span>
 </div>
 
 <div class="info">
 <strong>📐 Formato</strong>
-<span id="formatoProjeto">
-16:9
-</span>
+<span id="formatoProjeto">16:9</span>
 </div>
 
 </div>
 
 </div>
-
 
 <!-- ROTEIRO -->
 
@@ -339,16 +333,365 @@ id="progressBar"
 
 </div>
 
-
 <!-- ESTRUTURA -->
 
 <div
 class="card"
-id="roteiro"
+id="estrutura"
 >
 
 <h2>🎞️ Estrutura do clipe</h2>
 
+<div id="cenas"></div>
+
+<button
+class="button"
+onclick="gerarClipe()"
+>
+
+🎬 GERAR CLIPE
+
+</button>
+
+</div>
+
+<!-- GERAÇÃO -->
+
+<div
+class="card"
+id="geracao"
+>
+
+<h2>🎥 Gerando seu clipe</h2>
+
+<div
+class="status"
+id="statusGeracao"
+>
+Preparando as cenas...
+</div>
+
+<div
+class="progress"
+id="progressClipe"
+style="display:block;"
+>
+
+<div
+class="progress-bar"
+id="barraClipe"
+></div>
+
+</div>
+
+<div
+class="preview"
+id="preview"
+>
+
+<div
+class="preview-box"
+id="previewBox"
+>
+
+🎬
+
+</div>
+
+<h3>
+✅ Prévia preparada!
+</h3>
+
+<p>
+A prévia está pronta. Toque no botão abaixo para criar
+um vídeo WEBM reproduzível.
+</p>
+
+<button
+class="button"
+onclick="finalizarClipe()"
+>
+
+▶️ VER PRÉVIA
+
+</button>
+
+</div>
+
+<div
+id="videoArea"
+style="display:none;"
+>
+
+<h3 style="margin-top:20px;">
+🎥 Seu vídeo
+</h3>
+
+<video
+id="videoPreview"
+controls
+playsinline
+></video>
+
+<button
+class="button download"
+onclick="baixarVideo()"
+>
+
+⬇️ BAIXAR VÍDEO
+
+</button>
+
+<p class="aviso">
+O vídeo será criado no formato WEBM.
+</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+CLIP MUSICAL AI — Sistema de criação de clipes
+
+</div>
+
+</div>
+
+<script>
+
+let videoURL = null;
+
+
+/* =====================================
+   RECUPERAR DADOS
+===================================== */
+
+function recuperarDados(){
+
+const parametros =
+new URLSearchParams(
+window.location.search
+);
+
+const musica =
+parametros.get("musica");
+
+const imagens =
+parametros.get("imagens");
+
+const estilo =
+parametros.get("estilo");
+
+const formato =
+parametros.get("formato");
+
+
+/* Música */
+
+const musicaSalva =
+sessionStorage.getItem("clip_musica");
+
+if(musica){
+
+document.getElementById(
+"nomeMusica"
+).textContent = musica;
+
+}else if(musicaSalva){
+
+document.getElementById(
+"nomeMusica"
+).textContent = musicaSalva;
+
+}
+
+
+/* Imagens */
+
+const imagensSalvas =
+sessionStorage.getItem("clip_imagens");
+
+if(imagens){
+
+document.getElementById(
+"quantidadeImagens"
+).textContent =
+imagens + " imagens";
+
+}else if(imagensSalvas){
+
+try{
+
+const lista =
+JSON.parse(imagensSalvas);
+
+document.getElementById(
+"quantidadeImagens"
+).textContent =
+lista.length + " imagens";
+
+}catch(e){}
+
+}
+
+
+/* Estilo */
+
+if(estilo){
+
+document.getElementById(
+"estiloProjeto"
+).textContent = estilo;
+
+}
+
+
+/* Formato */
+
+if(formato){
+
+document.getElementById(
+"formatoProjeto"
+).textContent = formato;
+
+}
+
+
+/* Letra */
+
+const letra =
+sessionStorage.getItem(
+"clip_letra"
+);
+
+if(letra){
+
+document.getElementById(
+"roteiroManual"
+).value = letra;
+
+}
+
+}
+
+
+/* =====================================
+   GERAR ROTEIRO
+===================================== */
+
+function gerarRoteiro(){
+
+const mensagem =
+document.getElementById(
+"mensagem"
+);
+
+const progress =
+document.getElementById(
+"progress"
+);
+
+const bar =
+document.getElementById(
+"progressBar"
+);
+
+const estrutura =
+document.getElementById(
+"estrutura"
+);
+
+
+mensagem.style.display = "block";
+
+progress.style.display = "block";
+
+bar.style.width = "0%";
+
+mensagem.innerHTML =
+"🧠 Analisando sua música...";
+
+
+let porcentagem = 0;
+
+
+const intervalo =
+setInterval(function(){
+
+porcentagem += 20;
+
+bar.style.width =
+porcentagem + "%";
+
+
+if(porcentagem === 20){
+
+mensagem.innerHTML =
+"🎵 Identificando os momentos principais...";
+
+}
+
+
+if(porcentagem === 40){
+
+mensagem.innerHTML =
+"🖼️ Relacionando as imagens com a história...";
+
+}
+
+
+if(porcentagem === 60){
+
+mensagem.innerHTML =
+"🎬 Montando as cenas do clipe...";
+
+}
+
+
+if(porcentagem === 80){
+
+mensagem.innerHTML =
+"✨ Ajustando a narrativa visual...";
+
+}
+
+
+if(porcentagem >= 100){
+
+clearInterval(intervalo);
+
+mensagem.innerHTML =
+"✅ Roteiro criado com sucesso!";
+
+criarCenas();
+
+estrutura.style.display =
+"block";
+
+estrutura.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+},500);
+
+}
+
+
+/* =====================================
+   CRIAR CENAS
+===================================== */
+
+function criarCenas(){
+
+const container =
+document.getElementById(
+"cenas"
+);
+
+container.innerHTML = `
 
 <div class="scene">
 
@@ -434,417 +777,120 @@ representando a realização do sonho e a fidelidade de Deus.
 
 </div>
 
-
-<button
-class="button"
-onclick="gerarClipe()"
->
-
-🎬 GERAR CLIPE
-
-</button>
-
-</div>
-
-
-<!-- GERAÇÃO -->
-
-<div
-class="card"
-id="geracao"
->
-
-<h2>🎥 Gerando seu clipe</h2>
-
-<div id="statusGeracao">
-Preparando as cenas...
-</div>
-
-<div
-class="progress"
-style="display:block;"
->
-
-<div
-class="progress-bar"
-id="barraClipe"
-></div>
-
-</div>
-
-
-<div
-class="preview"
-id="preview"
->
-
-<div
-class="preview-box"
-id="previewBox"
->
-
-🎬
-
-</div>
-
-<h3>
-✅ Prévia preparada!
-</h3>
-
-<p>
-As imagens e a música serão utilizadas
-na montagem do vídeo.
-</p>
-
-<button
-class="button"
-onclick="finalizarClipe()"
->
-
-▶️ VER PRÉVIA
-
-</button>
-
-</div>
-
-
-<!-- VIDEO -->
-
-<div id="videoArea" style="display:none;">
-
-<h3 style="margin-top:20px;">
-🎥 Seu vídeo
-</h3>
-
-<video
-id="videoPreview"
-controls
-playsinline
-></video>
-
-<button
-class="button download"
-onclick="baixarVideo()"
->
-
-⬇️ BAIXAR VÍDEO
-
-</button>
-
-<p class="aviso">
-O vídeo será criado no formato WEBM.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-
-CLIP MUSICAL AI — Sistema de criação de clipes
-
-</div>
-
-</div>
-
-
-<script>
-
-let videoURL=null;
-
-let musicaArquivo=null;
-
-let imagensArquivos=[];
-
-
-// =====================================
-// RECUPERAR DADOS
-// =====================================
-
-const parametros=
-new URLSearchParams(
-window.location.search
-);
-
-const musica=
-parametros.get("musica");
-
-const imagens=
-parametros.get("imagens");
-
-const estilo=
-parametros.get("estilo");
-
-const formato=
-parametros.get("formato");
-
-
-if(musica){
-
-document.getElementById(
-"nomeMusica"
-).textContent=musica;
+`;
 
 }
 
 
-if(imagens){
-
-document.getElementById(
-"quantidadeImagens"
-).textContent=
-imagens+" imagens";
-
-}
-
-
-if(estilo){
-
-document.getElementById(
-"estiloProjeto"
-).textContent=estilo;
-
-}
-
-
-if(formato){
-
-document.getElementById(
-"formatoProjeto"
-).textContent=formato;
-
-}
-
-
-// =====================================
-// RECUPERAR LETRA
-// =====================================
-
-const letraSalva=
-sessionStorage.getItem(
-"clip_letra"
-);
-
-if(letraSalva){
-
-document.getElementById(
-"roteiroManual"
-).value=
-letraSalva;
-
-}
-
-
-// =====================================
-// ROTEIRO
-// =====================================
-
-function gerarRoteiro(){
-
-const mensagem=
-document.getElementById(
-"mensagem"
-);
-
-const progress=
-document.getElementById(
-"progress"
-);
-
-const bar=
-document.getElementById(
-"progressBar"
-);
-
-const roteiro=
-document.getElementById(
-"roteiro"
-);
-
-
-mensagem.style.display="block";
-
-progress.style.display="block";
-
-bar.style.width="0%";
-
-mensagem.innerHTML=
-"🧠 Analisando a música...";
-
-
-let porcentagem=0;
-
-
-const intervalo=
-setInterval(function(){
-
-porcentagem+=20;
-
-bar.style.width=
-porcentagem+"%";
-
-
-if(porcentagem===20){
-
-mensagem.innerHTML=
-"🎵 Identificando os momentos principais...";
-
-}
-
-
-if(porcentagem===40){
-
-mensagem.innerHTML=
-"🖼️ Relacionando as imagens com a história...";
-
-}
-
-
-if(porcentagem===60){
-
-mensagem.innerHTML=
-"🎬 Montando as cenas do clipe...";
-
-}
-
-
-if(porcentagem===80){
-
-mensagem.innerHTML=
-"✨ Ajustando a narrativa visual...";
-
-}
-
-
-if(porcentagem>=100){
-
-clearInterval(intervalo);
-
-mensagem.innerHTML=
-"✅ Roteiro criado com sucesso!";
-
-roteiro.style.display="block";
-
-roteiro.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-},500);
-
-}
-
-
-// =====================================
-// GERAR CLIPE
-// =====================================
+/* =====================================
+   GERAR CLIPE
+===================================== */
 
 function gerarClipe(){
 
-const geracao=
+const geracao =
 document.getElementById(
 "geracao"
 );
 
-const barra=
+const barra =
 document.getElementById(
 "barraClipe"
 );
 
-const status=
+const status =
 document.getElementById(
 "statusGeracao"
 );
 
-const preview=
+const preview =
 document.getElementById(
 "preview"
 );
 
-
-geracao.style.display="block";
-
-preview.style.display="none";
-
+const videoArea =
 document.getElementById(
 "videoArea"
-).style.display="none";
+);
 
 
-barra.style.width="0%";
+geracao.style.display =
+"block";
 
-status.innerHTML=
+preview.style.display =
+"none";
+
+videoArea.style.display =
+"none";
+
+barra.style.width =
+"0%";
+
+status.innerHTML =
 "⏳ Preparando seu clipe...";
 
 
-window.scrollTo({
-top:document.body.scrollHeight,
+geracao.scrollIntoView({
 behavior:"smooth"
 });
 
 
-let progresso=0;
+let progresso = 0;
 
 
-const intervalo=
+const intervalo =
 setInterval(function(){
 
-progresso+=10;
+progresso += 10;
 
-barra.style.width=
-progresso+"%";
+barra.style.width =
+progresso + "%";
 
 
-if(progresso===10){
+if(progresso === 10){
 
-status.innerHTML=
+status.innerHTML =
 "🎵 Carregando música...";
 
 }
 
+if(progresso === 20){
 
-if(progresso===20){
-
-status.innerHTML=
+status.innerHTML =
 "🖼️ Preparando as imagens...";
 
 }
 
+if(progresso === 40){
 
-if(progresso===40){
-
-status.innerHTML=
+status.innerHTML =
 "🎬 Criando movimentos das cenas...";
 
 }
 
+if(progresso === 60){
 
-if(progresso===60){
-
-status.innerHTML=
+status.innerHTML =
 "✨ Aplicando estilo visual...";
 
 }
 
+if(progresso === 80){
 
-if(progresso===80){
-
-status.innerHTML=
+status.innerHTML =
 "🎵 Sincronizando a música...";
 
 }
 
-
-if(progresso>=100){
+if(progresso >= 100){
 
 clearInterval(intervalo);
 
-status.innerHTML=
+status.innerHTML =
 "✅ Clipe preparado!";
 
-preview.style.display="block";
+preview.style.display =
+"block";
 
 criarPreviewImagem();
 
@@ -859,18 +905,18 @@ behavior:"smooth"
 }
 
 
-// =====================================
-// MOSTRAR IMAGEM NA PRÉVIA
-// =====================================
+/* =====================================
+   IMAGEM DA PRÉVIA
+===================================== */
 
 function criarPreviewImagem(){
 
-const box=
+const box =
 document.getElementById(
 "previewBox"
 );
 
-const imagemSalva=
+const imagemSalva =
 sessionStorage.getItem(
 "clip_imagem_preview"
 );
@@ -878,304 +924,390 @@ sessionStorage.getItem(
 
 if(imagemSalva){
 
-box.innerHTML=
-'<img src="'+
-imagemSalva+
-'" alt="Prévia">';
+box.innerHTML =
+'<img src="' +
+imagemSalva +
+'" alt="Prévia do clipe">';
+
+}else{
+
+box.innerHTML =
+"🎬";
+
+}
+
+}
+
+
+/* =====================================
+   CRIAR VÍDEO REAL
+===================================== */
+
+function finalizarClipe(){
+
+const videoArea =
+document.getElementById(
+"videoArea"
+);
+
+const video =
+document.getElementById(
+"videoPreview"
+);
+
+const formatoAtual =
+document.getElementById(
+"formatoProjeto"
+).textContent;
+
+
+let largura = 1280;
+let altura = 720;
+
+
+if(formatoAtual === "9:16"){
+
+largura = 720;
+altura = 1280;
+
+}
+
+
+if(formatoAtual === "1:1"){
+
+largura = 1080;
+altura = 1080;
+
+}
+
+
+const canvas =
+document.createElement("canvas");
+
+canvas.width =
+largura;
+
+canvas.height =
+altura;
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+const imagemSalva =
+sessionStorage.getItem(
+"clip_imagem_preview"
+);
+
+
+let imagem = null;
+
+
+function desenharCena(){
+
+ctx.fillStyle =
+"#111827";
+
+ctx.fillRect(
+0,
+0,
+largura,
+altura
+);
+
+
+if(imagem &&
+imagem.complete &&
+imagem.naturalWidth > 0){
+
+const escala =
+Math.max(
+largura / imagem.width,
+altura / imagem.height
+);
+
+const w =
+imagem.width * escala;
+
+const h =
+imagem.height * escala;
+
+const x =
+(largura - w) / 2;
+
+const y =
+(altura - h) / 2;
+
+
+ctx.drawImage(
+imagem,
+x,
+y,
+w,
+h
+);
+
+}
+
+
+ctx.fillStyle =
+"rgba(0,0,0,0.35)";
+
+ctx.fillRect(
+0,
+0,
+largura,
+altura
+);
+
+
+ctx.fillStyle =
+"white";
+
+ctx.textAlign =
+"center";
+
+ctx.font =
+"bold 42px Arial";
+
+ctx.fillText(
+"🎬 CLIP MUSICAL AI",
+largura / 2,
+altura / 2 - 20
+);
+
+
+ctx.font =
+"24px Arial";
+
+ctx.fillText(
+"Prévia do seu clipe",
+largura / 2,
+altura / 2 + 30
+);
+
+}
+
+
+/* Carregar imagem */
+
+if(imagemSalva){
+
+imagem =
+new Image();
+
+imagem.onload =
+function(){
+
+criarGravacao();
+
+};
+
+imagem.onerror =
+function(){
+
+criarGravacao();
+
+};
+
+imagem.src =
+imagemSalva;
+
+}else{
+
+criarGravacao();
+
+}
+
+
+/* Gravação */
+
+function criarGravacao(){
+
+if(!canvas.captureStream){
+
+alert(
+"Seu navegador não suporta a criação do vídeo."
+);
 
 return;
 
 }
 
 
-box.innerHTML=
-"🎬";
+const stream =
+canvas.captureStream(30);
+
+
+let mimeType =
+"video/webm;codecs=vp9";
+
+
+if(
+!MediaRecorder.isTypeSupported(
+mimeType
+)
+){
+
+mimeType =
+"video/webm;codecs=vp8";
 
 }
 
 
-// =====================================
-// CRIAR VÍDEO
-// =====================================
-
-// =====================================
-// CRIAR VÍDEO
-// =====================================
-
-function finalizarClipe(){
-
-    const videoArea =
-        document.getElementById("videoArea");
-
-    const video =
-        document.getElementById("videoPreview");
-
-    const formatoAtual =
-        document.getElementById("formatoProjeto").textContent;
-
-    let largura = 1280;
-    let altura = 720;
-
-    if(formatoAtual === "9:16"){
-        largura = 720;
-        altura = 1280;
-    }
-
-    if(formatoAtual === "1:1"){
-        largura = 1080;
-        altura = 1080;
-    }
-
-    const canvas =
-        document.createElement("canvas");
-
-    canvas.width = largura;
-    canvas.height = altura;
-
-    const ctx =
-        canvas.getContext("2d");
-
-    const imagemSalva =
-        sessionStorage.getItem(
-            "clip_imagem_preview"
-        );
-
-    let imagem = new Image();
-
-    function desenhar(){
-
-        ctx.fillStyle = "#111827";
-
-        ctx.fillRect(
-            0,
-            0,
-            largura,
-            altura
-        );
-
-        if(imagemSalva && imagem.complete){
-
-            const escala =
-                Math.max(
-                    largura / imagem.width,
-                    altura / imagem.height
-                );
-
-            const w =
-                imagem.width * escala;
-
-            const h =
-                imagem.height * escala;
-
-            const x =
-                (largura - w) / 2;
-
-            const y =
-                (altura - h) / 2;
-
-            ctx.drawImage(
-                imagem,
-                x,
-                y,
-                w,
-                h
-            );
-
-        }
-
-        ctx.fillStyle =
-            "rgba(0,0,0,0.35)";
-
-        ctx.fillRect(
-            0,
-            0,
-            largura,
-            altura
-        );
-
-        ctx.fillStyle = "white";
-
-        ctx.textAlign = "center";
-
-        ctx.font =
-            "bold 42px Arial";
-
-        ctx.fillText(
-            "🎬 CLIP MUSICAL AI",
-            largura / 2,
-            altura / 2 - 20
-        );
-
-        ctx.font =
-            "24px Arial";
-
-        ctx.fillText(
-            "Prévia do seu clipe",
-            largura / 2,
-            altura / 2 + 30
-        );
-
-    }
-
-
-    function criarVideo(){
-
-        if(!canvas.captureStream){
-
-            alert(
-                "Seu navegador não suporta a criação de vídeo."
-            );
-
-            return;
-
-        }
-
-        const stream =
-            canvas.captureStream(30);
-
-        let mimeType =
-            "video/webm;codecs=vp9";
-
-        if(!MediaRecorder.isTypeSupported(mimeType)){
-
-            mimeType =
-                "video/webm;codecs=vp8";
-
-        }
-
-        if(!MediaRecorder.isTypeSupported(mimeType)){
-
-            mimeType =
-                "video/webm";
-
-        }
-
-        const recorder =
-            new MediaRecorder(
-                stream,
-                {
-                    mimeType:mimeType
-                }
-            );
-
-        const partes = [];
-
-        recorder.ondataavailable =
-            function(event){
-
-                if(event.data.size > 0){
-
-                    partes.push(event.data);
-
-                }
-
-            };
-
-
-        recorder.onstop =
-            function(){
-
-                const blob =
-                    new Blob(
-                        partes,
-                        {
-                            type:"video/webm"
-                        }
-                    );
-
-                if(videoURL){
-
-                    URL.revokeObjectURL(
-                        videoURL
-                    );
-
-                }
-
-                videoURL =
-                    URL.createObjectURL(blob);
-
-                video.src =
-                    videoURL;
-
-                video.controls = true;
-
-                video.style.display =
-                    "block";
-
-                videoArea.style.display =
-                    "block";
-
-                video.load();
-
-                videoArea.scrollIntoView({
-                    behavior:"smooth"
-                });
-
-            };
-
-
-        recorder.start();
-
-        let tempo = 0;
-
-        const duracao = 5000;
-
-        const intervalo =
-            setInterval(
-                function(){
-
-                    desenhar();
-
-                    tempo += 100;
-
-                    if(tempo >= duracao){
-
-                        clearInterval(
-                            intervalo
-                        );
-
-                        recorder.stop();
-
-                        stream
-                            .getTracks()
-                            .forEach(
-                                track =>
-                                track.stop()
-                            );
-
-                    }
-
-                },
-                100
-            );
-
-    }
-
-
-    if(imagemSalva){
-
-        imagem.onload =
-            function(){
-
-                criarVideo();
-
-            };
-
-        imagem.src =
-            imagemSalva;
-
-    }else{
-
-        criarVideo();
-
-    }
+if(
+!MediaRecorder.isTypeSupported(
+mimeType
+)
+){
+
+mimeType =
+"video/webm";
 
 }
 
 
-// =====================================
-// BAIXAR
-// =====================================
+let recorder;
+
+
+try{
+
+recorder =
+new MediaRecorder(
+stream,
+{
+mimeType:mimeType
+}
+);
+
+}catch(e){
+
+alert(
+"Não foi possível criar o vídeo neste navegador."
+);
+
+return;
+
+}
+
+
+const partes = [];
+
+
+recorder.ondataavailable =
+function(event){
+
+if(event.data.size > 0){
+
+partes.push(
+event.data
+);
+
+}
+
+};
+
+
+recorder.onstop =
+function(){
+
+const blob =
+new Blob(
+partes,
+{
+type:"video/webm"
+}
+);
+
+
+if(videoURL){
+
+URL.revokeObjectURL(
+videoURL
+);
+
+}
+
+
+videoURL =
+URL.createObjectURL(
+blob
+);
+
+
+video.src =
+videoURL;
+
+video.controls =
+true;
+
+video.style.display =
+"block";
+
+videoArea.style.display =
+"block";
+
+video.load();
+
+
+videoArea.scrollIntoView({
+behavior:"smooth"
+});
+
+
+};
+
+
+/* Começa a gravação */
+
+recorder.start();
+
+
+let tempo = 0;
+
+const duracao = 5000;
+
+
+const intervalo =
+setInterval(function(){
+
+desenharCena();
+
+tempo += 100;
+
+
+if(tempo >= duracao){
+
+clearInterval(
+intervalo
+);
+
+recorder.stop();
+
+
+stream
+.getTracks()
+.forEach(
+function(track){
+
+track.stop();
+
+}
+);
+
+}
+
+},100);
+
+}
+
+}
+
+
+/* =====================================
+   BAIXAR VÍDEO
+===================================== */
 
 function baixarVideo(){
 
@@ -1190,34 +1322,38 @@ return;
 }
 
 
-const link=
+const link =
 document.createElement("a");
 
 
-link.href=
+link.href =
 videoURL;
 
 
-link.download=
+link.download =
 "clip-musical-ai.webm";
 
 
-link.style.display="none";
-
-
-document.body.appendChild(link);
+document.body.appendChild(
+link
+);
 
 
 link.click();
 
 
-setTimeout(function(){
-
-document.body.removeChild(link);
-
-},1000);
+document.body.removeChild(
+link
+);
 
 }
+
+
+/* =====================================
+   INICIAR
+===================================== */
+
+recuperarDados();
 
 </script>
 
