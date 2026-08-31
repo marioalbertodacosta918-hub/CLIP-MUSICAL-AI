@@ -267,7 +267,33 @@ margin-top:25px;
 <div class="card">
 <h2>📝<!-- IMAGENS DO CLIPE 
 <h2>📝 Roteiro do clipe</h2>
+<p>
+A IA usará a música, a letra e as imagens como referências
+para criar a narrativa visual do clipe.
+</p>
 
+<textarea
+id="roteiroManual"
+placeholder="Escreva aqui alguma ideia para a história do clipe..."
+></textarea>
+
+<button
+class="button"
+onclick="gerarRoteiro()"
+>
+✨ GERAR ROTEIRO COM IA
+</button>
+
+<div
+id="resultadoRoteiro"
+style="
+margin-top:20px;
+padding:15px;
+background:#111;
+border-radius:10px;
+white-space:pre-wrap;
+"
+></div>
 <p>
 A IA usará a música, a letra e as imagens como referências
 para criar a narrativa visual do seu clipe.
