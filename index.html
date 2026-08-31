@@ -832,6 +832,41 @@ document.body.removeChild(link);
 }
 
 </script>
+let imagensSelecionadas = [];
 
+function carregarImagens(event){
+
+const arquivos =
+Array.from(event.target.files);
+
+const galeria =
+document.getElementById("galeriaImagens");
+
+galeria.innerHTML = "";
+
+imagensSelecionadas = arquivos;
+
+document.getElementById("quantidadeImagens").textContent =
+arquivos.length + " imagens";
+
+arquivos.forEach(function(arquivo){
+
+const imagem =
+document.createElement("img");
+
+imagem.src =
+URL.createObjectURL(arquivo);
+
+imagem.style.width = "100%";
+imagem.style.aspectRatio = "16/9";
+imagem.style.objectFit = "cover";
+imagem.style.borderRadius = "12px";
+imagem.style.border = "1px solid #383845";
+
+galeria.appendChild(imagem);
+
+});
+
+}
 </body>
 </html>
