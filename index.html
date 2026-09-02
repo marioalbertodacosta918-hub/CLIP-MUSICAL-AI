@@ -1,1 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLIP MUSICAL AI</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b0b12;
+color:white;
+min-height:100vh;
+}
+
+header{
+background:linear-gradient(135deg,#15152a,#25114a);
+padding:22px 18px;
+border-bottom:1px solid #333;
+}
+
+header h1{
+font-size:25px;
+margin-bottom:6px;
+}
+
+header p{
+color:#bdbdc9;
+font-size:13px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+padding:22px 16px 50px;
+}
+
+.card{
+background:#15151f;
+border:1px solid #292936;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+}
+
+.card h2{
+font-size:19px;
+margin-bottom:10px;
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.card p{
+color:#aaaab8;
+font-size:13px;
+line-height:1.5;
+margin-bottom:15px;
+}
+
+.project-info{
+display:grid;
+gap:10px;
+}
+
+.info{
+background:#0d0d15;
+border:1px solid #30303d;
+padding:13px;
+border-radius:10px;
+}
+
+.info strong{
+display:block;
+color:#aaaab8;
+font-size:12px;
+margin-bottom:5px;
+}
+
+.info span{
+font-size:14px;
+}
+
+textarea{
+width:100%;
+min-height:160px;
+background:#0d0d15;
+color:white;
+border:1px solid #363644;
+border-radius:12px;
+padding:13px;
+resize:vertical;
+line-height:1.5;
+}
+
+.button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:13px;
+background:linear-gradient(135deg,#7c3aed,#ec4899);
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.button:disabled{
+opacity:.5;
+cursor:not-allowed;
+}
+
+.secondary{
+background:#22222e;
+border:1px solid #3b3b4a;
+}
+
+.scene{
+background:#0d0d15;
+border:1px solid #30303d;
+border-radius:14px;
+padding:15px;
+margin-top:12px;
+}
+
+.scene-title{
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.scene p{
+margin:0;
+}
+
+.tag{
+display:inline-block;
+padding:5px 9px;
+border-radius:20px;
+background:#262033;
+color:#d8b4fe;
+font-size:11px;
+margin-top:8px;
+margin-right:5px;
+}
+
+#mensagem{
+display:none;
+background:#111827;
+border:1px solid #374151;
+border-radius:12px;
+padding:14px;
+margin-top:15px;
+text-align:center;
+color:#d1d5db;
+line-height:1.5;
+}
+
+.progress{
+height:10px;
+background:#272733;
+border-radius:10px;
+overflow:hidden;
+margin-top:15px;
+display:none;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#7c3aed,#ec4899);
+transition:width .4s;
+}
+
+#resultadoRoteiro{
+display:none;
+margin-top:20px;
+padding:15px;
+background:#0d0d15;
+border:1px solid #30303d;
+border-radius:12px;
+white-space:pre-wrap;
+line-height:1.6;
+}
+
+#geracao{
+display:none;
+}
+
+#videoArea{
+display:none;
+margin-top:20px;
+}
+
+video{
+width:100%;
+border-radius:12px;
+background:#000;
+margin-top:12px;
+display:block;
+}
+
+.download{
+background:linear-gradient(135deg,#059669,#10b981);
+}
+
+.footer{
+text-align:center;
+color:#777;
+font-size:12px;
+margin-top:25px;
+}
+
+.aviso{
+background:#171722;
+border:1px solid #383845;
+border-radius:12px;
+padding:12px;
+margin-top:12px;
+font-size:12px;
+color:#aaaab8;
+line-height:1.5;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🎬 CLIP MUSICAL AI</h1>
+
+<p>Painel de criação do seu clipe</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📋 Resumo do projeto</h2>
+
+<div class="project-info">
+
+<div class="info">
+<strong>🎵 Música</strong>
+<span id="nomeMusica">Nenhuma música informada</span>
+</div>
+
+<div class="info">
+<strong>🖼️ Imagens</strong>
+<span id="quantidadeImagens">0 imagens</span>
+</div>
+
+<div class="info">
+<strong>🎨 Estilo</strong>
+<span id="estiloProjeto">Cinematográfico</span>
+</div>
+
+<div class="info">
+<strong>📐 Formato</strong>
+<span id="formatoProjeto">16:9</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<h2>📝 Roteiro do clipe</h2>
+
+<p>
+A IA usará a música, a letra e as imagens como referências
+para criar a narrativa visual do seu clipe.
+</p>
+
+<textarea
+id="roteiroManual"
+placeholder="Escreva aqui alguma ideia para a história do clipe..."
+></textarea>
+
+<button
+class="button"
+id="botaoRoteiro"
+onclick="gerarRoteiro()"
+>
+✨ GERAR ROTEIRO COM IA
+</button>
+
+<div class="progress" id="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div id="mensagem"></div>
+
+<div id="resultadoRoteiro"></div>
+
+</div>
+
+
+<div
+class="card"
+id="roteiro"
+style="display:none;"
+>
+
+<h2>🎞️ Estrutura do clipe</h2>
+
+<div class="scene">
+
+<div class="scene-title">
+🎬 Cena 1 — Introdução
+</div>
+
+<p>
+Apresentação do personagem e do ambiente da história.
+</p>
+
+<span class="tag">Introdução</span>
+<span class="tag">Movimento suave</span>
+
+</div>
+
+<div class="scene">
+
+<div class="scene-title">
+🌾 Cena 2 — O sonho
+</div>
+
+<p>
+O personagem contempla o ambiente e recebe uma visão
+que representa seus sonhos e seu propósito.
+</p>
+
+<span class="tag">Narrativa</span>
+<span class="tag">Sonho</span>
+
+</div>
+
+<div class="scene">
+
+<div class="scene-title">
+🔥 Cena 3 — Conflito
+</div>
+
+<p>
+Os acontecimentos criam tensão e colocam o personagem
+diante de uma grande prova.
+</p>
+
+<span class="tag">Drama</span>
+<span class="tag">Impacto</span>
+
+</div>
+
+<div class="scene">
+
+<div class="scene-title">
+🌙 Cena 4 — Provação
+</div>
+
+<p>
+Mesmo enfrentando dificuldades, o personagem continua
+acreditando em seu propósito.
+</p>
+
+<span class="tag">Emoção</span>
+<span class="tag">Superação</span>
+
+</div>
+
+<div class="scene">
+
+<div class="scene-title">
+✨ Cena 5 — Esperança
+</div>
+
+<p>
+A história termina apontando para a realização do sonho
+e para a fidelidade de Deus.
+</p>
+
+<span class="tag">Clímax</span>
+<span class="tag">Esperança</span>
+
+</div>
+
+<button
+class="button"
+id="botaoClipe"
+onclick="gerarClipe()"
+>
+🎬 GERAR CLIPE
+</button>
+
+</div>
+
+
+<div
+class="card"
+id="geracao"
+>
+
+<h2>🎥 Gerando seu clipe</h2>
+
+<div id="statusGeracao">
+Preparando a geração...
+</div>
+
+<div
+class="progress"
+id="progressClipe"
+style="display:block;"
+>
+
+<div
+class="progress-bar"
+id="barraClipe"
+></div>
+
+</div>
+
+<div
+class="aviso"
+id="avisoGeracao"
+>
+A geração do vídeo é feita pelo servidor e pode levar alguns minutos.
+</div>
+
+<div id="videoArea">
+
+<h3>🎥 Seu clipe</h3>
+
+<video
+id="videoPreview"
+controls
+playsinline
+preload="metadata"
+>
+Seu navegador não suporta vídeo.
+</video>
+
+<button
+class="button download"
+onclick="baixarVideo()"
+>
+⬇️ BAIXAR VÍDEO
+</button>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+CLIP MUSICAL AI — Sistema de criação de clipes
+
+</div>
+
+</div>
+
+
+<script>
+
+let videoURL = null;
+
+
+/* SERVIDOR */
+
+const API_URL =
+"https://clip-musical-ai-server.vercel.app/api/gerar-video";
+
+
+/* DADOS DA URL */
+
+const parametros =
+new URLSearchParams(window.location.search);
+
+const musica =
+parametros.get("musica");
+
+const imagens =
+parametros.get("imagens");
+
+const estilo =
+parametros.get("estilo");
+
+const formato =
+parametros.get("formato");
+
+
+if(musica){
+
+document.getElementById("nomeMusica").textContent =
+musica;
+
+}
+
+if(imagens){
+
+document.getElementById("quantidadeImagens").textContent =
+imagens + " imagens";
+
+}
+
+if(estilo){
+
+document.getElementById("estiloProjeto").textContent =
+estilo;
+
+}
+
+if(formato){
+
+document.getElementById("formatoProjeto").textContent =
+formato;
+
+}
+
+
+/* ROTEIRO */
+
+function gerarRoteiro(){
+
+const mensagem =
+document.getElementById("mensagem");
+
+const progress =
+document.getElementById("progress");
+
+const bar =
+document.getElementById("progressBar");
+
+const roteiro =
+document.getElementById("roteiro");
+
+const resultado =
+document.getElementById("resultadoRoteiro");
+
+const texto =
+document.getElementById("roteiroManual").value.trim();
+
+mensagem.style.display =
+"block";
+
+progress.style.display =
+"block";
+
+bar.style.width =
+"0%";
+
+resultado.style.display =
+"none";
+
+roteiro.style.display =
+"none";
+
+mensagem.innerHTML =
+"🧠 Preparando o roteiro...";
+
+let porcentagem = 0;
+
+const intervalo =
+setInterval(function(){
+
+porcentagem += 20;
+
+bar.style.width =
+porcentagem + "%";
+
+if(porcentagem === 20){
+
+mensagem.innerHTML =
+"🎵 Analisando a proposta musical...";
+
+}
+
+if(porcentagem === 40){
+
+mensagem.innerHTML =
+"🎬 Criando a narrativa...";
+
+}
+
+if(porcentagem === 60){
+
+mensagem.innerHTML =
+"🖼️ Organizando as cenas...";
+
+}
+
+if(porcentagem === 80){
+
+mensagem.innerHTML =
+"✨ Finalizando o roteiro...";
+
+}
+
+if(porcentagem >= 100){
+
+clearInterval(intervalo);
+
+const roteiroFinal =
+texto ||
+`Clipe musical cristão cinematográfico.
+
+Música: ${musica || "Não informada"}
+
+Estilo: ${estilo || "Cinematográfico"}
+
+Cena 1 — Introdução
+Apresentação do personagem em um ambiente cinematográfico.
+
+Cena 2 — O sonho
+O personagem contempla o cenário e visualiza seu propósito.
+
+Cena 3 — Conflito
+Surge um grande desafio que coloca sua fé à prova.
+
+Cena 4 — Provação
+O personagem enfrenta dificuldades, mas continua caminhando.
+
+Cena 5 — Esperança
+A história termina com uma sensação de esperança,
+fé e realização do propósito de Deus.`;
+
+resultado.textContent =
+"🎬 ROTEIRO DO CLIPE\n\n" +
+roteiroFinal;
+
+resultado.style.display =
+"block";
+
+mensagem.innerHTML =
+"✅ Roteiro preparado com sucesso!";
+
+roteiro.style.display =
+"block";
+
+roteiro.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+},400);
+
+}
+
+
+/* GERAR CLIPE */
+
+async function gerarClipe(){
+
+const resultado =
+document.getElementById("resultadoRoteiro");
+
+const textoManual =
+document.getElementById("roteiroManual").value.trim();
+
+const roteiroTexto =
+resultado.textContent.trim();
+
+const roteiroFinal =
+textoManual ||
+roteiroTexto;
+
+if(!roteiroFinal){
+
+alert(
+"Gere ou escreva um roteiro antes de gerar o clipe."
+);
+
+return;
+
+}
+
+const geracao =
+document.getElementById("geracao");
+
+const barra =
+document.getElementById("barraClipe");
+
+const status =
+document.getElementById("statusGeracao");
+
+const videoArea =
+document.getElementById("videoArea");
+
+const botao =
+document.getElementById("botaoClipe");
+
+geracao.style.display =
+"block";
+
+videoArea.style.display =
+"none";
+
+barra.style.width =
+"10%";
+
+status.innerHTML =
+"📡 Enviando o roteiro para o servidor...";
+
+botao.disabled =
+true;
+
+geracao.scrollIntoView({
+behavior:"smooth"
+});
+
+
+try{
+
+barra.style.width =
+"25%";
+
+const resposta =
+await fetch(
+API_URL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+roteiro:
+roteiroFinal,
+
+formato:
+formato || "16:9"
+
+})
+
+}
+);
+
+barra.style.width =
+"50%";
+
+
+let dados;
+
+try{
+
+dados =
+await resposta.json();
+
+}catch(e){
+
+throw new Error(
+"O servidor retornou uma resposta inválida."
+);
+
+}
+
+
+if(!resposta.ok){
+
+throw new Error(
+dados.error ||
+dados.message ||
+"Erro ao gerar o vídeo."
+);
+
+}
+
+
+if(!dados.videoUrl){
+
+throw new Error(
+"O servidor não retornou o endereço do vídeo."
+);
+
+}
+
+
+barra.style.width =
+"100%";
+
+status.innerHTML =
+"✅ Clipe gerado com sucesso!";
+
+videoURL =
+dados.videoUrl;
+
+const video =
+document.getElementById("videoPreview");
+
+video.src =
+videoURL;
+
+video.load();
+
+videoArea.style.display =
+"block";
+
+videoArea.scrollIntoView({
+behavior:"smooth"
+});
+
+
+}catch(error){
+
+console.error(error);
+
+barra.style.width =
+"0%";
+
+status.innerHTML =
+"❌ Não foi possível gerar o clipe.";
+
+alert(
+"Erro ao gerar o clipe:\n\n" +
+error.message
+);
+
+}finally{
+
+botao.disabled =
+false;
+
+}
+
+}
+
+
+/* DOWNLOAD */
+
+function baixarVideo(){
+
+if(!videoURL){
+
+alert(
+"O vídeo ainda não está pronto."
+);
+
+return;
+
+}
+
+const link =
+document.createElement("a");
+
+link.href =
+videoURL;
+
+link.target =
+"_blank";
+
+link.rel =
+"noopener";
+
+link.download =
+"clip-musical-ai.mp4";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+}
+
+</script>
+
+</body>
+</html>
