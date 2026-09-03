@@ -997,7 +997,7 @@ container.appendChild(div);
    GERAR CLIPE
 ========================================= */
 
-async function gerarClipe(){
+async async function gerarClipe(){
 
 const botao =
 document.getElementById("botaoClipe");
@@ -1017,10 +1017,8 @@ document.getElementById("videoArea");
 const video =
 document.getElementById("videoPreview");
 
-
 const resultado =
 document.getElementById("resultadoRoteiro");
-
 
 if(!resultado.textContent.trim()){
 
@@ -1032,6 +1030,20 @@ return;
 
 }
 
+/* VERIFICAR IMAGEM */
+
+if(
+!imagensSelecionadas ||
+imagensSelecionadas.length === 0
+){
+
+alert(
+"Selecione pelo menos uma imagem antes de gerar o clipe."
+);
+
+return;
+
+}
 
 botao.disabled = true;
 
@@ -1048,24 +1060,30 @@ status.className =
 "status-info";
 
 status.textContent =
-"📡 Enviando o roteiro para o servidor...";
-
+"🖼️ Preparando a imagem de referência...";
 
 geracao.scrollIntoView({
 behavior:"smooth",
 block:"start"
 });
 
-
 try{
 
-const roteiroFinal =
-resultado.textContent;
+/* CONVERTER A PRIMEIRA IMAGEM PARA BASE64 */
 
+const imagem =
+await imagemParaBase64(
+imagensSelecionadas[0]
+);
 
 barra.style.width =
 "20%";
 
+status.textContent =
+"📡 Enviando roteiro e imagem para o servidor...";
+
+const roteiroFinal =
+resultado.textContent;
 
 const resposta =
 await fetch(
@@ -1083,16 +1101,16 @@ roteiro:roteiroFinal,
 
 formato:
 formato ||
-"16:9"
+"16:9",
+
+imagem:imagem
 
 })
 }
 );
 
-
 barra.style.width =
-"45%";
-
+"50%";
 
 let dados = null;
 
@@ -1104,10 +1122,11 @@ await resposta.json();
 }
 catch(e){
 
-dados = null;
+throw new Error(
+"O servidor não retornou uma resposta JSON válida."
+);
 
 }
-
 
 if(!resposta.ok){
 
@@ -1137,15 +1156,7 @@ throw new Error(detalhe);
 
 }
 
-
-if(!dados){
-
-throw new Error(
-"O servidor não retornou uma resposta válida."
-);
-
-}
-
+/* VERIFICAR URL DO VÍDEO */
 
 if(
 dados.videoUrl ||
@@ -1179,6 +1190,7 @@ return;
 
 }
 
+/* OUTRO FORMATO DE RESPOSTA */
 
 if(
 dados.output &&
@@ -1209,6 +1221,7 @@ return;
 
 }
 
+/* TAREFA CRIADA */
 
 if(
 dados.id ||
@@ -1219,25 +1232,24 @@ const id =
 dados.id ||
 dados.taskId;
 
-status.textContent =
-"🎬 O servidor iniciou a geração. ID: " +
-id;
-
 barra.style.width =
 "60%";
 
 status.className =
 "status-info";
 
-throw new Error(
-"O servidor iniciou a tarefa, mas ainda não retornou o endereço do vídeo. O endpoint atual precisa consultar o resultado da tarefa antes de entregar o vídeo."
-);
+status.textContent =
+"🎬 A geração foi iniciada. ID da tarefa: " +
+id;
+
+return;
 
 }
 
+/* RESPOSTA DESCONHECIDA */
 
 throw new Error(
-"O servidor respondeu, mas não enviou o endereço do vídeo."
+"O servidor recebeu a imagem, mas não retornou o endereço do vídeo."
 );
 
 }
