@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CLIP MUSICAL AI</title>
-
-<style>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CLIP MUSICAL AI</title><style>
 
 *{
 box-sizing:border-box;
@@ -285,395 +274,186 @@ color:#aaaab8;
 line-height:1.5;
 }
 
-</style>
+.status-sucesso{
+color:#86efac;
+}
 
-</head>
+.status-erro{
+color:#fca5a5;
+}
 
-<body>
+.status-info{
+color:#d1d5db;
+}
 
-<header>
+@media(max-width:500px){
 
-<h1>🎬 CLIP MUSICAL AI</h1>
+.imagens-preview{
+grid-template-columns:repeat(2,1fr);
+}
 
-<p>Painel de criação do seu clipe</p>
+.imagem-item img{
+height:110px;
+}
 
-</header>
+}
 
-
-<div class="container">
-
-
-<!-- RESUMO -->
-
-<div class="card">
-
-<h2>📋 Resumo do projeto</h2>
-
-<div class="project-info">
-
-<div class="info">
-
-<strong>🎵 Música</strong>
+</style></head><body><header><h1>🎬 CLIP MUSICAL AI</h1><p>Painel de criação do seu clipe</p></header><div class="container"><!-- RESUMO --><div class="card"><h2>📋 Resumo do projeto</h2><div class="project-info"><div class="info"><strong>🎵 Música</strong>
 
 <span id="nomeMusica">
 Nenhuma música informada
-</span>
-
-</div>
-
-
-<div class="info">
-
-<strong>🖼️ Imagens</strong>
+</span></div><div class="info"><strong>🖼️ Imagens</strong>
 
 <span id="quantidadeImagens">
 0 imagens
-</span>
-
-</div>
-
-
-<div class="info">
-
-<strong>🎨 Estilo</strong>
+</span></div><div class="info"><strong>🎨 Estilo</strong>
 
 <span id="estiloProjeto">
 Cinematográfico
-</span>
-
-</div>
-
-
-<div class="info">
-
-<strong>📐 Formato</strong>
+</span></div><div class="info"><strong>📐 Formato</strong>
 
 <span id="formatoProjeto">
 16:9
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- IMAGENS -->
-
-<div class="card">
-
-<h2>🖼️ Imagens do clipe</h2>
-
-<p>
+</span></div></div></div><!-- IMAGENS --><div class="card"><h2>🖼️ Imagens do clipe</h2><p>
 Selecione as imagens que serão usadas como referência
 para criar as cenas do seu clipe.
-</p>
-
-<div class="upload-area">
-
-<p>
+</p><div class="upload-area"><p>
 📸 Escolha uma ou mais imagens
-</p>
-
-<input
+</p><input
 type="file"
 id="inputImagens"
 class="file-input"
 accept="image/jpeg,image/png,image/webp"
 multiple
->
 
-</div>
+«»
 
-<div
+</div><div
 id="imagensPreview"
 class="imagens-preview"
->
-</div>
-
-<div
-class="aviso"
->
-A primeira imagem selecionada será usada na geração
+></div><div class="aviso">A primeira imagem selecionada será usada como referência
 da primeira cena nesta etapa.
-</div>
 
-</div>
-
-
-<!-- ROTEIRO -->
-
-<div class="card">
-
-<h2>📝 Roteiro do clipe</h2>
-
-<p>
-A IA usará a música, a letra e as imagens como referências
-para criar a narrativa visual do seu clipe.
-</p>
-
-<textarea
+</div></div><!-- ROTEIRO --><div class="card"><h2>📝 Roteiro do clipe</h2><p>
+A IA usará as informações do projeto e as imagens
+selecionadas como referências para criar a narrativa
+visual do seu clipe.
+</p><textarea
 id="roteiroManual"
 placeholder="Escreva aqui alguma ideia para a história do clipe..."
-></textarea>
-
-
-<button
+></textarea><button
 class="button"
 id="botaoRoteiro"
 onclick="gerarRoteiro()"
->
+
+«»
+
 ✨ GERAR ROTEIRO COM IA
 </button>
-
 
 <div
 class="progress"
 id="progress"
->
-
-<div
+><div
 class="progress-bar"
 id="progressBar"
-></div>
-
-</div>
-
-
-<div id="mensagem"></div>
-
-
-<div id="resultadoRoteiro"></div>
-
-</div>
-
-
-<!-- ESTRUTURA -->
-
-<div
+></div></div><div id="mensagem"></div><div id="resultadoRoteiro"></div></div><!-- ESTRUTURA --><div
 class="card"
 id="roteiro"
 style="display:none;"
->
-
-<h2>🎞️ Estrutura do clipe</h2>
-
-
-<div class="scene">
-
-<div class="scene-title">
-🎬 Cena 1 — Introdução
-</div>
-
-<p>
-Apresentação do personagem e do ambiente da história.
-</p>
-
-<span class="tag">Introdução</span>
-
-<span class="tag">
-Movimento suave
-</span>
-
-</div>
-
-
-<div class="scene">
-
-<div class="scene-title">
-🌾 Cena 2 — O sonho
-</div>
-
-<p>
-O personagem contempla o ambiente e recebe uma visão
-que representa seus sonhos e seu propósito.
-</p>
-
-<span class="tag">Narrativa</span>
-
-<span class="tag">Sonho</span>
-
-</div>
-
-
-<div class="scene">
-
-<div class="scene-title">
-🔥 Cena 3 — Conflito
-</div>
-
-<p>
-Os acontecimentos criam tensão e colocam o personagem
-diante de uma grande prova.
-</p>
-
-<span class="tag">Drama</span>
-
-<span class="tag">Impacto</span>
-
-</div>
-
-
-<div class="scene">
-
-<div class="scene-title">
-🌙 Cena 4 — Provação
-</div>
-
-<p>
-Mesmo enfrentando dificuldades, o personagem continua
-acreditando em seu propósito.
-</p>
-
-<span class="tag">Emoção</span>
-
-<span class="tag">Superação</span>
-
-</div>
-
-
-<div class="scene">
-
-<div class="scene-title">
-✨ Cena 5 — Esperança
-</div>
-
-<p>
-A história termina apontando para a realização do sonho
-e para a fidelidade de Deus.
-</p>
-
-<span class="tag">Clímax</span>
-
-<span class="tag">Esperança</span>
-
-</div>
-
-
-<button
+><h2>🎞️ Estrutura do clipe</h2><div id="estruturaCenas"></div><button
 class="button"
 id="botaoClipe"
 onclick="gerarClipe()"
->
+
+«»
+
 🎬 GERAR CLIPE
 </button>
 
-</div>
-
-
-<!-- GERAÇÃO -->
-
-<div
+</div><!-- GERAÇÃO --><div
 class="card"
 id="geracao"
+><h2>🎥 Gerando seu clipe</h2><div
+id="statusGeracao"
+class="status-info"
 >
-
-<h2>🎥 Gerando seu clipe</h2>
-
-
-<div id="statusGeracao">
 Preparando a geração...
-</div>
-
-
-<div
+</div><div
 class="progress"
 id="progressClipe"
 style="display:block;"
->
-
-<div
+><div
 class="progress-bar"
 id="barraClipe"
-></div>
-
-</div>
-
-
-<div
+></div></div><div
 class="aviso"
 id="avisoGeracao"
 >
 A geração do vídeo é feita pelo servidor e pode levar
 alguns minutos.
-</div>
-
-
-<div id="videoArea">
-
-<h3>
+</div><div id="videoArea"><h3>
 🎥 Seu clipe
-</h3>
-
-
-<video
+</h3><video
 id="videoPreview"
 controls
 playsinline
 preload="metadata"
->
+
+«»
+
 Seu navegador não suporta vídeo.
 </video>
-
 
 <button
 class="button download"
 onclick="baixarVideo()"
->
+
+«»
+
 ⬇️ BAIXAR VÍDEO
 </button>
 
-</div>
+</div></div><div class="footer">CLIP MUSICAL AI — Sistema de criação de clipes
 
-</div>
-
-
-<div class="footer">
-
-CLIP MUSICAL AI — Sistema de criação de clipes
-
-</div>
-
-</div>
-
-
-<script>
+</div></div><script>
 
 let videoURL = null;
 
 let imagensSelecionadas = [];
 
 
-/* SERVIDOR */
+/* =========================================
+   SERVIDOR
+========================================= */
 
 const API_URL =
 "https://clip-musical-ai-server.vercel.app/api/gerar-video";
 
 
-/* DADOS DA URL */
+/* =========================================
+   DADOS DA URL
+========================================= */
 
 const parametros =
 new URLSearchParams(window.location.search);
 
-
 const musica =
 parametros.get("musica");
-
 
 const imagensURL =
 parametros.get("imagens");
 
-
 const estilo =
 parametros.get("estilo");
-
 
 const formato =
 parametros.get("formato");
 
 
-/* MOSTRAR DADOS */
+/* =========================================
+   MOSTRAR DADOS
+========================================= */
 
 if(musica){
 
@@ -682,14 +462,12 @@ musica;
 
 }
 
-
 if(estilo){
 
 document.getElementById("estiloProjeto").textContent =
 estilo;
 
 }
-
 
 if(formato){
 
@@ -699,17 +477,9 @@ formato;
 }
 
 
-/* QUANTIDADE VINDA DA URL */
-
-if(imagensURL){
-
-document.getElementById("quantidadeImagens").textContent =
-imagensURL + " imagens";
-
-}
-
-
-/* SELEÇÃO DE IMAGENS */
+/* =========================================
+   SELEÇÃO DE IMAGENS
+========================================= */
 
 document
 .getElementById("inputImagens")
@@ -726,7 +496,9 @@ mostrarImagens();
 );
 
 
-/* MOSTRAR MINIATURAS */
+/* =========================================
+   MOSTRAR MINIATURAS
+========================================= */
 
 function mostrarImagens(){
 
@@ -735,11 +507,20 @@ document.getElementById("imagensPreview");
 
 area.innerHTML = "";
 
-
 document.getElementById(
 "quantidadeImagens"
 ).textContent =
 imagensSelecionadas.length + " imagens";
+
+
+if(imagensSelecionadas.length === 0){
+
+area.innerHTML =
+"<div style='color:#aaaab8;font-size:13px;padding:10px;'>Nenhuma imagem selecionada.</div>";
+
+return;
+
+}
 
 
 imagensSelecionadas.forEach(
@@ -755,9 +536,13 @@ div.className =
 const img =
 document.createElement("img");
 
+img.alt =
+"Imagem " + (index + 1);
 
-img.src =
+const url =
 URL.createObjectURL(file);
+
+img.src = url;
 
 
 const numero =
@@ -765,7 +550,6 @@ document.createElement("div");
 
 numero.className =
 "imagem-numero";
-
 
 numero.textContent =
 "Imagem " + (index + 1);
@@ -783,9 +567,777 @@ area.appendChild(div);
 }
 
 
-/* CONVERTER IMAGEM PARA DATA URI */
+/* =========================================
+   CONVERTER IMAGEM PARA BASE64
+========================================= */
 
 function imagemParaBase64(file){
 
 return new Promise(
-function(resolve
+function(resolve,reject){
+
+const reader =
+new FileReader();
+
+reader.onload =
+function(){
+
+resolve(reader.result);
+
+};
+
+reader.onerror =
+function(){
+
+reject(
+new Error("Não foi possível ler a imagem.")
+);
+
+};
+
+reader.readAsDataURL(file);
+
+}
+);
+
+}
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+function mostrarMensagem(texto,tipo){
+
+const mensagem =
+document.getElementById("mensagem");
+
+mensagem.style.display =
+"block";
+
+mensagem.className = "";
+
+if(tipo === "erro"){
+
+mensagem.classList.add("status-erro");
+
+}
+
+else if(tipo === "sucesso"){
+
+mensagem.classList.add("status-sucesso");
+
+}
+
+else{
+
+mensagem.classList.add("status-info");
+
+}
+
+mensagem.innerHTML =
+texto;
+
+}
+
+
+/* =========================================
+   GERAR ROTEIRO
+========================================= */
+
+async function gerarRoteiro(){
+
+const botao =
+document.getElementById("botaoRoteiro");
+
+const progress =
+document.getElementById("progress");
+
+const progressBar =
+document.getElementById("progressBar");
+
+const resultado =
+document.getElementById("resultadoRoteiro");
+
+const estrutura =
+document.getElementById("roteiro");
+
+
+const ideia =
+document.getElementById("roteiroManual")
+.value
+.trim();
+
+
+botao.disabled = true;
+
+progress.style.display =
+"block";
+
+progressBar.style.width =
+"10%";
+
+resultado.style.display =
+"none";
+
+estrutura.style.display =
+"none";
+
+
+mostrarMensagem(
+"✨ Preparando o roteiro do seu clipe...",
+"info"
+);
+
+
+try{
+
+progressBar.style.width =
+"30%";
+
+
+await new Promise(
+resolve => setTimeout(resolve,700)
+);
+
+
+progressBar.style.width =
+"55%";
+
+
+await new Promise(
+resolve => setTimeout(resolve,700)
+);
+
+
+const nome =
+musica ||
+"Música do projeto";
+
+
+const estiloAtual =
+estilo ||
+"Cinematográfico";
+
+
+const formatoAtual =
+formato ||
+"16:9";
+
+
+let textoRoteiro = "";
+
+
+textoRoteiro +=
+"ROTEIRO DO CLIPE MUSICAL\n\n";
+
+textoRoteiro +=
+"Música: " + nome + "\n";
+
+textoRoteiro +=
+"Estilo: " + estiloAtual + "\n";
+
+textoRoteiro +=
+"Formato: " + formatoAtual + "\n\n";
+
+
+if(ideia){
+
+textoRoteiro +=
+"IDEIA DO ARTISTA:\n";
+
+textoRoteiro +=
+ideia + "\n\n";
+
+}
+
+
+textoRoteiro +=
+"NARRATIVA VISUAL:\n\n";
+
+
+textoRoteiro +=
+"Cena 1 — Introdução\n";
+
+textoRoteiro +=
+"A música começa apresentando o ambiente principal. "
++
+"A câmera realiza um movimento cinematográfico suave "
++
+"e estabelece o clima da história.\n\n";
+
+
+textoRoteiro +=
+"Cena 2 — Desenvolvimento\n";
+
+textoRoteiro +=
+"O personagem principal aparece e a narrativa começa "
++
+"a acompanhar sua jornada, seus sentimentos e seus objetivos.\n\n";
+
+
+textoRoteiro +=
+"Cena 3 — Conflito\n";
+
+textoRoteiro +=
+"Surge o principal desafio da história. "
++
+"A fotografia fica mais intensa e os movimentos de câmera "
++
+"acompanham o crescimento da emoção da música.\n\n";
+
+
+textoRoteiro +=
+"Cena 4 — Superação\n";
+
+textoRoteiro +=
+"O personagem enfrenta a dificuldade e continua avançando. "
++
+"As imagens transmitem força, fé, esperança e determinação.\n\n";
+
+
+textoRoteiro +=
+"Cena 5 — Final\n";
+
+textoRoteiro +=
+"A narrativa chega ao clímax e termina com uma imagem "
++
+"marcante relacionada à mensagem principal da música.\n";
+
+
+progressBar.style.width =
+"80%";
+
+
+resultado.textContent =
+textoRoteiro;
+
+resultado.style.display =
+"block";
+
+
+criarEstruturaCenas(
+nome,
+estiloAtual,
+ideia
+);
+
+
+estrutura.style.display =
+"block";
+
+
+progressBar.style.width =
+"100%";
+
+
+mostrarMensagem(
+"✅ Roteiro criado com sucesso! Agora você pode gerar o clipe.",
+"sucesso"
+);
+
+
+estrutura.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+
+}
+
+catch(error){
+
+console.error(error);
+
+mostrarMensagem(
+"❌ Erro ao preparar o roteiro: " +
+error.message,
+"erro"
+);
+
+}
+
+finally{
+
+setTimeout(
+function(){
+
+progress.style.display =
+"none";
+
+progressBar.style.width =
+"0%";
+
+},
+700
+);
+
+botao.disabled = false;
+
+}
+
+}
+
+
+/* =========================================
+   CRIAR ESTRUTURA DAS CENAS
+========================================= */
+
+function criarEstruturaCenas(
+nome,
+estiloAtual,
+ideia
+){
+
+const container =
+document.getElementById("estruturaCenas");
+
+container.innerHTML = "";
+
+
+const cenas = [
+
+{
+titulo:"🎬 Cena 1 — Introdução",
+texto:
+"Apresentação da música, do personagem e do ambiente principal. A câmera começa com movimento suave.",
+tags:["Introdução","Movimento suave"]
+},
+
+{
+titulo:"🌅 Cena 2 — Desenvolvimento",
+texto:
+"O personagem inicia sua jornada. As imagens acompanham a emoção e a mensagem da música.",
+tags:["Narrativa","Emoção"]
+},
+
+{
+titulo:"🔥 Cena 3 — Conflito",
+texto:
+"Um momento de tensão surge na história. A fotografia ganha intensidade e força dramática.",
+tags:["Drama","Impacto"]
+},
+
+{
+titulo:"🌙 Cena 4 — Superação",
+texto:
+"O personagem enfrenta a dificuldade e continua acreditando em seu propósito.",
+tags:["Superação","Esperança"]
+},
+
+{
+titulo:"✨ Cena 5 — Final",
+texto:
+"A história chega ao clímax e termina com uma imagem marcante ligada à mensagem da música.",
+tags:["Clímax","Final"]
+}
+
+];
+
+
+cenas.forEach(
+function(cena){
+
+const div =
+document.createElement("div");
+
+div.className =
+"scene";
+
+
+const titulo =
+document.createElement("div");
+
+titulo.className =
+"scene-title";
+
+titulo.textContent =
+cena.titulo;
+
+
+const p =
+document.createElement("p");
+
+p.textContent =
+cena.texto;
+
+
+div.appendChild(titulo);
+
+div.appendChild(p);
+
+
+cena.tags.forEach(
+function(tagTexto){
+
+const tag =
+document.createElement("span");
+
+tag.className =
+"tag";
+
+tag.textContent =
+tagTexto;
+
+div.appendChild(tag);
+
+}
+);
+
+
+container.appendChild(div);
+
+}
+);
+
+}
+
+
+/* =========================================
+   GERAR CLIPE
+========================================= */
+
+async function gerarClipe(){
+
+const botao =
+document.getElementById("botaoClipe");
+
+const geracao =
+document.getElementById("geracao");
+
+const status =
+document.getElementById("statusGeracao");
+
+const barra =
+document.getElementById("barraClipe");
+
+const videoArea =
+document.getElementById("videoArea");
+
+const video =
+document.getElementById("videoPreview");
+
+
+const resultado =
+document.getElementById("resultadoRoteiro");
+
+
+if(!resultado.textContent.trim()){
+
+alert(
+"Primeiro gere o roteiro do clipe."
+);
+
+return;
+
+}
+
+
+botao.disabled = true;
+
+geracao.style.display =
+"block";
+
+videoArea.style.display =
+"none";
+
+barra.style.width =
+"5%";
+
+status.className =
+"status-info";
+
+status.textContent =
+"📡 Enviando o roteiro para o servidor...";
+
+
+geracao.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+
+try{
+
+const roteiroFinal =
+resultado.textContent;
+
+
+barra.style.width =
+"20%";
+
+
+const resposta =
+await fetch(
+API_URL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+roteiro:roteiroFinal,
+
+formato:
+formato ||
+"16:9"
+
+})
+}
+);
+
+
+barra.style.width =
+"45%";
+
+
+let dados = null;
+
+try{
+
+dados =
+await resposta.json();
+
+}
+catch(e){
+
+dados = null;
+
+}
+
+
+if(!resposta.ok){
+
+let detalhe =
+"Erro HTTP " +
+resposta.status;
+
+if(dados){
+
+if(dados.error){
+
+detalhe +=
+": " + dados.error;
+
+}
+
+else if(dados.mensagem){
+
+detalhe +=
+": " + dados.mensagem;
+
+}
+
+}
+
+throw new Error(detalhe);
+
+}
+
+
+if(!dados){
+
+throw new Error(
+"O servidor não retornou uma resposta válida."
+);
+
+}
+
+
+if(
+dados.videoUrl ||
+dados.video_url ||
+dados.url
+){
+
+videoURL =
+dados.videoUrl ||
+dados.video_url ||
+dados.url;
+
+video.src =
+videoURL;
+
+video.load();
+
+barra.style.width =
+"100%";
+
+status.className =
+"status-sucesso";
+
+status.textContent =
+"✅ Clipe gerado com sucesso!";
+
+videoArea.style.display =
+"block";
+
+return;
+
+}
+
+
+if(
+dados.output &&
+typeof dados.output === "string"
+){
+
+videoURL =
+dados.output;
+
+video.src =
+videoURL;
+
+video.load();
+
+barra.style.width =
+"100%";
+
+status.className =
+"status-sucesso";
+
+status.textContent =
+"✅ Clipe gerado com sucesso!";
+
+videoArea.style.display =
+"block";
+
+return;
+
+}
+
+
+if(
+dados.id ||
+dados.taskId
+){
+
+const id =
+dados.id ||
+dados.taskId;
+
+status.textContent =
+"🎬 O servidor iniciou a geração. ID: " +
+id;
+
+barra.style.width =
+"60%";
+
+status.className =
+"status-info";
+
+throw new Error(
+"O servidor iniciou a tarefa, mas ainda não retornou o endereço do vídeo. O endpoint atual precisa consultar o resultado da tarefa antes de entregar o vídeo."
+);
+
+}
+
+
+throw new Error(
+"O servidor respondeu, mas não enviou o endereço do vídeo."
+);
+
+}
+
+catch(error){
+
+console.error(
+"Erro ao gerar clipe:",
+error
+);
+
+barra.style.width =
+"0%";
+
+status.className =
+"status-erro";
+
+status.innerHTML =
+"❌ Não foi possível gerar o clipe.<br><br>" +
+error.message;
+
+}
+
+finally{
+
+botao.disabled = false;
+
+}
+
+}
+
+
+/* =========================================
+   BAIXAR VÍDEO
+========================================= */
+
+function baixarVideo(){
+
+if(!videoURL){
+
+alert(
+"Nenhum vídeo disponível para baixar."
+);
+
+return;
+
+}
+
+
+const link =
+document.createElement("a");
+
+link.href =
+videoURL;
+
+link.target =
+"_blank";
+
+link.rel =
+"noopener";
+
+link.download =
+"clip-musical-ai.mp4";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+}
+
+
+/* =========================================
+   INICIALIZAÇÃO
+========================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+console.log(
+"CLIP MUSICAL AI iniciado."
+);
+
+console.log(
+"Servidor:",
+API_URL
+);
+
+if(imagensURL){
+
+console.log(
+"Quantidade informada na URL:",
+imagensURL
+);
+
+}
+
+}
+);
+
+</script></body></html>
