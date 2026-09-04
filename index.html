@@ -321,13 +321,7 @@ height:110px;
 
 </header>
 
-
 <div class="container">
-
-
-<!-- ========================= -->
-<!-- RESUMO -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -345,7 +339,6 @@ Nenhuma música informada
 
 </div>
 
-
 <div class="info">
 
 <strong>🖼️ Imagens</strong>
@@ -356,7 +349,6 @@ Nenhuma música informada
 
 </div>
 
-
 <div class="info">
 
 <strong>🎨 Estilo</strong>
@@ -366,7 +358,6 @@ Cinematográfico
 </span>
 
 </div>
-
 
 <div class="info">
 
@@ -381,11 +372,6 @@ Cinematográfico
 </div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- MÚSICA -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -415,11 +401,6 @@ Nenhuma música selecionada.
 </div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- IMAGENS -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -457,11 +438,6 @@ A ordem das imagens será usada na sequência do vídeo.
 </div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- CONFIGURAÇÃO -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -507,7 +483,6 @@ Realista
 
 </select>
 
-
 <label for="formato">
 📐 Formato do vídeo
 </label>
@@ -525,11 +500,6 @@ TikTok / Reels / Shorts — 9:16
 </select>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- ROTEIRO -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -555,15 +525,9 @@ onclick="gerarRoteiro()"
 
 </button>
 
-
 <div id="resultadoRoteiro"></div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- ESTRUTURA -->
-<!-- ========================= -->
 
 <section
 class="card"
@@ -586,11 +550,6 @@ onclick="gerarClipe()"
 
 </section>
 
-
-<!-- ========================= -->
-<!-- GERAÇÃO -->
-<!-- ========================= -->
-
 <section
 class="card"
 id="geracao"
@@ -607,7 +566,6 @@ Preparando geração...
 
 </div>
 
-
 <div id="progressoContainer">
 
 <div class="barra">
@@ -623,11 +581,6 @@ Preparando geração...
 </div>
 
 </section>
-
-
-<!-- ========================= -->
-<!-- VÍDEO -->
-<!-- ========================= -->
 
 <section
 class="card"
@@ -668,7 +621,6 @@ onclick="gerarClipe()"
 
 </section>
 
-
 <footer>
 
 CLIP MUSICAL AI — Sistema gratuito de criação de clipes
@@ -676,7 +628,6 @@ CLIP MUSICAL AI — Sistema gratuito de criação de clipes
 </footer>
 
 </div>
-
 
 <script>
 
@@ -856,7 +807,7 @@ document.getElementById(
 "nomeMusica"
 ).innerHTML =
 "🎵 <span class='sucesso'>" +
-musicaSelecionada.name +
+escapeHTML(musicaSelecionada.name) +
 "</span>";
 
 atualizarResumo();
@@ -926,6 +877,13 @@ URL.createObjectURL(file);
 
 img.alt =
 "Imagem " + (index + 1);
+
+img.onload =
+function(){
+
+URL.revokeObjectURL(img.src);
+
+};
 
 const numero =
 document.createElement("div");
@@ -1182,8 +1140,13 @@ function(resolve,reject){
 const img =
 new Image();
 
+const url =
+URL.createObjectURL(file);
+
 img.onload =
 function(){
+
+URL.revokeObjectURL(url);
 
 resolve(img);
 
@@ -1191,6 +1154,8 @@ resolve(img);
 
 img.onerror =
 function(){
+
+URL.revokeObjectURL(url);
 
 reject(
 new Error(
@@ -1201,10 +1166,13 @@ new Error(
 };
 
 img.src =
-URL.createObjectURL(file);
+url;
 
 }
+
 );
+
+}
 
 
 /* ==========================================
@@ -1233,11 +1201,6 @@ img.width;
 const ih =
 img.height;
 
-
-/* ==========================================
-   COVER
-========================================== */
-
 const escala =
 Math.max(
 cw / iw,
@@ -1255,11 +1218,6 @@ largura - cw;
 
 const excessoY =
 altura - ch;
-
-
-/* ==========================================
-   MOVIMENTO
-========================================== */
 
 const direcao =
 indice % 4;
@@ -1304,11 +1262,6 @@ excessoY *
 
 }
 
-
-/* ==========================================
-   ZOOM
-========================================== */
-
 const zoom =
 1 +
 (progresso * 0.08);
@@ -1335,11 +1288,6 @@ ctx.translate(
 -centroX,
 -centroY
 );
-
-
-/* ==========================================
-   IMAGEM
-========================================== */
 
 ctx.drawImage(
 
@@ -1392,6 +1340,15 @@ canvas.height
 ========================================== */
 
 function escolherMime(){
+
+if(
+typeof MediaRecorder ===
+"undefined"
+){
+
+return "";
+
+}
 
 const tipos = [
 
@@ -1469,7 +1426,6 @@ return;
 
 }
 
-
 gravando = true;
 
 geracao.style.display =
@@ -1490,7 +1446,6 @@ textoProgresso.textContent =
 statusGeracao.innerHTML =
 "⏳ Carregando imagens e preparando o vídeo...";
 
-
 try{
 
 const imagens = [];
@@ -1510,7 +1465,6 @@ imagens.push(img);
 
 }
 
-
 const audioURL =
 URL.createObjectURL(
 musicaSelecionada
@@ -1527,11 +1481,6 @@ audio.preload =
 
 audio.playsInline =
 true;
-
-
-/* ==========================================
-   ESPERAR ÁUDIO
-========================================== */
 
 await new Promise(
 function(resolve,reject){
@@ -1559,18 +1508,13 @@ audio.load();
 }
 );
 
-
 const duracaoAudio =
 Number.isFinite(
 audio.duration
-)
+) &&
+audio.duration > 0
 ? audio.duration
 : 30;
-
-
-/* ==========================================
-   CANVAS
-========================================== */
 
 const canvas =
 document.createElement("canvas");
@@ -1595,9 +1539,16 @@ canvas.height =
 
 }
 
-
 const ctx =
 canvas.getContext("2d");
+
+if(!ctx){
+
+throw new Error(
+"Não foi possível criar o canvas do vídeo."
+);
+
+}
 
 ctx.imageSmoothingEnabled =
 true;
@@ -1605,18 +1556,19 @@ true;
 ctx.imageSmoothingQuality =
 "high";
 
+if(
+typeof canvas.captureStream !==
+"function"
+){
 
-/* ==========================================
-   CAPTURA DO CANVAS
-========================================== */
+throw new Error(
+"Seu navegador não suporta captura de vídeo pelo canvas."
+);
+
+}
 
 const videoStream =
 canvas.captureStream(30);
-
-
-/* ==========================================
-   ÁUDIO COM WEB AUDIO
-========================================== */
 
 const AudioContext =
 window.AudioContext ||
@@ -1630,7 +1582,6 @@ let audioSource = null;
 
 let streamFinal =
 videoStream;
-
 
 if(AudioContext){
 
@@ -1668,11 +1619,6 @@ streamFinal.addTrack(track);
 
 }
 
-
-/* ==========================================
-   RECORDER
-========================================== */
-
 const recorder =
 new MediaRecorder(
 streamFinal,
@@ -1700,7 +1646,6 @@ event.data
 
 };
 
-
 const terminou =
 new Promise(
 function(resolve,reject){
@@ -1727,25 +1672,12 @@ resolve();
 }
 );
 
-
-recorder.start(
-1000
-);
-
-
-/* ==========================================
-   INICIAR MÚSICA
-========================================== */
+recorder.start(1000);
 
 statusGeracao.innerHTML =
 "🎬 <span class='sucesso'>Gravando o clipe...</span>";
 
 await audio.play();
-
-
-/* ==========================================
-   DURAÇÃO DE CADA CENA
-========================================== */
 
 const duracaoCena =
 duracaoAudio /
@@ -1757,16 +1689,9 @@ performance.now();
 let ultimaImagem =
 -1;
 
-
-/* ==========================================
-   ANIMAÇÃO
-========================================== */
-
 function animar(agora){
 
-if(
-!gravando
-){
+if(!gravando){
 
 return;
 
@@ -1780,11 +1705,6 @@ Math.min(
 tempo / duracaoAudio,
 1
 );
-
-
-/* ==========================================
-   IMAGEM ATUAL
-========================================== */
 
 let indice =
 Math.floor(
@@ -1810,11 +1730,6 @@ duracaoCena,
 1
 );
 
-
-/* ==========================================
-   FUNDO
-========================================== */
-
 ctx.fillStyle =
 "#000";
 
@@ -1824,11 +1739,6 @@ ctx.fillRect(
 canvas.width,
 canvas.height
 );
-
-
-/* ==========================================
-   IMAGEM
-========================================== */
 
 desenharImagem(
 
@@ -1843,11 +1753,6 @@ progressoCena,
 indice
 
 );
-
-
-/* ==========================================
-   TRANSIÇÕES
-========================================== */
 
 const tempoTransicao =
 Math.min(
@@ -1882,11 +1787,6 @@ fade * 0.65
 
 }
 
-
-/* ==========================================
-   PROGRESSO
-========================================== */
-
 const porcentagem =
 Math.min(
 100,
@@ -1903,7 +1803,6 @@ textoProgresso.textContent =
 porcentagem +
 "%";
 
-
 if(
 indice !== ultimaImagem
 ){
@@ -1919,11 +1818,6 @@ imagens.length +
 "...";
 
 }
-
-
-/* ==========================================
-   FINAL
-========================================== */
 
 if(
 tempo >= duracaoAudio
@@ -1942,7 +1836,7 @@ if(audioContext){
 
 try{
 
-await audioContext.close();
+audioContext.close();
 
 }catch(e){}
 
@@ -1968,13 +1862,7 @@ requestAnimationFrame(
 animar
 );
 
-
-/* ==========================================
-   ESPERAR RECORDER
-========================================== */
-
 await terminou;
-
 
 videoBlob =
 new Blob(
