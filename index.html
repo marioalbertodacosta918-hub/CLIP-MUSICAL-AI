@@ -1117,64 +1117,58 @@ url;
 ================================================== */
 
 function desenharImagem(
-
 ctx,
 img,
 canvas,
 progresso,
 indice
-
 ){
 
-const cw =
-canvas.width;
+const cw = canvas.width;
+const ch = canvas.height;
 
-const ch =
-canvas.height;
-
-const iw =
-img.width;
-
-const ih =
-img.height;
+const iw = img.width;
+const ih = img.height;
 
 
-/* COBRIR O CANVAS */
+/* ==========================================
+   ESCALA BASE PARA COBRIR TODO O CANVAS
+========================================== */
 
-const escala =
+const escalaBase =
 Math.max(
 cw / iw,
 ch / ih
 );
 
 const baseW =
-iw * escala;
+iw * escalaBase;
 
 const baseH =
-ih * escala;
+ih * escalaBase;
 
 
-/* ==================================================
-   ZOOM MUITO MAIS VISÍVEL
-================================================== */
+/* ==========================================
+   MOVIMENTOS FORTES
+========================================== */
 
 const movimentos = [
 
-/* 1 — aproximação */
+/* CENA 1 — ZOOM IN */
 
 {
 inicio:1.00,
-fim:1.20,
+fim:1.40,
 xInicio:0,
 yInicio:0,
 xFim:0,
 yFim:0
 },
 
-/* 2 — afastamento */
+/* CENA 2 — ZOOM OUT */
 
 {
-inicio:1.20,
+inicio:1.40,
 fim:1.00,
 xInicio:0,
 yInicio:0,
@@ -1182,48 +1176,48 @@ xFim:0,
 yFim:0
 },
 
-/* 3 — esquerda para direita */
+/* CENA 3 — ESQUERDA → DIREITA */
 
 {
 inicio:1.05,
-fim:1.18,
-xInicio:-0.08,
+fim:1.35,
+xInicio:-0.18,
 yInicio:0,
-xFim:0.08,
+xFim:0.18,
 yFim:0
 },
 
-/* 4 — direita para esquerda */
+/* CENA 4 — DIREITA → ESQUERDA */
 
 {
-inicio:1.18,
+inicio:1.35,
 fim:1.05,
-xInicio:0.08,
+xInicio:0.18,
 yInicio:0,
-xFim:-0.08,
+xFim:-0.18,
 yFim:0
 },
 
-/* 5 — baixo para cima */
+/* CENA 5 — BAIXO → CIMA */
 
 {
-inicio:1.04,
-fim:1.18,
+inicio:1.05,
+fim:1.35,
 xInicio:0,
-yInicio:0.08,
+yInicio:0.18,
 xFim:0,
-yFim:-0.08
+yFim:-0.18
 },
 
-/* 6 — cima para baixo */
+/* CENA 6 — CIMA → BAIXO */
 
 {
-inicio:1.18,
-fim:1.04,
+inicio:1.35,
+fim:1.05,
 xInicio:0,
-yInicio:-0.08,
+yInicio:-0.18,
 xFim:0,
-yFim:0.08
+yFim:0.18
 }
 
 ];
@@ -1235,16 +1229,18 @@ indice % movimentos.length
 ];
 
 
-/* ==================================================
-   SUAVIZAR MOVIMENTO
-================================================== */
+/* ==========================================
+   SUAVIZAÇÃO
+========================================== */
 
 const suave =
 progresso * progresso *
 (3 - 2 * progresso);
 
 
-/* ZOOM */
+/* ==========================================
+   ZOOM
+========================================== */
 
 const zoom =
 movimento.inicio +
@@ -1255,20 +1251,20 @@ movimento.inicio
 suave;
 
 
-/* TAMANHO FINAL */
+/* ==========================================
+   TAMANHO DA IMAGEM
+========================================== */
 
 const largura =
-baseW *
-zoom;
+baseW * zoom;
 
 const altura =
-baseH *
-zoom;
+baseH * zoom;
 
 
-/* ==================================================
-   POSIÇÃO
-================================================== */
+/* ==========================================
+   MOVIMENTO
+========================================== */
 
 const deslocamentoX =
 movimento.xInicio +
@@ -1287,30 +1283,30 @@ movimento.yInicio
 suave;
 
 
+/* ==========================================
+   POSIÇÃO CENTRAL
+========================================== */
+
 const x =
 (
-cw -
-largura
+cw - largura
 ) / 2 +
 (
-cw *
-deslocamentoX
+cw * deslocamentoX
 );
 
 const y =
 (
-ch -
-altura
+ch - altura
 ) / 2 +
 (
-ch *
-deslocamentoY
+ch * deslocamentoY
 );
 
 
-/* ==================================================
+/* ==========================================
    DESENHAR
-================================================== */
+========================================== */
 
 ctx.drawImage(
 
