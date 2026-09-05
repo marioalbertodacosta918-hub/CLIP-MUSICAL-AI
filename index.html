@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CLIP MUSICAL AI</title>
-
-<style>
-
+<title>CLIP MUSICAL AI</title><style>
 *{
 box-sizing:border-box;
 margin:0;
@@ -140,26 +132,6 @@ button.verde{
 background:linear-gradient(135deg,#059669,#047857);
 }
 
-button.vermelho{
-background:linear-gradient(135deg,#dc2626,#991b1b);
-}
-
-/* ================================
-   ORGANIZADOR DE IMAGENS
-================================ */
-
-.organizador-info{
-background:#10101b;
-border:1px solid #303047;
-border-radius:10px;
-padding:13px;
-margin-top:12px;
-margin-bottom:15px;
-color:#bbb;
-font-size:13px;
-line-height:1.5;
-}
-
 .preview-grid{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
@@ -173,22 +145,6 @@ background:#0c0c14;
 border:1px solid #303047;
 border-radius:12px;
 overflow:hidden;
-transition:.2s;
-}
-
-.preview-item:hover{
-border-color:#7c3aed;
-transform:translateY(-2px);
-}
-
-.preview-item.arrastando{
-opacity:.45;
-border:2px dashed #7c3aed;
-}
-
-.preview-imagem{
-position:relative;
-width:100%;
 }
 
 .preview-item img{
@@ -237,16 +193,16 @@ background:#242438;
 background:#7f1d1d;
 }
 
-.preview-acoes button:disabled{
-opacity:.25;
-cursor:not-allowed;
-}
-
-.drag-label{
-font-size:11px;
-color:#777;
-text-align:center;
-padding:0 8px 8px;
+.organizador-info{
+background:#10101b;
+border:1px solid #303047;
+border-radius:10px;
+padding:13px;
+margin-top:12px;
+margin-bottom:15px;
+color:#bbb;
+font-size:13px;
+line-height:1.5;
 }
 
 .vazio{
@@ -255,10 +211,6 @@ text-align:center;
 padding:20px 5px;
 font-size:14px;
 }
-
-/* ================================
-   PROGRESSO
-================================ */
 
 #progressoContainer{
 display:none;
@@ -299,10 +251,8 @@ line-height:1.6;
 font-size:14px;
 }
 
-#geracao{
-display:none;
-}
-
+#roteiro,
+#geracao,
 #videoArea{
 display:none;
 }
@@ -332,10 +282,6 @@ color:#34d399;
 
 .erro{
 color:#f87171;
-}
-
-.aviso{
-color:#fbbf24;
 }
 
 .dica{
@@ -383,417 +329,113 @@ gap:10px;
 height:105px;
 }
 
-.preview-acoes button{
-font-size:13px;
-padding:8px 2px;
 }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
+</style></head><body><header>
 <h1>🎬 CLIP MUSICAL AI</h1>
-
 <p>Painel de criação do seu clipe</p>
-
-</header>
-
-<div class="container">
-
-<!-- ================================
-     RESUMO
-================================ -->
-
-<section class="card">
-
-<h2>📋 Resumo do projeto</h2>
-
-<div class="resumo">
-
-<div class="info">
-
+</header><div class="container"><section class="card"><h2>📋 Resumo do projeto</h2><div class="resumo"><div class="info">
 <strong>🎵 Música</strong>
-
-<span id="resumoMusica">
-Nenhuma música informada
-</span>
-
-</div>
-
-<div class="info">
-
+<span id="resumoMusica">Nenhuma música informada</span>
+</div><div class="info">
 <strong>🖼️ Imagens</strong>
-
-<span id="resumoImagens">
-0 imagens
-</span>
-
-</div>
-
-<div class="info">
-
+<span id="resumoImagens">0 imagens</span>
+</div><div class="info">
 <strong>🎨 Estilo</strong>
-
-<span id="resumoEstilo">
-Cinematográfico
-</span>
-
-</div>
-
-<div class="info">
-
+<span id="resumoEstilo">Cinematográfico</span>
+</div><div class="info">
 <strong>📐 Formato</strong>
-
-<span id="resumoFormato">
-16:9
-</span>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================================
-     MÚSICA
-================================ -->
-
-<section class="card">
-
-<h2>🎵 Música do clipe</h2>
-
-<label for="inputMusica">
-Escolha a música
-</label>
+<span id="resumoFormato">16:9</span>
+</div></div>
+</section><section class="card"><h2>🎵 Música do clipe</h2><label for="inputMusica">Escolha a música</label>
 
 <input
 type="file"
 id="inputMusica"
 accept="audio/*"
->
 
-<div
-id="nomeMusica"
-class="status"
->
+«»
+
+<div id="nomeMusica" class="status">
 Nenhuma música selecionada.
-</div>
-
-<div class="dica">
-
+</div><div class="dica">
 💡 A música será usada como trilha sonora do vídeo gratuito.
-
-</div>
-
-</section>
-
-
-<!-- ================================
-     IMAGENS
-================================ -->
-
-<section class="card">
-
-<h2>🖼️ Imagens do clipe</h2>
-
-<p style="color:#aaa;font-size:14px;margin-bottom:15px;line-height:1.5;">
-
+</div></section><section class="card"><h2>🖼️ Imagens do clipe</h2><p style="color:#aaa;font-size:14px;margin-bottom:15px;line-height:1.5;">
 Selecione as imagens que serão usadas para criar as cenas do seu clipe.
-
-</p>
-
-<label for="inputImagens">
+</p><label for="inputImagens">
 📸 Escolha uma ou mais imagens
-</label>
-
-<input
+</label><input
 type="file"
 id="inputImagens"
 accept="image/*"
 multiple
->
 
-<div class="organizador-info">
+«»
 
-<strong>🎬 Organize suas cenas</strong><br><br>
+<div class="organizador-info"><strong>🎬 Organize suas cenas</strong><br><br>
 
-Depois de escolher as imagens, você poderá:
-
-<br>⬅️ Mover uma imagem para a esquerda
-<br>➡️ Mover uma imagem para a direita
-<br>🗑️ Excluir uma imagem
-<br>🖱️ Arrastar e soltar para reorganizar no computador
+⬅️ Mover para esquerda<br>
+➡️ Mover para direita<br>
+🗑️ Excluir imagem<br>
+🖱️ Arrastar no computador para reorganizar
 
 <br><br>
 
-📱 No celular, use os botões ⬅️ e ➡️ para definir a ordem.
+📱 No celular, use os botões para definir a ordem.
 
-</div>
+</div><div id="imagensPreview">
+<div class="vazio">Nenhuma imagem selecionada.</div>
+</div><div class="dica">
+⚠️ Organize as imagens antes de gerar o roteiro.
+</div></section><section class="card"><h2>⚙️ Configuração</h2><label for="estilo">🎨 Estilo do clipe</label>
 
-<div id="imagensPreview">
+<select id="estilo"><option value="Cinematográfico">Cinematográfico</option>
+<option value="Worship">Worship</option>
+<option value="Romântico">Romântico</option>
+<option value="Inspirador">Inspirador</option>
+<option value="Urbano">Urbano</option>
+<option value="Dramático">Dramático</option>
+<option value="Fantasia">Fantasia</option>
+<option value="Realista">Realista</option></select><label for="formato">📐 Formato do vídeo</label>
 
-<div class="vazio">
-Nenhuma imagem selecionada.
-</div>
+<select id="formato"><option value="16:9">YouTube — 16:9</option>
+<option value="9:16">TikTok / Reels / Shorts — 9:16</option></select></section><section class="card"><h2>📝 Roteiro do clipe</h2><p style="color:#aaa;font-size:14px;line-height:1.5;margin-bottom:12px;">O modo gratuito cria uma narrativa visual baseada nas imagens escolhidas.
 
-</div>
-
-<div class="dica">
-
-⚠️ Organize as imagens antes de gerar o roteiro. Essa ordem será usada na sequência do vídeo.
-
-</div>
-
-</section>
-
-
-<!-- ================================
-     CONFIGURAÇÃO
-================================ -->
-
-<section class="card">
-
-<h2>⚙️ Configuração</h2>
-
-<label for="estilo">
-🎨 Estilo do clipe
-</label>
-
-<select id="estilo">
-
-<option value="Cinematográfico">
-Cinematográfico
-</option>
-
-<option value="Worship">
-Worship
-</option>
-
-<option value="Romântico">
-Romântico
-</option>
-
-<option value="Inspirador">
-Inspirador
-</option>
-
-<option value="Urbano">
-Urbano
-</option>
-
-<option value="Dramático">
-Dramático
-</option>
-
-<option value="Fantasia">
-Fantasia
-</option>
-
-<option value="Realista">
-Realista
-</option>
-
-</select>
-
-<label for="formato">
-📐 Formato do vídeo
-</label>
-
-<select id="formato">
-
-<option value="16:9">
-YouTube — 16:9
-</option>
-
-<option value="9:16">
-TikTok / Reels / Shorts — 9:16
-</option>
-
-</select>
-
-</section>
-
-
-<!-- ================================
-     ROTEIRO
-================================ -->
-
-<section class="card">
-
-<h2>📝 Roteiro do clipe</h2>
-
-<p style="color:#aaa;font-size:14px;line-height:1.5;margin-bottom:12px;">
-
-O modo gratuito cria automaticamente uma narrativa visual baseada nas imagens, estilo e formato escolhidos.
-
-</p>
-
-<textarea
+</p><textarea
 id="roteiroManual"
 placeholder="Você também pode escrever ou alterar o roteiro aqui..."
-></textarea>
-
-<button
-id="botaoRoteiro"
-onclick="gerarRoteiro()"
->
-
+></textarea><button id="botaoRoteiro" onclick="gerarRoteiro()">
 ✨ GERAR ROTEIRO
-
-</button>
-
-<div id="resultadoRoteiro"></div>
-
-</section>
-
-
-<!-- ================================
-     ESTRUTURA
-================================ -->
-
-<section
-class="card"
-id="roteiro"
-style="display:none;"
->
-
-<h2>🎞️ Estrutura do clipe</h2>
-
-<div id="estruturaCenas"></div>
-
-<button
-class="verde"
-onclick="gerarClipe()"
->
-
+</button><div id="resultadoRoteiro"></div></section><section class="card" id="roteiro"><h2>🎞️ Estrutura do clipe</h2><div id="estruturaCenas"></div><button class="verde" onclick="gerarClipe()">
 🎬 GERAR CLIPE GRÁTIS
-
-</button>
-
-</section>
-
-
-<!-- ================================
-     GERAÇÃO
-================================ -->
-
-<section
-class="card"
-id="geracao"
->
-
-<h2>🎥 Gerando seu clipe</h2>
-
-<div
-id="statusGeracao"
-class="status"
->
-
+</button></section><section class="card" id="geracao"><h2>🎥 Gerando seu clipe</h2><div id="statusGeracao" class="status">
 Preparando geração...
-
-</div>
-
-<div id="progressoContainer">
-
-<div class="barra">
-
+</div><div id="progressoContainer"><div class="barra">
 <div id="barraProgresso"></div>
-
-</div>
-
-<div id="textoProgresso">
-0%
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ================================
-     VÍDEO
-================================ -->
-
-<section
-class="card"
-id="videoArea"
->
-
-<h2>🎬 Seu clipe está pronto!</h2>
-
-<video
+</div><div id="textoProgresso">0%</div></div></section><section class="card" id="videoArea"><h2>🎬 Seu clipe está pronto!</h2><video
 id="videoPreview"
 controls
 playsinline
-></video>
 
-<button
-class="verde"
-onclick="baixarVideo()"
->
+«</video>»
 
+<button class="verde" onclick="baixarVideo()">
 ⬇️ BAIXAR VÍDEO
-
-</button>
-
-<button
-class="secundario"
-onclick="gerarClipe()"
->
-
+</button><button class="secundario" onclick="gerarClipe()">
 🔄 GERAR NOVAMENTE
-
-</button>
-
-<div class="dica">
-
+</button><div class="dica">
 🎉 Seu vídeo foi criado no próprio navegador, sem usar créditos da Runway.
-
-</div>
-
-</section>
-
-
-<footer>
-
+</div></section><footer>
 CLIP MUSICAL AI — Sistema gratuito de criação de clipes
-
-</footer>
-
-</div>
-
-
-<script>
-
-/* ==========================================
-   VARIÁVEIS
-========================================== */
+</footer></div><script>
 
 let imagensSelecionadas = [];
-
 let musicaSelecionada = null;
-
 let videoBlob = null;
-
 let videoURL = null;
-
 let roteiroAtual = "";
-
 let gravando = false;
-
 let imagemArrastada = null;
 
-
-/* ==========================================
-   ELEMENTOS
-========================================== */
 
 const inputImagens =
 document.getElementById("inputImagens");
@@ -856,49 +498,9 @@ const videoPreview =
 document.getElementById("videoPreview");
 
 
-/* ==========================================
-   URL DO PROJETO
-========================================== */
-
-const params =
-new URLSearchParams(window.location.search);
-
-const musicaURL =
-params.get("musica");
-
-const estiloURL =
-params.get("estilo");
-
-const formatoURL =
-params.get("formato");
-
-
-if(estiloURL){
-
-estilo.value = estiloURL;
-
-}
-
-if(formatoURL){
-
-formato.value =
-formatoURL === "9:16"
-? "9:16"
-: "16:9";
-
-}
-
-if(musicaURL){
-
-resumoMusica.textContent =
-musicaURL;
-
-}
-
-
-/* ==========================================
-   ATUALIZAR RESUMO
-========================================== */
+/* ================================
+   RESUMO
+================================ */
 
 function atualizarResumo(){
 
@@ -924,42 +526,32 @@ musicaSelecionada.name;
 }
 
 
-/* ==========================================
-   ESCOLHER MÚSICA
-========================================== */
+/* ================================
+   MÚSICA
+================================ */
 
 inputMusica.addEventListener(
 "change",
 function(){
 
-if(
-!this.files ||
-!this.files.length
-){
+if(!this.files.length){
 
 musicaSelecionada = null;
 
-document.getElementById(
-"nomeMusica"
-).textContent =
+document.getElementById("nomeMusica").textContent =
 "Nenhuma música selecionada.";
 
 atualizarResumo();
 
 return;
-
 }
 
 musicaSelecionada =
 this.files[0];
 
-document.getElementById(
-"nomeMusica"
-).innerHTML =
+document.getElementById("nomeMusica").innerHTML =
 "🎵 <span class='sucesso'>" +
-escapeHTML(
-musicaSelecionada.name
-) +
+escapeHTML(musicaSelecionada.name) +
 "</span>";
 
 atualizarResumo();
@@ -968,21 +560,16 @@ atualizarResumo();
 );
 
 
-/* ==========================================
-   ESCOLHER IMAGENS
-========================================== */
+/* ================================
+   IMAGENS
+================================ */
 
 inputImagens.addEventListener(
 "change",
 function(){
 
-if(
-!this.files ||
-!this.files.length
-){
-
+if(!this.files.length){
 return;
-
 }
 
 imagensSelecionadas =
@@ -1004,25 +591,20 @@ roteiroCard.style.display =
 );
 
 
-/* ==========================================
+/* ================================
    MOSTRAR IMAGENS
-========================================== */
+================================ */
 
 function mostrarImagens(){
 
 imagensPreview.innerHTML = "";
 
-if(
-!imagensSelecionadas.length
-){
+if(!imagensSelecionadas.length){
 
 imagensPreview.innerHTML =
-'<div class="vazio">' +
-'Nenhuma imagem selecionada.' +
-'</div>';
+'<div class="vazio">Nenhuma imagem selecionada.</div>';
 
 return;
-
 }
 
 const grid =
@@ -1043,17 +625,15 @@ item.className =
 
 item.draggable = true;
 
-item.dataset.index =
-index;
+item.dataset.index = index;
 
 
-/* IMAGEM */
-
-const imagemContainer =
+const container =
 document.createElement("div");
 
-imagemContainer.className =
-"preview-imagem";
+container.style.position =
+"relative";
+
 
 const img =
 document.createElement("img");
@@ -1061,22 +641,13 @@ document.createElement("img");
 const url =
 URL.createObjectURL(file);
 
-img.src =
-url;
-
-img.alt =
-"Imagem " +
-(index + 1);
+img.src = url;
 
 img.onload =
 function(){
-
 URL.revokeObjectURL(url);
-
 };
 
-
-/* NÚMERO */
 
 const numero =
 document.createElement("div");
@@ -1085,22 +656,14 @@ numero.className =
 "preview-num";
 
 numero.textContent =
-"Cena " +
-(index + 1);
+"Cena " + (index + 1);
 
 
-/* MONTA IMAGEM */
+container.appendChild(img);
+container.appendChild(numero);
 
-imagemContainer.appendChild(img);
+item.appendChild(container);
 
-imagemContainer.appendChild(numero);
-
-item.appendChild(
-imagemContainer
-);
-
-
-/* NOME */
 
 const nome =
 document.createElement("div");
@@ -1111,15 +674,8 @@ nome.className =
 nome.textContent =
 file.name;
 
-nome.title =
-file.name;
+item.appendChild(nome);
 
-item.appendChild(
-nome
-);
-
-
-/* BOTÕES */
 
 const acoes =
 document.createElement("div");
@@ -1128,143 +684,80 @@ acoes.className =
 "preview-acoes";
 
 
-/* ESQUERDA */
-
 const esquerda =
 document.createElement("button");
 
-esquerda.type =
-"button";
-
 esquerda.textContent =
 "⬅️";
-
-esquerda.title =
-"Mover para esquerda";
 
 esquerda.disabled =
 index === 0;
 
 esquerda.onclick =
 function(){
-
-moverImagem(
-index,
-index - 1
-);
-
+moverImagem(index,index - 1);
 };
 
-
-/* DIREITA */
 
 const direita =
 document.createElement("button");
 
-direita.type =
-"button";
-
 direita.textContent =
 "➡️";
 
-direita.title =
-"Mover para direita";
-
 direita.disabled =
-index ===
-imagensSelecionadas.length - 1;
+index === imagensSelecionadas.length - 1;
 
 direita.onclick =
 function(){
-
-moverImagem(
-index,
-index + 1
-);
-
+moverImagem(index,index + 1);
 };
 
-
-/* EXCLUIR */
 
 const excluir =
 document.createElement("button");
 
-excluir.type =
-"button";
-
 excluir.textContent =
 "🗑️";
-
-excluir.title =
-"Excluir imagem";
 
 excluir.className =
 "excluir";
 
 excluir.onclick =
 function(){
-
 excluirImagem(index);
-
 };
 
 
-/* ADICIONA */
+acoes.appendChild(esquerda);
+acoes.appendChild(direita);
+acoes.appendChild(excluir);
 
-acoes.appendChild(
-esquerda
-);
-
-acoes.appendChild(
-direita
-);
-
-acoes.appendChild(
-excluir
-);
-
-item.appendChild(
-acoes
-);
+item.appendChild(acoes);
 
 
-/* DRAG AND DROP */
+/* DRAG */
 
 item.addEventListener(
 "dragstart",
 function(){
-
-imagemArrastada =
-index;
-
-item.classList.add(
-"arrastando"
-);
-
+imagemArrastada = index;
+item.style.opacity = ".4";
 }
 );
 
 item.addEventListener(
 "dragend",
 function(){
-
-imagemArrastada =
-null;
-
-item.classList.remove(
-"arrastando"
-);
-
+imagemArrastada = null;
+item.style.opacity = "1";
 }
 );
 
 item.addEventListener(
 "dragover",
 function(event){
-
 event.preventDefault();
-
 }
 );
 
@@ -1275,17 +768,13 @@ function(event){
 event.preventDefault();
 
 const destino =
-Number(
-item.dataset.index
-);
+Number(item.dataset.index);
 
 if(
 imagemArrastada === null ||
 imagemArrastada === destino
 ){
-
 return;
-
 }
 
 moverImagem(
@@ -1305,33 +794,14 @@ grid.appendChild(item);
 
 imagensPreview.appendChild(grid);
 
-
-/* TEXTO ABAIXO */
-
-const textoDrag =
-document.createElement("div");
-
-textoDrag.className =
-"drag-label";
-
-textoDrag.textContent =
-"🖱️ No computador, você também pode arrastar as imagens para mudar a ordem.";
-
-imagensPreview.appendChild(
-textoDrag
-);
-
 }
 
 
-/* ==========================================
-   MOVER IMAGEM
-========================================== */
+/* ================================
+   MOVER
+================================ */
 
-function moverImagem(
-origem,
-destino
-){
+function moverImagem(origem,destino){
 
 if(
 origem < 0 ||
@@ -1339,9 +809,7 @@ destino < 0 ||
 origem >= imagensSelecionadas.length ||
 destino >= imagensSelecionadas.length
 ){
-
 return;
-
 }
 
 const imagem =
@@ -1368,45 +836,20 @@ resultadoRoteiro.style.display =
 roteiroCard.style.display =
 "none";
 
-window.scrollTo({
-top:
-imagensPreview.getBoundingClientRect().top +
-window.scrollY -
-100,
-behavior:"smooth"
-});
-
 }
 
 
-/* ==========================================
-   EXCLUIR IMAGEM
-========================================== */
+/* ================================
+   EXCLUIR
+================================ */
 
 function excluirImagem(index){
 
-if(
-index < 0 ||
-index >= imagensSelecionadas.length
-){
-
-return;
-
-}
-
-const nome =
-imagensSelecionadas[index].name;
-
-const confirmar =
-confirm(
+if(!confirm(
 "Excluir esta imagem?\n\n" +
-nome
-);
-
-if(!confirmar){
-
+imagensSelecionadas[index].name
+)){
 return;
-
 }
 
 imagensSelecionadas.splice(
@@ -1429,222 +872,117 @@ roteiroCard.style.display =
 }
 
 
-/* ==========================================
-   ESCAPE HTML
-========================================== */
+/* ================================
+   ESCAPE
+================================ */
 
 function escapeHTML(text){
 
 return String(text)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
-/* ==========================================
-   GERAR ROTEIRO GRATUITO
-========================================== */
+/* ================================
+   ROTEIRO
+================================ */
 
 function gerarRoteiro(){
 
-if(
-!imagensSelecionadas.length
-){
+if(!imagensSelecionadas.length){
 
 alert(
 "Selecione pelo menos uma imagem antes de criar o roteiro."
 );
 
 return;
-
 }
-
-atualizarResumo();
-
 
 const nomeMusica =
 musicaSelecionada
-
-? musicaSelecionada.name.replace(
-/\.[^/.]+$/,
-""
-)
-
+? musicaSelecionada.name.replace(/\.[^/.]+$/,"")
 : "Música do projeto";
 
 
-const quantidade =
-imagensSelecionadas.length;
-
-
-const estiloAtual =
-estilo.value;
-
-
-let texto = "";
-
-
-texto +=
+let texto =
 "ROTEIRO DO CLIPE MUSICAL\n\n";
-
 
 texto +=
 "Música: " +
 nomeMusica +
 "\n";
 
-
 texto +=
 "Estilo: " +
-estiloAtual +
+estilo.value +
 "\n";
-
 
 texto +=
 "Formato: " +
 formato.value +
 "\n\n";
 
-
 texto +=
 "NARRATIVA VISUAL:\n\n";
 
 
-const cenasBase = [
-
+const nomes = [
 "Introdução",
-
 "Desenvolvimento",
-
 "Conflito",
-
 "Superação",
-
 "Final"
-
 ];
 
 
-for(
-let i = 0;
-i < quantidade;
-i++
-){
+imagensSelecionadas.forEach(
+function(file,index){
 
-let titulo =
-cenasBase[i]
-|| "Continuação";
-
-
-let descricao = "";
-
-
-if(i === 0){
-
-descricao =
-"Apresentação do personagem e do ambiente. A câmera inicia com movimento suave, criando o clima da música.";
-
-}
-
-else if(
-i === quantidade - 1
-){
-
-descricao =
-"A narrativa chega ao seu momento final, mostrando esperança, emoção e uma imagem marcante.";
-
-}
-
-else if(i === 1){
-
-descricao =
-"O personagem inicia sua jornada. A câmera acompanha a cena com movimentos suaves e cinematográficos.";
-
-}
-
-else if(i === 2){
-
-descricao =
-"Surge um momento de tensão ou desafio. A atmosfera fica mais intensa e dramática.";
-
-}
-
-else{
-
-descricao =
-"O personagem supera as dificuldades e continua avançando com fé, força e determinação.";
-
-}
-
+const nome =
+nomes[index] ||
+"Continuação";
 
 texto +=
 "Cena " +
-(i + 1) +
+(index + 1) +
 " — " +
-titulo +
+nome +
 "\n";
 
+texto +=
+"Imagem: " +
+file.name +
+"\n";
 
 texto +=
-descricao +
-"\n\n";
+"Movimento de câmera: zoom cinematográfico com deslocamento suave.\n\n";
 
 }
+);
 
 
 roteiroAtual =
 texto;
 
-
 roteiroManual.value =
 texto;
-
 
 resultadoRoteiro.style.display =
 "block";
 
-
 resultadoRoteiro.innerHTML =
-
-"✅ <span class='sucesso'>" +
-"Roteiro criado!" +
-"</span><br><br>" +
-
-escapeHTML(
-texto
-);
-
+"✅ <span class='sucesso'>Roteiro criado!</span><br><br>" +
+escapeHTML(texto);
 
 criarEstrutura();
 
-
 roteiroCard.style.display =
 "block";
-
 
 roteiroCard.scrollIntoView({
 behavior:"smooth",
@@ -1654,29 +992,13 @@ block:"start"
 }
 
 
-/* ==========================================
-   ESTRUTURA DAS CENAS
-========================================== */
+/* ================================
+   ESTRUTURA
+================================ */
 
 function criarEstrutura(){
 
 estruturaCenas.innerHTML = "";
-
-
-const nomes = [
-
-"Introdução",
-
-"Desenvolvimento",
-
-"Conflito",
-
-"Superação",
-
-"Final"
-
-];
-
 
 imagensSelecionadas.forEach(
 function(file,index){
@@ -1687,41 +1009,27 @@ document.createElement("div");
 bloco.className =
 "status";
 
-
-const nome =
-nomes[index]
-|| "Continuação";
-
-
 bloco.innerHTML =
-
 "<strong>🎬 Cena " +
 (index + 1) +
-" — " +
-nome +
 "</strong><br><br>" +
 
 "🖼️ " +
-escapeHTML(
-file.name
-) +
+escapeHTML(file.name) +
+"<br>" +
+
+"🎥 Movimento: " +
+getNomeMovimento(index) +
 "<br>" +
 
 "🎨 Estilo: " +
-escapeHTML(
-estilo.value
-) +
+escapeHTML(estilo.value) +
 "<br>" +
 
 "📐 Formato: " +
-escapeHTML(
-formato.value
-);
+escapeHTML(formato.value);
 
-
-estruturaCenas.appendChild(
-bloco
-);
+estruturaCenas.appendChild(bloco);
 
 }
 );
@@ -1729,9 +1037,38 @@ bloco
 }
 
 
-/* ==========================================
-   CARREGAR IMAGENS
-========================================== */
+/* ================================
+   NOME DO MOVIMENTO
+================================ */
+
+function getNomeMovimento(index){
+
+const movimentos = [
+
+"🔍 Aproximação — zoom 100% → 120%",
+
+"🔎 Afastamento — zoom 120% → 100%",
+
+"➡️ Panorâmica esquerda → direita + zoom",
+
+"⬅️ Panorâmica direita → esquerda + zoom",
+
+"↗️ Movimento diagonal + aproximação",
+
+"↙️ Movimento diagonal + afastamento"
+
+];
+
+return movimentos[
+index % movimentos.length
+];
+
+}
+
+
+/* ================================
+   CARREGAR IMAGEM
+================================ */
 
 function carregarImagem(file){
 
@@ -1744,7 +1081,6 @@ new Image();
 const url =
 URL.createObjectURL(file);
 
-
 img.onload =
 function(){
 
@@ -1753,7 +1089,6 @@ URL.revokeObjectURL(url);
 resolve(img);
 
 };
-
 
 img.onerror =
 function(){
@@ -1768,20 +1103,18 @@ new Error(
 
 };
 
-
 img.src =
 url;
 
 }
-
 );
 
 }
 
 
-/* ==========================================
-   DESENHAR IMAGEM COM MOVIMENTO
-========================================== */
+/* ==================================================
+   NOVO SISTEMA DE MOVIMENTO CINEMATOGRÁFICO
+================================================== */
 
 function desenharImagem(
 
@@ -1806,7 +1139,7 @@ const ih =
 img.height;
 
 
-/* COBERTURA */
+/* COBRIR O CANVAS */
 
 const escala =
 Math.max(
@@ -1814,141 +1147,178 @@ cw / iw,
 ch / ih
 );
 
-
-const largura =
+const baseW =
 iw * escala;
 
-const altura =
+const baseH =
 ih * escala;
 
 
-const excessoX =
-largura - cw;
+/* ==================================================
+   ZOOM MUITO MAIS VISÍVEL
+================================================== */
 
-const excessoY =
-altura - ch;
+const movimentos = [
 
+/* 1 — aproximação */
 
-/* DIREÇÕES */
+{
+inicio:1.00,
+fim:1.20,
+xInicio:0,
+yInicio:0,
+xFim:0,
+yFim:0
+},
 
-const direcao =
-indice % 6;
+/* 2 — afastamento */
 
+{
+inicio:1.20,
+fim:1.00,
+xInicio:0,
+yInicio:0,
+xFim:0,
+yFim:0
+},
 
-let movimentoX = 0;
+/* 3 — esquerda para direita */
 
-let movimentoY = 0;
+{
+inicio:1.05,
+fim:1.18,
+xInicio:-0.08,
+yInicio:0,
+xFim:0.08,
+yFim:0
+},
 
+/* 4 — direita para esquerda */
 
-if(direcao === 0){
+{
+inicio:1.18,
+fim:1.05,
+xInicio:0.08,
+yInicio:0,
+xFim:-0.08,
+yFim:0
+},
 
-movimentoX =
-excessoX *
-progresso *
-0.55;
+/* 5 — baixo para cima */
 
+{
+inicio:1.04,
+fim:1.18,
+xInicio:0,
+yInicio:0.08,
+xFim:0,
+yFim:-0.08
+},
+
+/* 6 — cima para baixo */
+
+{
+inicio:1.18,
+fim:1.04,
+xInicio:0,
+yInicio:-0.08,
+xFim:0,
+yFim:0.08
 }
 
-else if(direcao === 1){
+];
 
-movimentoX =
-excessoX *
-(1 - progresso) *
-0.55;
 
-}
+const movimento =
+movimentos[
+indice % movimentos.length
+];
 
-else if(direcao === 2){
 
-movimentoY =
-excessoY *
-progresso *
-0.55;
+/* ==================================================
+   SUAVIZAR MOVIMENTO
+================================================== */
 
-}
-
-else if(direcao === 3){
-
-movimentoY =
-excessoY *
-(1 - progresso) *
-0.55;
-
-}
-
-else if(direcao === 4){
-
-movimentoX =
-excessoX *
-progresso *
-0.35;
-
-movimentoY =
-excessoY *
-progresso *
-0.25;
-
-}
-
-else{
-
-movimentoX =
-excessoX *
-(1 - progresso) *
-0.35;
-
-movimentoY =
-excessoY *
-(1 - progresso) *
-0.25;
-
-}
+const suave =
+progresso * progresso *
+(3 - 2 * progresso);
 
 
 /* ZOOM */
 
 const zoom =
-1 +
-(progresso * 0.12);
+movimento.inicio +
+(
+movimento.fim -
+movimento.inicio
+) *
+suave;
 
 
-const centroX =
-cw / 2;
+/* TAMANHO FINAL */
 
-const centroY =
-ch / 2;
+const largura =
+baseW *
+zoom;
+
+const altura =
+baseH *
+zoom;
 
 
-ctx.save();
+/* ==================================================
+   POSIÇÃO
+================================================== */
+
+const deslocamentoX =
+movimento.xInicio +
+(
+movimento.xFim -
+movimento.xInicio
+) *
+suave;
+
+const deslocamentoY =
+movimento.yInicio +
+(
+movimento.yFim -
+movimento.yInicio
+) *
+suave;
 
 
-ctx.translate(
-centroX,
-centroY
+const x =
+(
+cw -
+largura
+) / 2 +
+(
+cw *
+deslocamentoX
+);
+
+const y =
+(
+ch -
+altura
+) / 2 +
+(
+ch *
+deslocamentoY
 );
 
 
-ctx.scale(
-zoom,
-zoom
-);
-
-
-ctx.translate(
--centroX,
--centroY
-);
-
+/* ==================================================
+   DESENHAR
+================================================== */
 
 ctx.drawImage(
 
 img,
 
--excessoX / 2 -
-movimentoX,
+x,
 
--excessoY / 2 -
-movimentoY,
+y,
 
 largura,
 
@@ -1956,190 +1326,123 @@ altura
 
 );
 
-
-ctx.restore();
-
 }
 
 
-/* ==========================================
-   TRANSIÇÃO
-========================================== */
-
-function desenharFade(
-
-ctx,
-canvas,
-opacidade
-
-){
-
-ctx.fillStyle =
-"rgba(0,0,0," +
-opacidade +
-")";
-
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-}
-
-
-/* ==========================================
-   SUPORTE MIME
-========================================== */
+/* ================================
+   MIME
+================================ */
 
 function escolherMime(){
 
-if(
-typeof MediaRecorder ===
-"undefined"
-){
-
+if(typeof MediaRecorder === "undefined"){
 return "";
-
 }
-
 
 const tipos = [
 
 "video/webm;codecs=vp9,opus",
-
 "video/webm;codecs=vp8,opus",
-
 "video/webm"
 
 ];
 
-
-for(
-const tipo of tipos
-){
+for(const tipo of tipos){
 
 if(
-MediaRecorder.isTypeSupported(
-tipo
-)
+MediaRecorder.isTypeSupported(tipo)
 ){
-
 return tipo;
-
 }
 
 }
-
 
 return "";
 
 }
 
 
-/* ==========================================
+/* ================================
    GERAR CLIPE
-========================================== */
+================================ */
 
 async function gerarClipe(){
 
 if(gravando){
-
 return;
-
 }
 
-
-if(
-!imagensSelecionadas.length
-){
+if(!imagensSelecionadas.length){
 
 alert(
 "Selecione pelo menos uma imagem."
 );
 
 return;
-
 }
 
-
-if(
-!musicaSelecionada
-){
+if(!musicaSelecionada){
 
 alert(
 "Selecione a música do clipe."
 );
 
 return;
-
 }
 
 
 const mime =
 escolherMime();
 
-
 if(!mime){
 
 alert(
-"Seu navegador não suporta a gravação de vídeo necessária para o modo gratuito."
+"Seu navegador não suporta a gravação de vídeo."
 );
 
 return;
-
 }
 
 
 gravando = true;
 
-
 geracao.style.display =
 "block";
-
 
 videoArea.style.display =
 "none";
 
-
 progressoContainer.style.display =
 "block";
-
 
 barraProgresso.style.width =
 "0%";
 
-
 textoProgresso.textContent =
 "Preparando...";
 
-
 statusGeracao.innerHTML =
-"⏳ Carregando imagens e preparando o vídeo...";
+"⏳ Carregando imagens...";
 
 
 try{
 
 
-/* CARREGAR TODAS AS IMAGENS */
+/* CARREGAR IMAGENS */
 
 const imagens = [];
 
-
 for(
-let i = 0;
-i < imagensSelecionadas.length;
+let i=0;
+i<imagensSelecionadas.length;
 i++
 ){
 
-const img =
+imagens.push(
 await carregarImagem(
 imagensSelecionadas[i]
+)
 );
-
-imagens.push(img);
 
 }
 
@@ -2151,10 +1454,8 @@ URL.createObjectURL(
 musicaSelecionada
 );
 
-
 const audio =
 new Audio();
-
 
 audio.src =
 audioURL;
@@ -2170,24 +1471,16 @@ await new Promise(
 function(resolve,reject){
 
 audio.onloadedmetadata =
-function(){
-
-resolve();
-
-};
-
+resolve;
 
 audio.onerror =
 function(){
-
 reject(
 new Error(
 "Não foi possível carregar a música."
 )
 );
-
 };
-
 
 audio.load();
 
@@ -2196,27 +1489,18 @@ audio.load();
 
 
 const duracaoAudio =
-Number.isFinite(
-audio.duration
-) &&
+Number.isFinite(audio.duration) &&
 audio.duration > 0
-
 ? audio.duration
-
 : 30;
 
 
 /* CANVAS */
 
 const canvas =
-document.createElement(
-"canvas"
-);
+document.createElement("canvas");
 
-
-if(
-formato.value === "9:16"
-){
+if(formato.value === "9:16"){
 
 canvas.width =
 720;
@@ -2225,7 +1509,6 @@ canvas.height =
 1280;
 
 }
-
 else{
 
 canvas.width =
@@ -2238,46 +1521,19 @@ canvas.height =
 
 
 const ctx =
-canvas.getContext(
-"2d"
-);
-
-
-if(!ctx){
-
-throw new Error(
-"Não foi possível criar o canvas do vídeo."
-);
-
-}
-
+canvas.getContext("2d");
 
 ctx.imageSmoothingEnabled =
 true;
-
 
 ctx.imageSmoothingQuality =
 "high";
 
 
-if(
-typeof canvas.captureStream !==
-"function"
-){
-
-throw new Error(
-"Seu navegador não suporta captura de vídeo pelo canvas."
-);
-
-}
-
-
 /* STREAM */
 
 const videoStream =
-canvas.captureStream(
-30
-);
+canvas.captureStream(30);
 
 
 /* ÁUDIO */
@@ -2286,12 +1542,9 @@ const AudioContext =
 window.AudioContext ||
 window.webkitAudioContext;
 
-
 let audioContext = null;
 
 let audioDestination = null;
-
-let audioSource = null;
 
 let streamFinal =
 videoStream;
@@ -2302,42 +1555,31 @@ if(AudioContext){
 audioContext =
 new AudioContext();
 
-
 await audioContext.resume();
 
-
-audioSource =
+const audioSource =
 audioContext.createMediaElementSource(
 audio
 );
 
-
 audioDestination =
 audioContext.createMediaStreamDestination();
-
 
 audioSource.connect(
 audioDestination
 );
-
 
 audioSource.connect(
 audioContext.destination
 );
 
-
-const audioTracks =
 audioDestination
 .stream
-.getAudioTracks();
-
-
-audioTracks.forEach(
+.getAudioTracks()
+.forEach(
 function(track){
 
-streamFinal.addTrack(
-track
-);
+streamFinal.addTrack(track);
 
 }
 );
@@ -2353,12 +1595,8 @@ new MediaRecorder(
 streamFinal,
 
 {
-
 mimeType:mime,
-
-videoBitsPerSecond:
-6000000
-
+videoBitsPerSecond:6000000
 }
 
 );
@@ -2366,18 +1604,12 @@ videoBitsPerSecond:
 
 const chunks = [];
 
-
 recorder.ondataavailable =
 function(event){
 
-if(
-event.data &&
-event.data.size > 0
-){
+if(event.data && event.data.size > 0){
 
-chunks.push(
-event.data
-);
+chunks.push(event.data);
 
 }
 
@@ -2400,90 +1632,55 @@ new Error(
 
 };
 
-
 recorder.onstop =
-function(){
-
-resolve();
-
-};
+resolve;
 
 }
 );
 
 
-recorder.start(
-1000
-);
-
-
-statusGeracao.innerHTML =
-"🎬 <span class='sucesso'>" +
-"Gravando o clipe..." +
-"</span>";
-
+recorder.start(1000);
 
 await audio.play();
 
-
-/* TEMPO DE CADA CENA */
 
 const duracaoCena =
 duracaoAudio /
 imagens.length;
 
-
 const inicio =
 performance.now();
 
+let ultimaImagem = -1;
 
-let ultimaImagem =
--1;
-
-
-/* ==========================================
-   ANIMAÇÃO
-========================================== */
 
 function animar(agora){
 
 if(!gravando){
-
 return;
-
 }
 
 
 const tempo =
-(
-agora -
-inicio
-) /
-1000;
+(agora - inicio) / 1000;
 
 
 const progressoTotal =
 Math.min(
-tempo /
-duracaoAudio,
+tempo / duracaoAudio,
 1
 );
 
 
 let indice =
 Math.floor(
-tempo /
-duracaoCena
+tempo / duracaoCena
 );
 
 
-if(
-indice >= imagens.length
-){
-
+if(indice >= imagens.length){
 indice =
 imagens.length - 1;
-
 }
 
 
@@ -2492,8 +1689,7 @@ Math.min(
 
 (
 tempo -
-indice *
-duracaoCena
+indice * duracaoCena
 ) /
 duracaoCena,
 
@@ -2507,21 +1703,15 @@ duracaoCena,
 ctx.fillStyle =
 "#000";
 
-
 ctx.fillRect(
-
 0,
-
 0,
-
 canvas.width,
-
 canvas.height
-
 );
 
 
-/* IMAGEM */
+/* IMAGEM COM ZOOM */
 
 desenharImagem(
 
@@ -2538,36 +1728,25 @@ indice
 );
 
 
-/* TRANSIÇÃO */
+/* FADE */
 
 const tempoTransicao =
 Math.min(
-
 1.0,
-
-duracaoCena *
-0.18
-
+duracaoCena * 0.18
 );
-
 
 const restante =
 duracaoCena -
 (
 tempo -
-indice *
-duracaoCena
+indice * duracaoCena
 );
 
 
 if(
-
-restante <
-tempoTransicao &&
-
-indice <
-imagens.length - 1
-
+restante < tempoTransicao &&
+indice < imagens.length - 1
 ){
 
 const fade =
@@ -2577,16 +1756,16 @@ restante /
 tempoTransicao
 );
 
+ctx.fillStyle =
+"rgba(0,0,0," +
+(fade * 0.65) +
+")";
 
-desenharFade(
-
-ctx,
-
-canvas,
-
-fade *
-0.70
-
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
 );
 
 }
@@ -2596,95 +1775,64 @@ fade *
 
 const porcentagem =
 Math.min(
-
 100,
-
 Math.round(
-progressoTotal *
-100
+progressoTotal * 100
 )
-
 );
 
-
 barraProgresso.style.width =
-porcentagem +
-"%";
-
+porcentagem + "%";
 
 textoProgresso.textContent =
-porcentagem +
-"%";
+porcentagem + "%";
 
 
-/* STATUS */
-
-if(
-indice !==
-ultimaImagem
-){
+if(indice !== ultimaImagem){
 
 ultimaImagem =
 indice;
 
-
 statusGeracao.innerHTML =
 
-"🎬 Gerando cena " +
-
+"🎬 Cena " +
 (indice + 1) +
-
 " de " +
-
 imagens.length +
-
 " — " +
-
 escapeHTML(
 imagensSelecionadas[indice].name
-);
+) +
+"<br><br>🎥 " +
+getNomeMovimento(indice);
 
 }
 
 
 /* FINAL */
 
-if(
-tempo >=
-duracaoAudio
-){
+if(tempo >= duracaoAudio){
 
 try{
-
 audio.pause();
-
 }
 catch(e){}
 
-
-gravando =
-false;
-
+gravando = false;
 
 if(audioContext){
 
 try{
-
 audioContext.close();
-
 }
 catch(e){}
 
 }
-
 
 try{
-
 recorder.stop();
-
 }
 catch(e){}
-
 
 return;
 
@@ -2703,28 +1851,17 @@ animar
 );
 
 
-/* ESPERAR GRAVAÇÃO */
-
 await terminou;
 
 
-/* BLOB */
-
 videoBlob =
 new Blob(
-
 chunks,
-
 {
-
 type:mime
-
 }
-
 );
 
-
-/* URL */
 
 if(videoURL){
 
@@ -2740,43 +1877,27 @@ URL.createObjectURL(
 videoBlob
 );
 
-
 videoPreview.src =
 videoURL;
 
-
 videoPreview.load();
-
 
 videoArea.style.display =
 "block";
 
-
 statusGeracao.innerHTML =
-
-"✅ <span class='sucesso'>" +
-
-"Clipe criado com sucesso!" +
-
-"</span>";
-
+"✅ <span class='sucesso'>Clipe criado com sucesso!</span>";
 
 barraProgresso.style.width =
 "100%";
 
-
 textoProgresso.textContent =
 "100%";
 
-
 videoArea.scrollIntoView({
-
 behavior:"smooth",
-
 block:"start"
-
 });
-
 
 URL.revokeObjectURL(
 audioURL
@@ -2786,43 +1907,24 @@ audioURL
 }
 catch(error){
 
-console.error(
-"Erro ao gerar vídeo:",
-error
-);
+console.error(error);
 
-
-gravando =
-false;
-
+gravando = false;
 
 statusGeracao.innerHTML =
-
 "❌ <span class='erro'>" +
-
 escapeHTML(
-
 error.message ||
-
 "Não foi possível criar o vídeo."
-
 ) +
-
 "</span>";
 
-
 alert(
-
 "Não foi possível criar o vídeo.\n\n" +
-
 (
-
 error.message ||
-
 "Erro desconhecido."
-
 )
-
 );
 
 }
@@ -2830,9 +1932,9 @@ error.message ||
 }
 
 
-/* ==========================================
-   BAIXAR VÍDEO
-========================================== */
+/* ================================
+   DOWNLOAD
+================================ */
 
 function baixarVideo(){
 
@@ -2843,52 +1945,35 @@ alert(
 );
 
 return;
-
 }
 
-
 const link =
-document.createElement(
-"a"
-);
-
+document.createElement("a");
 
 link.href =
 videoURL;
 
-
 link.download =
 "clip-musical-ai.webm";
 
-
-document.body.appendChild(
-link
-);
-
+document.body.appendChild(link);
 
 link.click();
 
-
-document.body.removeChild(
-link
-);
+document.body.removeChild(link);
 
 }
 
 
-/* ==========================================
+/* ================================
    ATUALIZAÇÕES
-========================================== */
+================================ */
 
 estilo.addEventListener(
 "change",
 function(){
 
 atualizarResumo();
-
-if(
-roteiroAtual
-){
 
 roteiroAtual = "";
 
@@ -2897,8 +1982,6 @@ resultadoRoteiro.style.display =
 
 roteiroCard.style.display =
 "none";
-
-}
 
 }
 );
@@ -2910,10 +1993,6 @@ function(){
 
 atualizarResumo();
 
-if(
-roteiroAtual
-){
-
 roteiroAtual = "";
 
 resultadoRoteiro.style.display =
@@ -2923,19 +2002,10 @@ roteiroCard.style.display =
 "none";
 
 }
-
-}
 );
 
 
-/* ==========================================
-   INICIALIZAÇÃO
-========================================== */
-
 atualizarResumo();
 
-</script>
-
-</body>
-
+</script></body>
 </html>
