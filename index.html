@@ -1116,6 +1116,7 @@ url;
    NOVO SISTEMA DE MOVIMENTO CINEMATOGRÁFICO
 ================================================== */
 
+
 function desenharImagem(
 ctx,
 img,
@@ -1131,93 +1132,76 @@ const iw = img.width;
 const ih = img.height;
 
 
-/* ==========================================
-   ESCALA BASE PARA COBRIR TODO O CANVAS
-========================================== */
-
-const escalaBase =
-Math.max(
-cw / iw,
-ch / ih
-);
-
-const baseW =
-iw * escalaBase;
-
-const baseH =
-ih * escalaBase;
-
-
-/* ==========================================
-   MOVIMENTOS FORTES
-========================================== */
+/* =================================================
+   MOVIMENTOS
+================================================= */
 
 const movimentos = [
 
-/* CENA 1 — ZOOM IN */
+/* 1 — ZOOM MUITO FORTE PARA DENTRO */
 
 {
-inicio:1.00,
-fim:1.40,
-xInicio:0,
-yInicio:0,
-xFim:0,
-yFim:0
+inicio: 1.00,
+fim: 1.60,
+xInicio: 0.50,
+yInicio: 0.50,
+xFim: 0.50,
+yFim: 0.50
 },
 
-/* CENA 2 — ZOOM OUT */
+/* 2 — ZOOM MUITO FORTE PARA FORA */
 
 {
-inicio:1.40,
-fim:1.00,
-xInicio:0,
-yInicio:0,
-xFim:0,
-yFim:0
+inicio: 1.60,
+fim: 1.00,
+xInicio: 0.50,
+yInicio: 0.50,
+xFim: 0.50,
+yFim: 0.50
 },
 
-/* CENA 3 — ESQUERDA → DIREITA */
+/* 3 — ESQUERDA PARA DIREITA */
 
 {
-inicio:1.05,
-fim:1.35,
-xInicio:-0.18,
-yInicio:0,
-xFim:0.18,
-yFim:0
+inicio: 1.25,
+fim: 1.50,
+xInicio: 0.20,
+yInicio: 0.50,
+xFim: 0.80,
+yFim: 0.50
 },
 
-/* CENA 4 — DIREITA → ESQUERDA */
+/* 4 — DIREITA PARA ESQUERDA */
 
 {
-inicio:1.35,
-fim:1.05,
-xInicio:0.18,
-yInicio:0,
-xFim:-0.18,
-yFim:0
+inicio: 1.50,
+fim: 1.25,
+xInicio: 0.80,
+yInicio: 0.50,
+xFim: 0.20,
+yFim: 0.50
 },
 
-/* CENA 5 — BAIXO → CIMA */
+/* 5 — BAIXO PARA CIMA */
 
 {
-inicio:1.05,
-fim:1.35,
-xInicio:0,
-yInicio:0.18,
-xFim:0,
-yFim:-0.18
+inicio: 1.25,
+fim: 1.50,
+xInicio: 0.50,
+yInicio: 0.80,
+xFim: 0.50,
+yFim: 0.20
 },
 
-/* CENA 6 — CIMA → BAIXO */
+/* 6 — CIMA PARA BAIXO */
 
 {
-inicio:1.35,
-fim:1.05,
-xInicio:0,
-yInicio:-0.18,
-xFim:0,
-yFim:0.18
+inicio: 1.50,
+fim: 1.25,
+xInicio: 0.50,
+yInicio: 0.20,
+xFim: 0.50,
+yFim: 0.80
 }
 
 ];
@@ -1229,101 +1213,119 @@ indice % movimentos.length
 ];
 
 
-/* ==========================================
+/* =================================================
    SUAVIZAÇÃO
-========================================== */
+================================================= */
 
-const suave =
+const p =
 progresso * progresso *
 (3 - 2 * progresso);
 
 
-/* ==========================================
+/* =================================================
    ZOOM
-========================================== */
+================================================= */
 
 const zoom =
 movimento.inicio +
 (
 movimento.fim -
 movimento.inicio
-) *
-suave;
+) * p;
 
 
-/* ==========================================
-   TAMANHO DA IMAGEM
-========================================== */
+/* =================================================
+   CENTRO DO RECORTE
+================================================= */
 
-const largura =
-baseW * zoom;
-
-const altura =
-baseH * zoom;
-
-
-/* ==========================================
-   MOVIMENTO
-========================================== */
-
-const deslocamentoX =
+const centroX =
 movimento.xInicio +
 (
 movimento.xFim -
 movimento.xInicio
-) *
-suave;
+) * p;
 
-const deslocamentoY =
+const centroY =
 movimento.yInicio +
 (
 movimento.yFim -
 movimento.yInicio
-) *
-suave;
+) * p;
 
 
-/* ==========================================
-   POSIÇÃO CENTRAL
-========================================== */
+/* =================================================
+   ÁREA VISÍVEL DA FOTO
+================================================= */
 
-const x =
-(
-cw - largura
-) / 2 +
-(
-cw * deslocamentoX
+/*
+   Quanto maior o zoom,
+   menor a área da foto utilizada.
+*/
+
+const larguraBase =
+iw / zoom;
+
+const alturaBase =
+ih / zoom;
+
+
+/* =================================================
+   POSIÇÃO DO RECORTE
+================================================= */
+
+let sx =
+iw * centroX -
+larguraBase / 2;
+
+let sy =
+ih * centroY -
+alturaBase / 2;
+
+
+/* =================================================
+   IMPEDIR QUE O RECORTE SAIA DA FOTO
+================================================= */
+
+sx =
+Math.max(
+0,
+Math.min(
+iw - larguraBase,
+sx
+)
 );
 
-const y =
-(
-ch - altura
-) / 2 +
-(
-ch * deslocamentoY
+sy =
+Math.max(
+0,
+Math.min(
+ih - alturaBase,
+sy
+)
 );
 
 
-/* ==========================================
+/* =================================================
    DESENHAR
-========================================== */
+================================================= */
 
 ctx.drawImage(
 
 img,
 
-x,
+sx,
+sy,
+larguraBase,
+alturaBase,
 
-y,
-
-largura,
-
-altura
+0,
+0,
+cw,
+ch
 
 );
 
 }
-
 
 /* ================================
    MIME
