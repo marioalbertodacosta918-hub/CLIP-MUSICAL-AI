@@ -144,10 +144,26 @@ button.vermelho{
 background:linear-gradient(135deg,#dc2626,#991b1b);
 }
 
+/* ================================
+   ORGANIZADOR DE IMAGENS
+================================ */
+
+.organizador-info{
+background:#10101b;
+border:1px solid #303047;
+border-radius:10px;
+padding:13px;
+margin-top:12px;
+margin-bottom:15px;
+color:#bbb;
+font-size:13px;
+line-height:1.5;
+}
+
 .preview-grid{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
-gap:12px;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:14px;
 margin-top:15px;
 }
 
@@ -155,25 +171,82 @@ margin-top:15px;
 position:relative;
 background:#0c0c14;
 border:1px solid #303047;
-border-radius:10px;
+border-radius:12px;
 overflow:hidden;
+transition:.2s;
+}
+
+.preview-item:hover{
+border-color:#7c3aed;
+transform:translateY(-2px);
+}
+
+.preview-item.arrastando{
+opacity:.45;
+border:2px dashed #7c3aed;
+}
+
+.preview-imagem{
+position:relative;
+width:100%;
 }
 
 .preview-item img{
 width:100%;
-height:120px;
+height:135px;
 object-fit:cover;
 display:block;
 }
 
 .preview-num{
 position:absolute;
-top:6px;
-left:6px;
-background:rgba(0,0,0,.75);
-padding:4px 8px;
+top:7px;
+left:7px;
+background:rgba(0,0,0,.8);
+padding:5px 9px;
 border-radius:20px;
 font-size:12px;
+font-weight:bold;
+}
+
+.preview-nome{
+padding:9px 10px 5px;
+font-size:12px;
+color:#ddd;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.preview-acoes{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:5px;
+padding:7px;
+}
+
+.preview-acoes button{
+margin:0;
+padding:9px 4px;
+font-size:14px;
+border-radius:8px;
+background:#242438;
+}
+
+.preview-acoes button.excluir{
+background:#7f1d1d;
+}
+
+.preview-acoes button:disabled{
+opacity:.25;
+cursor:not-allowed;
+}
+
+.drag-label{
+font-size:11px;
+color:#777;
+text-align:center;
+padding:0 8px 8px;
 }
 
 .vazio{
@@ -182,6 +255,10 @@ text-align:center;
 padding:20px 5px;
 font-size:14px;
 }
+
+/* ================================
+   PROGRESSO
+================================ */
 
 #progressoContainer{
 display:none;
@@ -299,10 +376,16 @@ grid-template-columns:1fr;
 
 .preview-grid{
 grid-template-columns:repeat(2,1fr);
+gap:10px;
 }
 
 .preview-item img{
-height:110px;
+height:105px;
+}
+
+.preview-acoes button{
+font-size:13px;
+padding:8px 2px;
 }
 
 }
@@ -322,6 +405,10 @@ height:110px;
 </header>
 
 <div class="container">
+
+<!-- ================================
+     RESUMO
+================================ -->
 
 <section class="card">
 
@@ -373,6 +460,11 @@ Cinematográfico
 
 </section>
 
+
+<!-- ================================
+     MÚSICA
+================================ -->
+
 <section class="card">
 
 <h2>🎵 Música do clipe</h2>
@@ -402,6 +494,11 @@ Nenhuma música selecionada.
 
 </section>
 
+
+<!-- ================================
+     IMAGENS
+================================ -->
+
 <section class="card">
 
 <h2>🖼️ Imagens do clipe</h2>
@@ -423,6 +520,23 @@ accept="image/*"
 multiple
 >
 
+<div class="organizador-info">
+
+<strong>🎬 Organize suas cenas</strong><br><br>
+
+Depois de escolher as imagens, você poderá:
+
+<br>⬅️ Mover uma imagem para a esquerda
+<br>➡️ Mover uma imagem para a direita
+<br>🗑️ Excluir uma imagem
+<br>🖱️ Arrastar e soltar para reorganizar no computador
+
+<br><br>
+
+📱 No celular, use os botões ⬅️ e ➡️ para definir a ordem.
+
+</div>
+
 <div id="imagensPreview">
 
 <div class="vazio">
@@ -433,11 +547,16 @@ Nenhuma imagem selecionada.
 
 <div class="dica">
 
-A ordem das imagens será usada na sequência do vídeo.
+⚠️ Organize as imagens antes de gerar o roteiro. Essa ordem será usada na sequência do vídeo.
 
 </div>
 
 </section>
+
+
+<!-- ================================
+     CONFIGURAÇÃO
+================================ -->
 
 <section class="card">
 
@@ -501,6 +620,11 @@ TikTok / Reels / Shorts — 9:16
 
 </section>
 
+
+<!-- ================================
+     ROTEIRO
+================================ -->
+
 <section class="card">
 
 <h2>📝 Roteiro do clipe</h2>
@@ -529,6 +653,11 @@ onclick="gerarRoteiro()"
 
 </section>
 
+
+<!-- ================================
+     ESTRUTURA
+================================ -->
+
 <section
 class="card"
 id="roteiro"
@@ -549,6 +678,11 @@ onclick="gerarClipe()"
 </button>
 
 </section>
+
+
+<!-- ================================
+     GERAÇÃO
+================================ -->
 
 <section
 class="card"
@@ -581,6 +715,11 @@ Preparando geração...
 </div>
 
 </section>
+
+
+<!-- ================================
+     VÍDEO
+================================ -->
 
 <section
 class="card"
@@ -621,6 +760,7 @@ onclick="gerarClipe()"
 
 </section>
 
+
 <footer>
 
 CLIP MUSICAL AI — Sistema gratuito de criação de clipes
@@ -629,7 +769,12 @@ CLIP MUSICAL AI — Sistema gratuito de criação de clipes
 
 </div>
 
+
 <script>
+
+/* ==========================================
+   VARIÁVEIS
+========================================== */
 
 let imagensSelecionadas = [];
 
@@ -642,6 +787,8 @@ let videoURL = null;
 let roteiroAtual = "";
 
 let gravando = false;
+
+let imagemArrastada = null;
 
 
 /* ==========================================
@@ -785,7 +932,10 @@ inputMusica.addEventListener(
 "change",
 function(){
 
-if(!this.files || !this.files.length){
+if(
+!this.files ||
+!this.files.length
+){
 
 musicaSelecionada = null;
 
@@ -807,7 +957,9 @@ document.getElementById(
 "nomeMusica"
 ).innerHTML =
 "🎵 <span class='sucesso'>" +
-escapeHTML(musicaSelecionada.name) +
+escapeHTML(
+musicaSelecionada.name
+) +
 "</span>";
 
 atualizarResumo();
@@ -824,12 +976,29 @@ inputImagens.addEventListener(
 "change",
 function(){
 
+if(
+!this.files ||
+!this.files.length
+){
+
+return;
+
+}
+
 imagensSelecionadas =
 Array.from(this.files);
 
 mostrarImagens();
 
 atualizarResumo();
+
+roteiroAtual = "";
+
+resultadoRoteiro.style.display =
+"none";
+
+roteiroCard.style.display =
+"none";
 
 }
 );
@@ -843,7 +1012,9 @@ function mostrarImagens(){
 
 imagensPreview.innerHTML = "";
 
-if(!imagensSelecionadas.length){
+if(
+!imagensSelecionadas.length
+){
 
 imagensPreview.innerHTML =
 '<div class="vazio">' +
@@ -860,6 +1031,7 @@ document.createElement("div");
 grid.className =
 "preview-grid";
 
+
 imagensSelecionadas.forEach(
 function(file,index){
 
@@ -869,21 +1041,42 @@ document.createElement("div");
 item.className =
 "preview-item";
 
+item.draggable = true;
+
+item.dataset.index =
+index;
+
+
+/* IMAGEM */
+
+const imagemContainer =
+document.createElement("div");
+
+imagemContainer.className =
+"preview-imagem";
+
 const img =
 document.createElement("img");
 
-img.src =
+const url =
 URL.createObjectURL(file);
 
+img.src =
+url;
+
 img.alt =
-"Imagem " + (index + 1);
+"Imagem " +
+(index + 1);
 
 img.onload =
 function(){
 
-URL.revokeObjectURL(img.src);
+URL.revokeObjectURL(url);
 
 };
+
+
+/* NÚMERO */
 
 const numero =
 document.createElement("div");
@@ -892,18 +1085,382 @@ numero.className =
 "preview-num";
 
 numero.textContent =
-"Imagem " + (index + 1);
+"Cena " +
+(index + 1);
 
-item.appendChild(img);
 
-item.appendChild(numero);
+/* MONTA IMAGEM */
+
+imagemContainer.appendChild(img);
+
+imagemContainer.appendChild(numero);
+
+item.appendChild(
+imagemContainer
+);
+
+
+/* NOME */
+
+const nome =
+document.createElement("div");
+
+nome.className =
+"preview-nome";
+
+nome.textContent =
+file.name;
+
+nome.title =
+file.name;
+
+item.appendChild(
+nome
+);
+
+
+/* BOTÕES */
+
+const acoes =
+document.createElement("div");
+
+acoes.className =
+"preview-acoes";
+
+
+/* ESQUERDA */
+
+const esquerda =
+document.createElement("button");
+
+esquerda.type =
+"button";
+
+esquerda.textContent =
+"⬅️";
+
+esquerda.title =
+"Mover para esquerda";
+
+esquerda.disabled =
+index === 0;
+
+esquerda.onclick =
+function(){
+
+moverImagem(
+index,
+index - 1
+);
+
+};
+
+
+/* DIREITA */
+
+const direita =
+document.createElement("button");
+
+direita.type =
+"button";
+
+direita.textContent =
+"➡️";
+
+direita.title =
+"Mover para direita";
+
+direita.disabled =
+index ===
+imagensSelecionadas.length - 1;
+
+direita.onclick =
+function(){
+
+moverImagem(
+index,
+index + 1
+);
+
+};
+
+
+/* EXCLUIR */
+
+const excluir =
+document.createElement("button");
+
+excluir.type =
+"button";
+
+excluir.textContent =
+"🗑️";
+
+excluir.title =
+"Excluir imagem";
+
+excluir.className =
+"excluir";
+
+excluir.onclick =
+function(){
+
+excluirImagem(index);
+
+};
+
+
+/* ADICIONA */
+
+acoes.appendChild(
+esquerda
+);
+
+acoes.appendChild(
+direita
+);
+
+acoes.appendChild(
+excluir
+);
+
+item.appendChild(
+acoes
+);
+
+
+/* DRAG AND DROP */
+
+item.addEventListener(
+"dragstart",
+function(){
+
+imagemArrastada =
+index;
+
+item.classList.add(
+"arrastando"
+);
+
+}
+);
+
+item.addEventListener(
+"dragend",
+function(){
+
+imagemArrastada =
+null;
+
+item.classList.remove(
+"arrastando"
+);
+
+}
+);
+
+item.addEventListener(
+"dragover",
+function(event){
+
+event.preventDefault();
+
+}
+);
+
+item.addEventListener(
+"drop",
+function(event){
+
+event.preventDefault();
+
+const destino =
+Number(
+item.dataset.index
+);
+
+if(
+imagemArrastada === null ||
+imagemArrastada === destino
+){
+
+return;
+
+}
+
+moverImagem(
+imagemArrastada,
+destino
+);
+
+}
+);
+
 
 grid.appendChild(item);
 
 }
 );
 
+
 imagensPreview.appendChild(grid);
+
+
+/* TEXTO ABAIXO */
+
+const textoDrag =
+document.createElement("div");
+
+textoDrag.className =
+"drag-label";
+
+textoDrag.textContent =
+"🖱️ No computador, você também pode arrastar as imagens para mudar a ordem.";
+
+imagensPreview.appendChild(
+textoDrag
+);
+
+}
+
+
+/* ==========================================
+   MOVER IMAGEM
+========================================== */
+
+function moverImagem(
+origem,
+destino
+){
+
+if(
+origem < 0 ||
+destino < 0 ||
+origem >= imagensSelecionadas.length ||
+destino >= imagensSelecionadas.length
+){
+
+return;
+
+}
+
+const imagem =
+imagensSelecionadas.splice(
+origem,
+1
+)[0];
+
+imagensSelecionadas.splice(
+destino,
+0,
+imagem
+);
+
+mostrarImagens();
+
+atualizarResumo();
+
+roteiroAtual = "";
+
+resultadoRoteiro.style.display =
+"none";
+
+roteiroCard.style.display =
+"none";
+
+window.scrollTo({
+top:
+imagensPreview.getBoundingClientRect().top +
+window.scrollY -
+100,
+behavior:"smooth"
+});
+
+}
+
+
+/* ==========================================
+   EXCLUIR IMAGEM
+========================================== */
+
+function excluirImagem(index){
+
+if(
+index < 0 ||
+index >= imagensSelecionadas.length
+){
+
+return;
+
+}
+
+const nome =
+imagensSelecionadas[index].name;
+
+const confirmar =
+confirm(
+"Excluir esta imagem?\n\n" +
+nome
+);
+
+if(!confirmar){
+
+return;
+
+}
+
+imagensSelecionadas.splice(
+index,
+1
+);
+
+mostrarImagens();
+
+atualizarResumo();
+
+roteiroAtual = "";
+
+resultadoRoteiro.style.display =
+"none";
+
+roteiroCard.style.display =
+"none";
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHTML(text){
+
+return String(text)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
@@ -914,7 +1471,9 @@ imagensPreview.appendChild(grid);
 
 function gerarRoteiro(){
 
-if(!imagensSelecionadas.length){
+if(
+!imagensSelecionadas.length
+){
 
 alert(
 "Selecione pelo menos uma imagem antes de criar o roteiro."
@@ -926,36 +1485,50 @@ return;
 
 atualizarResumo();
 
+
 const nomeMusica =
 musicaSelecionada
-? musicaSelecionada.name.replace(/\.[^/.]+$/,"")
+
+? musicaSelecionada.name.replace(
+/\.[^/.]+$/,
+""
+)
+
 : "Música do projeto";
+
 
 const quantidade =
 imagensSelecionadas.length;
 
+
 const estiloAtual =
 estilo.value;
 
+
 let texto = "";
+
 
 texto +=
 "ROTEIRO DO CLIPE MUSICAL\n\n";
+
 
 texto +=
 "Música: " +
 nomeMusica +
 "\n";
 
+
 texto +=
 "Estilo: " +
 estiloAtual +
 "\n";
 
+
 texto +=
 "Formato: " +
 formato.value +
 "\n\n";
+
 
 texto +=
 "NARRATIVA VISUAL:\n\n";
@@ -964,9 +1537,13 @@ texto +=
 const cenasBase = [
 
 "Introdução",
+
 "Desenvolvimento",
+
 "Conflito",
+
 "Superação",
+
 "Final"
 
 ];
@@ -982,36 +1559,47 @@ let titulo =
 cenasBase[i]
 || "Continuação";
 
+
 let descricao = "";
+
 
 if(i === 0){
 
 descricao =
 "Apresentação do personagem e do ambiente. A câmera inicia com movimento suave, criando o clima da música.";
 
-}else if(
+}
+
+else if(
 i === quantidade - 1
 ){
 
 descricao =
 "A narrativa chega ao seu momento final, mostrando esperança, emoção e uma imagem marcante.";
 
-}else if(i === 1){
+}
+
+else if(i === 1){
 
 descricao =
 "O personagem inicia sua jornada. A câmera acompanha a cena com movimentos suaves e cinematográficos.";
 
-}else if(i === 2){
+}
+
+else if(i === 2){
 
 descricao =
 "Surge um momento de tensão ou desafio. A atmosfera fica mais intensa e dramática.";
 
-}else{
+}
+
+else{
 
 descricao =
 "O personagem supera as dificuldades e continua avançando com fé, força e determinação.";
 
 }
+
 
 texto +=
 "Cena " +
@@ -1020,29 +1608,43 @@ texto +=
 titulo +
 "\n";
 
+
 texto +=
 descricao +
 "\n\n";
 
 }
 
+
 roteiroAtual =
 texto;
+
 
 roteiroManual.value =
 texto;
 
+
 resultadoRoteiro.style.display =
 "block";
 
+
 resultadoRoteiro.innerHTML =
-"✅ <span class='sucesso'>Roteiro criado!</span><br><br>" +
-escapeHTML(texto);
+
+"✅ <span class='sucesso'>" +
+"Roteiro criado!" +
+"</span><br><br>" +
+
+escapeHTML(
+texto
+);
+
 
 criarEstrutura();
 
+
 roteiroCard.style.display =
 "block";
+
 
 roteiroCard.scrollIntoView({
 behavior:"smooth",
@@ -1060,15 +1662,21 @@ function criarEstrutura(){
 
 estruturaCenas.innerHTML = "";
 
+
 const nomes = [
 
 "Introdução",
+
 "Desenvolvimento",
+
 "Conflito",
+
 "Superação",
+
 "Final"
 
 ];
+
 
 imagensSelecionadas.forEach(
 function(file,index){
@@ -1079,9 +1687,11 @@ document.createElement("div");
 bloco.className =
 "status";
 
+
 const nome =
 nomes[index]
 || "Continuação";
+
 
 bloco.innerHTML =
 
@@ -1091,16 +1701,23 @@ bloco.innerHTML =
 nome +
 "</strong><br><br>" +
 
-"🖼️ Imagem " +
-(index + 1) +
+"🖼️ " +
+escapeHTML(
+file.name
+) +
 "<br>" +
 
 "🎨 Estilo: " +
-escapeHTML(estilo.value) +
+escapeHTML(
+estilo.value
+) +
 "<br>" +
 
 "📐 Formato: " +
-escapeHTML(formato.value);
+escapeHTML(
+formato.value
+);
+
 
 estruturaCenas.appendChild(
 bloco
@@ -1108,22 +1725,6 @@ bloco
 
 }
 );
-
-}
-
-
-/* ==========================================
-   ESCAPE HTML
-========================================== */
-
-function escapeHTML(text){
-
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
 
 }
 
@@ -1143,6 +1744,7 @@ new Image();
 const url =
 URL.createObjectURL(file);
 
+
 img.onload =
 function(){
 
@@ -1151,6 +1753,7 @@ URL.revokeObjectURL(url);
 resolve(img);
 
 };
+
 
 img.onerror =
 function(){
@@ -1165,6 +1768,7 @@ new Error(
 
 };
 
+
 img.src =
 url;
 
@@ -1176,7 +1780,7 @@ url;
 
 
 /* ==========================================
-   DESENHAR IMAGEM COM ZOOM/PAN
+   DESENHAR IMAGEM COM MOVIMENTO
 ========================================== */
 
 function desenharImagem(
@@ -1201,11 +1805,15 @@ img.width;
 const ih =
 img.height;
 
+
+/* COBERTURA */
+
 const escala =
 Math.max(
 cw / iw,
 ch / ih
 );
+
 
 const largura =
 iw * escala;
@@ -1213,25 +1821,31 @@ iw * escala;
 const altura =
 ih * escala;
 
+
 const excessoX =
 largura - cw;
 
 const excessoY =
 altura - ch;
 
+
+/* DIREÇÕES */
+
 const direcao =
-indice % 4;
+indice % 6;
+
 
 let movimentoX = 0;
 
 let movimentoY = 0;
+
 
 if(direcao === 0){
 
 movimentoX =
 excessoX *
 progresso *
-0.35;
+0.55;
 
 }
 
@@ -1240,7 +1854,7 @@ else if(direcao === 1){
 movimentoX =
 excessoX *
 (1 - progresso) *
-0.35;
+0.55;
 
 }
 
@@ -1249,22 +1863,54 @@ else if(direcao === 2){
 movimentoY =
 excessoY *
 progresso *
+0.55;
+
+}
+
+else if(direcao === 3){
+
+movimentoY =
+excessoY *
+(1 - progresso) *
+0.55;
+
+}
+
+else if(direcao === 4){
+
+movimentoX =
+excessoX *
+progresso *
 0.35;
+
+movimentoY =
+excessoY *
+progresso *
+0.25;
 
 }
 
 else{
 
-movimentoY =
-excessoY *
+movimentoX =
+excessoX *
 (1 - progresso) *
 0.35;
 
+movimentoY =
+excessoY *
+(1 - progresso) *
+0.25;
+
 }
+
+
+/* ZOOM */
 
 const zoom =
 1 +
-(progresso * 0.08);
+(progresso * 0.12);
+
 
 const centroX =
 cw / 2;
@@ -1272,30 +1918,37 @@ cw / 2;
 const centroY =
 ch / 2;
 
+
 ctx.save();
+
 
 ctx.translate(
 centroX,
 centroY
 );
 
+
 ctx.scale(
 zoom,
 zoom
 );
+
 
 ctx.translate(
 -centroX,
 -centroY
 );
 
+
 ctx.drawImage(
 
 img,
 
--excessoX / 2 - movimentoX,
+-excessoX / 2 -
+movimentoX,
 
--excessoY / 2 - movimentoY,
+-excessoY / 2 -
+movimentoY,
 
 largura,
 
@@ -1303,13 +1956,14 @@ altura
 
 );
 
+
 ctx.restore();
 
 }
 
 
 /* ==========================================
-   DESENHAR TRANSIÇÃO
+   TRANSIÇÃO
 ========================================== */
 
 function desenharFade(
@@ -1324,6 +1978,7 @@ ctx.fillStyle =
 "rgba(0,0,0," +
 opacidade +
 ")";
+
 
 ctx.fillRect(
 0,
@@ -1350,6 +2005,7 @@ return "";
 
 }
 
+
 const tipos = [
 
 "video/webm;codecs=vp9,opus",
@@ -1359,6 +2015,7 @@ const tipos = [
 "video/webm"
 
 ];
+
 
 for(
 const tipo of tipos
@@ -1375,6 +2032,7 @@ return tipo;
 }
 
 }
+
 
 return "";
 
@@ -1393,7 +2051,10 @@ return;
 
 }
 
-if(!imagensSelecionadas.length){
+
+if(
+!imagensSelecionadas.length
+){
 
 alert(
 "Selecione pelo menos uma imagem."
@@ -1403,7 +2064,10 @@ return;
 
 }
 
-if(!musicaSelecionada){
+
+if(
+!musicaSelecionada
+){
 
 alert(
 "Selecione a música do clipe."
@@ -1413,8 +2077,10 @@ return;
 
 }
 
+
 const mime =
 escolherMime();
+
 
 if(!mime){
 
@@ -1426,29 +2092,41 @@ return;
 
 }
 
+
 gravando = true;
+
 
 geracao.style.display =
 "block";
 
+
 videoArea.style.display =
 "none";
+
 
 progressoContainer.style.display =
 "block";
 
+
 barraProgresso.style.width =
 "0%";
+
 
 textoProgresso.textContent =
 "Preparando...";
 
+
 statusGeracao.innerHTML =
 "⏳ Carregando imagens e preparando o vídeo...";
 
+
 try{
 
+
+/* CARREGAR TODAS AS IMAGENS */
+
 const imagens = [];
+
 
 for(
 let i = 0;
@@ -1465,13 +2143,18 @@ imagens.push(img);
 
 }
 
+
+/* ÁUDIO */
+
 const audioURL =
 URL.createObjectURL(
 musicaSelecionada
 );
 
+
 const audio =
 new Audio();
+
 
 audio.src =
 audioURL;
@@ -1482,6 +2165,7 @@ audio.preload =
 audio.playsInline =
 true;
 
+
 await new Promise(
 function(resolve,reject){
 
@@ -1491,6 +2175,7 @@ function(){
 resolve();
 
 };
+
 
 audio.onerror =
 function(){
@@ -1503,21 +2188,31 @@ new Error(
 
 };
 
+
 audio.load();
 
 }
 );
+
 
 const duracaoAudio =
 Number.isFinite(
 audio.duration
 ) &&
 audio.duration > 0
+
 ? audio.duration
+
 : 30;
 
+
+/* CANVAS */
+
 const canvas =
-document.createElement("canvas");
+document.createElement(
+"canvas"
+);
+
 
 if(
 formato.value === "9:16"
@@ -1529,7 +2224,9 @@ canvas.width =
 canvas.height =
 1280;
 
-}else{
+}
+
+else{
 
 canvas.width =
 1280;
@@ -1539,8 +2236,12 @@ canvas.height =
 
 }
 
+
 const ctx =
-canvas.getContext("2d");
+canvas.getContext(
+"2d"
+);
+
 
 if(!ctx){
 
@@ -1550,11 +2251,14 @@ throw new Error(
 
 }
 
+
 ctx.imageSmoothingEnabled =
 true;
 
+
 ctx.imageSmoothingQuality =
 "high";
+
 
 if(
 typeof canvas.captureStream !==
@@ -1567,12 +2271,21 @@ throw new Error(
 
 }
 
+
+/* STREAM */
+
 const videoStream =
-canvas.captureStream(30);
+canvas.captureStream(
+30
+);
+
+
+/* ÁUDIO */
 
 const AudioContext =
 window.AudioContext ||
 window.webkitAudioContext;
+
 
 let audioContext = null;
 
@@ -1583,52 +2296,76 @@ let audioSource = null;
 let streamFinal =
 videoStream;
 
+
 if(AudioContext){
 
 audioContext =
 new AudioContext();
 
+
 await audioContext.resume();
+
 
 audioSource =
 audioContext.createMediaElementSource(
 audio
 );
 
+
 audioDestination =
 audioContext.createMediaStreamDestination();
+
 
 audioSource.connect(
 audioDestination
 );
 
+
 audioSource.connect(
 audioContext.destination
 );
 
+
 const audioTracks =
-audioDestination.stream.getAudioTracks();
+audioDestination
+.stream
+.getAudioTracks();
+
 
 audioTracks.forEach(
 function(track){
 
-streamFinal.addTrack(track);
+streamFinal.addTrack(
+track
+);
 
 }
 );
 
 }
+
+
+/* GRAVADOR */
 
 const recorder =
 new MediaRecorder(
+
 streamFinal,
+
 {
+
 mimeType:mime,
-videoBitsPerSecond:6000000
+
+videoBitsPerSecond:
+6000000
+
 }
+
 );
 
+
 const chunks = [];
+
 
 recorder.ondataavailable =
 function(event){
@@ -1646,6 +2383,7 @@ event.data
 
 };
 
+
 const terminou =
 new Promise(
 function(resolve,reject){
@@ -1662,6 +2400,7 @@ new Error(
 
 };
 
+
 recorder.onstop =
 function(){
 
@@ -1672,22 +2411,39 @@ resolve();
 }
 );
 
-recorder.start(1000);
+
+recorder.start(
+1000
+);
+
 
 statusGeracao.innerHTML =
-"🎬 <span class='sucesso'>Gravando o clipe...</span>";
+"🎬 <span class='sucesso'>" +
+"Gravando o clipe..." +
+"</span>";
+
 
 await audio.play();
+
+
+/* TEMPO DE CADA CENA */
 
 const duracaoCena =
 duracaoAudio /
 imagens.length;
 
+
 const inicio =
 performance.now();
 
+
 let ultimaImagem =
 -1;
+
+
+/* ==========================================
+   ANIMAÇÃO
+========================================== */
 
 function animar(agora){
 
@@ -1697,19 +2453,29 @@ return;
 
 }
 
+
 const tempo =
-(agora - inicio) / 1000;
+(
+agora -
+inicio
+) /
+1000;
+
 
 const progressoTotal =
 Math.min(
-tempo / duracaoAudio,
+tempo /
+duracaoAudio,
 1
 );
 
+
 let indice =
 Math.floor(
-tempo / duracaoCena
+tempo /
+duracaoCena
 );
+
 
 if(
 indice >= imagens.length
@@ -1720,25 +2486,42 @@ imagens.length - 1;
 
 }
 
+
 const progressoCena =
 Math.min(
+
 (
 tempo -
-indice * duracaoCena
+indice *
+duracaoCena
 ) /
 duracaoCena,
+
 1
+
 );
+
+
+/* FUNDO */
 
 ctx.fillStyle =
 "#000";
 
+
 ctx.fillRect(
+
 0,
+
 0,
+
 canvas.width,
+
 canvas.height
+
 );
+
+
+/* IMAGEM */
 
 desenharImagem(
 
@@ -1754,22 +2537,37 @@ indice
 
 );
 
+
+/* TRANSIÇÃO */
+
 const tempoTransicao =
 Math.min(
+
 1.0,
-duracaoCena * 0.15
+
+duracaoCena *
+0.18
+
 );
+
 
 const restante =
 duracaoCena -
 (
 tempo -
-indice * duracaoCena
+indice *
+duracaoCena
 );
 
+
 if(
-restante < tempoTransicao &&
-indice < imagens.length - 1
+
+restante <
+tempoTransicao &&
+
+indice <
+imagens.length - 1
+
 ){
 
 const fade =
@@ -1779,58 +2577,94 @@ restante /
 tempoTransicao
 );
 
+
 desenharFade(
+
 ctx,
+
 canvas,
-fade * 0.65
+
+fade *
+0.70
+
 );
 
 }
 
+
+/* PROGRESSO */
+
 const porcentagem =
 Math.min(
+
 100,
+
 Math.round(
-progressoTotal * 100
+progressoTotal *
+100
 )
+
 );
+
 
 barraProgresso.style.width =
 porcentagem +
 "%";
 
+
 textoProgresso.textContent =
 porcentagem +
 "%";
 
+
+/* STATUS */
+
 if(
-indice !== ultimaImagem
+indice !==
+ultimaImagem
 ){
 
 ultimaImagem =
 indice;
 
+
 statusGeracao.innerHTML =
+
 "🎬 Gerando cena " +
+
 (indice + 1) +
+
 " de " +
+
 imagens.length +
-"...";
+
+" — " +
+
+escapeHTML(
+imagensSelecionadas[indice].name
+);
 
 }
 
+
+/* FINAL */
+
 if(
-tempo >= duracaoAudio
+tempo >=
+duracaoAudio
 ){
 
 try{
 
 audio.pause();
 
-}catch(e){}
+}
+catch(e){}
+
 
 gravando =
 false;
+
 
 if(audioContext){
 
@@ -1838,39 +2672,59 @@ try{
 
 audioContext.close();
 
-}catch(e){}
+}
+catch(e){}
 
 }
+
 
 try{
 
 recorder.stop();
 
-}catch(e){}
+}
+catch(e){}
+
 
 return;
 
 }
 
+
 requestAnimationFrame(
 animar
 );
 
 }
 
+
 requestAnimationFrame(
 animar
 );
+
+
+/* ESPERAR GRAVAÇÃO */
 
 await terminou;
 
+
+/* BLOB */
+
 videoBlob =
 new Blob(
+
 chunks,
+
 {
+
 type:mime
+
 }
+
 );
+
+
+/* URL */
 
 if(videoURL){
 
@@ -1880,61 +2734,95 @@ videoURL
 
 }
 
+
 videoURL =
 URL.createObjectURL(
 videoBlob
 );
 
+
 videoPreview.src =
 videoURL;
 
+
 videoPreview.load();
+
 
 videoArea.style.display =
 "block";
 
+
 statusGeracao.innerHTML =
-"✅ <span class='sucesso'>Clipe criado com sucesso!</span>";
+
+"✅ <span class='sucesso'>" +
+
+"Clipe criado com sucesso!" +
+
+"</span>";
+
 
 barraProgresso.style.width =
 "100%";
 
+
 textoProgresso.textContent =
 "100%";
 
+
 videoArea.scrollIntoView({
+
 behavior:"smooth",
+
 block:"start"
+
 });
+
 
 URL.revokeObjectURL(
 audioURL
 );
 
-}catch(error){
+
+}
+catch(error){
 
 console.error(
 "Erro ao gerar vídeo:",
 error
 );
 
+
 gravando =
 false;
 
+
 statusGeracao.innerHTML =
+
 "❌ <span class='erro'>" +
+
 escapeHTML(
+
 error.message ||
+
 "Não foi possível criar o vídeo."
+
 ) +
+
 "</span>";
 
+
 alert(
+
 "Não foi possível criar o vídeo.\n\n" +
+
 (
+
 error.message ||
+
 "Erro desconhecido."
+
 )
+
 );
 
 }
@@ -1958,20 +2846,28 @@ return;
 
 }
 
+
 const link =
-document.createElement("a");
+document.createElement(
+"a"
+);
+
 
 link.href =
 videoURL;
 
+
 link.download =
 "clip-musical-ai.webm";
+
 
 document.body.appendChild(
 link
 );
 
+
 link.click();
+
 
 document.body.removeChild(
 link
@@ -1986,12 +2882,49 @@ link
 
 estilo.addEventListener(
 "change",
-atualizarResumo
+function(){
+
+atualizarResumo();
+
+if(
+roteiroAtual
+){
+
+roteiroAtual = "";
+
+resultadoRoteiro.style.display =
+"none";
+
+roteiroCard.style.display =
+"none";
+
+}
+
+}
 );
+
 
 formato.addEventListener(
 "change",
-atualizarResumo
+function(){
+
+atualizarResumo();
+
+if(
+roteiroAtual
+){
+
+roteiroAtual = "";
+
+resultadoRoteiro.style.display =
+"none";
+
+roteiroCard.style.display =
+"none";
+
+}
+
+}
 );
 
 
