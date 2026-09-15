@@ -5,10 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>CLIP MUSICAL AI</title>
 
@@ -55,41 +52,46 @@ h1{
 }
 
 .card h2{
-    font-size:19px;
-    margin-bottom:14px;
+    font-size:20px;
+    margin-bottom:15px;
 }
 
 label{
     display:block;
     font-weight:bold;
-    margin-bottom:8px;
+    margin-bottom:9px;
 }
 
 input[type="file"],
 select,
 textarea{
     width:100%;
-    background:#0c0c15;
+    background:#090912;
     color:#fff;
-    border:1px solid #353548;
+    border:1px solid #37374a;
     border-radius:10px;
-    padding:12px;
-    margin-bottom:15px;
+    padding:13px;
+    margin-bottom:12px;
+}
+
+input[type="file"]{
+    cursor:pointer;
 }
 
 textarea{
-    min-height:170px;
+    min-height:220px;
     resize:vertical;
-    line-height:1.5;
+    line-height:1.55;
+    font-size:15px;
 }
 
 button{
     width:100%;
     border:0;
-    border-radius:12px;
+    border-radius:11px;
     padding:15px;
     margin-top:8px;
-    background:#6c35ff;
+    background:#6838ff;
     color:#fff;
     font-size:16px;
     font-weight:bold;
@@ -101,59 +103,103 @@ button:disabled{
 }
 
 .btn-azul{
-    background:#1269d3;
+    background:#176bd1;
 }
 
 .btn-verde{
-    background:#0aa36c;
+    background:#0a9d68;
 }
 
-.audio-info{
+.status{
     color:#aaa;
     font-size:14px;
-    margin-bottom:10px;
+    line-height:1.5;
+    margin-top:8px;
 }
 
 .sucesso{
-    color:#35d996;
+    color:#38dc9b;
 }
 
 .erro{
-    color:#ff6868;
+    color:#ff6666;
+}
+
+.dica{
+    color:#999;
+    font-size:13px;
+    line-height:1.5;
+    margin-top:4px;
+}
+
+.letra-contador{
+    color:#888;
+    text-align:right;
+    font-size:12px;
+    margin-top:-7px;
+    margin-bottom:12px;
+}
+
+.letra-preview{
+    display:none;
+    background:#090912;
+    border:1px solid #29293a;
+    border-radius:10px;
+    padding:13px;
+    margin-top:12px;
+}
+
+.letra-preview h3{
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.letra-preview-texto{
+    color:#ddd;
+    white-space:pre-wrap;
+    line-height:1.55;
+    max-height:220px;
+    overflow:auto;
+}
+
+.audio-preview{
+    width:100%;
+    display:none;
+    margin-top:8px;
 }
 
 .preview-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
-    margin-top:10px;
+    margin-top:12px;
 }
 
 .preview-item{
     background:#090912;
     border:1px solid #29293a;
-    border-radius:12px;
+    border-radius:11px;
     padding:8px;
 }
 
 .preview-item img{
+    display:block;
     width:100%;
     aspect-ratio:16/10;
     object-fit:cover;
     border-radius:8px;
-    display:block;
 }
 
 .preview-num{
     text-align:center;
-    font-size:13px;
     color:#aaa;
-    margin:7px 0;
+    font-size:13px;
+    padding:7px 0;
 }
 
 .preview-buttons{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1fr 1fr 1fr;
     gap:5px;
 }
 
@@ -166,50 +212,33 @@ button:disabled{
 .resumo{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px;
+    gap:9px;
 }
 
-.resumo div{
-    background:#0c0c15;
+.resumo-box{
+    background:#090912;
     border:1px solid #29293a;
-    padding:10px;
-    border-radius:8px;
+    border-radius:9px;
+    padding:11px;
     font-size:13px;
+    overflow-wrap:anywhere;
 }
 
-.resumo strong{
+.resumo-box strong{
     display:block;
-    color:#fff;
-    margin-bottom:4px;
-}
-
-.info{
-    background:#0d0d17;
-    border-radius:10px;
-    padding:13px;
-    color:#bbb;
-    line-height:1.5;
-    font-size:14px;
-}
-
-.dica{
-    color:#999;
-    font-size:13px;
-    line-height:1.4;
-    margin-top:-7px;
-    margin-bottom:12px;
+    margin-bottom:5px;
 }
 
 #roteiro{
     white-space:pre-wrap;
     background:#090912;
     border:1px solid #29293a;
-    padding:14px;
     border-radius:10px;
-    line-height:1.5;
-    color:#ddd;
-    min-height:80px;
+    padding:14px;
     margin-top:12px;
+    color:#ddd;
+    line-height:1.55;
+    min-height:90px;
 }
 
 .progress-container{
@@ -220,7 +249,7 @@ button:disabled{
 .progress-bar{
     width:100%;
     height:18px;
-    background:#252535;
+    background:#252536;
     border-radius:20px;
     overflow:hidden;
 }
@@ -228,15 +257,8 @@ button:disabled{
 .progress-fill{
     width:0%;
     height:100%;
-    background:#6c35ff;
-    transition:width .2s linear;
-}
-
-.status{
-    text-align:center;
-    color:#bbb;
-    margin-top:10px;
-    font-size:14px;
+    background:#6838ff;
+    transition:width .15s linear;
 }
 
 .video-container{
@@ -245,7 +267,6 @@ button:disabled{
 
 #videoResultado{
     width:100%;
-    max-height:650px;
     background:#000;
     border-radius:12px;
     border:1px solid #333;
@@ -255,14 +276,24 @@ button:disabled{
 
 .download{
     display:none;
+    width:100%;
     text-decoration:none;
-    background:#0aa36c;
+    background:#0a9d68;
     color:#fff;
     font-weight:bold;
     text-align:center;
     padding:15px;
-    border-radius:12px;
+    border-radius:11px;
     margin-top:12px;
+}
+
+.info{
+    background:#0c0c16;
+    border-radius:10px;
+    padding:13px;
+    color:#bbb;
+    line-height:1.6;
+    font-size:14px;
 }
 
 @media(max-width:600px){
@@ -282,94 +313,81 @@ button:disabled{
     .resumo{
         grid-template-columns:1fr;
     }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
-<h1>
-🎬 CLIP MUSICAL AI
-</h1>
-
+<h1>🎬 CLIP MUSICAL AI</h1>
 
 <div class="subtitulo">
 Crie seu clipe musical gratuitamente
 </div>
 
 
-<!-- =========================================
-     1 - MÚSICA
-========================================= -->
+<!-- ==================================================
+     MÚSICA
+================================================== -->
 
 <div class="card">
 
-<h2>
-🎵 1. Escolha sua música
-</h2>
+<h2>🎵 1. Escolha sua música</h2>
 
 <label for="inputMusica">
 Arquivo do louvor
 </label>
 
 <input
-    type="file"
     id="inputMusica"
+    type="file"
     accept="audio/*"
 >
 
 <div
     id="audioInfo"
-    class="audio-info"
+    class="status"
 >
 Nenhuma música selecionada.
 </div>
 
 <audio
     id="audioPreview"
+    class="audio-preview"
     controls
-    preload="metadata"
-    style="
-        width:100%;
-        display:none;
-        margin-bottom:10px;
-    "
+    playsinline
 ></audio>
 
 </div>
 
 
-<!-- =========================================
-     2 - IMAGENS
-========================================= -->
+<!-- ==================================================
+     IMAGENS
+================================================== -->
 
 <div class="card">
 
-<h2>
-🖼️ 2. Escolha as imagens
-</h2>
+<h2>🖼️ 2. Escolha as imagens</h2>
 
 <label for="inputImagens">
 Imagens do clipe
 </label>
 
 <input
-    type="file"
     id="inputImagens"
+    type="file"
     accept="image/*"
     multiple
 >
 
 <div
     id="contadorImagens"
-    class="audio-info"
+    class="status"
 >
 Nenhuma imagem selecionada.
 </div>
@@ -382,15 +400,13 @@ Nenhuma imagem selecionada.
 </div>
 
 
-<!-- =========================================
-     3 - LETRA
-========================================= -->
+<!-- ==================================================
+     LETRA
+================================================== -->
 
 <div class="card">
 
-<h2>
-📝 3. Letra do louvor
-</h2>
+<h2>📝 3. Letra do louvor</h2>
 
 <label for="inputLetra">
 Cole aqui a letra do louvor
@@ -398,7 +414,7 @@ Cole aqui a letra do louvor
 
 <textarea
     id="inputLetra"
-    placeholder="Cole aqui a letra do seu louvor.
+    placeholder="Cole aqui a letra completa do seu louvor.
 
 Exemplo:
 
@@ -406,30 +422,51 @@ Mesmo no poço eu sei, Tu estás comigo,
 Mesmo em correntes, és o meu abrigo.
 Sonhos que vêm de Ti, ninguém vai frustrar,
 O Teu propósito em mim vai se realizar.
+
 Sou o sonhador que o céu escolheu,
 E o sonho é Te adorar, meu Deus."
 ></textarea>
 
+<div
+    id="letraContador"
+    class="letra-contador"
+>
+0 caracteres
+</div>
+
 <div class="dica">
 
-💡 Coloque cada verso ou trecho em uma nova linha.
+💡 Coloque cada verso em uma nova linha.
+
 A letra será distribuída automaticamente durante a música
-e ficará gravada dentro do vídeo.
+e aparecerá na parte inferior do vídeo.
+
+</div>
+
+<div
+    id="letraPreview"
+    class="letra-preview"
+>
+
+<h3>👁️ Prévia da letra</h3>
+
+<div
+    id="letraPreviewTexto"
+    class="letra-preview-texto"
+></div>
 
 </div>
 
 </div>
 
 
-<!-- =========================================
-     4 - ESTILO
-========================================= -->
+<!-- ==================================================
+     ESTILO
+================================================== -->
 
 <div class="card">
 
-<h2>
-🎨 4. Estilo do clipe
-</h2>
+<h2>🎨 4. Estilo do clipe</h2>
 
 <label for="estilo">
 Estilo visual
@@ -437,40 +474,16 @@ Estilo visual
 
 <select id="estilo">
 
-<option value="Cinematográfico">
-Cinematográfico
-</option>
-
-<option value="Worship">
-Worship
-</option>
-
-<option value="Romântico">
-Romântico
-</option>
-
-<option value="Inspirador">
-Inspirador
-</option>
-
-<option value="Urbano">
-Urbano
-</option>
-
-<option value="Dramático">
-Dramático
-</option>
-
-<option value="Fantasia">
-Fantasia
-</option>
-
-<option value="Realista">
-Realista
-</option>
+<option>Cinematográfico</option>
+<option>Worship</option>
+<option>Romântico</option>
+<option>Inspirador</option>
+<option>Urbano</option>
+<option>Dramático</option>
+<option>Fantasia</option>
+<option>Realista</option>
 
 </select>
-
 
 <label for="formato">
 Formato
@@ -491,23 +504,19 @@ Formato
 </div>
 
 
-<!-- =========================================
-     5 - RESUMO
-========================================= -->
+<!-- ==================================================
+     RESUMO
+================================================== -->
 
 <div class="card">
 
-<h2>
-📋 Resumo do projeto
-</h2>
+<h2>📋 Resumo do projeto</h2>
 
 <div class="resumo">
 
-<div>
+<div class="resumo-box">
 
-<strong>
-Música
-</strong>
+<strong>🎵 Música</strong>
 
 <span id="resumoMusica">
 Não selecionada
@@ -515,12 +524,9 @@ Não selecionada
 
 </div>
 
+<div class="resumo-box">
 
-<div>
-
-<strong>
-Imagens
-</strong>
+<strong>🖼️ Imagens</strong>
 
 <span id="resumoImagens">
 0 imagens
@@ -528,12 +534,9 @@ Imagens
 
 </div>
 
+<div class="resumo-box">
 
-<div>
-
-<strong>
-Letra
-</strong>
+<strong>📝 Letra</strong>
 
 <span id="resumoLetra">
 Não adicionada
@@ -541,12 +544,9 @@ Não adicionada
 
 </div>
 
+<div class="resumo-box">
 
-<div>
-
-<strong>
-Estilo
-</strong>
+<strong>🎨 Estilo</strong>
 
 <span id="resumoEstilo">
 Cinematográfico
@@ -554,12 +554,9 @@ Cinematográfico
 
 </div>
 
+<div class="resumo-box">
 
-<div>
-
-<strong>
-Formato
-</strong>
+<strong>📐 Formato</strong>
 
 <span id="resumoFormato">
 16:9
@@ -572,15 +569,13 @@ Formato
 </div>
 
 
-<!-- =========================================
-     6 - ROTEIRO
-========================================= -->
+<!-- ==================================================
+     ROTEIRO
+================================================== -->
 
 <div class="card">
 
-<h2>
-📖 5. Roteiro
-</h2>
+<h2>📖 5. Roteiro</h2>
 
 <button
     id="botaoRoteiro"
@@ -596,15 +591,13 @@ O roteiro aparecerá aqui.
 </div>
 
 
-<!-- =========================================
-     7 - GERAR
-========================================= -->
+<!-- ==================================================
+     GERAR CLIPE
+================================================== -->
 
 <div class="card">
 
-<h2>
-🎬 6. Gerar clipe
-</h2>
+<h2>🎬 6. Gerar clipe</h2>
 
 <div class="info">
 
@@ -624,7 +617,7 @@ O roteiro aparecerá aqui.
 
 <br>
 
-✔ Letra do louvor
+✔ Letra do louvor dentro do vídeo
 
 <br>
 
@@ -642,7 +635,6 @@ O roteiro aparecerá aqui.
 >
 GERAR CLIPE GRÁTIS
 </button>
-
 
 <div
     id="progressContainer"
@@ -670,18 +662,16 @@ Preparando...
 </div>
 
 
-<!-- =========================================
-     8 - RESULTADO
-========================================= -->
+<!-- ==================================================
+     RESULTADO
+================================================== -->
 
 <div
     id="videoContainer"
     class="card video-container"
 >
 
-<h2>
-🎥 Seu clipe está pronto!
-</h2>
+<h2>🎥 Seu clipe está pronto!</h2>
 
 <video
     id="videoResultado"
@@ -705,16 +695,14 @@ Preparando...
 
 </div>
 
-
 </div>
 
 
 <script>
 
-
-/* =====================================================
+/* ==================================================
    ELEMENTOS
-===================================================== */
+================================================== */
 
 const inputMusica =
 document.getElementById("inputMusica");
@@ -725,17 +713,26 @@ document.getElementById("inputImagens");
 const inputLetra =
 document.getElementById("inputLetra");
 
+const audioInfo =
+document.getElementById("audioInfo");
+
 const audioPreview =
 document.getElementById("audioPreview");
 
-const audioInfo =
-document.getElementById("audioInfo");
+const contadorImagens =
+document.getElementById("contadorImagens");
 
 const previewGrid =
 document.getElementById("previewGrid");
 
-const contadorImagens =
-document.getElementById("contadorImagens");
+const letraContador =
+document.getElementById("letraContador");
+
+const letraPreview =
+document.getElementById("letraPreview");
+
+const letraPreviewTexto =
+document.getElementById("letraPreviewTexto");
 
 const estilo =
 document.getElementById("estilo");
@@ -789,9 +786,9 @@ const download =
 document.getElementById("download");
 
 
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
+/* ==================================================
+   ESTADO
+================================================== */
 
 let musicaSelecionada = null;
 
@@ -799,16 +796,7 @@ let imagensSelecionadas = [];
 
 let roteiroAtual = "";
 
-let videoBlob = null;
-
 let videoURL = null;
-
-
-/*
-   O AudioContext e a fonte são criados
-   apenas uma vez para evitar erro caso
-   o usuário gere mais de um clipe.
-*/
 
 let audioContext = null;
 
@@ -817,37 +805,37 @@ let audioSource = null;
 let audioDestination = null;
 
 
-/* =====================================================
+/* ==================================================
    MÚSICA
-===================================================== */
+================================================== */
 
 inputMusica.addEventListener(
 "change",
 function(){
 
-    const arquivo =
-    this.files && this.files[0];
-
-    if(!arquivo){
+    if(
+        !this.files ||
+        this.files.length === 0
+    ){
 
         return;
     }
 
     musicaSelecionada =
-    arquivo;
+    this.files[0];
 
 
     resumoMusica.textContent =
-    arquivo.name;
+    musicaSelecionada.name;
 
 
     audioInfo.textContent =
     "✓ Música selecionada: " +
-    arquivo.name;
+    musicaSelecionada.name;
 
 
     audioInfo.className =
-    "audio-info sucesso";
+    "status sucesso";
 
 
     if(audioPreview.src){
@@ -865,52 +853,26 @@ function(){
 
     audioPreview.src =
     URL.createObjectURL(
-        arquivo
+        musicaSelecionada
     );
 
 
     audioPreview.style.display =
     "block";
 
-}
-);
+
+    audioPreview.load();
+
+});
 
 
-/* =====================================================
-   LETRA
-===================================================== */
-
-inputLetra.addEventListener(
-"input",
-function(){
-
-    const texto =
-    this.value.trim();
-
-
-    if(texto){
-
-        resumoLetra.textContent =
-        "Adicionada";
-
-    }else{
-
-        resumoLetra.textContent =
-        "Não adicionada";
-
-    }
-
-}
-);
-
-
-/* =====================================================
+/* ==================================================
    IMAGENS
-===================================================== */
+================================================== */
 
 inputImagens.addEventListener(
 "change",
-function(){
+async function(){
 
     const arquivos =
     Array.from(
@@ -918,7 +880,9 @@ function(){
     );
 
 
-    if(!arquivos.length){
+    if(
+        arquivos.length === 0
+    ){
 
         return;
     }
@@ -927,39 +891,57 @@ function(){
     imagensSelecionadas = [];
 
 
-    let processadas = 0;
+    contadorImagens.textContent =
+    "Carregando imagens...";
 
 
-    arquivos.forEach(
-    function(arquivo){
+    for(
+        const arquivo of arquivos
+    ){
+
+        const src =
+        await arquivoParaDataURL(
+            arquivo
+        );
+
+
+        imagensSelecionadas.push({
+
+            file:arquivo,
+
+            src:src
+
+        });
+
+    }
+
+
+    atualizarImagens();
+
+});
+
+
+/* ==================================================
+   FILE → DATA URL
+================================================== */
+
+function arquivoParaDataURL(
+    arquivo
+){
+
+    return new Promise(
+    function(resolve,reject){
 
         const leitor =
         new FileReader();
 
 
         leitor.onload =
-        function(evento){
+        function(){
 
-            imagensSelecionadas.push({
-
-                file: arquivo,
-
-                src: evento.target.result
-
-            });
-
-
-            processadas++;
-
-
-            if(
-                processadas ===
-                arquivos.length
-            ){
-
-                atualizarImagens();
-
-            }
+            resolve(
+                leitor.result
+            );
 
         };
 
@@ -967,17 +949,11 @@ function(){
         leitor.onerror =
         function(){
 
-            processadas++;
-
-
-            if(
-                processadas ===
-                arquivos.length
-            ){
-
-                atualizarImagens();
-
-            }
+            reject(
+                new Error(
+                    "Erro ao carregar imagem."
+                )
+            );
 
         };
 
@@ -989,17 +965,15 @@ function(){
     });
 
 }
-);
 
 
-/* =====================================================
+/* ==================================================
    ATUALIZAR IMAGENS
-===================================================== */
+================================================== */
 
 function atualizarImagens(){
 
-    previewGrid.innerHTML =
-    "";
+    previewGrid.innerHTML = "";
 
 
     imagensSelecionadas.forEach(
@@ -1083,7 +1057,7 @@ function atualizarImagens(){
 
 
         excluir.textContent =
-        "🗑";
+        "🗑️";
 
 
         excluir.onclick =
@@ -1154,16 +1128,12 @@ function atualizarImagens(){
     imagensSelecionadas.length;
 
 
-    if(quantidade === 0){
+    if(
+        quantidade === 0
+    ){
 
         contadorImagens.textContent =
         "Nenhuma imagem selecionada.";
-
-    }
-    else if(quantidade === 1){
-
-        contadorImagens.textContent =
-        "✓ 1 imagem selecionada.";
 
     }
     else{
@@ -1171,7 +1141,11 @@ function atualizarImagens(){
         contadorImagens.textContent =
         "✓ " +
         quantidade +
-        " imagens selecionadas.";
+        (
+            quantidade === 1
+            ? " imagem selecionada."
+            : " imagens selecionadas."
+        );
 
     }
 
@@ -1187,9 +1161,9 @@ function atualizarImagens(){
 }
 
 
-/* =====================================================
+/* ==================================================
    MOVER IMAGEM
-===================================================== */
+================================================== */
 
 function moverImagem(
     index,
@@ -1210,7 +1184,7 @@ function moverImagem(
     }
 
 
-    const temporaria =
+    const temp =
     imagensSelecionadas[index];
 
 
@@ -1219,7 +1193,7 @@ function moverImagem(
 
 
     imagensSelecionadas[novoIndex] =
-    temporaria;
+    temp;
 
 
     atualizarImagens();
@@ -1227,9 +1201,9 @@ function moverImagem(
 }
 
 
-/* =====================================================
-   REMOVER IMAGEM
-===================================================== */
+/* ==================================================
+   REMOVER
+================================================== */
 
 function removerImagem(
     index
@@ -1246,9 +1220,64 @@ function removerImagem(
 }
 
 
-/* =====================================================
-   RESUMO
-===================================================== */
+/* ==================================================
+   LETRA — ATUALIZAÇÃO EM TEMPO REAL
+================================================== */
+
+inputLetra.addEventListener(
+"input",
+function(){
+
+    const texto =
+    this.value;
+
+
+    letraContador.textContent =
+    texto.length +
+    (
+        texto.length === 1
+        ? " caractere"
+        : " caracteres"
+    );
+
+
+    if(
+        texto.trim()
+    ){
+
+        resumoLetra.textContent =
+        "✓ Adicionada";
+
+
+        letraPreview.style.display =
+        "block";
+
+
+        letraPreviewTexto.textContent =
+        texto;
+
+    }
+    else{
+
+        resumoLetra.textContent =
+        "Não adicionada";
+
+
+        letraPreview.style.display =
+        "none";
+
+
+        letraPreviewTexto.textContent =
+        "";
+
+    }
+
+});
+
+
+/* ==================================================
+   ESTILO
+================================================== */
 
 estilo.addEventListener(
 "change",
@@ -1257,9 +1286,12 @@ function(){
     resumoEstilo.textContent =
     this.value;
 
-}
-);
+});
 
+
+/* ==================================================
+   FORMATO
+================================================== */
 
 formato.addEventListener(
 "change",
@@ -1268,27 +1300,16 @@ function(){
     resumoFormato.textContent =
     this.value;
 
-}
-);
+});
 
 
-/* =====================================================
-   PEGAR LETRAS
-===================================================== */
+/* ==================================================
+   OBTER VERSOS
+================================================== */
 
-function obterLinhasLetra(){
+function obterVersos(){
 
-    const texto =
-    inputLetra.value.trim();
-
-
-    if(!texto){
-
-        return [];
-    }
-
-
-    return texto
+    return inputLetra.value
     .split("\n")
     .map(
         function(linha){
@@ -1303,12 +1324,15 @@ function obterLinhasLetra(){
             if(!linha){
 
                 return false;
+
             }
 
 
             /*
-               Ignorar somente marcadores
-               como [Chorus], [Verse], etc.
+               Ignora marcadores como:
+               [Verse]
+               [Chorus]
+               [Ponte]
             */
 
             if(
@@ -1317,6 +1341,7 @@ function obterLinhasLetra(){
             ){
 
                 return false;
+
             }
 
 
@@ -1328,9 +1353,9 @@ function obterLinhasLetra(){
 }
 
 
-/* =====================================================
+/* ==================================================
    GERAR ROTEIRO
-===================================================== */
+================================================== */
 
 botaoRoteiro.addEventListener(
 "click",
@@ -1339,10 +1364,11 @@ function(){
     if(!musicaSelecionada){
 
         alert(
-            "Selecione uma música primeiro."
+            "Selecione a música primeiro."
         );
 
         return;
+
     }
 
 
@@ -1355,15 +1381,19 @@ function(){
         );
 
         return;
+
     }
 
 
-    const linhas =
-    obterLinhasLetra();
+    const versos =
+    obterVersos();
 
 
-    let texto =
-    "CLIP MUSICAL AI\n\n";
+    let texto = "";
+
+
+    texto +=
+    "🎬 CLIP MUSICAL AI\n\n";
 
 
     texto +=
@@ -1385,77 +1415,94 @@ function(){
 
 
     texto +=
-    "Imagens: " +
+    "Quantidade de imagens: " +
     imagensSelecionadas.length +
     "\n";
 
 
     texto +=
-    "Trechos da letra: " +
-    linhas.length +
+    "Quantidade de versos: " +
+    versos.length +
     "\n\n";
 
 
     texto +=
-    "ESTRUTURA DAS CENAS\n\n";
+    "━━━━━━━━━━━━━━━━━━━━\n";
+
+
+    texto +=
+    "ESTRUTURA DAS CENAS\n";
+
+
+    texto +=
+    "━━━━━━━━━━━━━━━━━━━━\n\n";
 
 
     imagensSelecionadas.forEach(
     function(item,index){
 
         texto +=
-        "Cena " +
-        (index + 1) +
-        " — Imagem " +
+        "🎥 CENA " +
         (index + 1) +
         "\n";
 
 
-        if(index % 4 === 0){
+        /*
+           MOVIMENTO DIFERENTE EM CADA CENA
+        */
+
+        if(
+            index % 4 === 0
+        ){
 
             texto +=
-            "Movimento: zoom aproximando 115% → 150% + deslocamento lateral\n";
+            "Movimento: zoom aproximando 115% → 150% + deslocamento lateral.\n";
 
         }
-        else if(index % 4 === 1){
+        else if(
+            index % 4 === 1
+        ){
 
             texto +=
-            "Movimento: zoom afastando 150% → 115% + deslocamento lateral\n";
+            "Movimento: zoom afastando 150% → 115% + deslocamento lateral.\n";
 
         }
-        else if(index % 4 === 2){
+        else if(
+            index % 4 === 2
+        ){
 
             texto +=
-            "Movimento: zoom aproximando 115% → 150% + deslocamento vertical\n";
+            "Movimento: zoom aproximando 115% → 150% + deslocamento vertical.\n";
 
         }
         else{
 
             texto +=
-            "Movimento: zoom afastando 150% → 115% + deslocamento vertical\n";
+            "Movimento: zoom afastando 150% → 115% + deslocamento vertical.\n";
 
         }
 
 
-        if(linhas.length){
+        if(
+            versos.length > 0
+        ){
 
-            const indice =
+            const indiceVerso =
             Math.min(
                 index,
-                linhas.length - 1
+                versos.length - 1
             );
 
 
             texto +=
             "Letra: " +
-            linhas[indice] +
+            versos[indiceVerso] +
             "\n";
 
         }
 
 
-        texto +=
-        "\n";
+        texto += "\n";
 
     });
 
@@ -1482,13 +1529,12 @@ function(){
     2000
     );
 
-}
-);
+});
 
 
-/* =====================================================
-   CARREGAR IMAGEM
-===================================================== */
+/* ==================================================
+   CARREGAR IMAGEM PARA CANVAS
+================================================== */
 
 function carregarImagem(
     src
@@ -1497,19 +1543,21 @@ function carregarImagem(
     return new Promise(
     function(resolve,reject){
 
-        const img =
+        const imagem =
         new Image();
 
 
-        img.onload =
+        imagem.onload =
         function(){
 
-            resolve(img);
+            resolve(
+                imagem
+            );
 
         };
 
 
-        img.onerror =
+        imagem.onerror =
         function(){
 
             reject(
@@ -1521,7 +1569,7 @@ function carregarImagem(
         };
 
 
-        img.src =
+        imagem.src =
         src;
 
     });
@@ -1529,14 +1577,14 @@ function carregarImagem(
 }
 
 
-/* =====================================================
-   DESENHAR CENA
-===================================================== */
+/* ==================================================
+   DESENHAR IMAGEM
+================================================== */
 
 function desenharCena(
     ctx,
-    img,
     canvas,
+    img,
     progresso,
     indice
 ){
@@ -1544,132 +1592,117 @@ function desenharCena(
     const cw =
     canvas.width;
 
-
     const ch =
     canvas.height;
 
 
     /*
-       PRIMEIRA CENA TAMBÉM TEM
-       MOVIMENTO FORTE.
+       MUITO IMPORTANTE:
 
-       Cena 1:
+       A PRIMEIRA IMAGEM JÁ COMEÇA
+       COM 115% DE ESCALA.
+
+       Depois vai até 150%.
+
+       Portanto não existe mais:
+       100% → 120%
+
+       Agora:
        115% → 150%
-
-       Cena 2:
-       150% → 115%
-
-       Cena 3:
-       115% → 150%
-
-       Cena 4:
-       150% → 115%
     */
 
 
-    let escala;
+    let zoom;
+
+
+    if(
+        indice % 2 === 0
+    ){
+
+        zoom =
+        1.15 +
+        progresso * 0.35;
+
+    }
+    else{
+
+        zoom =
+        1.50 -
+        progresso * 0.35;
+
+    }
+
+
+    /*
+       Movimento muito maior que antes.
+    */
 
     let deslocamentoX = 0;
 
     let deslocamentoY = 0;
 
 
-    const ciclo =
-    indice % 4;
-
-
-    if(ciclo === 0){
-
-        escala =
-        1.15 +
-        progresso *
-        0.35;
-
+    if(
+        indice % 4 === 0
+    ){
 
         deslocamentoX =
         (
-            progresso -
-            0.5
-        )
-        *
+            progresso - 0.5
+        ) *
         cw *
-        0.15;
+        0.20;
 
     }
-    else if(ciclo === 1){
-
-        escala =
-        1.50 -
-        progresso *
-        0.35;
-
+    else if(
+        indice % 4 === 1
+    ){
 
         deslocamentoX =
         (
-            0.5 -
-            progresso
-        )
-        *
+            0.5 - progresso
+        ) *
         cw *
-        0.15;
+        0.20;
 
     }
-    else if(ciclo === 2){
-
-        escala =
-        1.15 +
-        progresso *
-        0.35;
-
+    else if(
+        indice % 4 === 2
+    ){
 
         deslocamentoY =
         (
-            0.5 -
-            progresso
-        )
-        *
+            progresso - 0.5
+        ) *
         ch *
-        0.15;
+        0.20;
 
     }
     else{
 
-        escala =
-        1.50 -
-        progresso *
-        0.35;
-
-
         deslocamentoY =
         (
-            progresso -
-            0.5
-        )
-        *
+            0.5 - progresso
+        ) *
         ch *
-        0.15;
+        0.20;
 
     }
 
 
     /*
-       Fazer a imagem preencher
-       o canvas.
+       Fazer a imagem preencher o canvas.
     */
 
     const escalaBase =
     Math.max(
-
         cw / img.width,
-
         ch / img.height
-
     );
 
 
     const escalaFinal =
-    escalaBase *
-    escala;
+    escalaBase * zoom;
 
 
     const largura =
@@ -1684,40 +1717,32 @@ function desenharCena(
 
     const x =
     (
-        cw -
-        largura
+        cw - largura
     ) / 2 +
     deslocamentoX;
 
 
     const y =
     (
-        ch -
-        altura
+        ch - altura
     ) / 2 +
     deslocamentoY;
 
 
     ctx.drawImage(
-
         img,
-
         x,
-
         y,
-
         largura,
-
         altura
-
     );
 
 }
 
 
-/* =====================================================
-   DESENHAR LETRA
-===================================================== */
+/* ==================================================
+   LETRA NO VÍDEO
+================================================== */
 
 function desenharLetra(
     ctx,
@@ -1725,21 +1750,24 @@ function desenharLetra(
     texto
 ){
 
-    if(!texto){
+    if(
+        !texto ||
+        !texto.trim()
+    ){
 
         return;
+
     }
 
 
     const cw =
     canvas.width;
 
-
     const ch =
     canvas.height;
 
 
-    const tamanhoFonte =
+    const tamanho =
     Math.max(
         24,
         Math.round(
@@ -1753,7 +1781,7 @@ function desenharLetra(
 
     ctx.font =
     "bold " +
-    tamanhoFonte +
+    tamanho +
     "px Arial";
 
 
@@ -1765,21 +1793,26 @@ function desenharLetra(
     "middle";
 
 
+    const margem =
+    cw * 0.08;
+
+
     const larguraMax =
-    cw * 0.82;
+    cw -
+    margem * 2;
 
 
     /*
-       Quebrar palavras automaticamente.
+       Quebrar o texto em linhas.
     */
 
     const palavras =
-    texto.split(" ");
+    texto.split(/\s+/);
 
 
-    let linhas = [];
+    const linhas = [];
 
-    let linhaAtual =
+    let linha =
     "";
 
 
@@ -1787,11 +1820,9 @@ function desenharLetra(
     function(palavra){
 
         const teste =
-        linhaAtual
+        linha
         ?
-        linhaAtual +
-        " " +
-        palavra
+        linha + " " + palavra
         :
         palavra;
 
@@ -1803,21 +1834,22 @@ function desenharLetra(
             larguraMax
         ){
 
-            linhaAtual =
+            linha =
             teste;
 
         }
         else{
 
-            if(linhaAtual){
+            if(linha){
 
                 linhas.push(
-                    linhaAtual
+                    linha
                 );
 
             }
 
-            linhaAtual =
+
+            linha =
             palavra;
 
         }
@@ -1825,111 +1857,89 @@ function desenharLetra(
     });
 
 
-    if(linhaAtual){
+    if(linha){
 
         linhas.push(
-            linhaAtual
+            linha
         );
 
     }
 
 
     /*
-       No máximo duas linhas
+       Limitar para duas linhas
        na tela.
     */
 
-    if(linhas.length > 2){
+    let linhasFinais =
+    linhas.slice(0,2);
 
-        linhas = [
 
-            linhas[0],
+    if(
+        linhas.length > 2
+    ){
 
-            linhas
-            .slice(1)
-            .join(" ")
-
-        ];
+        linhasFinais[1] =
+        linhas.slice(1).join(" ");
 
     }
 
 
     const alturaLinha =
-    tamanhoFonte *
-    1.25;
+    tamanho * 1.25;
 
 
     const alturaCaixa =
-    linhas.length *
+    linhasFinais.length *
     alturaLinha +
-    tamanhoFonte;
-
-
-    /*
-       Letra na parte inferior.
-    */
-
-    const centroY =
-    ch -
-    ch * 0.13;
+    tamanho;
 
 
     const caixaX =
-    cw * 0.06;
-
-
-    const caixaY =
-    centroY -
-    alturaCaixa / 2;
+    cw * 0.05;
 
 
     const caixaLargura =
-    cw * 0.88;
+    cw * 0.90;
+
+
+    const caixaY =
+    ch -
+    ch * 0.18 -
+    alturaCaixa / 2;
 
 
     /*
-       Fundo preto transparente.
+       Fundo preto.
     */
 
     ctx.fillStyle =
-    "rgba(0,0,0,0.65)";
+    "rgba(0,0,0,0.68)";
 
 
     ctx.beginPath();
 
 
     if(
-        typeof ctx.roundRect ===
-        "function"
+        ctx.roundRect
     ){
 
         ctx.roundRect(
-
             caixaX,
-
             caixaY,
-
             caixaLargura,
-
             alturaCaixa,
-
             18
-
         );
 
     }
     else{
 
         ctx.rect(
-
             caixaX,
-
             caixaY,
-
             caixaLargura,
-
             alturaCaixa
-
         );
 
     }
@@ -1939,7 +1949,7 @@ function desenharLetra(
 
 
     /*
-       Texto branco.
+       Texto.
     */
 
     ctx.fillStyle =
@@ -1951,7 +1961,7 @@ function desenharLetra(
 
 
     ctx.shadowBlur =
-    8;
+    7;
 
 
     ctx.shadowOffsetX =
@@ -1962,28 +1972,28 @@ function desenharLetra(
     2;
 
 
+    const centroY =
+    caixaY +
+    alturaCaixa / 2;
+
+
     const inicioY =
     centroY -
     (
-        (linhas.length - 1) *
+        (linhasFinais.length - 1) *
         alturaLinha /
         2
     );
 
 
-    linhas.forEach(
-    function(linha,index){
+    linhasFinais.forEach(
+    function(item,index){
 
         ctx.fillText(
-
-            linha,
-
+            item,
             cw / 2,
-
             inicioY +
-            index *
-            alturaLinha
-
+            index * alturaLinha
         );
 
     });
@@ -1994,9 +2004,9 @@ function desenharLetra(
 }
 
 
-/* =====================================================
-   CODEC
-===================================================== */
+/* ==================================================
+   ESCOLHER CODEC
+================================================== */
 
 function escolherCodec(){
 
@@ -2015,17 +2025,20 @@ function escolherCodec(){
         const codec of codecs
     ){
 
-        if(
-            typeof MediaRecorder !==
-            "undefined" &&
-            MediaRecorder.isTypeSupported(
-                codec
-            )
-        ){
+        try{
 
-            return codec;
+            if(
+                MediaRecorder.isTypeSupported(
+                    codec
+                )
+            ){
+
+                return codec;
+
+            }
 
         }
+        catch(e){}
 
     }
 
@@ -2035,19 +2048,30 @@ function escolherCodec(){
 }
 
 
-/* =====================================================
+/* ==================================================
    PREPARAR ÁUDIO
-===================================================== */
+================================================== */
 
 async function prepararAudio(){
 
     if(!audioContext){
 
+        const AudioCtx =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+
+        if(!AudioCtx){
+
+            throw new Error(
+                "Seu navegador não suporta áudio para gravação."
+            );
+
+        }
+
+
         audioContext =
-        new(
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
+        new AudioCtx();
 
 
         audioSource =
@@ -2066,8 +2090,8 @@ async function prepararAudio(){
 
 
         /*
-           Também manda o áudio para
-           o alto-falante do celular.
+           Também permite ouvir a música
+           normalmente.
         */
 
         audioSource.connect(
@@ -2092,29 +2116,21 @@ async function prepararAudio(){
 }
 
 
-/* =====================================================
+/* ==================================================
    GERAR CLIPE
-===================================================== */
+================================================== */
 
 botaoGerar.addEventListener(
 "click",
 async function(){
 
-    let recorder = null;
-
-    let audioStream = null;
-
-    let videoStream = null;
-
-    let audioTracks = [];
-
-
     try{
 
-
-        /* ---------------------------------------------
+        /*
+           ==========================================
            VERIFICAÇÕES
-        --------------------------------------------- */
+        ==========================================
+        */
 
         if(!musicaSelecionada){
 
@@ -2141,16 +2157,38 @@ async function(){
 
 
         /*
-           Se não houver roteiro,
-           cria automaticamente.
+           ==========================================
+           VERIFICAR LETRA
+        ==========================================
+        */
+
+        const versos =
+        obterVersos();
+
+
+        /*
+           ==========================================
+           GERAR ROTEIRO AUTOMATICAMENTE
+        ==========================================
         */
 
         if(!roteiroAtual){
 
-            botaoRoteiro.click();
+            const evento =
+            new Event("click");
+
+            botaoRoteiro.dispatchEvent(
+                evento
+            );
 
         }
 
+
+        /*
+           ==========================================
+           INTERFACE
+        ==========================================
+        */
 
         botaoGerar.disabled =
         true;
@@ -2173,12 +2211,14 @@ async function(){
 
 
         statusElemento.textContent =
-        "Preparando imagens...";
+        "Preparando o clipe...";
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            CARREGAR IMAGENS
-        --------------------------------------------- */
+        ==========================================
+        */
 
         const imagens = [];
 
@@ -2200,9 +2240,11 @@ async function(){
         }
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            CANVAS
-        --------------------------------------------- */
+        ==========================================
+        */
 
         const canvas =
         document.createElement(
@@ -2248,41 +2290,40 @@ async function(){
         }
 
 
-        /* ---------------------------------------------
-           STREAM DE VÍDEO
-        --------------------------------------------- */
+        /*
+           ==========================================
+           STREAM
+        ==========================================
+        */
 
-        videoStream =
+        const videoStream =
         canvas.captureStream(
             30
         );
 
 
-        if(
-            !videoStream
-        ){
+        if(!videoStream){
 
             throw new Error(
-                "Seu navegador não conseguiu capturar o vídeo."
+                "Seu navegador não conseguiu criar o vídeo."
             );
 
         }
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            ÁUDIO
-        --------------------------------------------- */
+        ==========================================
+        */
 
-        audioStream =
+        const audioStream =
         await prepararAudio();
 
 
-        audioTracks =
         audioStream
-        .getAudioTracks();
-
-
-        audioTracks.forEach(
+        .getAudioTracks()
+        .forEach(
         function(track){
 
             videoStream.addTrack(
@@ -2292,9 +2333,11 @@ async function(){
         });
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            CODEC
-        --------------------------------------------- */
+        ==========================================
+        */
 
         const codec =
         escolherCodec();
@@ -2303,17 +2346,19 @@ async function(){
         if(!codec){
 
             throw new Error(
-                "Este navegador não suporta gravação WebM."
+                "Seu navegador não suporta gravação de vídeo WebM."
             );
 
         }
 
 
-        /* ---------------------------------------------
-           MEDIA RECORDER
-        --------------------------------------------- */
+        /*
+           ==========================================
+           RECORDER
+        ==========================================
+        */
 
-        recorder =
+        const recorder =
         new MediaRecorder(
 
             videoStream,
@@ -2353,108 +2398,49 @@ async function(){
         };
 
 
-        /* ---------------------------------------------
-           COMEÇAR GRAVAÇÃO
-        --------------------------------------------- */
+        /*
+           ==========================================
+           INICIAR GRAVAÇÃO
+        ==========================================
+        */
 
         recorder.start(
             1000
         );
 
 
-        /* ---------------------------------------------
-           COMEÇAR MÚSICA
-        --------------------------------------------- */
+        /*
+           ==========================================
+           DESCOBRIR DURAÇÃO DA MÚSICA
+        ==========================================
+        */
 
         audioPreview.currentTime =
         0;
 
 
         if(
-            audioContext &&
-            audioContext.state ===
-            "suspended"
+            audioPreview.readyState < 1
         ){
-
-            await audioContext.resume();
-
-        }
-
-
-        await audioPreview.play();
-
-
-        /* ---------------------------------------------
-           DURAÇÃO
-        --------------------------------------------- */
-
-        let duracao =
-        audioPreview.duration;
-
-
-        if(
-            !isFinite(duracao) ||
-            duracao <= 0
-        ){
-
-            /*
-               Aguarda o navegador
-               descobrir a duração.
-            */
 
             await new Promise(
             function(resolve){
 
-                const inicioEspera =
-                Date.now();
-
-
-                function verificar(){
-
-                    if(
-                        isFinite(
-                            audioPreview.duration
-                        ) &&
-                        audioPreview.duration > 0
-                    ){
-
-                        resolve();
-
-                        return;
-
+                audioPreview.addEventListener(
+                    "loadedmetadata",
+                    resolve,
+                    {
+                        once:true
                     }
-
-
-                    if(
-                        Date.now() -
-                        inicioEspera >
-                        5000
-                    ){
-
-                        resolve();
-
-                        return;
-
-                    }
-
-
-                    setTimeout(
-                        verificar,
-                        100
-                    );
-
-                }
-
-
-                verificar();
+                );
 
             });
 
-
-            duracao =
-            audioPreview.duration;
-
         }
+
+
+        let duracao =
+        audioPreview.duration;
 
 
         if(
@@ -2468,43 +2454,39 @@ async function(){
         }
 
 
-        /* ---------------------------------------------
-           LETRA
-        --------------------------------------------- */
+        /*
+           ==========================================
+           INICIAR ÁUDIO
+        ==========================================
+        */
 
-        const linhasLetra =
-        obterLinhasLetra();
-
-
-        /* ---------------------------------------------
-           CENAS
-        --------------------------------------------- */
-
-        const quantidade =
-        imagens.length;
-
-
-        const tempoPorCena =
-        duracao /
-        quantidade;
+        await audioPreview.play();
 
 
         /*
-           Cada linha da letra recebe
-           uma parte da música.
+           ==========================================
+           CENAS
+        ==========================================
         */
 
-        const quantidadeLetra =
-        linhasLetra.length;
+        const quantidadeImagens =
+        imagens.length;
+
+
+        const tempoCena =
+        duracao /
+        quantidadeImagens;
 
 
         const inicio =
         performance.now();
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            RENDERIZAÇÃO
-        --------------------------------------------- */
+        ==========================================
+        */
 
         await new Promise(
         function(resolve){
@@ -2513,110 +2495,96 @@ async function(){
                 agora
             ){
 
-                const decorrido =
+                const tempo =
                 (
                     agora -
                     inicio
-                ) /
-                1000;
+                ) / 1000;
 
 
                 const progressoTotal =
                 Math.min(
-
-                    decorrido /
-                    duracao,
-
+                    tempo / duracao,
                     1
-
                 );
 
 
-                /* -----------------------------
+                /*
                    CENA ATUAL
-                ----------------------------- */
+                */
 
                 let indice =
                 Math.floor(
-
                     progressoTotal *
-                    quantidade
-
+                    quantidadeImagens
                 );
 
 
                 if(
-                    indice >= quantidade
+                    indice >=
+                    quantidadeImagens
                 ){
 
                     indice =
-                    quantidade - 1;
+                    quantidadeImagens - 1;
 
                 }
 
 
-                /* -----------------------------
+                /*
                    PROGRESSO DA CENA
-                ----------------------------- */
+                */
 
                 const inicioCena =
                 indice *
-                tempoPorCena;
+                tempoCena;
 
 
                 let progressoCena =
                 (
-                    decorrido -
+                    tempo -
                     inicioCena
                 ) /
-                tempoPorCena;
+                tempoCena;
 
 
                 progressoCena =
                 Math.max(
-
                     0,
-
                     Math.min(
                         progressoCena,
                         1
                     )
-
                 );
 
 
-                /* -----------------------------
+                /*
                    FUNDO
-                ----------------------------- */
+                */
 
                 ctx.fillStyle =
-                "#000000";
+                "#000";
 
 
                 ctx.fillRect(
-
                     0,
-
                     0,
-
                     canvas.width,
-
                     canvas.height
-
                 );
 
 
-                /* -----------------------------
+                /*
                    IMAGEM
-                ----------------------------- */
+                */
 
                 desenharCena(
 
                     ctx,
 
-                    imagens[indice],
-
                     canvas,
+
+                    imagens[indice],
 
                     progressoCena,
 
@@ -2625,30 +2593,28 @@ async function(){
                 );
 
 
-                /* -----------------------------
+                /*
                    LETRA
-                ----------------------------- */
+                */
 
                 if(
-                    quantidadeLetra > 0
+                    versos.length > 0
                 ){
 
-                    let indiceLetra =
+                    let indiceVerso =
                     Math.floor(
-
                         progressoTotal *
-                        quantidadeLetra
-
+                        versos.length
                     );
 
 
                     if(
-                        indiceLetra >=
-                        quantidadeLetra
+                        indiceVerso >=
+                        versos.length
                     ){
 
-                        indiceLetra =
-                        quantidadeLetra - 1;
+                        indiceVerso =
+                        versos.length - 1;
 
                     }
 
@@ -2659,31 +2625,25 @@ async function(){
 
                         canvas,
 
-                        linhasLetra[
-                            indiceLetra
-                        ]
+                        versos[indiceVerso]
 
                     );
 
                 }
 
 
-                /* -----------------------------
+                /*
                    PROGRESSO
-                ----------------------------- */
+                */
 
                 const porcentagem =
                 Math.round(
-
-                    progressoTotal *
-                    100
-
+                    progressoTotal * 100
                 );
 
 
                 progressFill.style.width =
-                porcentagem +
-                "%";
+                porcentagem + "%";
 
 
                 statusElemento.textContent =
@@ -2692,9 +2652,9 @@ async function(){
                 "%";
 
 
-                /* -----------------------------
+                /*
                    FINAL
-                ----------------------------- */
+                */
 
                 if(
                     progressoTotal >= 1
@@ -2721,16 +2681,18 @@ async function(){
         });
 
 
-        /* ---------------------------------------------
-           PARAR MÚSICA
-        --------------------------------------------- */
+        /*
+           ==========================================
+           FINALIZAR ÁUDIO
+        ==========================================
+        */
 
         audioPreview.pause();
 
 
-        /* ---------------------------------------------
-           PEDIR DADOS FINAIS
-        --------------------------------------------- */
+        /*
+           Solicita o último bloco.
+        */
 
         try{
 
@@ -2740,33 +2702,18 @@ async function(){
         catch(e){}
 
 
-        /* ---------------------------------------------
-           PARAR RECORDER
-        --------------------------------------------- */
+        /*
+           ==========================================
+           PARAR GRAVAÇÃO
+        ==========================================
+        */
 
         await new Promise(
         function(resolve){
 
-            if(
-                !recorder ||
-                recorder.state ===
-                "inactive"
-            ){
-
-                resolve();
-
-                return;
-
-            }
-
-
             recorder.addEventListener(
                 "stop",
-                function(){
-
-                    resolve();
-
-                },
+                resolve,
                 {
                     once:true
                 }
@@ -2778,22 +2725,28 @@ async function(){
         });
 
 
-        /* ---------------------------------------------
-           AGUARDAR ÚLTIMOS BLOCOS
-        --------------------------------------------- */
+        /*
+           ==========================================
+           AGUARDAR DADOS
+        ==========================================
+        */
 
         await new Promise(
-            resolve =>
+        function(resolve){
+
             setTimeout(
                 resolve,
                 500
-            )
-        );
+            );
+
+        });
 
 
-        /* ---------------------------------------------
-           VERIFICAR DADOS
-        --------------------------------------------- */
+        /*
+           ==========================================
+           VERIFICAR
+        ==========================================
+        */
 
         if(
             partes.length === 0
@@ -2806,29 +2759,29 @@ async function(){
         }
 
 
-        /* ---------------------------------------------
-           CRIAR BLOB
-        --------------------------------------------- */
+        /*
+           ==========================================
+           BLOB
+        ==========================================
+        */
 
-        videoBlob =
+        const blob =
         new Blob(
 
             partes,
 
             {
-
                 type:
                 recorder.mimeType ||
                 codec ||
                 "video/webm"
-
             }
 
         );
 
 
         if(
-            videoBlob.size === 0
+            blob.size === 0
         ){
 
             throw new Error(
@@ -2838,9 +2791,11 @@ async function(){
         }
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            URL
-        --------------------------------------------- */
+        ==========================================
+        */
 
         if(videoURL){
 
@@ -2853,13 +2808,15 @@ async function(){
 
         videoURL =
         URL.createObjectURL(
-            videoBlob
+            blob
         );
 
 
-        /* ---------------------------------------------
-           CONFIGURAR PLAYER
-        --------------------------------------------- */
+        /*
+           ==========================================
+           PLAYER
+        ==========================================
+        */
 
         videoResultado.pause();
 
@@ -2876,29 +2833,19 @@ async function(){
         videoURL;
 
 
-        videoResultado.controls =
-        true;
-
-
-        videoResultado.playsInline =
-        true;
-
-
         videoResultado.style.display =
         "block";
 
-
-        /* ---------------------------------------------
-           MOSTRAR RESULTADO
-        --------------------------------------------- */
 
         videoContainer.style.display =
         "block";
 
 
-        /* ---------------------------------------------
+        /*
+           ==========================================
            DOWNLOAD
-        --------------------------------------------- */
+        ==========================================
+        */
 
         download.href =
         videoURL;
@@ -2912,20 +2859,23 @@ async function(){
         "block";
 
 
-        /* ---------------------------------------------
-           TAMANHO
-        --------------------------------------------- */
+        /*
+           ==========================================
+           INFORMAÇÕES
+        ==========================================
+        */
 
-        const tamanhoMB =
+        const tamanho =
         (
-            videoBlob.size /
-            (1024 * 1024)
+            blob.size /
+            1024 /
+            1024
         ).toFixed(2);
 
 
         resultadoInfo.textContent =
         "✓ Clipe criado com sucesso — " +
-        tamanhoMB +
+        tamanho +
         " MB";
 
 
@@ -2938,90 +2888,44 @@ async function(){
 
 
         statusElemento.textContent =
-        "✓ Clipe criado com sucesso!";
+        "✓ CLIPE CRIADO COM SUCESSO!";
 
 
-        /* ---------------------------------------------
-           CARREGAR VÍDEO
-        --------------------------------------------- */
+        /*
+           ==========================================
+           CARREGAR PLAYER
+        ==========================================
+        */
 
-        await new Promise(
-        function(resolve){
-
-            let terminou =
-            false;
+        videoResultado.load();
 
 
-            function finalizar(){
-
-                if(terminou){
-
-                    return;
-
-                }
-
-
-                terminou =
-                true;
-
-
-                resolve();
-
-            }
-
-
-            videoResultado.onloadeddata =
-            finalizar;
-
-
-            videoResultado.onerror =
-            finalizar;
-
-
-            setTimeout(
-                finalizar,
-                4000
-            );
-
-
-            videoResultado.load();
-
-        });
-
-
-        /* ---------------------------------------------
-           TENTAR PLAY
-        --------------------------------------------- */
+        /*
+           Tentar iniciar automaticamente.
+           Se o Android bloquear, o botão
+           PLAY continuará disponível.
+        */
 
         try{
 
             await videoResultado.play();
 
         }
-        catch(e){
-
-            /*
-               Se o navegador bloquear
-               autoplay, o vídeo continua
-               disponível no botão PLAY.
-            */
-
-        }
+        catch(e){}
 
 
-        /* ---------------------------------------------
-           IR PARA RESULTADO
-        --------------------------------------------- */
+        /*
+           ==========================================
+           IR PARA O VÍDEO
+        ==========================================
+        */
 
         setTimeout(
         function(){
 
             videoContainer.scrollIntoView({
-
                 behavior:"smooth",
-
                 block:"start"
-
             });
 
         },
@@ -3033,7 +2937,7 @@ async function(){
     catch(erro){
 
         console.error(
-            "ERRO AO GERAR CLIPE:",
+            "ERRO:",
             erro
         );
 
@@ -3048,10 +2952,8 @@ async function(){
 
 
         alert(
-
             "Não foi possível gerar o clipe.\n\n" +
             erro.message
-
         );
 
     }
@@ -3065,9 +2967,9 @@ async function(){
 });
 
 
-/* =====================================================
+/* ==================================================
    LIMPEZA
-===================================================== */
+================================================== */
 
 window.addEventListener(
 "beforeunload",
@@ -3075,9 +2977,14 @@ function(){
 
     if(videoURL){
 
-        URL.revokeObjectURL(
-            videoURL
-        );
+        try{
+
+            URL.revokeObjectURL(
+                videoURL
+            );
+
+        }
+        catch(e){}
 
     }
 
