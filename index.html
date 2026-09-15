@@ -20,8 +20,8 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0b0b12;
-color:#fff;
+background:#080810;
+color:white;
 min-height:100vh;
 }
 
@@ -34,20 +34,20 @@ padding:18px;
 
 h1{
 text-align:center;
-font-size:30px;
+font-size:28px;
 margin-bottom:8px;
 }
 
 .subtitulo{
 text-align:center;
 color:#aaa;
-margin-bottom:22px;
+margin-bottom:25px;
 }
 
 .card{
-background:#151522;
-border:1px solid #29293b;
-border-radius:15px;
+background:#12121d;
+border:1px solid #29293a;
+border-radius:16px;
 padding:18px;
 margin-bottom:18px;
 }
@@ -63,224 +63,344 @@ font-weight:bold;
 margin-bottom:8px;
 }
 
-input[type=file],
-select{
+input[type="file"],
+select,
+textarea{
+
 width:100%;
-background:#0e0e18;
-color:#fff;
-border:1px solid #343449;
+
+background:#0c0c15;
+
+color:white;
+
+border:1px solid #353548;
+
 border-radius:10px;
+
 padding:12px;
-margin-bottom:12px;
+
+margin-bottom:15px;
+}
+
+textarea{
+
+min-height:160px;
+
+resize:vertical;
+
+line-height:1.5;
 }
 
 button{
+
 width:100%;
+
 border:0;
-border-radius:10px;
-padding:14px;
+
+border-radius:12px;
+
+padding:15px;
+
+margin-top:8px;
+
+background:#6c35ff;
+
+color:white;
+
 font-size:16px;
+
 font-weight:bold;
+
 cursor:pointer;
-margin-top:10px;
 }
 
 button:disabled{
-opacity:.45;
-cursor:not-allowed;
+
+opacity:.5;
+
 }
 
-#botaoRoteiro{
-background:#6746ff;
-color:white;
+.btn-verde{
+
+background:#0aa36c;
 }
 
-#botaoGerar{
-background:#00b86b;
-color:white;
-font-size:17px;
+.btn-azul{
+
+background:#1269d3;
 }
 
-.info{
-background:#101019;
-border:1px solid #252536;
-border-radius:10px;
-padding:12px;
-color:#aaa;
-font-size:14px;
-line-height:1.5;
-margin-top:8px;
-}
+.preview-grid{
 
-#previewImagens{
 display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:15px;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:12px;
+
+margin-top:10px;
 }
 
-.imagemItem{
-background:#0d0d16;
-border:1px solid #303044;
-border-radius:10px;
-overflow:hidden;
-}
+.preview-item{
 
-.imagemItem img{
-width:100%;
-height:140px;
-object-fit:cover;
-display:block;
-}
+background:#090912;
 
-.imagemTitulo{
-text-align:center;
-font-size:12px;
+border:1px solid #29293a;
+
+border-radius:12px;
+
 padding:8px;
 }
 
-.controles{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:4px;
-padding:5px;
-}
+.preview-item img{
 
-.controles button{
-margin:0;
-padding:8px 3px;
-font-size:12px;
-background:#29293b;
-color:white;
-}
+width:100%;
 
-.controles .excluir{
-background:#a52639;
-}
+aspect-ratio:16/10;
 
-.resumo{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
+object-fit:cover;
 
-.resumoBox{
-background:#101019;
-border:1px solid #252536;
-border-radius:10px;
-padding:12px;
-}
+border-radius:8px;
 
-.resumoBox strong{
 display:block;
-font-size:11px;
-color:#777;
-margin-bottom:5px;
 }
 
-#roteiro{
-white-space:pre-wrap;
-line-height:1.6;
-color:#ddd;
-}
+.preview-num{
 
-.cena{
-background:#101019;
-border:1px solid #29293b;
-border-radius:10px;
-padding:12px;
-margin-top:10px;
-line-height:1.6;
-}
-
-.cena strong{
-color:#907cff;
-}
-
-.movimentoAtivo{
-background:#10261d;
-border:1px solid #1b6845;
-color:#62ffad;
-padding:12px;
-border-radius:10px;
 text-align:center;
-font-weight:bold;
+
+font-size:13px;
+
+color:#aaa;
+
+margin:7px 0;
+}
+
+.preview-buttons{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:5px;
+}
+
+.preview-buttons button{
+
+padding:8px 3px;
+
+margin:0;
+
+font-size:12px;
+}
+
+.audio-info{
+
+color:#aaa;
+
+font-size:13px;
+
 margin-bottom:10px;
 }
 
-.status{
-text-align:center;
-color:#ccc;
-margin-top:15px;
-line-height:1.5;
-}
+.info{
 
-.barra{
-height:18px;
-width:100%;
-background:#08080d;
-border:1px solid #29293b;
-border-radius:20px;
-overflow:hidden;
-margin-top:12px;
-}
+background:#0d0d17;
 
-#progresso{
-height:100%;
-width:0%;
-background:#00d47b;
-transition:width:.1s linear;
-}
-
-video{
-width:100%;
-display:block;
-background:#000;
-border-radius:12px;
-margin-top:15px;
-max-height:650px;
-}
-
-#download{
-display:none;
-background:#2878ff;
-color:white;
-text-align:center;
-text-decoration:none;
-padding:14px;
 border-radius:10px;
-font-weight:bold;
-margin-top:12px;
+
+padding:12px;
+
+color:#bbb;
+
+line-height:1.5;
+
+font-size:14px;
+}
+
+.resumo{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:8px;
+}
+
+.resumo div{
+
+background:#0c0c15;
+
+border:1px solid #29293a;
+
+padding:10px;
+
+border-radius:8px;
+
+font-size:13px;
+}
+
+.resumo strong{
+
+display:block;
+
+color:white;
+
+margin-bottom:4px;
+}
+
+#roteiro{
+
+white-space:pre-wrap;
+
+background:#090912;
+
+border:1px solid #29293a;
+
+padding:14px;
+
+border-radius:10px;
+
+line-height:1.5;
+
+color:#ddd;
+
+min-height:80px;
+}
+
+.progress-container{
+
+margin-top:15px;
+
+display:none;
+}
+
+.progress-bar{
+
+width:100%;
+
+height:18px;
+
+background:#252535;
+
+border-radius:20px;
+
+overflow:hidden;
+}
+
+.progress-fill{
+
+width:0%;
+
+height:100%;
+
+background:#6c35ff;
+
+transition:width .2s linear;
+}
+
+.status{
+
+text-align:center;
+
+color:#bbb;
+
+margin-top:10px;
+
+font-size:14px;
 }
 
 .sucesso{
-color:#5cffaa;
+
+color:#35d996;
 }
 
 .erro{
-color:#ff6d7c;
+
+color:#ff6868;
+}
+
+.video-container{
+
+display:none;
+
+margin-top:18px;
+}
+
+#videoResultado{
+
+width:100%;
+
+max-height:650px;
+
+background:#000;
+
+border-radius:12px;
+
+border:1px solid #333;
+
+display:block;
+}
+
+.download{
+
+display:none;
+
+text-decoration:none;
+
+background:#0aa36c;
+
+color:white;
+
+font-weight:bold;
+
+text-align:center;
+
+padding:15px;
+
+border-radius:12px;
+
+margin-top:12px;
+}
+
+.dica-letra{
+
+font-size:13px;
+
+color:#999;
+
+margin-top:-7px;
+
+margin-bottom:15px;
+
+line-height:1.4;
 }
 
 @media(max-width:600px){
 
 .container{
+
 padding:12px;
 }
 
 h1{
-font-size:25px;
+
+font-size:24px;
 }
 
-#previewImagens{
-grid-template-columns:repeat(2,1fr);
-}
+.preview-grid{
 
-.imagemItem img{
-height:125px;
+grid-template-columns:
+1fr 1fr;
 }
 
 .resumo{
-grid-template-columns:1fr;
+
+grid-template-columns:
+1fr;
 }
 
 }
@@ -296,125 +416,199 @@ grid-template-columns:1fr;
 <div class="container">
 
 
-<h1>🎬 CLIP MUSICAL AI</h1>
+<h1>
+🎬 CLIP MUSICAL AI
+</h1>
+
 
 <div class="subtitulo">
+
 Crie seu clipe musical gratuitamente
+
 </div>
 
 
-<!-- =====================================================
-MÚSICA
-===================================================== -->
+<!-- ==============================
+     MÚSICA
+================================ -->
 
 <div class="card">
 
-<h2>🎵 1. Escolha sua música</h2>
+<h2>
+🎵 1. Escolha sua música
+</h2>
 
 <label for="inputMusica">
-Arquivo de música
+
+Arquivo do louvor
+
 </label>
 
 <input
-id="inputMusica"
 type="file"
+id="inputMusica"
 accept="audio/*"
 >
 
 <div
-id="nomeMusica"
-class="info"
+id="audioInfo"
+class="audio-info"
 >
+
 Nenhuma música selecionada.
-</div>
 
 </div>
 
+<audio
+id="audioPreview"
+controls
+style="
+width:100%;
+display:none;
+margin-bottom:10px;
+"
+></audio>
 
-<!-- =====================================================
-IMAGENS
-===================================================== -->
+</div>
+
+
+<!-- ==============================
+     IMAGENS
+================================ -->
 
 <div class="card">
 
-<h2>🖼️ 2. Escolha as imagens</h2>
+<h2>
+🖼️ 2. Escolha as imagens
+</h2>
 
 <label for="inputImagens">
-Selecione uma ou várias imagens
+
+Imagens do clipe
+
 </label>
 
 <input
-id="inputImagens"
 type="file"
+id="inputImagens"
 accept="image/*"
 multiple
 >
 
 <div
-id="previewImagens"
+id="contadorImagens"
+class="audio-info"
+>
+
+Nenhuma imagem selecionada.
+
+</div>
+
+<div
+id="previewGrid"
+class="preview-grid"
 ></div>
 
-<div class="info">
-
-Depois de selecionar as imagens,
-elas aparecerão aqui.
-
-Você pode mudar a ordem ou excluir
-uma imagem antes de gerar o clipe.
-
-</div>
-
 </div>
 
 
-<!-- =====================================================
-ESTILO
-===================================================== -->
+<!-- ==============================
+     LETRA
+================================ -->
 
 <div class="card">
 
-<h2>🎨 3. Estilo</h2>
+<h2>
+📝 3. Letra do louvor
+</h2>
+
+<label for="inputLetra">
+
+Cole aqui a letra do louvor
+
+</label>
+
+<textarea
+id="inputLetra"
+placeholder="Cole aqui a letra do seu louvor...
+
+Exemplo:
+
+Eu sei que Tu estás comigo
+Mesmo quando não posso Te ver
+Tua mão me sustenta
+Tua graça me faz vencer"
+></textarea>
+
+<div class="dica-letra">
+
+💡 Coloque cada verso ou trecho em uma nova linha.
+O sistema distribuirá os trechos automaticamente
+durante a música.
+
+</div>
+
+</div>
+
+
+<!-- ==============================
+     ESTILO
+================================ -->
+
+<div class="card">
+
+<h2>
+🎨 4. Estilo do clipe
+</h2>
+
+<label for="estilo">
+
+Estilo visual
+
+</label>
 
 <select id="estilo">
 
 <option value="Cinematográfico">
-🎬 Cinematográfico
+Cinematográfico
 </option>
 
 <option value="Worship">
-🙏 Worship
+Worship
 </option>
 
 <option value="Romântico">
-❤️ Romântico
+Romântico
 </option>
 
 <option value="Inspirador">
-✨ Inspirador
+Inspirador
 </option>
 
 <option value="Urbano">
-🏙️ Urbano
+Urbano
 </option>
 
 <option value="Dramático">
-🎭 Dramático
+Dramático
 </option>
 
 <option value="Fantasia">
-🪄 Fantasia
+Fantasia
 </option>
 
 <option value="Realista">
-📷 Realista
+Realista
 </option>
 
 </select>
 
 
-<h2>
-📱 Formato
-</h2>
+<label for="formato">
+
+Formato
+
+</label>
 
 <select id="formato">
 
@@ -431,32 +625,36 @@ ESTILO
 </div>
 
 
-<!-- =====================================================
-RESUMO
-===================================================== -->
+<!-- ==============================
+     RESUMO
+================================ -->
 
 <div class="card">
 
 <h2>
-📋 4. Resumo do projeto
+📋 Resumo do projeto
 </h2>
 
 <div class="resumo">
 
-<div class="resumoBox">
+<div>
 
-<strong>MÚSICA</strong>
+<strong>
+Música
+</strong>
 
 <span id="resumoMusica">
-—
+Não selecionada
 </span>
 
 </div>
 
 
-<div class="resumoBox">
+<div>
 
-<strong>IMAGENS</strong>
+<strong>
+Imagens
+</strong>
 
 <span id="resumoImagens">
 0 imagens
@@ -465,9 +663,24 @@ RESUMO
 </div>
 
 
-<div class="resumoBox">
+<div>
 
-<strong>ESTILO</strong>
+<strong>
+Letra
+</strong>
+
+<span id="resumoLetra">
+Não adicionada
+</span>
+
+</div>
+
+
+<div>
+
+<strong>
+Estilo
+</strong>
 
 <span id="resumoEstilo">
 Cinematográfico
@@ -476,9 +689,11 @@ Cinematográfico
 </div>
 
 
-<div class="resumoBox">
+<div>
 
-<strong>FORMATO</strong>
+<strong>
+Formato
+</strong>
 
 <span id="resumoFormato">
 16:9
@@ -488,87 +703,112 @@ Cinematográfico
 
 </div>
 
+</div>
+
+
+<!-- ==============================
+     ROTEIRO
+================================ -->
+
+<div class="card">
+
+<h2>
+📖 5. Roteiro
+</h2>
 
 <button
 id="botaoRoteiro"
+class="btn-azul"
 >
-📝 GERAR ROTEIRO
+
+GERAR ROTEIRO
+
 </button>
 
+<div
+id="roteiro"
+style="margin-top:12px;"
+>
+
+O roteiro aparecerá aqui.
+
+</div>
+
 </div>
 
 
-<!-- =====================================================
-ROTEIRO
-===================================================== -->
+<!-- ==============================
+     GERAR CLIPE
+================================ -->
 
 <div class="card">
 
 <h2>
-🎞️ 5. Roteiro
+🎬 6. Gerar clipe
 </h2>
-
-<div id="roteiro">
-
-Selecione uma música e imagens
-e depois clique em GERAR ROTEIRO.
-
-</div>
-
-<div id="estruturaCenas">
-</div>
-
-</div>
-
-
-<!-- =====================================================
-GERAÇÃO
-===================================================== -->
-
-<div class="card">
-
-<h2>
-🎥 6. Gerar clipe
-</h2>
-
-<div class="movimentoAtivo">
-
-🎥 MOTOR DE MOVIMENTO ATIVO
-
-<br>
-
-Zoom forte + movimento horizontal
-+ movimento vertical
-
-</div>
 
 <div class="info">
 
-O vídeo é criado diretamente no navegador.
-Nenhum crédito do Runway é utilizado.
+O vídeo será criado diretamente no navegador.
+
+<br><br>
+
+✔ Música
+
+<br>
+
+✔ Imagens
+
+<br>
+
+✔ Zoom e movimento de câmera
+
+<br>
+
+✔ Letra do louvor
+
+<br>
+
+✔ Formato YouTube ou vertical
+
+<br>
+
+✔ Sem créditos do Runway
 
 </div>
 
 
 <button
 id="botaoGerar"
-disabled
+class="btn-verde"
 >
-🎬 GERAR CLIPE GRÁTIS
+
+GERAR CLIPE GRÁTIS
+
 </button>
 
+
+<div
+id="progressContainer"
+class="progress-container"
+>
+
+<div class="progress-bar">
+
+<div
+id="progressFill"
+class="progress-fill"
+></div>
+
+</div>
 
 <div
 id="status"
 class="status"
 >
-Aguardando...
-</div>
 
+Preparando...
 
-<div class="barra">
-
-<div id="progresso">
 </div>
 
 </div>
@@ -576,27 +816,44 @@ Aguardando...
 </div>
 
 
-<!-- =====================================================
-RESULTADO
-===================================================== -->
+<!-- ==============================
+     RESULTADO
+================================ -->
 
-<div class="card">
+<div
+id="videoContainer"
+class="card video-container"
+>
 
 <h2>
-▶️ 7. Resultado
+
+🎥 Seu clipe está pronto!
+
 </h2>
+
 
 <video
 id="videoResultado"
 controls
 playsinline
+preload="auto"
 ></video>
+
+
+<div
+id="resultadoInfo"
+class="status"
+></div>
+
 
 <a
 id="download"
+class="download"
 download="clip-musical-ai.webm"
 >
+
 ⬇️ BAIXAR CLIPE
+
 </a>
 
 </div>
@@ -608,127 +865,229 @@ download="clip-musical-ai.webm"
 <script>
 
 
-/* =====================================================
-VARIÁVEIS
-===================================================== */
-
-let imagensSelecionadas = [];
-
-let musicaSelecionada = null;
-
-let roteiroAtual = "";
-
-let videoBlob = null;
-
-let videoURL = null;
-
-let gravando = false;
-
-
-/* =====================================================
-ELEMENTOS
-===================================================== */
+/* =================================
+   ELEMENTOS
+================================= */
 
 const inputMusica =
-document.getElementById("inputMusica");
+document.getElementById(
+"inputMusica"
+);
 
 const inputImagens =
-document.getElementById("inputImagens");
+document.getElementById(
+"inputImagens"
+);
 
-const nomeMusica =
-document.getElementById("nomeMusica");
+const inputLetra =
+document.getElementById(
+"inputLetra"
+);
 
-const previewImagens =
-document.getElementById("previewImagens");
+const audioPreview =
+document.getElementById(
+"audioPreview"
+);
+
+const audioInfo =
+document.getElementById(
+"audioInfo"
+);
+
+const previewGrid =
+document.getElementById(
+"previewGrid"
+);
+
+const contadorImagens =
+document.getElementById(
+"contadorImagens"
+);
 
 const estilo =
-document.getElementById("estilo");
+document.getElementById(
+"estilo"
+);
 
 const formato =
-document.getElementById("formato");
+document.getElementById(
+"formato"
+);
 
 const resumoMusica =
-document.getElementById("resumoMusica");
+document.getElementById(
+"resumoMusica"
+);
 
 const resumoImagens =
-document.getElementById("resumoImagens");
+document.getElementById(
+"resumoImagens"
+);
+
+const resumoLetra =
+document.getElementById(
+"resumoLetra"
+);
 
 const resumoEstilo =
-document.getElementById("resumoEstilo");
+document.getElementById(
+"resumoEstilo"
+);
 
 const resumoFormato =
-document.getElementById("resumoFormato");
+document.getElementById(
+"resumoFormato"
+);
 
 const botaoRoteiro =
-document.getElementById("botaoRoteiro");
+document.getElementById(
+"botaoRoteiro"
+);
 
 const botaoGerar =
-document.getElementById("botaoGerar");
+document.getElementById(
+"botaoGerar"
+);
 
-const roteiro =
-document.getElementById("roteiro");
+const roteiroElemento =
+document.getElementById(
+"roteiro"
+);
 
-const estruturaCenas =
-document.getElementById("estruturaCenas");
+const progressContainer =
+document.getElementById(
+"progressContainer"
+);
 
-const status =
-document.getElementById("status");
+const progressFill =
+document.getElementById(
+"progressFill"
+);
 
-const progresso =
-document.getElementById("progresso");
+const statusElemento =
+document.getElementById(
+"status"
+);
+
+const videoContainer =
+document.getElementById(
+"videoContainer"
+);
 
 const videoResultado =
-document.getElementById("videoResultado");
+document.getElementById(
+"videoResultado"
+);
+
+const resultadoInfo =
+document.getElementById(
+"resultadoInfo"
+);
 
 const download =
-document.getElementById("download");
+document.getElementById(
+"download"
+);
 
 
-/* =====================================================
-MÚSICA
-===================================================== */
+/* =================================
+   ESTADO
+================================= */
+
+let musicaSelecionada =
+null;
+
+let imagensSelecionadas =
+[];
+
+let roteiroAtual =
+"";
+
+let videoURL =
+null;
+
+let videoBlob =
+null;
+
+
+/* =================================
+   MÚSICA
+================================= */
 
 inputMusica.addEventListener(
 "change",
 function(){
 
-if(!this.files || !this.files[0]){
+const arquivo =
+this.files[0];
 
-musicaSelecionada = null;
-
-nomeMusica.textContent =
-"Nenhuma música selecionada.";
-
-resumoMusica.textContent =
-"—";
+if(!arquivo){
 
 return;
 
 }
 
 musicaSelecionada =
-this.files[0];
-
-nomeMusica.textContent =
-"🎵 " +
-musicaSelecionada.name;
+arquivo;
 
 resumoMusica.textContent =
-musicaSelecionada.name;
+arquivo.name;
 
-});
+audioInfo.textContent =
+"Música selecionada: " +
+arquivo.name;
+
+audioPreview.src =
+URL.createObjectURL(
+arquivo
+);
+
+audioPreview.style.display =
+"block";
+
+}
+);
 
 
-/* =====================================================
-IMAGENS
-===================================================== */
+/* =================================
+   LETRA
+================================= */
+
+inputLetra.addEventListener(
+"input",
+function(){
+
+const texto =
+this.value.trim();
+
+if(texto){
+
+resumoLetra.textContent =
+"Adicionada";
+
+}else{
+
+resumoLetra.textContent =
+"Não adicionada";
+
+}
+
+}
+);
+
+
+/* =================================
+   IMAGENS
+================================= */
 
 inputImagens.addEventListener(
 "change",
 function(){
 
 const arquivos =
-Array.from(this.files || []);
+Array.from(
+this.files
+);
 
 if(!arquivos.length){
 
@@ -736,229 +1095,160 @@ return;
 
 }
 
+imagensSelecionadas =
+[];
 
-/*
-IMPORTANTE:
+let processadas =
+0;
 
-Usamos FileReader em vez de depender
-somente de URL.createObjectURL.
+arquivos.forEach(
+function(arquivo){
 
-Isso é mais compatível com celulares.
-*/
-
-const leituras = arquivos.map(
-function(file){
-
-return new Promise(
-function(resolve,reject){
-
-const reader =
+const leitor =
 new FileReader();
 
-reader.onload =
-function(){
+leitor.onload =
+function(e){
 
-resolve({
+imagensSelecionadas.push({
 
-file:file,
+file:arquivo,
 
-src:reader.result
+src:e.target.result
 
 });
+
+processadas++;
+
+if(
+processadas ===
+arquivos.length
+){
+
+atualizarImagens();
+
+}
 
 };
 
-reader.onerror =
-function(){
-
-reject(
-new Error(
-"Erro ao ler a imagem."
-)
+leitor.readAsDataURL(
+arquivo
 );
 
-};
-
-reader.readAsDataURL(file);
-
-});
-
-});
-
-
-Promise.all(leituras)
-.then(
-function(resultado){
-
-imagensSelecionadas =
-resultado;
-
-atualizarPreview();
-
-status.textContent =
-"✅ " +
-imagensSelecionadas.length +
-" imagem(ns) carregada(s).";
-
-})
-.catch(
-function(erro){
-
-console.error(erro);
-
-alert(
-"Não foi possível carregar as imagens."
+}
 );
 
-});
+}
+);
 
-});
 
+/* =================================
+   ATUALIZAR IMAGENS
+================================= */
 
-/* =====================================================
-PREVIEW
-===================================================== */
+function atualizarImagens(){
 
-function atualizarPreview(){
-
-previewImagens.innerHTML = "";
+previewGrid.innerHTML =
+"";
 
 
 imagensSelecionadas.forEach(
 function(item,index){
 
 const div =
-document.createElement("div");
+document.createElement(
+"div"
+);
 
 div.className =
-"imagemItem";
+"preview-item";
 
 
-const img =
-document.createElement("img");
+div.innerHTML = `
 
-img.src =
-item.src;
+<img
+src="${item.src}"
+alt="Imagem ${index+1}"
+>
 
-img.alt =
-"Imagem " + (index+1);
+<div class="preview-num">
+
+Imagem ${index+1}
+
+</div>
+
+<div class="preview-buttons">
+
+<button
+onclick="moverImagem(${index},-1)"
+>
+◀
+</button>
+
+<button
+onclick="removerImagem(${index})"
+>
+🗑
+</button>
+
+<button
+onclick="moverImagem(${index},1)"
+>
+▶
+</button>
+
+</div>
+
+`;
 
 
-const titulo =
-document.createElement("div");
-
-titulo.className =
-"imagemTitulo";
-
-titulo.textContent =
-"Imagem " + (index+1);
-
-
-const controles =
-document.createElement("div");
-
-controles.className =
-"controles";
-
-
-const esquerda =
-document.createElement("button");
-
-esquerda.textContent =
-"◀";
-
-esquerda.disabled =
-index === 0;
-
-esquerda.onclick =
-function(){
-
-moverImagem(
-index,
--1
+previewGrid.appendChild(
+div
 );
 
-};
-
-
-const direita =
-document.createElement("button");
-
-direita.textContent =
-"▶";
-
-direita.disabled =
-index ===
-imagensSelecionadas.length-1;
-
-direita.onclick =
-function(){
-
-moverImagem(
-index,
-1
-);
-
-};
-
-
-const excluir =
-document.createElement("button");
-
-excluir.textContent =
-"✕";
-
-excluir.className =
-"excluir";
-
-excluir.onclick =
-function(){
-
-excluirImagem(index);
-
-};
-
-
-controles.appendChild(
-esquerda
-);
-
-controles.appendChild(
-direita
-);
-
-controles.appendChild(
-excluir
+}
 );
 
 
-div.appendChild(img);
+contadorImagens.textContent =
 
-div.appendChild(titulo);
+imagensSelecionadas.length +
 
-div.appendChild(controles);
+(
+imagensSelecionadas.length === 1
 
+?
 
-previewImagens.appendChild(div);
+" imagem selecionada."
 
-});
+:
+
+" imagens selecionadas."
+);
 
 
 resumoImagens.textContent =
+
 imagensSelecionadas.length +
-" imagem" +
+
 (
 imagensSelecionadas.length === 1
-? ""
-: "s"
+
+?
+
+" imagem"
+
+:
+
+" imagens"
 );
 
 }
 
 
-/* =====================================================
-MOVER IMAGEM
-===================================================== */
+/* =================================
+   MOVER IMAGEM
+================================= */
 
 function moverImagem(
 index,
@@ -967,7 +1257,6 @@ direcao
 
 const novoIndex =
 index + direcao;
-
 
 if(
 novoIndex < 0 ||
@@ -983,47 +1272,53 @@ return;
 const temp =
 imagensSelecionadas[index];
 
-
 imagensSelecionadas[index] =
-imagensSelecionadas[novoIndex];
+imagensSelecionadas[
+novoIndex
+];
 
-imagensSelecionadas[novoIndex] =
+imagensSelecionadas[
+novoIndex
+] =
 temp;
 
 
-atualizarPreview();
+atualizarImagens();
 
 }
 
 
-/* =====================================================
-EXCLUIR
-===================================================== */
+/* =================================
+   REMOVER
+================================= */
 
-function excluirImagem(index){
+function removerImagem(
+index
+){
 
 imagensSelecionadas.splice(
 index,
 1
 );
 
-atualizarPreview();
+atualizarImagens();
 
 }
 
 
-/* =====================================================
-SELECTS
-===================================================== */
+/* =================================
+   RESUMO
+================================= */
 
 estilo.addEventListener(
 "change",
 function(){
 
 resumoEstilo.textContent =
-estilo.value;
+this.value;
 
-});
+}
+);
 
 
 formato.addEventListener(
@@ -1031,51 +1326,19 @@ formato.addEventListener(
 function(){
 
 resumoFormato.textContent =
-formato.value;
-
-});
-
-
-/* =====================================================
-MOVIMENTOS
-===================================================== */
-
-function nomeMovimento(index){
-
-const lista = [
-
-"🔍 Zoom IN forte",
-
-"🔎 Zoom OUT forte",
-
-"➡️ Movimento esquerda → direita",
-
-"⬅️ Movimento direita → esquerda",
-
-"⬆️ Movimento baixo → cima",
-
-"⬇️ Movimento cima → baixo"
-
-];
-
-return lista[
-index % lista.length
-];
+this.value;
 
 }
-
-
-/* =====================================================
-GERAR ROTEIRO
-===================================================== */
-
-botaoRoteiro.addEventListener(
-"click",
-gerarRoteiro
 );
 
 
-function gerarRoteiro(){
+/* =================================
+   ROTEIRO
+================================= */
+
+botaoRoteiro.addEventListener(
+"click",
+function(){
 
 if(!musicaSelecionada){
 
@@ -1088,7 +1351,9 @@ return;
 }
 
 
-if(imagensSelecionadas.length === 0){
+if(
+!imagensSelecionadas.length
+){
 
 alert(
 "Selecione pelo menos uma imagem."
@@ -1099,99 +1364,177 @@ return;
 }
 
 
-const nome =
-musicaSelecionada.name
-.replace(
-/\.[^/.]+$/,
-""
-);
+const linhasLetra =
+obterLinhasLetra();
 
 
-roteiroAtual =
+let texto =
+"CLIP MUSICAL AI\n\n";
 
-"ROTEIRO DO CLIPE\n\n" +
 
+texto +=
 "Música: " +
-nome +
-"\n\n" +
+musicaSelecionada.name +
+"\n";
 
+
+texto +=
 "Estilo: " +
 estilo.value +
-"\n\n" +
+"\n";
 
+
+texto +=
 "Formato: " +
 formato.value +
-"\n\n" +
+"\n";
 
-"Quantidade de cenas: " +
+
+texto +=
+"Imagens: " +
 imagensSelecionadas.length +
-"\n\n" +
-
-"Cada imagem será transformada em uma cena com movimento de câmera.";
-
-roteiro.textContent =
-roteiroAtual;
+"\n";
 
 
-estruturaCenas.innerHTML = "";
+texto +=
+"Trechos da letra: " +
+linhasLetra.length +
+"\n\n";
+
+
+texto +=
+"ESTRUTURA DAS CENAS\n\n";
 
 
 imagensSelecionadas.forEach(
 function(item,index){
 
-const cena =
-document.createElement("div");
-
-cena.className =
-"cena";
-
-cena.innerHTML =
-
-"<strong>CENA " +
+texto +=
+"Cena " +
 (index+1) +
-"</strong><br><br>" +
-
-"Imagem: " +
+" — Imagem " +
 (index+1) +
-"<br>" +
-
-"Movimento: " +
-nomeMovimento(index) +
-"<br>" +
-
-"Estilo: " +
-estilo.value +
-"<br>" +
-
-"Formato: " +
-formato.value;
+"\n";
 
 
-estruturaCenas.appendChild(
-cena
-);
+if(index % 4 === 0){
 
-});
+texto +=
+"Movimento: zoom forte aproximando + deslocamento lateral\n";
 
+}
 
-botaoGerar.disabled =
-false;
+else if(index % 4 === 1){
 
+texto +=
+"Movimento: zoom afastando + deslocamento lateral\n";
 
-status.innerHTML =
-'<span class="sucesso">' +
-"✅ Roteiro criado com sucesso!" +
-"</span>";
+}
 
+else if(index % 4 === 2){
+
+texto +=
+"Movimento: zoom aproximando + movimento vertical\n";
+
+}
+
+else{
+
+texto +=
+"Movimento: zoom afastando + movimento vertical\n";
 
 }
 
 
-/* =====================================================
-CARREGAR IMAGEM PARA CANVAS
-===================================================== */
+texto +=
+"Intensidade: ALTA\n";
 
-function carregarImagem(src){
+
+if(
+linhasLetra[index]
+){
+
+texto +=
+"Letra: " +
+linhasLetra[index] +
+"\n";
+
+}
+
+
+texto +=
+"\n";
+
+}
+);
+
+
+roteiroAtual =
+texto;
+
+roteiroElemento.textContent =
+texto;
+
+
+botaoRoteiro.textContent =
+"✓ ROTEIRO CRIADO";
+
+
+setTimeout(
+function(){
+
+botaoRoteiro.textContent =
+"GERAR ROTEIRO";
+
+},
+2000
+);
+
+}
+);
+
+
+/* =================================
+   PEGAR LETRA
+================================= */
+
+function obterLinhasLetra(){
+
+const texto =
+inputLetra.value.trim();
+
+if(!texto){
+
+return [];
+
+}
+
+
+/*
+   Cada linha vira um trecho.
+*/
+
+return texto
+.split("\n")
+.map(
+linha =>
+linha.trim()
+)
+.filter(
+linha =>
+linha.length > 0
+);
+
+}
+
+
+/* =================================
+   CARREGAR IMAGEM
+================================= */
+
+function carregarImagem(
+src
+){
 
 return new Promise(
 function(resolve,reject){
@@ -1213,7 +1556,7 @@ function(){
 
 reject(
 new Error(
-"Erro ao carregar uma imagem."
+"Não foi possível carregar uma imagem."
 )
 );
 
@@ -1223,49 +1566,19 @@ new Error(
 img.src =
 src;
 
-});
-
 }
-
-
-/* =====================================================
-EASING
-===================================================== */
-
-function suavizar(t){
-
-t =
-Math.max(
-0,
-Math.min(
-1,
-t
-)
 );
 
 
-return t < 0.5
+/* =================================
+   DESENHAR CENA
+================================= */
 
-? 2*t*t
-
-: 1 -
-Math.pow(
--2*t+2,
-2
-)/2;
-
-}
-
-
-/* =====================================================
-DESENHAR MOVIMENTO
-===================================================== */
-
-function desenharImagem(
+function desenharCena(
 ctx,
 img,
 canvas,
-p,
+progresso,
 indice
 ){
 
@@ -1275,261 +1588,476 @@ canvas.width;
 const ch =
 canvas.height;
 
-const iw =
-img.naturalWidth ||
-img.width;
 
-const ih =
-img.naturalHeight ||
-img.height;
+/*
+   ZOOM MAIS FORTE.
+
+   PRIMEIRA CENA:
+   115% → 150%
+
+   SEGUNDA:
+   150% → 115%
+
+   E assim por diante.
+
+   Portanto o vídeo nunca
+   começa com 100%.
+*/
 
 
-p =
-Math.max(
-0,
-Math.min(
-1,
-p
+let escala;
+
+
+let deslocamentoX =
+0;
+
+let deslocamentoY =
+0;
+
+
+const ciclo =
+indice % 4;
+
+
+if(
+ciclo === 0
+){
+
+/*
+   APROXIMAÇÃO
+*/
+
+escala =
+1.15 +
+progresso *
+0.35;
+
+
+/*
+   Movimento lateral
+*/
+
+deslocamentoX =
+(
+progresso -
+0.5
 )
-);
+*
+cw *
+0.15;
+
+}
 
 
-const movimento =
-indice % 6;
-
-
-let zoom;
-
-let panX = 0;
-
-let panY = 0;
-
+else if(
+ciclo === 1
+){
 
 /*
-ZOOM IN
+   AFASTAMENTO
 */
 
-if(movimento === 0){
+escala =
+1.50 -
+progresso *
+0.35;
 
-const t =
-suavizar(p);
 
-zoom =
-1.00 +
-0.90*t;
+deslocamentoX =
+(
+0.5 -
+progresso
+)
+*
+cw *
+0.15;
+
+}
+
+
+else if(
+ciclo === 2
+){
+
+/*
+   APROXIMAÇÃO
+   + movimento vertical
+*/
+
+escala =
+1.15 +
+progresso *
+0.35;
+
+
+deslocamentoY =
+(
+0.5 -
+progresso
+)
+*
+ch *
+0.15;
+
+}
+
+
+else
+{
+
+/*
+   AFASTAMENTO
+   + movimento vertical
+*/
+
+escala =
+1.50 -
+progresso *
+0.35;
+
+
+deslocamentoY =
+(
+progresso -
+0.5
+)
+*
+ch *
+0.15;
 
 }
 
 
 /*
-ZOOM OUT
-*/
-
-else if(movimento === 1){
-
-const t =
-suavizar(p);
-
-zoom =
-1.90 -
-0.90*t;
-
-}
-
-
-/*
-ESQUERDA → DIREITA
-*/
-
-else if(movimento === 2){
-
-const t =
-suavizar(p);
-
-zoom =
-1.55;
-
-panX =
--0.40 +
-0.80*t;
-
-}
-
-
-/*
-DIREITA → ESQUERDA
-*/
-
-else if(movimento === 3){
-
-const t =
-suavizar(p);
-
-zoom =
-1.55;
-
-panX =
-0.40 -
-0.80*t;
-
-}
-
-
-/*
-BAIXO → CIMA
-*/
-
-else if(movimento === 4){
-
-const t =
-suavizar(p);
-
-zoom =
-1.55;
-
-panY =
-0.40 -
-0.80*t;
-
-}
-
-
-/*
-CIMA → BAIXO
-*/
-
-else{
-
-const t =
-suavizar(p);
-
-zoom =
-1.55;
-
-panY =
--0.40 +
-0.80*t;
-
-}
-
-
-/*
-ESCALA PARA COBRIR TODO O CANVAS
+   COBRIR CANVAS
 */
 
 const escalaBase =
 Math.max(
-cw/iw,
-ch/ih
+
+cw /
+img.width,
+
+ch /
+img.height
+
 );
+
+
+const escalaFinal =
+escalaBase *
+escala;
 
 
 const largura =
-iw *
-escalaBase *
-zoom;
+img.width *
+escalaFinal;
+
 
 const altura =
-ih *
-escalaBase *
-zoom;
+img.height *
+escalaFinal;
 
 
-/*
-CENTRALIZA
-*/
-
-let x =
-(cw-largura)/2;
-
-let y =
-(ch-altura)/2;
-
-
-/*
-MOVIMENTO
-*/
-
-x +=
-panX *
-Math.max(
-0,
-largura-cw
-);
-
-y +=
-panY *
-Math.max(
-0,
-altura-ch
-);
+const x =
+(
+cw -
+largura
+) /
+2
++
+deslocamentoX;
 
 
-/*
-NÃO DEIXAR APARECER PRETO
-*/
+const y =
+(
+ch -
+altura
+) /
+2
++
+deslocamentoY;
 
-x =
-Math.max(
-cw-largura,
-Math.min(
-0,
-x
-)
-);
-
-
-y =
-Math.max(
-ch-altura,
-Math.min(
-0,
-y
-)
-);
-
-
-/*
-LIMPA CANVAS
-*/
-
-ctx.fillStyle =
-"#000";
-
-ctx.fillRect(
-0,
-0,
-cw,
-ch
-);
-
-
-/*
-DESENHA
-*/
 
 ctx.drawImage(
+
 img,
+
 x,
+
 y,
+
 largura,
+
 altura
+
 );
 
 }
 
 
-/* =====================================================
-CODEC
-===================================================== */
+/* =================================
+   DESENHAR LETRA
+================================= */
 
-function obterCodec(){
+function desenharLetra(
+ctx,
+canvas,
+texto
+){
+
+if(!texto){
+
+return;
+
+}
+
+
+const cw =
+canvas.width;
+
+const ch =
+canvas.height;
+
+
+/*
+   Tamanho adaptado ao formato.
+*/
+
+const tamanhoFonte =
+Math.round(
+cw * 0.034
+);
+
+
+ctx.save();
+
+
+/*
+   Fonte
+*/
+
+ctx.font =
+"bold " +
+tamanhoFonte +
+"px Arial";
+
+ctx.textAlign =
+"center";
+
+ctx.textBaseline =
+"middle";
+
+
+/*
+   Quebrar texto
+   se ficar muito comprido.
+*/
+
+const larguraMax =
+cw * 0.82;
+
+
+const palavras =
+texto.split(" ");
+
+let linhas =
+[];
+
+let linhaAtual =
+"";
+
+
+palavras.forEach(
+function(palavra){
+
+const teste =
+linhaAtual
+?
+linhaAtual +
+" " +
+palavra
+:
+palavra;
+
+
+if(
+ctx.measureText(
+teste
+).width
+<= larguraMax
+){
+
+linhaAtual =
+teste;
+
+}
+
+else{
+
+if(linhaAtual){
+
+linhas.push(
+linhaAtual
+);
+
+}
+
+linhaAtual =
+palavra;
+
+}
+
+});
+
+
+if(linhaAtual){
+
+linhas.push(
+linhaAtual
+);
+
+}
+
+
+/*
+   Limitar a duas linhas.
+*/
+
+if(
+linhas.length > 2
+){
+
+linhas =
+[
+linhas[0],
+linhas.slice(1).join(" ")
+];
+
+}
+
+
+/*
+   Altura da caixa
+*/
+
+const alturaLinha =
+tamanhoFonte *
+1.25;
+
+
+const alturaCaixa =
+linhas.length *
+alturaLinha
++
+tamanhoFonte;
+
+
+const centroY =
+ch -
+(
+ch * 0.13
+);
+
+
+const caixaX =
+cw * 0.07;
+
+
+const caixaY =
+centroY -
+alturaCaixa / 2;
+
+
+const caixaLargura =
+cw * 0.86;
+
+
+/*
+   Fundo semitransparente
+*/
+
+ctx.fillStyle =
+"rgba(0,0,0,0.60)";
+
+
+ctx.beginPath();
+
+ctx.roundRect(
+caixaX,
+caixaY,
+caixaLargura,
+alturaCaixa,
+18
+);
+
+ctx.fill();
+
+
+/*
+   Texto
+*/
+
+ctx.fillStyle =
+"white";
+
+
+ctx.shadowColor =
+"black";
+
+ctx.shadowBlur =
+8;
+
+ctx.shadowOffsetX =
+2;
+
+ctx.shadowOffsetY =
+2;
+
+
+const inicioY =
+centroY -
+(
+(linhas.length - 1) *
+alturaLinha /
+2
+);
+
+
+linhas.forEach(
+function(linha,index){
+
+ctx.fillText(
+
+linha,
+
+cw / 2,
+
+inicioY +
+index *
+alturaLinha
+
+);
+
+});
+
+
+ctx.restore();
+
+}
+
+
+/* =================================
+   CODEC
+================================= */
+
+function escolherCodec(){
 
 const codecs = [
 
-"video/webm;codecs=vp9,opus",
-
 "video/webm;codecs=vp8,opus",
+
+"video/webm;codecs=vp9,opus",
 
 "video/webm"
 
@@ -1537,18 +2065,16 @@ const codecs = [
 
 
 for(
-let i=0;
-i<codecs.length;
-i++
+const codec of codecs
 ){
 
 if(
 MediaRecorder.isTypeSupported(
-codecs[i]
+codec
 )
 ){
 
-return codecs[i];
+return codec;
 
 }
 
@@ -1560,23 +2086,21 @@ return "";
 }
 
 
-/* =====================================================
-GERAR CLIPE
-===================================================== */
+/* =================================
+   GERAR CLIPE
+================================= */
 
-async function gerarClipe(){
+botaoGerar.addEventListener(
+"click",
+async function(){
 
-if(gravando){
-
-return;
-
-}
+try{
 
 
 if(!musicaSelecionada){
 
 alert(
-"Selecione uma música."
+"Selecione uma música primeiro."
 );
 
 return;
@@ -1584,7 +2108,9 @@ return;
 }
 
 
-if(imagensSelecionadas.length === 0){
+if(
+!imagensSelecionadas.length
+){
 
 alert(
 "Selecione pelo menos uma imagem."
@@ -1597,60 +2123,69 @@ return;
 
 if(!roteiroAtual){
 
-alert(
-"Primeiro clique em GERAR ROTEIRO."
-);
+botaoRoteiro.click();
 
-return;
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+300
+)
+);
 
 }
 
 
-gravando = true;
-
 botaoGerar.disabled =
 true;
 
-botaoRoteiro.disabled =
-true;
+
+progressContainer.style.display =
+"block";
 
 
-progresso.style.width =
+videoContainer.style.display =
+"none";
+
+
+download.style.display =
+"none";
+
+
+progressFill.style.width =
 "0%";
 
 
-try{
+statusElemento.textContent =
+"Carregando imagens...";
 
 
 /*
-CARREGAR IMAGENS
+   CARREGAR IMAGENS
 */
-
-status.textContent =
-"🖼️ Preparando imagens...";
-
 
 const imagens = [];
 
 
 for(
-let i=0;
-i<imagensSelecionadas.length;
-i++
+const item of
+imagensSelecionadas
 ){
 
 const img =
 await carregarImagem(
-imagensSelecionadas[i].src
+item.src
 );
 
-imagens.push(img);
+imagens.push(
+img
+);
 
 }
 
 
 /*
-CANVAS
+   CANVAS
 */
 
 const canvas =
@@ -1660,7 +2195,8 @@ document.createElement(
 
 
 if(
-formato.value === "9:16"
+formato.value ===
+"9:16"
 ){
 
 canvas.width =
@@ -1669,7 +2205,9 @@ canvas.width =
 canvas.height =
 1280;
 
-}else{
+}
+
+else{
 
 canvas.width =
 1280;
@@ -1687,173 +2225,113 @@ canvas.getContext(
 
 
 /*
-MÚSICA
+   STREAM
 */
 
-status.textContent =
-"🎵 Preparando áudio...";
-
-
-const audio =
-new Audio();
-
-
-audio.src =
-URL.createObjectURL(
-musicaSelecionada
-);
-
-audio.preload =
-"auto";
-
-
-await new Promise(
-function(resolve,reject){
-
-audio.onloadedmetadata =
-function(){
-
-resolve();
-
-};
-
-audio.onerror =
-function(){
-
-reject(
-new Error(
-"Não foi possível carregar a música."
-)
-);
-
-};
-
-});
-
-
-const duracao =
-audio.duration;
-
-
-if(
-!isFinite(duracao) ||
-duracao <= 0
-){
-
-throw new Error(
-"Duração da música inválida."
-);
-
-}
-
-
-/*
-DURAÇÃO DAS CENAS
-*/
-
-const duracaoCena =
-duracao /
-imagens.length;
-
-
-/*
-STREAM DO CANVAS
-*/
-
-const stream =
+const videoStream =
 canvas.captureStream(
 30
 );
 
 
 /*
-ÁUDIO
+   ÁUDIO
 */
 
-const AudioContextClass =
+const audioContext =
+new(
 window.AudioContext ||
-window.webkitAudioContext;
+window.webkitAudioContext
+)();
 
 
-if(!AudioContextClass){
+if(
+audioContext.state ===
+"suspended"
+){
 
-throw new Error(
-"Seu navegador não suporta áudio para gravação."
-);
+await audioContext.resume();
 
 }
 
 
-const audioContext =
-new AudioContextClass();
-
-
-const fonte =
+const audioSource =
 audioContext.createMediaElementSource(
-audio
+audioPreview
 );
 
 
-const destino =
+const audioDestination =
 audioContext.createMediaStreamDestination();
 
 
-fonte.connect(
-destino
+audioSource.connect(
+audioDestination
 );
 
-fonte.connect(
+
+audioSource.connect(
 audioContext.destination
 );
 
 
 /*
-COLOCAR ÁUDIO NO VÍDEO
+   COLOCAR ÁUDIO NO VÍDEO
 */
 
-const audioTracks =
-destino.stream.getAudioTracks();
-
-
-audioTracks.forEach(
+audioDestination
+.stream
+.getAudioTracks()
+.forEach(
 function(track){
 
-stream.addTrack(track);
+videoStream.addTrack(
+track
+);
 
-});
+}
+);
 
 
 /*
-RECORDER
+   CODEC
 */
 
 const codec =
-obterCodec();
+escolherCodec();
 
 
-let recorder;
+if(!codec){
+
+throw new Error(
+"Seu navegador não suporta gravação WebM."
+);
+
+}
 
 
-if(codec){
+/*
+   RECORDER
+*/
 
-recorder =
+const recorder =
 new MediaRecorder(
-stream,
+
+videoStream,
+
 {
+
 mimeType:codec,
-videoBitsPerSecond:8000000,
-audioBitsPerSecond:192000
-}
-);
 
-}else{
+videoBitsPerSecond:
+6000000,
 
-recorder =
-new MediaRecorder(
-stream
-);
+audioBitsPerSecond:
+128000
 
 }
+
+);
 
 
 const partes = [];
@@ -1876,8 +2354,300 @@ event.data
 };
 
 
-const terminou =
-new Promise(
+/*
+   INICIAR
+*/
+
+recorder.start(
+1000
+);
+
+
+/*
+   INICIAR MÚSICA
+*/
+
+audioPreview.currentTime =
+0;
+
+
+await audioPreview.play();
+
+
+/*
+   DURAÇÃO
+*/
+
+let duracao =
+audioPreview.duration;
+
+
+if(
+!isFinite(duracao) ||
+duracao <= 0
+){
+
+duracao =
+30;
+
+}
+
+
+/*
+   DISTRIBUIÇÃO
+*/
+
+const quantidade =
+imagens.length;
+
+
+const tempoPorCena =
+duracao /
+quantidade;
+
+
+const linhasLetra =
+obterLinhasLetra();
+
+
+/*
+   CADA TRECHO DA LETRA
+   TAMBÉM É DISTRIBUÍDO
+   PELA DURAÇÃO.
+*/
+
+let inicio =
+performance.now();
+
+
+/*
+   RENDER
+*/
+
+await new Promise(
+function(resolve){
+
+function renderizar(
+agora
+){
+
+const decorrido =
+(
+agora -
+inicio
+) /
+1000;
+
+
+const progressoTotal =
+Math.min(
+decorrido /
+duracao,
+1
+);
+
+
+/*
+   IMAGEM ATUAL
+*/
+
+let indice =
+Math.floor(
+progressoTotal *
+quantidade
+);
+
+
+if(
+indice >= quantidade
+){
+
+indice =
+quantidade - 1;
+
+}
+
+
+/*
+   PROGRESSO DA CENA
+*/
+
+const inicioCena =
+indice *
+tempoPorCena;
+
+
+let progressoCena =
+(
+decorrido -
+inicioCena
+) /
+tempoPorCena;
+
+
+progressoCena =
+Math.max(
+0,
+Math.min(
+progressoCena,
+1
+)
+);
+
+
+/*
+   FUNDO
+*/
+
+ctx.fillStyle =
+"black";
+
+
+ctx.fillRect(
+
+0,
+
+0,
+
+canvas.width,
+
+canvas.height
+
+);
+
+
+/*
+   IMAGEM COM MOVIMENTO
+*/
+
+desenharCena(
+
+ctx,
+
+imagens[indice],
+
+canvas,
+
+progressoCena,
+
+indice
+
+);
+
+
+/*
+   LETRA
+*/
+
+if(
+linhasLetra.length
+){
+
+const indiceLetra =
+Math.min(
+
+Math.floor(
+progressoTotal *
+linhasLetra.length
+),
+
+linhasLetra.length -
+1
+
+);
+
+
+const textoAtual =
+linhasLetra[
+indiceLetra
+];
+
+
+desenharLetra(
+
+ctx,
+
+canvas,
+
+textoAtual
+
+);
+
+}
+
+
+/*
+   PROGRESSO
+*/
+
+const porcentagem =
+Math.round(
+progressoTotal *
+100
+);
+
+
+progressFill.style.width =
+porcentagem +
+"%";
+
+
+statusElemento.textContent =
+"Gerando clipe... " +
+porcentagem +
+"%";
+
+
+if(
+progressoTotal >= 1
+){
+
+resolve();
+
+return;
+
+}
+
+
+requestAnimationFrame(
+renderizar
+);
+
+}
+
+
+requestAnimationFrame(
+renderizar
+);
+
+}
+);
+
+
+/*
+   PARAR MÚSICA
+*/
+
+audioPreview.pause();
+
+
+/*
+   SOLICITAR ÚLTIMOS DADOS
+*/
+
+try{
+
+recorder.requestData();
+
+}
+catch(e){}
+
+
+/*
+   PARAR GRAVAÇÃO
+*/
+
+await new Promise(
 function(resolve){
 
 recorder.onstop =
@@ -1887,212 +2657,114 @@ resolve();
 
 };
 
-});
-
-
-/*
-INICIA GRAVAÇÃO
-*/
-
-recorder.start(
-500
-);
-
-
-status.textContent =
-"🎬 Gravando...";
-
-
-/*
-INICIA ÁUDIO
-*/
-
-await audioContext.resume();
-
-await audio.play();
-
-
-const inicio =
-performance.now();
-
-
-/*
-ANIMAÇÃO
-*/
-
-function animar(agora){
-
-const tempo =
-(agora-inicio)/1000;
-
-
-const total =
-Math.min(
-1,
-tempo/duracao
-);
-
-
-let indice =
-Math.floor(
-tempo/duracaoCena
-);
-
 
 if(
-indice >= imagens.length
+recorder.state !==
+"inactive"
 ){
 
-indice =
-imagens.length-1;
+recorder.stop();
 
 }
 
+else{
 
-const inicioCena =
-indice *
-duracaoCena;
+resolve();
+
+}
+
+}
+);
 
 
-const tempoCena =
-tempo -
-inicioCena;
+/*
+   ESPERAR DADOS FINAIS
+*/
 
-
-const pCena =
-Math.max(
-0,
-Math.min(
-1,
-tempoCena/duracaoCena
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+500
 )
 );
 
 
 /*
-DESENHA FRAME
+   FECHAR ÁUDIO
 */
 
-desenharImagem(
-ctx,
-imagens[indice],
-canvas,
-pCena,
-indice
-);
+try{
+
+await audioContext.close();
+
+}
+catch(e){}
 
 
 /*
-PROGRESSO
+   VERIFICAR
 */
-
-progresso.style.width =
-(
-total*100
-).toFixed(1)
-+
-"%";
-
-
-status.textContent =
-"🎥 Cena " +
-(indice+1) +
-" de " +
-imagens.length +
-" — " +
-nomeMovimento(indice);
-
 
 if(
-tempo < duracao
+!partes.length
 ){
 
-requestAnimationFrame(
-animar
-);
-
-}else{
-
-
-/*
-ÚLTIMO FRAME
-*/
-
-desenharImagem(
-ctx,
-imagens[
-imagens.length-1
-],
-canvas,
-1,
-imagens.length-1
-);
-
-
-setTimeout(
-function(){
-
-try{
-audio.pause();
-}catch(e){}
-
-
-try{
-recorder.stop();
-}catch(e){}
-
-},
-500
+throw new Error(
+"O navegador não entregou os dados do vídeo."
 );
 
 }
 
-}
-
-
-requestAnimationFrame(
-animar
-);
-
 
 /*
-ESPERA TERMINAR
-*/
-
-await terminou;
-
-
-/*
-BLOB
+   BLOB
 */
 
 videoBlob =
 new Blob(
+
 partes,
+
 {
+
 type:
+recorder.mimeType ||
 codec ||
 "video/webm"
+
 }
+
 );
 
 
+if(
+videoBlob.size <= 0
+){
+
+throw new Error(
+"O vídeo foi criado vazio."
+);
+
+}
+
+
 /*
-URL
+   LIBERAR URL ANTERIOR
 */
 
 if(videoURL){
-
-try{
 
 URL.revokeObjectURL(
 videoURL
 );
 
-}catch(e){}
-
 }
 
+
+/*
+   URL
+*/
 
 videoURL =
 URL.createObjectURL(
@@ -2100,103 +2772,240 @@ videoBlob
 );
 
 
-videoResultado.src =
-videoURL;
+/*
+   CONFIGURAR PLAYER
+*/
+
+videoResultado.pause();
+
+
+videoResultado.removeAttribute(
+"src"
+);
+
 
 videoResultado.load();
 
 
+videoResultado.src =
+videoURL;
+
+
+videoResultado.controls =
+true;
+
+
+videoResultado.preload =
+"auto";
+
+
+videoResultado.style.display =
+"block";
+
+
+/*
+   MOSTRAR RESULTADO
+*/
+
+videoContainer.style.display =
+"block";
+
+
+/*
+   DOWNLOAD
+*/
+
 download.href =
 videoURL;
+
+
+download.download =
+"clip-musical-ai.webm";
+
 
 download.style.display =
 "block";
 
 
-progresso.style.width =
+/*
+   TAMANHO
+*/
+
+const tamanhoMB =
+(
+videoBlob.size /
+(
+1024 *
+1024
+)
+).toFixed(2);
+
+
+resultadoInfo.textContent =
+"✓ Clipe criado com sucesso — " +
+tamanhoMB +
+" MB";
+
+
+resultadoInfo.className =
+"status sucesso";
+
+
+progressFill.style.width =
 "100%";
 
 
-status.innerHTML =
-'<span class="sucesso">' +
-"✅ CLIPE GERADO COM SUCESSO!" +
-"</span>";
+statusElemento.textContent =
+"✓ Clipe criado com sucesso!";
 
 
-try{
+/*
+   CARREGAR PLAYER
+*/
 
-await audioContext.close();
+await new Promise(
+function(resolve){
 
-}catch(e){}
+let finalizado =
+false;
 
 
-try{
+function terminar(){
 
-URL.revokeObjectURL(
-audio.src
+if(finalizado){
+
+return;
+
+}
+
+finalizado =
+true;
+
+resolve();
+
+}
+
+
+videoResultado.onloadeddata =
+terminar;
+
+
+videoResultado.onerror =
+terminar;
+
+
+setTimeout(
+terminar,
+3000
 );
 
-}catch(e){}
+
+videoResultado.load();
+
+}
+);
 
 
-}catch(erro){
+/*
+   TENTAR REPRODUZIR
+*/
+
+try{
+
+await videoResultado.play();
+
+}
+catch(e){
+
+/*
+   Alguns navegadores
+   bloqueiam autoplay.
+
+   O usuário poderá
+   apertar PLAY.
+*/
+
+}
+
+
+/*
+   IR PARA O VÍDEO
+*/
+
+setTimeout(
+function(){
+
+videoContainer.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+},
+200
+);
+
+
+}
+catch(erro){
+
 
 console.error(
-"ERRO COMPLETO:",
+"ERRO:",
 erro
 );
 
 
-status.innerHTML =
-'<span class="erro">' +
-"❌ Erro ao gerar o clipe." +
-"</span>";
+statusElemento.textContent =
+"❌ " +
+erro.message;
+
+
+statusElemento.className =
+"status erro";
 
 
 alert(
-"Erro ao gerar o clipe:\n\n" +
-(
-erro.message ||
-erro
-)
+
+"Não foi possível finalizar o vídeo.\n\n" +
+
+erro.message
+
 );
 
 
-}finally{
-
-gravando =
-false;
+}
+finally{
 
 botaoGerar.disabled =
 false;
 
-botaoRoteiro.disabled =
-false;
-
 }
 
 }
-
-
-/* =====================================================
-BOTÃO GERAR
-===================================================== */
-
-botaoGerar.addEventListener(
-"click",
-gerarClipe
 );
 
 
-/* =====================================================
-INICIALIZAÇÃO
-===================================================== */
+/* =================================
+   LIMPEZA
+================================= */
 
-resumoEstilo.textContent =
-estilo.value;
+window.addEventListener(
+"beforeunload",
+function(){
 
-resumoFormato.textContent =
-formato.value;
+if(videoURL){
+
+URL.revokeObjectURL(
+videoURL
+);
+
+}
+
+}
+);
 
 </script>
 
