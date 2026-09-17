@@ -5,7 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>CLIP MUSICAL AI</title>
 
@@ -20,7 +21,7 @@
 
 body{
     background:#080810;
-    color:#fff;
+    color:white;
     min-height:100vh;
 }
 
@@ -28,19 +29,19 @@ body{
     width:100%;
     max-width:900px;
     margin:auto;
-    padding:18px;
+    padding:15px;
 }
 
 h1{
     text-align:center;
     font-size:28px;
-    margin-bottom:8px;
+    margin-bottom:7px;
 }
 
 .subtitulo{
     text-align:center;
     color:#aaa;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .card{
@@ -59,40 +60,36 @@ h1{
 label{
     display:block;
     font-weight:bold;
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 input[type="file"],
 select,
-textarea{
+textarea,
+input[type="number"]{
     width:100%;
     background:#090912;
     color:#fff;
     border:1px solid #37374a;
     border-radius:10px;
-    padding:13px;
+    padding:12px;
     margin-bottom:12px;
-}
-
-input[type="file"]{
-    cursor:pointer;
 }
 
 textarea{
     min-height:220px;
     resize:vertical;
-    line-height:1.55;
-    font-size:15px;
+    line-height:1.5;
 }
 
 button{
     width:100%;
     border:0;
     border-radius:11px;
-    padding:15px;
+    padding:14px;
     margin-top:8px;
     background:#6838ff;
-    color:#fff;
+    color:white;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
@@ -107,65 +104,68 @@ button:disabled{
 }
 
 .btn-verde{
-    background:#0a9d68;
+    background:#079866;
+}
+
+.btn-vermelho{
+    background:#a72828;
+}
+
+.btn-cinza{
+    background:#383847;
 }
 
 .status{
     color:#aaa;
     font-size:14px;
     line-height:1.5;
-    margin-top:8px;
+    margin-top:7px;
 }
 
 .sucesso{
-    color:#38dc9b;
+    color:#35dc98;
 }
 
 .erro{
-    color:#ff6666;
-}
-
-.dica{
-    color:#999;
-    font-size:13px;
-    line-height:1.5;
-    margin-top:4px;
-}
-
-.letra-contador{
-    color:#888;
-    text-align:right;
-    font-size:12px;
-    margin-top:-7px;
-    margin-bottom:12px;
-}
-
-.letra-preview{
-    display:none;
-    background:#090912;
-    border:1px solid #29293a;
-    border-radius:10px;
-    padding:13px;
-    margin-top:12px;
-}
-
-.letra-preview h3{
-    font-size:15px;
-    margin-bottom:10px;
-}
-
-.letra-preview-texto{
-    color:#ddd;
-    white-space:pre-wrap;
-    line-height:1.55;
-    max-height:220px;
-    overflow:auto;
+    color:#ff6868;
 }
 
 .audio-preview{
     width:100%;
     display:none;
     margin-top:8px;
+}
+
+.dica{
+    color:#999;
+    font-size:13px;
+    line-height:1.5;
+    margin-top:5px;
+}
+
+.contador{
+    color:#888;
+    font-size:12px;
+    text-align:right;
+    margin-top:-7px;
+    margin-bottom:10px;
+}
+
+.letra-preview{
+    display:none;
+    margin-top:12px;
+    background:#090912;
+    border:1px solid #29293a;
+    border-radius:10px;
+    padding:12px;
+}
+
+.letra-preview-texto{
+    color:#ddd;
+    white-space:pre-wrap;
+    line-height:1.5;
+    max-height:180px;
+    overflow:auto;
 }
 
 .preview-grid{
@@ -178,23 +178,23 @@ button:disabled{
 .preview-item{
     background:#090912;
     border:1px solid #29293a;
-    border-radius:11px;
-    padding:8px;
+    border-radius:10px;
+    padding:7px;
 }
 
 .preview-item img{
-    display:block;
     width:100%;
     aspect-ratio:16/10;
     object-fit:cover;
     border-radius:8px;
+    display:block;
 }
 
 .preview-num{
     text-align:center;
     color:#aaa;
-    font-size:13px;
     padding:7px 0;
+    font-size:13px;
 }
 
 .preview-buttons{
@@ -204,8 +204,8 @@ button:disabled{
 }
 
 .preview-buttons button{
-    margin:0;
     padding:8px 3px;
+    margin:0;
     font-size:12px;
 }
 
@@ -221,7 +221,6 @@ button:disabled{
     border-radius:9px;
     padding:11px;
     font-size:13px;
-    overflow-wrap:anywhere;
 }
 
 .resumo-box strong{
@@ -238,8 +237,97 @@ button:disabled{
     margin-top:12px;
     color:#ddd;
     line-height:1.55;
-    min-height:90px;
+    min-height:80px;
 }
+
+
+/* ==========================================
+   SINCRONIZAÇÃO
+========================================== */
+
+.sync-box{
+    background:#090912;
+    border:1px solid #303044;
+    border-radius:12px;
+    padding:12px;
+    margin-top:12px;
+}
+
+.tempo-grande{
+    text-align:center;
+    font-size:34px;
+    font-weight:bold;
+    margin:10px 0;
+    color:#fff;
+}
+
+.sync-botoes{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.sync-botoes button{
+    margin:0;
+}
+
+.marcar{
+    background:#d43b3b;
+    font-size:17px;
+}
+
+.lista-versos{
+    margin-top:14px;
+}
+
+.verso-item{
+    display:grid;
+    grid-template-columns:70px 1fr 65px;
+    gap:7px;
+    align-items:center;
+    background:#141421;
+    border:1px solid #29293a;
+    border-radius:8px;
+    padding:7px;
+    margin-bottom:6px;
+}
+
+.verso-numero{
+    color:#888;
+    font-size:12px;
+    text-align:center;
+}
+
+.verso-texto{
+    color:#ddd;
+    font-size:13px;
+    line-height:1.3;
+}
+
+.verso-tempo{
+    width:100%;
+    margin:0 !important;
+    padding:7px !important;
+    font-size:12px;
+    text-align:center;
+}
+
+.verso-atual{
+    border-color:#d43b3b;
+    box-shadow:0 0 0 1px #d43b3b;
+}
+
+.sync-info{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:10px;
+}
+
+
+/* ==========================================
+   PROGRESSO
+========================================== */
 
 .progress-container{
     display:none;
@@ -258,8 +346,13 @@ button:disabled{
     width:0%;
     height:100%;
     background:#6838ff;
-    transition:width .15s linear;
+    transition:width .1s linear;
 }
+
+
+/* ==========================================
+   VÍDEO
+========================================== */
 
 .video-container{
     display:none;
@@ -278,7 +371,7 @@ button:disabled{
     display:none;
     width:100%;
     text-decoration:none;
-    background:#0a9d68;
+    background:#079866;
     color:#fff;
     font-weight:bold;
     text-align:center;
@@ -288,13 +381,14 @@ button:disabled{
 }
 
 .info{
-    background:#0c0c16;
+    background:#090912;
     border-radius:10px;
     padding:13px;
     color:#bbb;
     line-height:1.6;
     font-size:14px;
 }
+
 
 @media(max-width:600px){
 
@@ -306,12 +400,20 @@ button:disabled{
         font-size:24px;
     }
 
+    .resumo{
+        grid-template-columns:1fr;
+    }
+
     .preview-grid{
         grid-template-columns:1fr 1fr;
     }
 
-    .resumo{
+    .sync-botoes{
         grid-template-columns:1fr;
+    }
+
+    .verso-item{
+        grid-template-columns:45px 1fr 68px;
     }
 
 }
@@ -324,6 +426,7 @@ button:disabled{
 
 <div class="container">
 
+
 <h1>🎬 CLIP MUSICAL AI</h1>
 
 <div class="subtitulo">
@@ -331,15 +434,15 @@ Crie seu clipe musical gratuitamente
 </div>
 
 
-<!-- ==================================================
-     MÚSICA
-================================================== -->
+<!-- ==========================================
+     1 MÚSICA
+========================================== -->
 
 <div class="card">
 
 <h2>🎵 1. Escolha sua música</h2>
 
-<label for="inputMusica">
+<label>
 Arquivo do louvor
 </label>
 
@@ -366,15 +469,15 @@ Nenhuma música selecionada.
 </div>
 
 
-<!-- ==================================================
-     IMAGENS
-================================================== -->
+<!-- ==========================================
+     2 IMAGENS
+========================================== -->
 
 <div class="card">
 
 <h2>🖼️ 2. Escolha as imagens</h2>
 
-<label for="inputImagens">
+<label>
 Imagens do clipe
 </label>
 
@@ -400,21 +503,23 @@ Nenhuma imagem selecionada.
 </div>
 
 
-<!-- ==================================================
-     LETRA
-================================================== -->
+<!-- ==========================================
+     3 LETRA
+========================================== -->
 
 <div class="card">
 
 <h2>📝 3. Letra do louvor</h2>
 
-<label for="inputLetra">
+<label>
 Cole aqui a letra do louvor
 </label>
 
 <textarea
     id="inputLetra"
-    placeholder="Cole aqui a letra completa do seu louvor.
+    placeholder="Cole a letra completa.
+
+Coloque cada verso em uma nova linha.
 
 Exemplo:
 
@@ -429,17 +534,14 @@ E o sonho é Te adorar, meu Deus."
 
 <div
     id="letraContador"
-    class="letra-contador"
+    class="contador"
 >
 0 caracteres
 </div>
 
 <div class="dica">
 
-💡 Coloque cada verso em uma nova linha.
-
-A letra será distribuída automaticamente durante a música
-e aparecerá na parte inferior do vídeo.
+💡 Cada linha será considerada um trecho da letra.
 
 </div>
 
@@ -447,8 +549,6 @@ e aparecerá na parte inferior do vídeo.
     id="letraPreview"
     class="letra-preview"
 >
-
-<h3>👁️ Prévia da letra</h3>
 
 <div
     id="letraPreviewTexto"
@@ -460,15 +560,107 @@ e aparecerá na parte inferior do vídeo.
 </div>
 
 
-<!-- ==================================================
-     ESTILO
-================================================== -->
+<!-- ==========================================
+     4 SINCRONIZAÇÃO
+========================================== -->
 
 <div class="card">
 
-<h2>🎨 4. Estilo do clipe</h2>
+<h2>🎯 4. Sincronizar letra</h2>
 
-<label for="estilo">
+<div class="sync-info">
+
+Primeiro cole a letra acima.
+
+Depois você pode usar a sincronização automática ou marcar manualmente cada verso enquanto a música toca.
+
+</div>
+
+
+<button
+    id="botaoAuto"
+    class="btn-azul"
+>
+⚡ SINCRONIZAR AUTOMATICAMENTE
+</button>
+
+
+<div
+    id="syncBox"
+    class="sync-box"
+    style="display:none;"
+>
+
+<div
+    id="tempoAtual"
+    class="tempo-grande"
+>
+00:00.000
+</div>
+
+
+<div class="sync-botoes">
+
+<button
+    id="botaoIniciarSync"
+    class="btn-verde"
+>
+▶️ COMEÇAR SINCRONIZAÇÃO
+</button>
+
+<button
+    id="botaoPararSync"
+    class="btn-cinza"
+>
+⏸️ PARAR
+</button>
+
+</div>
+
+
+<button
+    id="botaoMarcar"
+    class="marcar"
+>
+🔴 MARCAR PRÓXIMO VERSO
+</button>
+
+
+<button
+    id="botaoLimparSync"
+    class="btn-vermelho"
+>
+🗑️ LIMPAR MARCAÇÕES
+</button>
+
+
+<div
+    id="syncStatus"
+    class="status"
+>
+Aguardando.
+</div>
+
+
+<div
+    id="listaVersos"
+    class="lista-versos"
+></div>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     5 ESTILO
+========================================== -->
+
+<div class="card">
+
+<h2>🎨 5. Estilo do clipe</h2>
+
+<label>
 Estilo visual
 </label>
 
@@ -485,7 +677,8 @@ Estilo visual
 
 </select>
 
-<label for="formato">
+
+<label>
 Formato
 </label>
 
@@ -504,9 +697,9 @@ Formato
 </div>
 
 
-<!-- ==================================================
+<!-- ==========================================
      RESUMO
-================================================== -->
+========================================== -->
 
 <div class="card">
 
@@ -524,6 +717,7 @@ Não selecionada
 
 </div>
 
+
 <div class="resumo-box">
 
 <strong>🖼️ Imagens</strong>
@@ -533,6 +727,7 @@ Não selecionada
 </span>
 
 </div>
+
 
 <div class="resumo-box">
 
@@ -544,6 +739,18 @@ Não adicionada
 
 </div>
 
+
+<div class="resumo-box">
+
+<strong>🎯 Sincronização</strong>
+
+<span id="resumoSync">
+Não sincronizada
+</span>
+
+</div>
+
+
 <div class="resumo-box">
 
 <strong>🎨 Estilo</strong>
@@ -553,6 +760,7 @@ Cinematográfico
 </span>
 
 </div>
+
 
 <div class="resumo-box">
 
@@ -569,13 +777,13 @@ Cinematográfico
 </div>
 
 
-<!-- ==================================================
-     ROTEIRO
-================================================== -->
+<!-- ==========================================
+     6 ROTEIRO
+========================================== -->
 
 <div class="card">
 
-<h2>📖 5. Roteiro</h2>
+<h2>📖 6. Roteiro</h2>
 
 <button
     id="botaoRoteiro"
@@ -591,13 +799,13 @@ O roteiro aparecerá aqui.
 </div>
 
 
-<!-- ==================================================
-     GERAR CLIPE
-================================================== -->
+<!-- ==========================================
+     7 GERAR
+========================================== -->
 
 <div class="card">
 
-<h2>🎬 6. Gerar clipe</h2>
+<h2>🎬 7. Gerar clipe</h2>
 
 <div class="info">
 
@@ -617,7 +825,7 @@ O roteiro aparecerá aqui.
 
 <br>
 
-✔ Letra do louvor dentro do vídeo
+✔ Letra sincronizada
 
 <br>
 
@@ -629,12 +837,14 @@ O roteiro aparecerá aqui.
 
 </div>
 
+
 <button
     id="botaoGerar"
     class="btn-verde"
 >
 GERAR CLIPE GRÁTIS
 </button>
+
 
 <div
     id="progressContainer"
@@ -662,9 +872,9 @@ Preparando...
 </div>
 
 
-<!-- ==================================================
+<!-- ==========================================
      RESULTADO
-================================================== -->
+========================================== -->
 
 <div
     id="videoContainer"
@@ -695,10 +905,12 @@ Preparando...
 
 </div>
 
+
 </div>
 
 
 <script>
+
 
 /* ==================================================
    ELEMENTOS
@@ -749,20 +961,50 @@ document.getElementById("resumoImagens");
 const resumoLetra =
 document.getElementById("resumoLetra");
 
+const resumoSync =
+document.getElementById("resumoSync");
+
 const resumoEstilo =
 document.getElementById("resumoEstilo");
 
 const resumoFormato =
 document.getElementById("resumoFormato");
 
+const botaoAuto =
+document.getElementById("botaoAuto");
+
+const syncBox =
+document.getElementById("syncBox");
+
+const tempoAtual =
+document.getElementById("tempoAtual");
+
+const botaoIniciarSync =
+document.getElementById("botaoIniciarSync");
+
+const botaoPararSync =
+document.getElementById("botaoPararSync");
+
+const botaoMarcar =
+document.getElementById("botaoMarcar");
+
+const botaoLimparSync =
+document.getElementById("botaoLimparSync");
+
+const syncStatus =
+document.getElementById("syncStatus");
+
+const listaVersos =
+document.getElementById("listaVersos");
+
 const botaoRoteiro =
 document.getElementById("botaoRoteiro");
 
-const botaoGerar =
-document.getElementById("botaoGerar");
-
 const roteiroElemento =
 document.getElementById("roteiro");
+
+const botaoGerar =
+document.getElementById("botaoGerar");
 
 const progressContainer =
 document.getElementById("progressContainer");
@@ -804,6 +1046,10 @@ let audioSource = null;
 
 let audioDestination = null;
 
+let marcacoes = [];
+
+let indiceMarcacao = 0;
+
 
 /* ==================================================
    MÚSICA
@@ -815,11 +1061,13 @@ function(){
 
     if(
         !this.files ||
-        this.files.length === 0
+        !this.files.length
     ){
 
         return;
+
     }
+
 
     musicaSelecionada =
     this.files[0];
@@ -838,7 +1086,9 @@ function(){
     "status sucesso";
 
 
-    if(audioPreview.src){
+    if(
+        audioPreview.src
+    ){
 
         try{
 
@@ -846,7 +1096,8 @@ function(){
                 audioPreview.src
             );
 
-        }catch(e){}
+        }
+        catch(e){}
 
     }
 
@@ -862,6 +1113,18 @@ function(){
 
 
     audioPreview.load();
+
+
+    audioPreview.onloadedmetadata =
+    function(){
+
+        syncBox.style.display =
+        "block";
+
+
+        montarListaVersos();
+
+    };
 
 });
 
@@ -881,10 +1144,11 @@ async function(){
 
 
     if(
-        arquivos.length === 0
+        !arquivos.length
     ){
 
         return;
+
     }
 
 
@@ -895,35 +1159,44 @@ async function(){
     "Carregando imagens...";
 
 
-    for(
-        const arquivo of arquivos
-    ){
+    try{
 
-        const src =
-        await arquivoParaDataURL(
-            arquivo
-        );
+        for(
+            const arquivo of arquivos
+        ){
+
+            const src =
+            await arquivoParaDataURL(
+                arquivo
+            );
 
 
-        imagensSelecionadas.push({
+            imagensSelecionadas.push({
 
-            file:arquivo,
+                file:arquivo,
 
-            src:src
+                src:src
 
-        });
+            });
+
+        }
+
+
+        atualizarImagens();
+
+    }
+    catch(erro){
+
+        contadorImagens.textContent =
+        "Erro ao carregar imagens.";
+
+        contadorImagens.className =
+        "status erro";
 
     }
 
-
-    atualizarImagens();
-
 });
 
-
-/* ==================================================
-   FILE → DATA URL
-================================================== */
 
 function arquivoParaDataURL(
     arquivo
@@ -968,7 +1241,7 @@ function arquivoParaDataURL(
 
 
 /* ==================================================
-   ATUALIZAR IMAGENS
+   IMAGENS
 ================================================== */
 
 function atualizarImagens(){
@@ -997,11 +1270,6 @@ function atualizarImagens(){
 
         img.src =
         item.src;
-
-
-        img.alt =
-        "Imagem " +
-        (index + 1);
 
 
         const numero =
@@ -1063,9 +1331,13 @@ function atualizarImagens(){
         excluir.onclick =
         function(){
 
-            removerImagem(
-                index
+            imagensSelecionadas.splice(
+                index,
+                1
             );
+
+
+            atualizarImagens();
 
         };
 
@@ -1128,26 +1400,24 @@ function atualizarImagens(){
     imagensSelecionadas.length;
 
 
-    if(
-        quantidade === 0
-    ){
+    contadorImagens.textContent =
+    quantidade
+    ?
+    "✓ " +
+    quantidade +
+    (
+        quantidade === 1
+        ? " imagem selecionada."
+        : " imagens selecionadas."
+    )
+    :
+    "Nenhuma imagem selecionada.";
 
-        contadorImagens.textContent =
-        "Nenhuma imagem selecionada.";
 
-    }
-    else{
-
-        contadorImagens.textContent =
-        "✓ " +
-        quantidade +
-        (
-            quantidade === 1
-            ? " imagem selecionada."
-            : " imagens selecionadas."
-        );
-
-    }
+    contadorImagens.className =
+    quantidade
+    ? "status sucesso"
+    : "status";
 
 
     resumoImagens.textContent =
@@ -1161,26 +1431,23 @@ function atualizarImagens(){
 }
 
 
-/* ==================================================
-   MOVER IMAGEM
-================================================== */
-
 function moverImagem(
     index,
     direcao
 ){
 
-    const novoIndex =
-    index + direcao;
+    const novo =
+    index +
+    direcao;
 
 
     if(
-        novoIndex < 0 ||
-        novoIndex >=
-        imagensSelecionadas.length
+        novo < 0 ||
+        novo >= imagensSelecionadas.length
     ){
 
         return;
+
     }
 
 
@@ -1189,10 +1456,10 @@ function moverImagem(
 
 
     imagensSelecionadas[index] =
-    imagensSelecionadas[novoIndex];
+    imagensSelecionadas[novo];
 
 
-    imagensSelecionadas[novoIndex] =
+    imagensSelecionadas[novo] =
     temp;
 
 
@@ -1202,27 +1469,28 @@ function moverImagem(
 
 
 /* ==================================================
-   REMOVER
+   LETRA
 ================================================== */
 
-function removerImagem(
-    index
-){
+function obterVersos(){
 
-    imagensSelecionadas.splice(
-        index,
-        1
+    return inputLetra.value
+    .split("\n")
+    .map(
+        linha =>
+        linha.trim()
+    )
+    .filter(
+        linha =>
+        linha &&
+        !(
+            linha.startsWith("[") &&
+            linha.endsWith("]")
+        )
     );
-
-
-    atualizarImagens();
 
 }
 
-
-/* ==================================================
-   LETRA — ATUALIZAÇÃO EM TEMPO REAL
-================================================== */
 
 inputLetra.addEventListener(
 "input",
@@ -1256,6 +1524,9 @@ function(){
         letraPreviewTexto.textContent =
         texto;
 
+
+        montarListaVersos();
+
     }
     else{
 
@@ -1263,11 +1534,15 @@ function(){
         "Não adicionada";
 
 
+        resumoSync.textContent =
+        "Não sincronizada";
+
+
         letraPreview.style.display =
         "none";
 
 
-        letraPreviewTexto.textContent =
+        listaVersos.innerHTML =
         "";
 
     }
@@ -1276,7 +1551,7 @@ function(){
 
 
 /* ==================================================
-   ESTILO
+   FORMATO / ESTILO
 ================================================== */
 
 estilo.addEventListener(
@@ -1289,10 +1564,6 @@ function(){
 });
 
 
-/* ==================================================
-   FORMATO
-================================================== */
-
 formato.addEventListener(
 "change",
 function(){
@@ -1304,64 +1575,328 @@ function(){
 
 
 /* ==================================================
-   OBTER VERSOS
+   LISTA DE VERSOS
 ================================================== */
 
-function obterVersos(){
+function montarListaVersos(){
 
-    return inputLetra.value
-    .split("\n")
-    .map(
-        function(linha){
-
-            return linha.trim();
-
-        }
-    )
-    .filter(
-        function(linha){
-
-            if(!linha){
-
-                return false;
-
-            }
+    const versos =
+    obterVersos();
 
 
-            /*
-               Ignora marcadores como:
-               [Verse]
-               [Chorus]
-               [Ponte]
-            */
+    listaVersos.innerHTML =
+    "";
+
+
+    if(
+        !versos.length
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        marcacoes.length !==
+        versos.length
+    ){
+
+        marcacoes =
+        new Array(
+            versos.length
+        ).fill(
+            null
+        );
+
+    }
+
+
+    versos.forEach(
+    function(verso,index){
+
+        const div =
+        document.createElement(
+            "div"
+        );
+
+
+        div.className =
+        "verso-item";
+
+
+        div.id =
+        "verso-" +
+        index;
+
+
+        const numero =
+        document.createElement(
+            "div"
+        );
+
+
+        numero.className =
+        "verso-numero";
+
+
+        numero.textContent =
+        "#" +
+        (index + 1);
+
+
+        const texto =
+        document.createElement(
+            "div"
+        );
+
+
+        texto.className =
+        "verso-texto";
+
+
+        texto.textContent =
+        verso;
+
+
+        const tempo =
+        document.createElement(
+            "input"
+        );
+
+
+        tempo.type =
+        "number";
+
+
+        tempo.step =
+        "0.001";
+
+
+        tempo.min =
+        "0";
+
+
+        tempo.className =
+        "verso-tempo";
+
+
+        tempo.value =
+        marcacoes[index] !== null
+        ?
+        marcacoes[index].toFixed(3)
+        :
+        "";
+
+
+        tempo.title =
+        "Tempo em segundos";
+
+
+        tempo.addEventListener(
+        "change",
+        function(){
+
+            const valor =
+            parseFloat(
+                tempo.value
+            );
+
 
             if(
-                linha.startsWith("[") &&
-                linha.endsWith("]")
+                isFinite(valor) &&
+                valor >= 0
             ){
 
-                return false;
+                marcacoes[index] =
+                valor;
+
+            }
+            else{
+
+                marcacoes[index] =
+                null;
 
             }
 
 
-            return true;
+            atualizarResumoSync();
 
-        }
+        });
+
+
+        div.appendChild(
+            numero
+        );
+
+        div.appendChild(
+            texto
+        );
+
+        div.appendChild(
+            tempo
+        );
+
+
+        listaVersos.appendChild(
+            div
+        );
+
+    });
+
+
+    atualizarResumoSync();
+
+}
+
+
+/* ==================================================
+   FORMATA TEMPO
+================================================== */
+
+function formatarTempo(
+    segundos
+){
+
+    if(
+        !isFinite(segundos)
+    ){
+
+        segundos =
+        0;
+
+    }
+
+
+    const minutos =
+    Math.floor(
+        segundos / 60
+    );
+
+
+    const segundosRestantes =
+    segundos -
+    minutos * 60;
+
+
+    return String(
+        minutos
+    ).padStart(
+        2,
+        "0"
+    )
+    +
+    ":"
+    +
+    segundosRestantes
+    .toFixed(3)
+    .padStart(
+        6,
+        "0"
     );
 
 }
 
 
 /* ==================================================
-   GERAR ROTEIRO
+   ATUALIZAR RELÓGIO
 ================================================== */
 
-botaoRoteiro.addEventListener(
-"click",
+audioPreview.addEventListener(
+"timeupdate",
 function(){
 
-    if(!musicaSelecionada){
+    tempoAtual.textContent =
+    formatarTempo(
+        audioPreview.currentTime
+    );
+
+
+    destacarVersoAtual();
+
+});
+
+
+function destacarVersoAtual(){
+
+    const tempo =
+    audioPreview.currentTime;
+
+
+    document
+    .querySelectorAll(
+        ".verso-item"
+    )
+    .forEach(
+    item => {
+
+        item.classList.remove(
+            "verso-atual"
+        );
+
+    });
+
+
+    let atual =
+    -1;
+
+
+    for(
+        let i = 0;
+        i < marcacoes.length;
+        i++
+    ){
+
+        if(
+            marcacoes[i] !== null &&
+            tempo >= marcacoes[i]
+        ){
+
+            atual =
+            i;
+
+        }
+
+    }
+
+
+    if(
+        atual >= 0
+    ){
+
+        const elemento =
+        document.getElementById(
+            "verso-" +
+            atual
+        );
+
+
+        if(
+            elemento
+        ){
+
+            elemento.classList.add(
+                "verso-atual"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* ==================================================
+   COMEÇAR SINCRONIZAÇÃO
+================================================== */
+
+botaoIniciarSync.addEventListener(
+"click",
+async function(){
+
+    if(
+        !musicaSelecionada
+    ){
 
         alert(
             "Selecione a música primeiro."
@@ -1372,8 +1907,430 @@ function(){
     }
 
 
+    const versos =
+    obterVersos();
+
+
     if(
-        imagensSelecionadas.length === 0
+        !versos.length
+    ){
+
+        alert(
+            "Cole a letra primeiro."
+        );
+
+        return;
+
+    }
+
+
+    indiceMarcacao =
+    0;
+
+
+    /*
+       Remove marcações antigas para
+       iniciar uma nova sincronização.
+    */
+
+    marcacoes =
+    new Array(
+        versos.length
+    ).fill(
+        null
+    );
+
+
+    montarListaVersos();
+
+
+    audioPreview.currentTime =
+    0;
+
+
+    try{
+
+        await audioPreview.play();
+
+    }
+    catch(e){
+
+        alert(
+            "Toque no botão PLAY do áudio para permitir a reprodução."
+        );
+
+        return;
+
+    }
+
+
+    syncStatus.textContent =
+    "🎵 Música tocando. Quando começar o primeiro verso, toque em MARCAR.";
+
+    syncStatus.className =
+    "status sucesso";
+
+
+    botaoMarcar.disabled =
+    false;
+
+});
+
+
+/* ==================================================
+   MARCAR PRÓXIMO VERSO
+================================================== */
+
+botaoMarcar.addEventListener(
+"click",
+function(){
+
+    const versos =
+    obterVersos();
+
+
+    if(
+        !versos.length
+    ){
+
+        alert(
+            "Cole a letra primeiro."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        indiceMarcacao >=
+        versos.length
+    ){
+
+        syncStatus.textContent =
+        "✓ Todos os versos já foram marcados.";
+
+        resumoSync.textContent =
+        "✓ Completa";
+
+
+        return;
+
+    }
+
+
+    const tempo =
+    audioPreview.currentTime;
+
+
+    marcacoes[
+        indiceMarcacao
+    ] =
+    tempo;
+
+
+    /*
+       Atualiza o campo correspondente.
+    */
+
+    const elemento =
+    document.getElementById(
+        "verso-" +
+        indiceMarcacao
+    );
+
+
+    if(
+        elemento
+    ){
+
+        const input =
+        elemento.querySelector(
+            "input"
+        );
+
+
+        if(
+            input
+        ){
+
+            input.value =
+            tempo.toFixed(3);
+
+        }
+
+    }
+
+
+    syncStatus.textContent =
+    "✓ Verso " +
+    (indiceMarcacao + 1) +
+    " marcado em " +
+    formatarTempo(
+        tempo
+    );
+
+
+    indiceMarcacao++;
+
+
+    atualizarResumoSync();
+
+
+    if(
+        indiceMarcacao >=
+        versos.length
+    ){
+
+        syncStatus.textContent +=
+        " — todos os versos marcados!";
+
+    }
+
+});
+
+
+/* ==================================================
+   PARAR
+================================================== */
+
+botaoPararSync.addEventListener(
+"click",
+function(){
+
+    audioPreview.pause();
+
+
+    syncStatus.textContent =
+    "⏸️ Sincronização pausada em " +
+    formatarTempo(
+        audioPreview.currentTime
+    );
+
+});
+
+
+/* ==================================================
+   LIMPAR
+================================================== */
+
+botaoLimparSync.addEventListener(
+"click",
+function(){
+
+    audioPreview.pause();
+
+    audioPreview.currentTime =
+    0;
+
+
+    const versos =
+    obterVersos();
+
+
+    marcacoes =
+    new Array(
+        versos.length
+    ).fill(
+        null
+    );
+
+
+    indiceMarcacao =
+    0;
+
+
+    montarListaVersos();
+
+
+    syncStatus.textContent =
+    "Marcações apagadas.";
+
+
+    resumoSync.textContent =
+    "Não sincronizada";
+
+});
+
+
+/* ==================================================
+   AUTOMÁTICO
+================================================== */
+
+botaoAuto.addEventListener(
+"click",
+function(){
+
+    if(
+        !musicaSelecionada
+    ){
+
+        alert(
+            "Selecione a música primeiro."
+        );
+
+        return;
+
+    }
+
+
+    const versos =
+    obterVersos();
+
+
+    if(
+        !versos.length
+    ){
+
+        alert(
+            "Cole a letra primeiro."
+        );
+
+        return;
+
+    }
+
+
+    const duracao =
+    audioPreview.duration;
+
+
+    if(
+        !isFinite(duracao) ||
+        duracao <= 0
+    ){
+
+        alert(
+            "Aguarde o carregamento da duração da música."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Distribuição automática.
+
+       O primeiro verso começa em 0.
+       Os demais são distribuídos
+       proporcionalmente pela duração.
+    */
+
+    marcacoes =
+    versos.map(
+    function(_,index){
+
+        return (
+            index /
+            versos.length
+        ) *
+        duracao;
+
+    });
+
+
+    montarListaVersos();
+
+
+    resumoSync.textContent =
+    "⚡ Automática";
+
+
+    syncStatus.textContent =
+    "✓ Sincronização automática criada. Você pode ajustar os tempos manualmente.";
+
+    syncStatus.className =
+    "status sucesso";
+
+
+    syncBox.style.display =
+    "block";
+
+});
+
+
+/* ==================================================
+   RESUMO SINCRONIZAÇÃO
+================================================== */
+
+function atualizarResumoSync(){
+
+    const total =
+    marcacoes.filter(
+        valor =>
+        valor !== null
+    ).length;
+
+
+    const quantidade =
+    marcacoes.length;
+
+
+    if(
+        !quantidade
+    ){
+
+        resumoSync.textContent =
+        "Não sincronizada";
+
+        return;
+
+    }
+
+
+    if(
+        total === quantidade
+    ){
+
+        resumoSync.textContent =
+        "✓ Completa";
+
+    }
+    else if(
+        total > 0
+    ){
+
+        resumoSync.textContent =
+        total +
+        "/" +
+        quantidade +
+        " marcados";
+
+    }
+    else{
+
+        resumoSync.textContent =
+        "Não sincronizada";
+
+    }
+
+}
+
+
+/* ==================================================
+   ROTEIRO
+================================================== */
+
+botaoRoteiro.addEventListener(
+"click",
+function(){
+
+    if(
+        !musicaSelecionada
+    ){
+
+        alert(
+            "Selecione a música."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !imagensSelecionadas.length
     ){
 
         alert(
@@ -1389,10 +2346,7 @@ function(){
     obterVersos();
 
 
-    let texto = "";
-
-
-    texto +=
+    let texto =
     "🎬 CLIP MUSICAL AI\n\n";
 
 
@@ -1411,35 +2365,15 @@ function(){
     texto +=
     "Formato: " +
     formato.value +
-    "\n";
-
-
-    texto +=
-    "Quantidade de imagens: " +
-    imagensSelecionadas.length +
-    "\n";
-
-
-    texto +=
-    "Quantidade de versos: " +
-    versos.length +
     "\n\n";
 
 
     texto +=
-    "━━━━━━━━━━━━━━━━━━━━\n";
-
-
-    texto +=
-    "ESTRUTURA DAS CENAS\n";
-
-
-    texto +=
-    "━━━━━━━━━━━━━━━━━━━━\n\n";
+    "ESTRUTURA DAS CENAS\n\n";
 
 
     imagensSelecionadas.forEach(
-    function(item,index){
+    function(_,index){
 
         texto +=
         "🎥 CENA " +
@@ -1447,47 +2381,27 @@ function(){
         "\n";
 
 
-        /*
-           MOVIMENTO DIFERENTE EM CADA CENA
-        */
-
         if(
-            index % 4 === 0
+            index % 2 === 0
         ){
 
             texto +=
-            "Movimento: zoom aproximando 115% → 150% + deslocamento lateral.\n";
-
-        }
-        else if(
-            index % 4 === 1
-        ){
-
-            texto +=
-            "Movimento: zoom afastando 150% → 115% + deslocamento lateral.\n";
-
-        }
-        else if(
-            index % 4 === 2
-        ){
-
-            texto +=
-            "Movimento: zoom aproximando 115% → 150% + deslocamento vertical.\n";
+            "Movimento: zoom 115% → 155% + câmera lateral.\n";
 
         }
         else{
 
             texto +=
-            "Movimento: zoom afastando 150% → 115% + deslocamento vertical.\n";
+            "Movimento: zoom 155% → 115% + câmera lateral.\n";
 
         }
 
 
         if(
-            versos.length > 0
+            versos.length
         ){
 
-            const indiceVerso =
+            const indice =
             Math.min(
                 index,
                 versos.length - 1
@@ -1495,14 +2409,15 @@ function(){
 
 
             texto +=
-            "Letra: " +
-            versos[indiceVerso] +
+            "Trecho: " +
+            versos[indice] +
             "\n";
 
         }
 
 
-        texto += "\n";
+        texto +=
+        "\n";
 
     });
 
@@ -1533,7 +2448,7 @@ function(){
 
 
 /* ==================================================
-   CARREGAR IMAGEM PARA CANVAS
+   CARREGAR IMAGEM
 ================================================== */
 
 function carregarImagem(
@@ -1543,33 +2458,33 @@ function carregarImagem(
     return new Promise(
     function(resolve,reject){
 
-        const imagem =
+        const img =
         new Image();
 
 
-        imagem.onload =
+        img.onload =
         function(){
 
             resolve(
-                imagem
+                img
             );
 
         };
 
 
-        imagem.onerror =
+        img.onerror =
         function(){
 
             reject(
                 new Error(
-                    "Não foi possível carregar uma imagem."
+                    "Erro ao carregar imagem."
                 )
             );
 
         };
 
 
-        imagem.src =
+        img.src =
         src;
 
     });
@@ -1578,7 +2493,7 @@ function carregarImagem(
 
 
 /* ==================================================
-   DESENHAR IMAGEM
+   DESENHAR CENA
 ================================================== */
 
 function desenharCena(
@@ -1597,20 +2512,13 @@ function desenharCena(
 
 
     /*
-       MUITO IMPORTANTE:
+       ZOOM FORTE.
 
-       A PRIMEIRA IMAGEM JÁ COMEÇA
-       COM 115% DE ESCALA.
+       A PRIMEIRA CENA começa
+       imediatamente em 115%.
 
-       Depois vai até 150%.
-
-       Portanto não existe mais:
-       100% → 120%
-
-       Agora:
-       115% → 150%
+       Depois vai até 155%.
     */
-
 
     let zoom;
 
@@ -1621,25 +2529,30 @@ function desenharCena(
 
         zoom =
         1.15 +
-        progresso * 0.35;
+        progresso *
+        0.40;
 
     }
     else{
 
         zoom =
-        1.50 -
-        progresso * 0.35;
+        1.55 -
+        progresso *
+        0.40;
 
     }
 
 
     /*
-       Movimento muito maior que antes.
+       Movimento de câmera
+       bastante perceptível.
     */
 
-    let deslocamentoX = 0;
+    let deslocamentoX =
+    0;
 
-    let deslocamentoY = 0;
+    let deslocamentoY =
+    0;
 
 
     if(
@@ -1648,10 +2561,13 @@ function desenharCena(
 
         deslocamentoX =
         (
-            progresso - 0.5
-        ) *
-        cw *
-        0.20;
+            progresso -
+            0.5
+        )
+        *
+        cw
+        *
+        0.24;
 
     }
     else if(
@@ -1660,10 +2576,13 @@ function desenharCena(
 
         deslocamentoX =
         (
-            0.5 - progresso
-        ) *
-        cw *
-        0.20;
+            0.5 -
+            progresso
+        )
+        *
+        cw
+        *
+        0.24;
 
     }
     else if(
@@ -1672,27 +2591,29 @@ function desenharCena(
 
         deslocamentoY =
         (
-            progresso - 0.5
-        ) *
-        ch *
-        0.20;
+            progresso -
+            0.5
+        )
+        *
+        ch
+        *
+        0.24;
 
     }
     else{
 
         deslocamentoY =
         (
-            0.5 - progresso
-        ) *
-        ch *
-        0.20;
+            0.5 -
+            progresso
+        )
+        *
+        ch
+        *
+        0.24;
 
     }
 
-
-    /*
-       Fazer a imagem preencher o canvas.
-    */
 
     const escalaBase =
     Math.max(
@@ -1701,31 +2622,38 @@ function desenharCena(
     );
 
 
-    const escalaFinal =
-    escalaBase * zoom;
+    const escala =
+    escalaBase *
+    zoom;
 
 
     const largura =
     img.width *
-    escalaFinal;
+    escala;
 
 
     const altura =
     img.height *
-    escalaFinal;
+    escala;
 
 
     const x =
     (
-        cw - largura
-    ) / 2 +
+        cw -
+        largura
+    ) /
+    2
+    +
     deslocamentoX;
 
 
     const y =
     (
-        ch - altura
-    ) / 2 +
+        ch -
+        altura
+    ) /
+    2
+    +
     deslocamentoY;
 
 
@@ -1741,7 +2669,7 @@ function desenharCena(
 
 
 /* ==================================================
-   LETRA NO VÍDEO
+   DESENHAR LETRA
 ================================================== */
 
 function desenharLetra(
@@ -1769,9 +2697,9 @@ function desenharLetra(
 
     const tamanho =
     Math.max(
-        24,
+        25,
         Math.round(
-            cw * 0.034
+            cw * 0.035
         )
     );
 
@@ -1794,23 +2722,25 @@ function desenharLetra(
 
 
     const margem =
-    cw * 0.08;
+    cw *
+    0.07;
 
 
     const larguraMax =
     cw -
-    margem * 2;
+    margem *
+    2;
 
-
-    /*
-       Quebrar o texto em linhas.
-    */
 
     const palavras =
-    texto.split(/\s+/);
+    texto.split(
+        /\s+/
+    );
 
 
-    const linhas = [];
+    const linhas =
+    [];
+
 
     let linha =
     "";
@@ -1822,7 +2752,9 @@ function desenharLetra(
         const teste =
         linha
         ?
-        linha + " " + palavra
+        linha +
+        " " +
+        palavra
         :
         palavra;
 
@@ -1840,7 +2772,9 @@ function desenharLetra(
         }
         else{
 
-            if(linha){
+            if(
+                linha
+            ){
 
                 linhas.push(
                     linha
@@ -1857,7 +2791,9 @@ function desenharLetra(
     });
 
 
-    if(linha){
+    if(
+        linha
+    ){
 
         linhas.push(
             linha
@@ -1866,13 +2802,11 @@ function desenharLetra(
     }
 
 
-    /*
-       Limitar para duas linhas
-       na tela.
-    */
-
     let linhasFinais =
-    linhas.slice(0,2);
+    linhas.slice(
+        0,
+        2
+    );
 
 
     if(
@@ -1880,13 +2814,18 @@ function desenharLetra(
     ){
 
         linhasFinais[1] =
-        linhas.slice(1).join(" ");
+        linhas.slice(
+            1
+        ).join(
+            " "
+        );
 
     }
 
 
     const alturaLinha =
-    tamanho * 1.25;
+    tamanho *
+    1.25;
 
 
     const alturaCaixa =
@@ -1896,25 +2835,25 @@ function desenharLetra(
 
 
     const caixaX =
-    cw * 0.05;
+    cw *
+    0.05;
 
 
     const caixaLargura =
-    cw * 0.90;
+    cw *
+    0.90;
 
 
     const caixaY =
     ch -
-    ch * 0.18 -
-    alturaCaixa / 2;
+    ch *
+    0.18 -
+    alturaCaixa /
+    2;
 
-
-    /*
-       Fundo preto.
-    */
 
     ctx.fillStyle =
-    "rgba(0,0,0,0.68)";
+    "rgba(0,0,0,.72)";
 
 
     ctx.beginPath();
@@ -1948,10 +2887,6 @@ function desenharLetra(
     ctx.fill();
 
 
-    /*
-       Texto.
-    */
-
     ctx.fillStyle =
     "#ffffff";
 
@@ -1961,7 +2896,7 @@ function desenharLetra(
 
 
     ctx.shadowBlur =
-    7;
+    8;
 
 
     ctx.shadowOffsetX =
@@ -1974,26 +2909,32 @@ function desenharLetra(
 
     const centroY =
     caixaY +
-    alturaCaixa / 2;
+    alturaCaixa /
+    2;
 
 
     const inicioY =
     centroY -
     (
-        (linhasFinais.length - 1) *
+        (
+            linhasFinais.length -
+            1
+        )
+        *
         alturaLinha /
         2
     );
 
 
     linhasFinais.forEach(
-    function(item,index){
+    function(linhaTexto,index){
 
         ctx.fillText(
-            item,
+            linhaTexto,
             cw / 2,
             inicioY +
-            index * alturaLinha
+            index *
+            alturaLinha
         );
 
     });
@@ -2005,7 +2946,7 @@ function desenharLetra(
 
 
 /* ==================================================
-   ESCOLHER CODEC
+   CODEC
 ================================================== */
 
 function escolherCodec(){
@@ -2049,26 +2990,30 @@ function escolherCodec(){
 
 
 /* ==================================================
-   PREPARAR ÁUDIO
+   ÁUDIO
 ================================================== */
 
 async function prepararAudio(){
 
-    if(!audioContext){
-
-        const AudioCtx =
-        window.AudioContext ||
-        window.webkitAudioContext;
+    const AudioCtx =
+    window.AudioContext ||
+    window.webkitAudioContext;
 
 
-        if(!AudioCtx){
+    if(
+        !AudioCtx
+    ){
 
-            throw new Error(
-                "Seu navegador não suporta áudio para gravação."
-            );
+        throw new Error(
+            "Seu navegador não suporta o sistema de áudio."
+        );
 
-        }
+    }
 
+
+    if(
+        !audioContext
+    ){
 
         audioContext =
         new AudioCtx();
@@ -2088,11 +3033,6 @@ async function prepararAudio(){
             audioDestination
         );
 
-
-        /*
-           Também permite ouvir a música
-           normalmente.
-        */
 
         audioSource.connect(
             audioContext.destination
@@ -2117,6 +3057,25 @@ async function prepararAudio(){
 
 
 /* ==================================================
+   ESPERAR
+================================================== */
+
+function esperar(
+    ms
+){
+
+    return new Promise(
+    resolve =>
+    setTimeout(
+        resolve,
+        ms
+    )
+    );
+
+}
+
+
+/* ==================================================
    GERAR CLIPE
 ================================================== */
 
@@ -2124,18 +3083,25 @@ botaoGerar.addEventListener(
 "click",
 async function(){
 
+    let recorder =
+    null;
+
+    let intervalo =
+    null;
+
+
     try{
 
-        /*
-           ==========================================
-           VERIFICAÇÕES
-        ==========================================
-        */
+        /* ------------------------------------------
+           VALIDAÇÕES
+        ------------------------------------------ */
 
-        if(!musicaSelecionada){
+        if(
+            !musicaSelecionada
+        ){
 
             alert(
-                "Selecione uma música primeiro."
+                "Selecione a música."
             );
 
             return;
@@ -2144,7 +3110,7 @@ async function(){
 
 
         if(
-            imagensSelecionadas.length === 0
+            !imagensSelecionadas.length
         ){
 
             alert(
@@ -2156,39 +3122,101 @@ async function(){
         }
 
 
-        /*
-           ==========================================
-           VERIFICAR LETRA
-        ==========================================
-        */
-
         const versos =
         obterVersos();
 
 
-        /*
-           ==========================================
-           GERAR ROTEIRO AUTOMATICAMENTE
-        ==========================================
-        */
+        if(
+            !versos.length
+        ){
 
-        if(!roteiroAtual){
-
-            const evento =
-            new Event("click");
-
-            botaoRoteiro.dispatchEvent(
-                evento
+            alert(
+                "Cole a letra do louvor."
             );
+
+            return;
 
         }
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
+           DURAÇÃO
+        ------------------------------------------ */
+
+        if(
+            !isFinite(
+                audioPreview.duration
+            ) ||
+            audioPreview.duration <= 0
+        ){
+
+            alert(
+                "Aguarde o carregamento da música."
+            );
+
+            return;
+
+        }
+
+
+        /* ------------------------------------------
+           SE NÃO HOUVER MARCAÇÃO COMPLETA,
+           USA DISTRIBUIÇÃO AUTOMÁTICA
+        ------------------------------------------ */
+
+        const todasMarcadas =
+        marcacoes.length ===
+        versos.length &&
+        marcacoes.every(
+            valor =>
+            valor !== null &&
+            isFinite(valor)
+        );
+
+
+        if(
+            !todasMarcadas
+        ){
+
+            const duracao =
+            audioPreview.duration;
+
+
+            marcacoes =
+            versos.map(
+            function(_,index){
+
+                return (
+                    index /
+                    versos.length
+                )
+                *
+                duracao;
+
+            });
+
+
+            montarListaVersos();
+
+        }
+
+
+        /* ------------------------------------------
+           ROTEIRO
+        ------------------------------------------ */
+
+        if(
+            !roteiroAtual
+        ){
+
+            botaoRoteiro.click();
+
+        }
+
+
+        /* ------------------------------------------
            INTERFACE
-        ==========================================
-        */
+        ------------------------------------------ */
 
         botaoGerar.disabled =
         true;
@@ -2211,14 +3239,12 @@ async function(){
 
 
         statusElemento.textContent =
-        "Preparando o clipe...";
+        "Carregando imagens...";
 
 
-        /*
-           ==========================================
-           CARREGAR IMAGENS
-        ==========================================
-        */
+        /* ------------------------------------------
+           IMAGENS
+        ------------------------------------------ */
 
         const imagens = [];
 
@@ -2227,24 +3253,18 @@ async function(){
             const item of imagensSelecionadas
         ){
 
-            const img =
-            await carregarImagem(
-                item.src
-            );
-
-
             imagens.push(
-                img
+                await carregarImagem(
+                    item.src
+                )
             );
 
         }
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
            CANVAS
-        ==========================================
-        */
+        ------------------------------------------ */
 
         const canvas =
         document.createElement(
@@ -2281,7 +3301,9 @@ async function(){
         );
 
 
-        if(!ctx){
+        if(
+            !ctx
+        ){
 
             throw new Error(
                 "Não foi possível criar o Canvas."
@@ -2290,32 +3312,46 @@ async function(){
         }
 
 
-        /*
-           ==========================================
-           STREAM
-        ==========================================
-        */
+        /* ------------------------------------------
+           CAPTURA
+        ------------------------------------------ */
 
-        const videoStream =
-        canvas.captureStream(
-            30
-        );
+        let capturaManual =
+        true;
 
 
-        if(!videoStream){
+        let videoStream;
 
-            throw new Error(
-                "Seu navegador não conseguiu criar o vídeo."
+
+        try{
+
+            videoStream =
+            canvas.captureStream(
+                0
+            );
+
+        }
+        catch(e){
+
+            capturaManual =
+            false;
+
+
+            videoStream =
+            canvas.captureStream(
+                30
             );
 
         }
 
 
-        /*
-           ==========================================
+        const videoTrack =
+        videoStream.getVideoTracks()[0];
+
+
+        /* ------------------------------------------
            ÁUDIO
-        ==========================================
-        */
+        ------------------------------------------ */
 
         const audioStream =
         await prepararAudio();
@@ -2333,48 +3369,37 @@ async function(){
         });
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
            CODEC
-        ==========================================
-        */
+        ------------------------------------------ */
 
         const codec =
         escolherCodec();
 
 
-        if(!codec){
+        if(
+            !codec
+        ){
 
             throw new Error(
-                "Seu navegador não suporta gravação de vídeo WebM."
+                "Seu navegador não suporta gravação WebM."
             );
 
         }
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
            RECORDER
-        ==========================================
-        */
+        ------------------------------------------ */
 
-        const recorder =
+        recorder =
         new MediaRecorder(
-
             videoStream,
-
             {
-
                 mimeType:codec,
-
-                videoBitsPerSecond:
-                6000000,
-
-                audioBitsPerSecond:
-                128000
-
+                videoBitsPerSecond:7000000,
+                audioBitsPerSecond:128000
             }
-
         );
 
 
@@ -2398,301 +3423,416 @@ async function(){
         };
 
 
-        /*
-           ==========================================
-           INICIAR GRAVAÇÃO
-        ==========================================
-        */
+        /* ------------------------------------------
+           DURAÇÃO
+        ------------------------------------------ */
+
+        const duracao =
+        audioPreview.duration;
+
+
+        /* ------------------------------------------
+           COMEÇAR GRAVAÇÃO
+        ------------------------------------------ */
 
         recorder.start(
             1000
         );
 
 
-        /*
-           ==========================================
-           DESCOBRIR DURAÇÃO DA MÚSICA
-        ==========================================
-        */
+        /* ------------------------------------------
+           PRIMEIRO QUADRO
+        ------------------------------------------ */
+
+        ctx.fillStyle =
+        "#000";
+
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        desenharCena(
+            ctx,
+            canvas,
+            imagens[0],
+            0,
+            0
+        );
+
+
+        desenharLetra(
+            ctx,
+            canvas,
+            versos[0]
+        );
+
+
+        if(
+            capturaManual &&
+            videoTrack.requestFrame
+        ){
+
+            videoTrack.requestFrame();
+
+        }
+
+
+        /* ------------------------------------------
+           COMEÇAR MÚSICA
+        ------------------------------------------ */
+
+        await esperar(
+            300
+        );
+
 
         audioPreview.currentTime =
         0;
 
 
-        if(
-            audioPreview.readyState < 1
-        ){
+        await audioContext.resume();
 
-            await new Promise(
-            function(resolve){
-
-                audioPreview.addEventListener(
-                    "loadedmetadata",
-                    resolve,
-                    {
-                        once:true
-                    }
-                );
-
-            });
-
-        }
-
-
-        let duracao =
-        audioPreview.duration;
-
-
-        if(
-            !isFinite(duracao) ||
-            duracao <= 0
-        ){
-
-            duracao =
-            30;
-
-        }
-
-
-        /*
-           ==========================================
-           INICIAR ÁUDIO
-        ==========================================
-        */
 
         await audioPreview.play();
 
 
-        /*
-           ==========================================
-           CENAS
-        ==========================================
-        */
+        /* ------------------------------------------
+           FRAMES
+        ------------------------------------------ */
 
-        const quantidadeImagens =
-        imagens.length;
+        const fps =
+        30;
 
 
-        const tempoCena =
-        duracao /
-        quantidadeImagens;
+        const intervaloMs =
+        1000 /
+        fps;
 
 
-        const inicio =
-        performance.now();
+        let terminou =
+        false;
 
 
-        /*
-           ==========================================
-           RENDERIZAÇÃO
-        ==========================================
-        */
+        intervalo =
+        setInterval(
+        function(){
 
-        await new Promise(
-        function(resolve){
-
-            function renderizar(
-                agora
+            if(
+                terminou
             ){
 
-                const tempo =
-                (
-                    agora -
-                    inicio
-                ) / 1000;
-
-
-                const progressoTotal =
-                Math.min(
-                    tempo / duracao,
-                    1
-                );
-
-
-                /*
-                   CENA ATUAL
-                */
-
-                let indice =
-                Math.floor(
-                    progressoTotal *
-                    quantidadeImagens
-                );
-
-
-                if(
-                    indice >=
-                    quantidadeImagens
-                ){
-
-                    indice =
-                    quantidadeImagens - 1;
-
-                }
-
-
-                /*
-                   PROGRESSO DA CENA
-                */
-
-                const inicioCena =
-                indice *
-                tempoCena;
-
-
-                let progressoCena =
-                (
-                    tempo -
-                    inicioCena
-                ) /
-                tempoCena;
-
-
-                progressoCena =
-                Math.max(
-                    0,
-                    Math.min(
-                        progressoCena,
-                        1
-                    )
-                );
-
-
-                /*
-                   FUNDO
-                */
-
-                ctx.fillStyle =
-                "#000";
-
-
-                ctx.fillRect(
-                    0,
-                    0,
-                    canvas.width,
-                    canvas.height
-                );
-
-
-                /*
-                   IMAGEM
-                */
-
-                desenharCena(
-
-                    ctx,
-
-                    canvas,
-
-                    imagens[indice],
-
-                    progressoCena,
-
-                    indice
-
-                );
-
-
-                /*
-                   LETRA
-                */
-
-                if(
-                    versos.length > 0
-                ){
-
-                    let indiceVerso =
-                    Math.floor(
-                        progressoTotal *
-                        versos.length
-                    );
-
-
-                    if(
-                        indiceVerso >=
-                        versos.length
-                    ){
-
-                        indiceVerso =
-                        versos.length - 1;
-
-                    }
-
-
-                    desenharLetra(
-
-                        ctx,
-
-                        canvas,
-
-                        versos[indiceVerso]
-
-                    );
-
-                }
-
-
-                /*
-                   PROGRESSO
-                */
-
-                const porcentagem =
-                Math.round(
-                    progressoTotal * 100
-                );
-
-
-                progressFill.style.width =
-                porcentagem + "%";
-
-
-                statusElemento.textContent =
-                "Gerando clipe... " +
-                porcentagem +
-                "%";
-
-
-                /*
-                   FINAL
-                */
-
-                if(
-                    progressoTotal >= 1
-                ){
-
-                    resolve();
-
-                    return;
-
-                }
-
-
-                requestAnimationFrame(
-                    renderizar
-                );
+                return;
 
             }
 
 
-            requestAnimationFrame(
-                renderizar
+            const tempo =
+            audioPreview.currentTime;
+
+
+            const progressoTotal =
+            Math.max(
+                0,
+                Math.min(
+                    tempo /
+                    duracao,
+                    1
+                )
+            );
+
+
+            /* --------------------------------------
+               IMAGEM
+            -------------------------------------- */
+
+            let indiceImagem =
+            Math.floor(
+                progressoTotal *
+                imagens.length
+            );
+
+
+            if(
+                indiceImagem >=
+                imagens.length
+            ){
+
+                indiceImagem =
+                imagens.length - 1;
+
+            }
+
+
+            const duracaoCena =
+            duracao /
+            imagens.length;
+
+
+            const inicioCena =
+            indiceImagem *
+            duracaoCena;
+
+
+            let progressoCena =
+            (
+                tempo -
+                inicioCena
+            )
+            /
+            duracaoCena;
+
+
+            progressoCena =
+            Math.max(
+                0,
+                Math.min(
+                    progressoCena,
+                    1
+                )
+            );
+
+
+            /* --------------------------------------
+               FUNDO
+            -------------------------------------- */
+
+            ctx.fillStyle =
+            "#000";
+
+
+            ctx.fillRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            /* --------------------------------------
+               IMAGEM + ZOOM
+            -------------------------------------- */
+
+            desenharCena(
+                ctx,
+                canvas,
+                imagens[indiceImagem],
+                progressoCena,
+                indiceImagem
+            );
+
+
+            /* --------------------------------------
+               LETRA PELO TEMPO MARCADO
+            -------------------------------------- */
+
+            let indiceLetra =
+            0;
+
+
+            for(
+                let i = 0;
+                i < marcacoes.length;
+                i++
+            ){
+
+                if(
+                    tempo >=
+                    marcacoes[i]
+                ){
+
+                    indiceLetra =
+                    i;
+
+                }
+
+            }
+
+
+            if(
+                indiceLetra >=
+                versos.length
+            ){
+
+                indiceLetra =
+                versos.length - 1;
+
+            }
+
+
+            desenharLetra(
+                ctx,
+                canvas,
+                versos[indiceLetra]
+            );
+
+
+            /* --------------------------------------
+               CAPTURA DO QUADRO
+            -------------------------------------- */
+
+            if(
+                capturaManual &&
+                videoTrack.requestFrame
+            ){
+
+                videoTrack.requestFrame();
+
+            }
+
+
+            /* --------------------------------------
+               PROGRESSO
+            -------------------------------------- */
+
+            progressFill.style.width =
+            Math.round(
+                progressoTotal *
+                100
+            )
+            +
+            "%";
+
+
+            statusElemento.textContent =
+            "Gerando clipe... " +
+            Math.round(
+                progressoTotal *
+                100
+            )
+            +
+            "%";
+
+
+            if(
+                tempo >=
+                duracao -
+                0.05
+            ){
+
+                terminou =
+                true;
+
+            }
+
+        },
+        intervaloMs
+        );
+
+
+        /* ------------------------------------------
+           ESPERAR FIM DO ÁUDIO
+        ------------------------------------------ */
+
+        await new Promise(
+        function(resolve){
+
+            const verificar =
+            setInterval(
+            function(){
+
+                if(
+                    audioPreview.ended ||
+                    audioPreview.currentTime >=
+                    duracao -
+                    0.03
+                ){
+
+                    clearInterval(
+                        verificar
+                    );
+
+
+                    resolve();
+
+                }
+
+            },
+            50
             );
 
         });
 
 
-        /*
-           ==========================================
-           FINALIZAR ÁUDIO
-        ==========================================
-        */
+        /* ------------------------------------------
+           PARAR LOOP
+        ------------------------------------------ */
+
+        if(
+            intervalo
+        ){
+
+            clearInterval(
+                intervalo
+            );
+
+            intervalo =
+            null;
+
+        }
+
 
         audioPreview.pause();
 
 
-        /*
-           Solicita o último bloco.
-        */
+        /* ------------------------------------------
+           ÚLTIMO QUADRO
+        ------------------------------------------ */
+
+        ctx.fillStyle =
+        "#000";
+
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        desenharCena(
+            ctx,
+            canvas,
+            imagens[
+                imagens.length - 1
+            ],
+            1,
+            imagens.length - 1
+        );
+
+
+        desenharLetra(
+            ctx,
+            canvas,
+            versos[
+                versos.length - 1
+            ]
+        );
+
+
+        if(
+            capturaManual &&
+            videoTrack.requestFrame
+        ){
+
+            videoTrack.requestFrame();
+
+        }
+
+
+        await esperar(
+            400
+        );
+
+
+        /* ------------------------------------------
+           PEDIR DADOS
+        ------------------------------------------ */
 
         try{
 
@@ -2702,14 +3842,29 @@ async function(){
         catch(e){}
 
 
-        /*
-           ==========================================
-           PARAR GRAVAÇÃO
-        ==========================================
-        */
+        await esperar(
+            300
+        );
+
+
+        /* ------------------------------------------
+           PARAR RECORDER
+        ------------------------------------------ */
 
         await new Promise(
         function(resolve){
+
+            if(
+                recorder.state ===
+                "inactive"
+            ){
+
+                resolve();
+
+                return;
+
+            }
+
 
             recorder.addEventListener(
                 "stop",
@@ -2725,83 +3880,65 @@ async function(){
         });
 
 
-        /*
-           ==========================================
-           AGUARDAR DADOS
-        ==========================================
-        */
+        await esperar(
+            700
+        );
 
-        await new Promise(
-        function(resolve){
-
-            setTimeout(
-                resolve,
-                500
-            );
-
-        });
-
-
-        /*
-           ==========================================
-           VERIFICAR
-        ==========================================
-        */
 
         if(
-            partes.length === 0
+            !partes.length
         ){
 
             throw new Error(
-                "O navegador não entregou os dados do vídeo."
+                "O navegador não entregou o vídeo."
             );
 
         }
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
            BLOB
-        ==========================================
-        */
+        ------------------------------------------ */
 
         const blob =
         new Blob(
-
             partes,
-
             {
                 type:
                 recorder.mimeType ||
                 codec ||
                 "video/webm"
             }
-
         );
 
 
         if(
-            blob.size === 0
+            !blob.size
         ){
 
             throw new Error(
-                "O arquivo do vídeo ficou vazio."
+                "O arquivo de vídeo ficou vazio."
             );
 
         }
 
 
-        /*
-           ==========================================
+        /* ------------------------------------------
            URL
-        ==========================================
-        */
+        ------------------------------------------ */
 
-        if(videoURL){
+        if(
+            videoURL
+        ){
 
-            URL.revokeObjectURL(
-                videoURL
-            );
+            try{
+
+                URL.revokeObjectURL(
+                    videoURL
+                );
+
+            }
+            catch(e){}
 
         }
 
@@ -2812,11 +3949,9 @@ async function(){
         );
 
 
-        /*
-           ==========================================
-           PLAYER
-        ==========================================
-        */
+        /* ------------------------------------------
+           MOSTRAR
+        ------------------------------------------ */
 
         videoResultado.pause();
 
@@ -2841,12 +3976,6 @@ async function(){
         "block";
 
 
-        /*
-           ==========================================
-           DOWNLOAD
-        ==========================================
-        */
-
         download.href =
         videoURL;
 
@@ -2858,12 +3987,6 @@ async function(){
         download.style.display =
         "block";
 
-
-        /*
-           ==========================================
-           INFORMAÇÕES
-        ==========================================
-        */
 
         const tamanho =
         (
@@ -2891,34 +4014,20 @@ async function(){
         "✓ CLIPE CRIADO COM SUCESSO!";
 
 
-        /*
-           ==========================================
-           CARREGAR PLAYER
-        ==========================================
-        */
-
         videoResultado.load();
 
 
-        /*
-           Tentar iniciar automaticamente.
-           Se o Android bloquear, o botão
-           PLAY continuará disponível.
-        */
+        videoResultado.onloadeddata =
+        function(){
 
-        try{
+            videoResultado
+            .play()
+            .catch(
+                function(){}
+            );
 
-            await videoResultado.play();
+        };
 
-        }
-        catch(e){}
-
-
-        /*
-           ==========================================
-           IR PARA O VÍDEO
-        ==========================================
-        */
 
         setTimeout(
         function(){
@@ -2932,19 +4041,34 @@ async function(){
         300
         );
 
-
     }
     catch(erro){
 
         console.error(
-            "ERRO:",
             erro
         );
 
 
+        if(
+            intervalo
+        ){
+
+            clearInterval(
+                intervalo
+            );
+
+        }
+
+
+        audioPreview.pause();
+
+
         statusElemento.textContent =
         "❌ " +
-        erro.message;
+        (
+            erro.message ||
+            "Erro desconhecido."
+        );
 
 
         statusElemento.className =
@@ -2953,7 +4077,10 @@ async function(){
 
         alert(
             "Não foi possível gerar o clipe.\n\n" +
-            erro.message
+            (
+                erro.message ||
+                "Erro desconhecido."
+            )
         );
 
     }
@@ -2975,7 +4102,9 @@ window.addEventListener(
 "beforeunload",
 function(){
 
-    if(videoURL){
+    if(
+        videoURL
+    ){
 
         try{
 
