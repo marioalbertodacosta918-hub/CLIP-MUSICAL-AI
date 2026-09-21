@@ -115,10 +115,6 @@ button:disabled{
     background:#383847;
 }
 
-.btn-teste{
-    background:#d87900;
-}
-
 .status{
     color:#aaa;
     font-size:14px;
@@ -286,7 +282,7 @@ button:disabled{
 
 .verso-item{
     display:grid;
-    grid-template-columns:70px 1fr 65px;
+    grid-template-columns:70px 1fr 75px;
     gap:7px;
     align-items:center;
     background:#141421;
@@ -330,6 +326,55 @@ button:disabled{
 
 
 /* ==========================================
+   TESTE
+========================================== */
+
+.teste-box{
+    background:#090912;
+    border:1px solid #303044;
+    border-radius:12px;
+    padding:16px;
+    margin-top:15px;
+}
+
+.teste-titulo{
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.teste-info{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.teste-botoes{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.teste-botoes button{
+    margin:0;
+    background:#e88900;
+}
+
+.teste-botoes button.selecionado{
+    background:#079866;
+    box-shadow:0 0 0 2px white;
+}
+
+.teste-status{
+    color:#d8a957;
+    text-align:center;
+    margin-top:12px;
+    font-size:14px;
+}
+
+
+/* ==========================================
    PROGRESSO
 ========================================== */
 
@@ -364,6 +409,7 @@ button:disabled{
 
 #videoResultado{
     width:100%;
+    min-height:220px;
     background:#000;
     border-radius:12px;
     border:1px solid #333;
@@ -394,54 +440,6 @@ button:disabled{
 }
 
 
-/* ==========================================
-   MODO DE TESTE
-========================================== */
-
-.teste-box{
-    background:#090912;
-    border:1px solid #39394c;
-    border-radius:12px;
-    padding:13px;
-    margin-top:14px;
-}
-
-.teste-box h3{
-    font-size:16px;
-    margin-bottom:8px;
-}
-
-.teste-box p{
-    color:#aaa;
-    font-size:13px;
-    line-height:1.5;
-    margin-bottom:10px;
-}
-
-.teste-opcoes{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    gap:7px;
-}
-
-.teste-opcoes button{
-    margin:0;
-    padding:11px 5px;
-    font-size:13px;
-}
-
-.teste-selecionado{
-    box-shadow:0 0 0 2px #fff;
-}
-
-.modo-info{
-    text-align:center;
-    color:#f0b45a;
-    font-size:13px;
-    margin-top:9px;
-}
-
-
 @media(max-width:600px){
 
     .container{
@@ -464,12 +462,12 @@ button:disabled{
         grid-template-columns:1fr;
     }
 
-    .verso-item{
-        grid-template-columns:45px 1fr 68px;
+    .teste-botoes{
+        grid-template-columns:1fr 1fr;
     }
 
-    .teste-opcoes{
-        grid-template-columns:1fr 1fr;
+    .verso-item{
+        grid-template-columns:45px 1fr 68px;
     }
 
 }
@@ -596,7 +594,9 @@ E o sonho é Te adorar, meu Deus."
 </div>
 
 <div class="dica">
+
 💡 Cada linha será considerada um trecho da letra.
+
 </div>
 
 <div
@@ -626,7 +626,7 @@ E o sonho é Te adorar, meu Deus."
 
 Primeiro cole a letra acima.
 
-Depois você pode usar a sincronização automática ou marcar manualmente cada verso enquanto a música toca.
+Você pode sincronizar manualmente ou usar a sincronização automática.
 
 </div>
 
@@ -762,33 +762,68 @@ Formato
 <div class="resumo">
 
 <div class="resumo-box">
+
 <strong>🎵 Música</strong>
-<span id="resumoMusica">Não selecionada</span>
+
+<span id="resumoMusica">
+Não selecionada
+</span>
+
 </div>
 
+
 <div class="resumo-box">
+
 <strong>🖼️ Imagens</strong>
-<span id="resumoImagens">0 imagens</span>
+
+<span id="resumoImagens">
+0 imagens
+</span>
+
 </div>
 
+
 <div class="resumo-box">
+
 <strong>📝 Letra</strong>
-<span id="resumoLetra">Não adicionada</span>
+
+<span id="resumoLetra">
+Não adicionada
+</span>
+
 </div>
 
+
 <div class="resumo-box">
+
 <strong>🎯 Sincronização</strong>
-<span id="resumoSync">Não sincronizada</span>
+
+<span id="resumoSync">
+Não sincronizada
+</span>
+
 </div>
 
+
 <div class="resumo-box">
+
 <strong>🎨 Estilo</strong>
-<span id="resumoEstilo">Cinematográfico</span>
+
+<span id="resumoEstilo">
+Cinematográfico
+</span>
+
 </div>
 
+
 <div class="resumo-box">
+
 <strong>📐 Formato</strong>
-<span id="resumoFormato">16:9</span>
+
+<span id="resumoFormato">
+16:9
+</span>
+
 </div>
 
 </div>
@@ -819,7 +854,7 @@ O roteiro aparecerá aqui.
 
 
 <!-- ==========================================
-     7 GERAR
+     7 GERAR CLIPE
 ========================================== -->
 
 <div class="card">
@@ -828,11 +863,11 @@ O roteiro aparecerá aqui.
 
 <div class="info">
 
-✔ Música
+✔ Música completa
 
 <br>
 
-✔ Imagens
+✔ Imagens baseadas na música
 
 <br>
 
@@ -858,55 +893,68 @@ O roteiro aparecerá aqui.
 
 
 <!-- ==========================================
-     MODO DE TESTE
+     TESTE RÁPIDO
 ========================================== -->
 
 <div class="teste-box">
 
-<h3>🧪 Teste rápido antes do clipe completo</h3>
+<div class="teste-titulo">
+🧪 Teste rápido antes do clipe completo
+</div>
 
-<p>
-Use esta opção para verificar o zoom, movimento de câmera,
-troca de imagens e legenda sem precisar gerar a música inteira.
-</p>
+<div class="teste-info">
 
-<div class="teste-opcoes">
+Use esta opção para verificar o zoom, movimento de câmera, troca de imagens e legenda sem precisar gerar a música inteira.
+
+<br><br>
+
+<strong>
+A música original continua sendo usada.
+</strong>
+
+O sistema apenas grava os primeiros segundos escolhidos.
+
+</div>
+
+
+<div class="teste-botoes">
 
 <button
     id="teste10"
-    class="btn-teste"
+    data-duracao="10"
 >
 10 SEG
 </button>
 
 <button
     id="teste15"
-    class="btn-teste"
+    data-duracao="15"
 >
 15 SEG
 </button>
 
 <button
     id="teste30"
-    class="btn-teste"
+    data-duracao="30"
 >
 30 SEG
 </button>
 
 <button
     id="testeCompleto"
-    class="btn-verde"
+    data-duracao="0"
 >
 COMPLETO
 </button>
 
 </div>
 
+
 <div
-    id="modoInfo"
-    class="modo-info"
+    id="testeStatus"
+    class="teste-status"
 >
-Modo selecionado: CLIPE COMPLETO
+🎬 Modo selecionado: CLIPE COMPLETO
 </div>
 
 </div>
@@ -961,7 +1009,7 @@ Preparando...
     id="videoResultado"
     controls
     playsinline
-    preload="auto"
+    preload="metadata"
 ></video>
 
 <div
@@ -984,6 +1032,7 @@ Preparando...
 
 
 <script>
+
 
 /* ==================================================
    ELEMENTOS
@@ -1100,165 +1149,8 @@ document.getElementById("resultadoInfo");
 const download =
 document.getElementById("download");
 
-
-/* ==================================================
-   TESTE
-================================================== */
-
-const teste10 =
-document.getElementById("teste10");
-
-const teste15 =
-document.getElementById("teste15");
-
-const teste30 =
-document.getElementById("teste30");
-
-const testeCompleto =
-document.getElementById("testeCompleto");
-
-const modoInfo =
-document.getElementById("modoInfo");
-
-
-/*
-   null = música completa
-
-   número = duração máxima do teste
-*/
-
-let duracaoTeste =
-null;
-
-
-/* ==================================================
-   SELEÇÃO DO MODO
-================================================== */
-
-function selecionarModo(
-    segundos
-){
-
-    duracaoTeste =
-    segundos;
-
-
-    teste10.classList.remove(
-        "teste-selecionado"
-    );
-
-    teste15.classList.remove(
-        "teste-selecionado"
-    );
-
-    teste30.classList.remove(
-        "teste-selecionado"
-    );
-
-    testeCompleto.classList.remove(
-        "teste-selecionado"
-    );
-
-
-    if(
-        segundos === 10
-    ){
-
-        teste10.classList.add(
-            "teste-selecionado"
-        );
-
-        modoInfo.textContent =
-        "🧪 Modo selecionado: TESTE DE 10 SEGUNDOS";
-
-        botaoGerar.textContent =
-        "🧪 GERAR TESTE DE 10 SEGUNDOS";
-
-    }
-    else if(
-        segundos === 15
-    ){
-
-        teste15.classList.add(
-            "teste-selecionado"
-        );
-
-        modoInfo.textContent =
-        "🧪 Modo selecionado: TESTE DE 15 SEGUNDOS";
-
-        botaoGerar.textContent =
-        "🧪 GERAR TESTE DE 15 SEGUNDOS";
-
-    }
-    else if(
-        segundos === 30
-    ){
-
-        teste30.classList.add(
-            "teste-selecionado"
-        );
-
-        modoInfo.textContent =
-        "🧪 Modo selecionado: TESTE DE 30 SEGUNDOS";
-
-        botaoGerar.textContent =
-        "🧪 GERAR TESTE DE 30 SEGUNDOS";
-
-    }
-    else{
-
-        testeCompleto.classList.add(
-            "teste-selecionado"
-        );
-
-        modoInfo.textContent =
-        "🎬 Modo selecionado: CLIPE COMPLETO";
-
-        botaoGerar.textContent =
-        "🎬 GERAR CLIPE COMPLETO";
-
-    }
-
-}
-
-
-teste10.addEventListener(
-"click",
-function(){
-
-    selecionarModo(10);
-
-});
-
-
-teste15.addEventListener(
-"click",
-function(){
-
-    selecionarModo(15);
-
-});
-
-
-teste30.addEventListener(
-"click",
-function(){
-
-    selecionarModo(30);
-
-});
-
-
-testeCompleto.addEventListener(
-"click",
-function(){
-
-    selecionarModo(null);
-
-});
-
-
-selecionarModo(null);
+const testeStatus =
+document.getElementById("testeStatus");
 
 
 /* ==================================================
@@ -1283,6 +1175,12 @@ let marcacoes = [];
 
 let indiceMarcacao = 0;
 
+/*
+   0 = clipe completo
+   >0 = quantidade de segundos para teste
+*/
+let duracaoTeste = 0;
+
 
 /* ==================================================
    MÚSICA
@@ -1296,9 +1194,7 @@ function(){
         !this.files ||
         !this.files.length
     ){
-
         return;
-
     }
 
 
@@ -1379,9 +1275,7 @@ async function(){
     if(
         !arquivos.length
     ){
-
         return;
-
     }
 
 
@@ -1474,7 +1368,7 @@ function arquivoParaDataURL(
 
 
 /* ==================================================
-   IMAGENS
+   ATUALIZAR IMAGENS
 ================================================== */
 
 function atualizarImagens(){
@@ -1678,9 +1572,7 @@ function moverImagem(
         novo < 0 ||
         novo >= imagensSelecionadas.length
     ){
-
         return;
-
     }
 
 
@@ -1784,7 +1676,7 @@ function(){
 
 
 /* ==================================================
-   FORMATO / ESTILO
+   ESTILO / FORMATO
 ================================================== */
 
 estilo.addEventListener(
@@ -1824,9 +1716,7 @@ function montarListaVersos(){
     if(
         !versos.length
     ){
-
         return;
-
     }
 
 
@@ -1994,10 +1884,7 @@ function formatarTempo(
     if(
         !isFinite(segundos)
     ){
-
-        segundos =
-        0;
-
+        segundos = 0;
     }
 
 
@@ -2085,8 +1972,7 @@ function destacarVersoAtual(){
             tempo >= marcacoes[i]
         ){
 
-            atual =
-            i;
+            atual = i;
 
         }
 
@@ -2120,7 +2006,7 @@ function destacarVersoAtual(){
 
 
 /* ==================================================
-   SINCRONIZAÇÃO MANUAL
+   COMEÇAR SINCRONIZAÇÃO
 ================================================== */
 
 botaoIniciarSync.addEventListener(
@@ -2206,7 +2092,7 @@ async function(){
 
 
 /* ==================================================
-   MARCAR
+   MARCAR VERSO
 ================================================== */
 
 botaoMarcar.addEventListener(
@@ -2240,7 +2126,6 @@ function(){
 
         resumoSync.textContent =
         "✓ Completa";
-
 
         return;
 
@@ -2467,7 +2352,7 @@ function(){
 
 
 /* ==================================================
-   RESUMO SYNC
+   RESUMO
 ================================================== */
 
 function atualizarResumoSync(){
@@ -2602,13 +2487,13 @@ function(){
         ){
 
             texto +=
-            "Movimento: zoom 115% → 155% + câmera lateral.\n";
+            "Movimento: ZOOM FORTE 115% → 155% + câmera lateral.\n";
 
         }
         else{
 
             texto +=
-            "Movimento: zoom 155% → 115% + câmera lateral.\n";
+            "Movimento: ZOOM FORTE 155% → 115% + câmera lateral.\n";
 
         }
 
@@ -2728,14 +2613,13 @@ function desenharCena(
 
 
     /*
-       ZOOM FORTE.
+       ZOOM FORTE E VISÍVEL.
 
-       Começa em 115%.
+       Cenas pares:
+       115% → 155%
 
-       Vai até 155%.
-
-       Isso é propositalmente forte para
-       que o efeito seja perceptível.
+       Cenas ímpares:
+       155% → 115%
     */
 
     let zoom;
@@ -2762,7 +2646,7 @@ function desenharCena(
 
 
     /*
-       MOVIMENTO DE CÂMERA FORTE
+       MOVIMENTO DE CÂMERA
     */
 
     let deslocamentoX =
@@ -3293,6 +3177,83 @@ function esperar(
 
 
 /* ==================================================
+   BOTÕES DE TESTE
+================================================== */
+
+const botoesTeste =
+document.querySelectorAll(
+    ".teste-botoes button"
+);
+
+
+botoesTeste.forEach(
+function(botao){
+
+    botao.addEventListener(
+    "click",
+    function(){
+
+        botoesTeste.forEach(
+        b =>
+        b.classList.remove(
+            "selecionado"
+        )
+        );
+
+
+        this.classList.add(
+            "selecionado"
+        );
+
+
+        duracaoTeste =
+        Number(
+            this.dataset.duracao
+        );
+
+
+        if(
+            duracaoTeste === 0
+        ){
+
+            testeStatus.textContent =
+            "🎬 Modo selecionado: CLIPE COMPLETO";
+
+
+            botaoGerar.textContent =
+            "🎬 GERAR CLIPE COMPLETO";
+
+        }
+        else{
+
+            testeStatus.textContent =
+            "🧪 Modo selecionado: TESTE DE " +
+            duracaoTeste +
+            " SEGUNDOS";
+
+
+            botaoGerar.textContent =
+            "🧪 GERAR TESTE DE " +
+            duracaoTeste +
+            " SEGUNDOS";
+
+        }
+
+    });
+
+});
+
+
+/*
+   Começa no modo completo.
+*/
+
+document
+.getElementById("testeCompleto")
+.classList.add("selecionado");
+
+
+/* ==================================================
    GERAR CLIPE
 ================================================== */
 
@@ -3306,12 +3267,15 @@ async function(){
     let intervalo =
     null;
 
+    let terminou =
+    false;
+
 
     try{
 
-        /* ==========================================
+        /* ------------------------------------------
            VALIDAÇÕES
-        ========================================== */
+        ------------------------------------------ */
 
         if(
             !musicaSelecionada
@@ -3372,47 +3336,34 @@ async function(){
         }
 
 
-        /* ==========================================
-           DURAÇÃO REAL DA MÚSICA
-        ========================================== */
+        /* ------------------------------------------
+           DURAÇÃO DA GRAVAÇÃO
+        ------------------------------------------ */
 
         const duracaoMusica =
         audioPreview.duration;
 
 
-        /*
-           Se estiver em modo teste,
-           limita a duração.
-
-           Se a música tiver menos tempo
-           que o teste, usa a duração real.
-        */
-
-        const duracaoGeracao =
-        duracaoTeste === null
-        ?
-        duracaoMusica
-        :
-        Math.min(
-            duracaoTeste,
-            duracaoMusica
-        );
+        let duracaoGravacao =
+        duracaoMusica;
 
 
         if(
-            duracaoGeracao <= 0
+            duracaoTeste > 0
         ){
 
-            throw new Error(
-                "A duração da música não é válida."
+            duracaoGravacao =
+            Math.min(
+                duracaoTeste,
+                duracaoMusica
             );
 
         }
 
 
-        /* ==========================================
-           MARCAÇÕES
-        ========================================== */
+        /* ------------------------------------------
+           SINCRONIZAÇÃO AUTOMÁTICA
+        ------------------------------------------ */
 
         const todasMarcadas =
         marcacoes.length ===
@@ -3427,14 +3378,6 @@ async function(){
         if(
             !todasMarcadas
         ){
-
-            /*
-               Para o teste, distribuímos os versos
-               dentro do trecho que será gerado.
-
-               Para o completo, usamos a duração
-               inteira da música.
-            */
 
             marcacoes =
             versos.map(
@@ -3455,9 +3398,9 @@ async function(){
         }
 
 
-        /* ==========================================
+        /* ------------------------------------------
            ROTEIRO
-        ========================================== */
+        ------------------------------------------ */
 
         if(
             !roteiroAtual
@@ -3468,9 +3411,9 @@ async function(){
         }
 
 
-        /* ==========================================
+        /* ------------------------------------------
            INTERFACE
-        ========================================== */
+        ------------------------------------------ */
 
         botaoGerar.disabled =
         true;
@@ -3492,27 +3435,13 @@ async function(){
         "0%";
 
 
-        if(
-            duracaoTeste === null
-        ){
-
-            statusElemento.textContent =
-            "Preparando clipe completo...";
-
-        }
-        else{
-
-            statusElemento.textContent =
-            "Preparando teste de " +
-            duracaoGeracao +
-            " segundos...";
-
-        }
+        statusElemento.textContent =
+        "Carregando imagens...";
 
 
-        /* ==========================================
+        /* ------------------------------------------
            IMAGENS
-        ========================================== */
+        ------------------------------------------ */
 
         const imagens = [];
 
@@ -3530,9 +3459,9 @@ async function(){
         }
 
 
-        /* ==========================================
+        /* ------------------------------------------
            CANVAS
-        ========================================== */
+        ------------------------------------------ */
 
         const canvas =
         document.createElement(
@@ -3580,9 +3509,9 @@ async function(){
         }
 
 
-        /* ==========================================
-           CAPTURA
-        ========================================== */
+        /* ------------------------------------------
+           CAPTURE STREAM
+        ------------------------------------------ */
 
         let capturaManual =
         true;
@@ -3617,9 +3546,9 @@ async function(){
         videoStream.getVideoTracks()[0];
 
 
-        /* ==========================================
+        /* ------------------------------------------
            ÁUDIO
-        ========================================== */
+        ------------------------------------------ */
 
         const audioStream =
         await prepararAudio();
@@ -3637,9 +3566,9 @@ async function(){
         });
 
 
-        /* ==========================================
+        /* ------------------------------------------
            CODEC
-        ========================================== */
+        ------------------------------------------ */
 
         const codec =
         escolherCodec();
@@ -3656,17 +3585,24 @@ async function(){
         }
 
 
-        /* ==========================================
+        /* ------------------------------------------
            RECORDER
-        ========================================== */
+        ------------------------------------------ */
 
         recorder =
         new MediaRecorder(
             videoStream,
             {
                 mimeType:codec,
-                videoBitsPerSecond:7000000,
-                audioBitsPerSecond:128000
+
+                /*
+                   Reduz o tamanho do arquivo
+                   mantendo boa qualidade.
+                */
+
+                videoBitsPerSecond:4000000,
+
+                audioBitsPerSecond:96000
             }
         );
 
@@ -3691,9 +3627,9 @@ async function(){
         };
 
 
-        /* ==========================================
+        /* ------------------------------------------
            PRIMEIRO QUADRO
-        ========================================== */
+        ------------------------------------------ */
 
         ctx.fillStyle =
         "#000";
@@ -3733,13 +3669,24 @@ async function(){
         }
 
 
-        /* ==========================================
-           COMEÇAR GRAVAÇÃO
-        ========================================== */
+        /* ------------------------------------------
+           INICIAR RECORDER
+        ------------------------------------------ */
 
         recorder.start(
             1000
         );
+
+
+        /* ------------------------------------------
+           COMEÇAR ÁUDIO
+        ------------------------------------------ */
+
+        audioPreview.pause();
+
+
+        audioPreview.currentTime =
+        0;
 
 
         await esperar(
@@ -3747,19 +3694,22 @@ async function(){
         );
 
 
-        audioPreview.currentTime =
-        0;
+        if(
+            audioContext.state ===
+            "suspended"
+        ){
 
+            await audioContext.resume();
 
-        await audioContext.resume();
+        }
 
 
         await audioPreview.play();
 
 
-        /* ==========================================
+        /* ------------------------------------------
            FRAMES
-        ========================================== */
+        ------------------------------------------ */
 
         const fps =
         30;
@@ -3770,10 +3720,6 @@ async function(){
         fps;
 
 
-        let terminou =
-        false;
-
-
         intervalo =
         setInterval(
         function(){
@@ -3781,9 +3727,7 @@ async function(){
             if(
                 terminou
             ){
-
                 return;
-
             }
 
 
@@ -3791,25 +3735,20 @@ async function(){
             audioPreview.currentTime;
 
 
-            /*
-               A duração usada aqui é a duração
-               do teste ou da música completa.
-            */
-
             const progressoTotal =
             Math.max(
                 0,
                 Math.min(
                     tempo /
-                    duracaoGeracao,
+                    duracaoGravacao,
                     1
                 )
             );
 
 
-            /* ======================================
+            /* --------------------------------------
                IMAGEM
-            ====================================== */
+            -------------------------------------- */
 
             let indiceImagem =
             Math.floor(
@@ -3829,13 +3768,8 @@ async function(){
             }
 
 
-            /*
-               Cada imagem recebe uma parte
-               proporcional do trecho gerado.
-            */
-
             const duracaoCena =
-            duracaoGeracao /
+            duracaoGravacao /
             imagens.length;
 
 
@@ -3863,9 +3797,9 @@ async function(){
             );
 
 
-            /* ======================================
+            /* --------------------------------------
                FUNDO
-            ====================================== */
+            -------------------------------------- */
 
             ctx.fillStyle =
             "#000";
@@ -3879,9 +3813,9 @@ async function(){
             );
 
 
-            /* ======================================
-               IMAGEM + ZOOM
-            ====================================== */
+            /* --------------------------------------
+               IMAGEM
+            -------------------------------------- */
 
             desenharCena(
                 ctx,
@@ -3892,9 +3826,9 @@ async function(){
             );
 
 
-            /* ======================================
+            /* --------------------------------------
                LETRA
-            ====================================== */
+            -------------------------------------- */
 
             let indiceLetra =
             0;
@@ -3919,12 +3853,6 @@ async function(){
             }
 
 
-            /*
-               No modo teste, caso as marcações
-               estejam depois do trecho testado,
-               usamos o primeiro verso.
-            */
-
             if(
                 indiceLetra >=
                 versos.length
@@ -3943,9 +3871,9 @@ async function(){
             );
 
 
-            /* ======================================
+            /* --------------------------------------
                CAPTURA
-            ====================================== */
+            -------------------------------------- */
 
             if(
                 capturaManual &&
@@ -3957,9 +3885,9 @@ async function(){
             }
 
 
-            /* ======================================
+            /* --------------------------------------
                PROGRESSO
-            ====================================== */
+            -------------------------------------- */
 
             progressFill.style.width =
             Math.round(
@@ -3970,30 +3898,39 @@ async function(){
             "%";
 
 
-            statusElemento.textContent =
-            (
-                duracaoTeste === null
-                ?
-                "Gerando clipe completo... "
-                :
-                "Gerando teste... "
-            )
-            +
-            Math.round(
-                progressoTotal *
-                100
-            )
-            +
-            "%";
+            if(
+                duracaoTeste > 0
+            ){
+
+                statusElemento.textContent =
+                "🧪 Gerando teste... " +
+                Math.round(
+                    progressoTotal *
+                    100
+                ) +
+                "%";
+
+            }
+            else{
+
+                statusElemento.textContent =
+                "🎬 Gerando clipe... " +
+                Math.round(
+                    progressoTotal *
+                    100
+                ) +
+                "%";
+
+            }
 
 
-            /* ======================================
+            /* --------------------------------------
                FIM
-            ====================================== */
+            -------------------------------------- */
 
             if(
                 tempo >=
-                duracaoGeracao -
+                duracaoGravacao -
                 0.05
             ){
 
@@ -4007,9 +3944,9 @@ async function(){
         );
 
 
-        /* ==========================================
+        /* ------------------------------------------
            ESPERAR FINAL
-        ========================================== */
+        ------------------------------------------ */
 
         await new Promise(
         function(resolve){
@@ -4019,9 +3956,8 @@ async function(){
             function(){
 
                 if(
-                    audioPreview.ended ||
                     audioPreview.currentTime >=
-                    duracaoGeracao -
+                    duracaoGravacao -
                     0.03
                 ){
 
@@ -4041,9 +3977,9 @@ async function(){
         });
 
 
-        /* ==========================================
+        /* ------------------------------------------
            PARAR LOOP
-        ========================================== */
+        ------------------------------------------ */
 
         if(
             intervalo
@@ -4062,9 +3998,9 @@ async function(){
         audioPreview.pause();
 
 
-        /* ==========================================
+        /* ------------------------------------------
            ÚLTIMO QUADRO
-        ========================================== */
+        ------------------------------------------ */
 
         ctx.fillStyle =
         "#000";
@@ -4078,23 +4014,42 @@ async function(){
         );
 
 
-        desenharCena(
-            ctx,
-            canvas,
-            imagens[
-                imagens.length - 1
-            ],
-            1,
-            imagens.length - 1
+        const ultimoTempo =
+        duracaoGravacao;
+
+
+        let ultimoIndice =
+        Math.floor(
+            (
+                ultimoTempo /
+                duracaoGravacao
+            )
+            *
+            imagens.length
         );
 
 
-        /*
-           Procura o verso correspondente
-           ao final do trecho.
-        */
+        if(
+            ultimoIndice >=
+            imagens.length
+        ){
 
-        let versoFinal =
+            ultimoIndice =
+            imagens.length - 1;
+
+        }
+
+
+        desenharCena(
+            ctx,
+            canvas,
+            imagens[ultimoIndice],
+            1,
+            ultimoIndice
+        );
+
+
+        let ultimaLetra =
         0;
 
 
@@ -4105,11 +4060,11 @@ async function(){
         ){
 
             if(
-                duracaoGeracao >=
+                ultimoTempo >=
                 marcacoes[i]
             ){
 
-                versoFinal =
+                ultimaLetra =
                 i;
 
             }
@@ -4120,7 +4075,12 @@ async function(){
         desenharLetra(
             ctx,
             canvas,
-            versos[versoFinal]
+            versos[
+                Math.min(
+                    ultimaLetra,
+                    versos.length - 1
+                )
+            ]
         );
 
 
@@ -4139,9 +4099,9 @@ async function(){
         );
 
 
-        /* ==========================================
-           PEDIR DADOS
-        ========================================== */
+        /* ------------------------------------------
+           FORÇAR ENTREGA DOS DADOS
+        ------------------------------------------ */
 
         try{
 
@@ -4156,9 +4116,9 @@ async function(){
         );
 
 
-        /* ==========================================
+        /* ------------------------------------------
            PARAR RECORDER
-        ========================================== */
+        ------------------------------------------ */
 
         await new Promise(
         function(resolve){
@@ -4205,9 +4165,9 @@ async function(){
         }
 
 
-        /* ==========================================
+        /* ------------------------------------------
            BLOB
-        ========================================== */
+        ------------------------------------------ */
 
         const blob =
         new Blob(
@@ -4232,9 +4192,9 @@ async function(){
         }
 
 
-        /* ==========================================
-           URL
-        ========================================== */
+        /* ------------------------------------------
+           URL FINAL
+        ------------------------------------------ */
 
         if(
             videoURL
@@ -4258,9 +4218,14 @@ async function(){
         );
 
 
-        /* ==========================================
-           MOSTRAR
-        ========================================== */
+        /* ------------------------------------------
+           MOSTRAR VÍDEO
+           CORREÇÃO IMPORTANTE
+        ------------------------------------------ */
+
+        videoContainer.style.display =
+        "block";
+
 
         videoResultado.pause();
 
@@ -4273,6 +4238,10 @@ async function(){
         videoResultado.load();
 
 
+        /*
+           Define o novo Blob
+        */
+
         videoResultado.src =
         videoURL;
 
@@ -4281,27 +4250,37 @@ async function(){
         "block";
 
 
-        videoContainer.style.display =
-        "block";
+        /*
+           Força o navegador a
+           carregar o novo arquivo.
+        */
 
+        videoResultado.load();
+
+
+        /* ------------------------------------------
+           DOWNLOAD
+        ------------------------------------------ */
 
         download.href =
         videoURL;
 
 
         download.download =
-        duracaoTeste === null
+        duracaoTeste > 0
         ?
-        "clip-musical-ai-completo.webm"
+        "teste-clip-musical-ai.webm"
         :
-        "clip-musical-ai-teste-" +
-        duracaoGeracao +
-        "s.webm";
+        "clip-musical-ai.webm";
 
 
         download.style.display =
         "block";
 
+
+        /* ------------------------------------------
+           TAMANHO
+        ------------------------------------------ */
 
         const tamanho =
         (
@@ -4312,15 +4291,7 @@ async function(){
 
 
         resultadoInfo.textContent =
-        duracaoTeste === null
-        ?
-        "✓ Clipe completo criado com sucesso — " +
-        tamanho +
-        " MB"
-        :
-        "✓ TESTE DE " +
-        duracaoGeracao +
-        " SEGUNDOS criado com sucesso — " +
+        "✓ Vídeo criado — " +
         tamanho +
         " MB";
 
@@ -4333,28 +4304,94 @@ async function(){
         "100%";
 
 
-        statusElemento.textContent =
-        duracaoTeste === null
-        ?
-        "✓ CLIPE COMPLETO CRIADO COM SUCESSO!"
-        :
-        "✓ TESTE CRIADO COM SUCESSO!";
+        if(
+            duracaoTeste > 0
+        ){
+
+            statusElemento.textContent =
+            "✓ TESTE DE " +
+            duracaoTeste +
+            " SEGUNDOS CRIADO COM SUCESSO!";
+
+        }
+        else{
+
+            statusElemento.textContent =
+            "✓ CLIPE COMPLETO CRIADO COM SUCESSO!";
+
+        }
 
 
-        videoResultado.load();
+        statusElemento.className =
+        "status sucesso";
 
 
-        videoResultado.onloadeddata =
+        /* ------------------------------------------
+           EVENTOS DO VÍDEO
+        ------------------------------------------ */
+
+        videoResultado.onloadedmetadata =
         function(){
 
-            videoResultado
-            .play()
-            .catch(
-                function(){}
-            );
+            if(
+                isFinite(
+                    videoResultado.duration
+                )
+            ){
+
+                resultadoInfo.textContent =
+                "✓ Vídeo criado — " +
+                tamanho +
+                " MB — " +
+                Math.round(
+                    videoResultado.duration
+                ) +
+                " segundos";
+
+            }
 
         };
 
+
+        videoResultado.onerror =
+        function(){
+
+            console.error(
+                "Erro no player:",
+                videoResultado.error
+            );
+
+
+            resultadoInfo.textContent =
+            "⚠️ O arquivo foi criado, mas o navegador não conseguiu reproduzi-lo. Use o botão BAIXAR CLIPE.";
+
+            resultadoInfo.className =
+            "status erro";
+
+        };
+
+
+        /*
+           Tenta reproduzir.
+
+           Se o navegador bloquear autoplay,
+           o usuário poderá apertar PLAY.
+        */
+
+        videoResultado.play()
+        .catch(
+        function(){
+
+            console.log(
+                "Autoplay bloqueado pelo navegador."
+            );
+
+        });
+
+
+        /* ------------------------------------------
+           ROLAR ATÉ O VÍDEO
+        ------------------------------------------ */
 
         setTimeout(
         function(){
