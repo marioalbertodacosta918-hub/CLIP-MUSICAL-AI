@@ -1,0 +1,31 @@
+name: Verificar CLIP MUSICAL AI V2
+on:
+  push:
+    branches:
+      - feat/clip-musical-ai-v2
+  pull_request:
+    branches:
+      - main
+jobs:
+  verificar:
+    name: Checagem do código V2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+      - name: Usar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir estrutura e scripts
+        run: node tests/check-v2.mjs
+      - name: Testar servidor de IA sem custos
+        run: node tests/ai-worker.test.mjs
+      - name: Testar hospedagem Node do motor de IA
+        run: node tests/ai-backend-http.test.mjs
+      - name: Instalar Playwright Core
+        run: npm install --no-save playwright-core
+      - name: Teste funcional em navegador móvel
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node tests/browser-smoke.mjs

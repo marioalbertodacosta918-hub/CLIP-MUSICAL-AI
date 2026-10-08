@@ -1,0 +1,11 @@
+# Implantação alternativa como Cloudflare Worker (o projeto atual usa Render/Node).
+name = "clip-musical-ai-private"
+main = "server/ai-worker.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[secrets]
+required = ["CF_ACCOUNT_ID", "CF_API_TOKEN", "CLIP_OWNER_TOKEN", "ALLOWED_ORIGIN"]
+
+# O motor está fixado no FLUX Schnell e não pode selecionar outro modelo arbitrário.
+# Nunca escreva tokens e senhas neste arquivo.

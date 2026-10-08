@@ -1,0 +1,31 @@
+/* CLIP MUSICAL AI V2 — complementa a interface original sem remover recursos */
+:root{color-scheme:dark}
+.v2-hero{padding:20px 14px;margin-bottom:19px;background:linear-gradient(135deg,#1a123a,#102647);border:1px solid #54438c;border-radius:16px;text-align:center}
+.v2-hero strong{font-size:14px;letter-spacing:.16em;color:#bbabff}
+.v2-hero p{color:#d1cceb;font-size:13px;line-height:1.55;margin-top:7px}
+.v2-mode-card{border-color:#6c54c6}
+.v2-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.v2-mode{background:#16182a;border:1px solid #444566;color:#f4f2ff;border-radius:12px;text-align:left;padding:13px;cursor:pointer;min-height:90px;width:100%;margin:0;font-size:14px;font-weight:700}
+.v2-mode small{display:block;color:#aaaec5;margin-top:6px;line-height:1.35;font-size:12px;font-weight:400}
+.v2-mode[aria-pressed="true"]{background:#30215d;border:2px solid #ab91ff;padding:12px}
+.v2-mode:focus-visible{outline:3px solid #f7c752;outline-offset:2px}
+.v2-note{font-size:13px;line-height:1.55;color:#bebdd4;margin:11px 0 4px}
+.v2-notice{padding:12px;border-radius:11px;background:#1a2033;border:1px solid #42527d;color:#d0dbf9;font-size:13px;line-height:1.55;margin:12px 0}
+.v2-note strong{color:#f2f0ff}
+.v2-hidden{display:none!important}
+#v2Genero{margin-bottom:13px}
+@media(max-width:420px){.v2-modes{grid-template-columns:1fr}.v2-mode{min-height:69px}}
+
+
+/* Painel opcional: imagens com IA externa */
+.ai-v2-card{border-color:#4f4677}
+.ai-v2-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:12px}
+.ai-v2-grid input,.ai-v2-grid select{width:100%}
+.ai-v2-card textarea{min-height:88px}
+.ai-v2-help{padding:10px 12px;border:1px solid #44485d;background:#1b2132;color:#c6ccdf;font-size:13px;line-height:1.5;border-radius:10px;margin-bottom:12px}
+.ai-v2-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ai-v2-actions button{margin:0}
+.ai-v2-preview{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+.ai-v2-prompt{padding:12px;background:#101222;border:1px solid #333850;border-radius:10px;font-size:12px;line-height:1.55}
+.ai-v2-prompt p{color:#b4bace;margin-top:6px;overflow-wrap:anywhere}
+@media(max-width:580px){.ai-v2-grid,.ai-v2-actions{grid-template-columns:1fr}}

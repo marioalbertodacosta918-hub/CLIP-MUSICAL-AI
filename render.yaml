@@ -1,0 +1,20 @@
+# Serviço opcional do backend privado. O plano free é selecionado em Render.
+services:
+  - type: web
+    name: clip-musical-ai-ia
+    runtime: node
+    plan: free
+    buildCommand: node --version
+    startCommand: node server/index.mjs
+    healthCheckPath: /health
+    envVars:
+      - key: CF_ACCOUNT_ID
+        sync: false
+      - key: CF_API_TOKEN
+        sync: false
+      - key: CLIP_OWNER_TOKEN
+        sync: false
+      - key: ALLOWED_ORIGIN
+        value: https://clip-musical-ai.hatchable.site
+      - key: CF_IMAGE_MODEL
+        value: "@cf/black-forest-labs/flux-1-schnell"
