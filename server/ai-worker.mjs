@@ -30,8 +30,10 @@ export default {
   };
   if(request.method==="OPTIONS")return new Response(null,{status:204,headers:cors});
   if(request.method!=="POST")return respond({error:"Método inválido."},405,cors);
-  if(!env.CLIP_OWNER_TOKEN||!env.CF_API_TOKEN||!env.CF_ACCOUNT_ID)
-   return respond({error:"Configure CF_ACCOUNT_ID, CF_API_TOKEN e CLIP_OWNER_TOKEN nas variáveis privadas do Render."},503,cors);
+  const missing=["CF_ACCOUNT_ID","CF_API_TOKEN","CLIP_OWNER_TOKEN"]
+   .filter(key=>typeof env[key]!=="string"||!env[key].trim());
+  if(missing.length)
+   return respond({error:"Variáveis ausentes no Render: "+missing.join(", ")+". Abra o serviço clip-musical-ai-ia > Environment e escolha Save, rebuild and deploy.",missing_variables:missing},503,cors);
   if(env.CF_IMAGE_MODEL && env.CF_IMAGE_MODEL!==MODEL)
    return respond({error:"Modelo inválido. Somente FLUX.1 Schnell está autorizado nesta versão."},503,cors);
   if(!/^[0-9a-f]{32}$/i.test(env.CF_ACCOUNT_ID))
