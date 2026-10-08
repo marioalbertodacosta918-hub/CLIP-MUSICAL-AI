@@ -230,7 +230,7 @@ const botaoAuto=$("botaoAuto"),syncBox=$("syncBox"),tempoAtual=$("tempoAtual"),b
 const botaoRoteiro=$("botaoRoteiro"),roteiroElemento=$("roteiro"),botaoGerar=$("botaoGerar"),progressContainer=$("progressContainer"),progressFill=$("progressFill"),statusElemento=$("status"),videoContainer=$("videoContainer"),videoResultado=$("videoResultado"),resultadoInfo=$("resultadoInfo"),download=$("download");
 const inicioEngajamento=$("inicioEngajamento"),engSelecionado=$("engSelecionado"),resumoEngEl=resumoEng;
 let musicaSelecionada=null,imagensSelecionadas=[],roteiroAtual="",videoURL=null,audioContext=null,audioSource=null,audioDestination=null,marcacoes=[],indiceMarcacao=0;
-let modoTeste=0,modoEngajamento=0,miniaturaURL=null;
+let modoTeste=0,modoEngajamento=0,miniaturaURL=null,audioAnalyser=null,audioBins=null;
 
 function obterVersos(){
  return inputLetra.value.split("\n").map(x=>x.trim()).filter(x=>x && !(x.startsWith("[")&&x.endsWith("]")));
@@ -352,7 +352,14 @@ function escolherCodec(){
 }
 async function prepararAudio(){
  const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)throw new Error("Seu navegador não suporta o sistema de áudio.");
- if(!audioContext){audioContext=new AudioCtx();audioSource=audioContext.createMediaElementSource(audioPreview);audioDestination=audioContext.createMediaStreamDestination();audioSource.connect(audioDestination);audioSource.connect(audioContext.destination)}
+ if(!audioContext){
+  audioContext=new AudioCtx();
+  audioSource=audioContext.createMediaElementSource(audioPreview);
+  audioDestination=audioContext.createMediaStreamDestination();
+  audioAnalyser=audioContext.createAnalyser();audioAnalyser.fftSize=256;audioAnalyser.smoothingTimeConstant=.75;
+  audioBins=new Uint8Array(audioAnalyser.frequencyBinCount);
+  audioSource.connect(audioDestination);audioSource.connect(audioContext.destination);audioSource.connect(audioAnalyser);
+ }
  if(audioContext.state==="suspended")await audioContext.resume();return audioDestination.stream;
 }
 async function carregarImagem(item){
@@ -370,9 +377,9 @@ async function carregarImagem(item){
  });
 }
 
-function desenharCena(ctx,canvas,img,p,indice){
+function desenharCena(ctx,canvas,img,p,indice,pulso=0){
  const cw=canvas.width,ch=canvas.height;
- const zoom=indice%2===0?1.15+p*.40:1.55-p*.40;
+ const zoom=(indice%2===0?1.15+p*.40:1.55-p*.40)+Math.max(0,Math.min(pulso,.4))*.14;
  let dx=0,dy=0;
  if(indice%4===0)dx=(p-.5)*cw*.24;
  else if(indice%4===1)dx=(.5-p)*cw*.24;
@@ -397,7 +404,7 @@ function desenharLetra(ctx,canvas,text){
 }
 
 async function gerarVideo(duracaoAlvo,tituloModo){
- let recorder=null,intervalo=null;
+ let recorder=null,intervalo=null,streamVideo=null,imagensRender=[];
  try{
   if(!musicaSelecionada)return alert("Selecione a música.");
   if(!imagensSelecionadas.length)return alert("Selecione pelo menos uma imagem.");
@@ -413,13 +420,14 @@ async function gerarVideo(duracaoAlvo,tituloModo){
   botaoGerar.disabled=true;progressContainer.style.display="block";videoContainer.style.display="none";download.style.display="none";progressFill.style.width="0%";
   statusElemento.textContent="Carregando imagens...";
 
-  const imagens=[];for(const item of imagensSelecionadas)imagens.push(await carregarImagem(item));
+  const imagens=[];imagensRender=imagens;for(const item of imagensSelecionadas)imagens.push(await carregarImagem(item));
   const canvas=document.createElement("canvas");if(formato.value==="9:16"){canvas.width=720;canvas.height=1280}else if(formato.value==="1:1"){canvas.width=900;canvas.height=900}else{canvas.width=1280;canvas.height=720}
   const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Não foi possível criar o Canvas.");
 
   // IMPORTANTE: 30 FPS reais em vez de captureStream(0).
   // Isso melhora a compatibilidade do WebM e evita o player mostrar 0:00.
-  const videoStream=canvas.captureStream(30);
+  streamVideo=canvas.captureStream(30);
+  const videoStream=streamVideo;
   const audioStream=await prepararAudio();audioStream.getAudioTracks().forEach(t=>videoStream.addTrack(t));
   const codec=escolherCodec();if(!codec)throw new Error("Seu navegador não suporta gravação WebM.");
   recorder=new MediaRecorder(videoStream,{mimeType:codec,videoBitsPerSecond:7000000,audioBitsPerSecond:128000});
@@ -452,7 +460,18 @@ async function gerarVideo(duracaoAlvo,tituloModo){
      const durCena=duracao/imagens.length;
     let pCena=(tempoLocal-indiceImagem*durCena)/durCena;pCena=Math.max(0,Math.min(pCena,1));
     ctx.fillStyle="#000";ctx.fillRect(0,0,canvas.width,canvas.height);
-    desenharCena(ctx,canvas,imagens[indiceImagem],pCena,indiceImagem);
+    let pulso=0;
+    if(audioAnalyser&&audioBins){
+      audioAnalyser.getByteFrequencyData(audioBins);
+      let soma=0;for(let k=0;k<Math.min(48,audioBins.length);k++)soma+=audioBins[k];
+      pulso=soma/(Math.min(48,audioBins.length)*255);
+    }
+    desenharCena(ctx,canvas,imagens[indiceImagem],pCena,indiceImagem,pulso);
+    if(indiceImagem<imagens.length-1&&pCena>.88){
+      ctx.save();ctx.globalAlpha=Math.min(1,(pCena-.88)/.12);
+      desenharCena(ctx,canvas,imagens[indiceImagem+1],0,indiceImagem+1,pulso);
+      ctx.restore();
+    }
     let indiceLetra=0;
     for(let i=0;i<marcacoes.length;i++){
       // As marcações da música inteira são deslocadas para o trecho.
@@ -472,7 +491,8 @@ async function gerarVideo(duracaoAlvo,tituloModo){
   // Mantém o último quadro por alguns frames para fechar corretamente o WebM.
   ctx.fillStyle="#000";ctx.fillRect(0,0,canvas.width,canvas.height);
   desenharCena(ctx,canvas,imagens[imagens.length-1],1,imagens.length-1);
-  desenharLetra(ctx,canvas,versos[Math.min(versos.length-1,marcacoes.findLastIndex?.(v=>v!==null&&v<=tempoInicio+duracao)||versos.length-1)]);
+  const ultimoVerso=versos.length?versos[Math.max(0,marcacoes.findLastIndex(v=>v!==null&&v<=tempoInicio+duracao))]:null;
+  desenharLetra(ctx,canvas,ultimoVerso);
   await esperar(500);
   try{recorder.requestData()}catch(e){}
   await esperar(400);
@@ -492,7 +512,12 @@ async function gerarVideo(duracaoAlvo,tituloModo){
   setTimeout(()=>videoContainer.scrollIntoView({behavior:"smooth",block:"start"}),300);
  }catch(erro){
   console.error(erro);if(intervalo)clearInterval(intervalo);audioPreview.pause();statusElemento.textContent="❌ "+(erro.message||"Erro desconhecido.");statusElemento.className="status erro";alert("Não foi possível gerar o vídeo.\n\n"+(erro.message||"Erro desconhecido."));
- }finally{botaoGerar.disabled=false}
+ }finally{
+   if(intervalo)clearInterval(intervalo);
+   imagensRender.forEach(x=>{if(x instanceof HTMLVideoElement){x.pause();x.removeAttribute("src");x.load()}});
+   if(streamVideo)streamVideo.getVideoTracks().forEach(t=>t.stop());
+   botaoGerar.disabled=false;
+ }
 }
 
 document.querySelectorAll("[data-teste]").forEach(b=>b.addEventListener("click",()=>{
