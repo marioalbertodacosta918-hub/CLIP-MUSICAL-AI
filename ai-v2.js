@@ -69,6 +69,23 @@
   return plan;
  }
  $("aiV2Plan").addEventListener("click",makePlan);
+ async function optimizeReference(src){
+  // Reduz fotos grandes enviadas por celular sem modificar a imagem original.
+  if(!/^data:image\/(?:png|jpeg|webp);base64,/.test(src||""))return null;
+  const img=new Image();
+  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Imagem de referência inválida."));img.src=src;});
+  const max=1280,ratio=Math.min(1,max/Math.max(img.width,img.height));
+  const canvas=document.createElement("canvas");
+  canvas.width=Math.max(1,Math.round(img.width*ratio));
+  canvas.height=Math.max(1,Math.round(img.height*ratio));
+  const ctx=canvas.getContext("2d");
+  if(!ctx)throw new Error("Seu navegador não consegue preparar a foto.");
+  ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  const encoded=canvas.toDataURL("image/jpeg",.78);
+  if(encoded.length>6000000)throw new Error("Foto grande demais para o serviço de IA.");
+  return encoded;
+ }
  async function generate(){
   if(running)return false;
   if(!musicaSelecionada){status.textContent="Primeiro escolha uma música.";return false;}
@@ -85,7 +102,8 @@
   const button=$("aiV2Generate");button.disabled=true;
   const previous=imagensSelecionadas.slice();
   const generated=[];
-  const reference=activeMode()==="imagem"?originals().find(x=>x.tipo!=="video"&&/^data:image\/(png|jpeg|webp);base64,/.test(x.src))?.src:null;
+  const originalPhoto=activeMode()==="imagem"?originals().find(x=>x.tipo!=="video"&&/^data:image\/(png|jpeg|webp);base64,/.test(x.src))?.src:null;
+  const reference=originalPhoto?await optimizeReference(originalPhoto):null;
   try{
    for(let i=0;i<scenes.length;i++){
     status.textContent="IA criando cena "+(i+1)+" de "+scenes.length+"…";
