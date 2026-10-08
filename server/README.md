@@ -1,38 +1,45 @@
-# CLIP MUSICAL AI — geração real de imagens (prévia)
+
+# CLIP MUSICAL AI — Cloudflare Workers AI gratuita no Render
 
 ## Situação
-O painel `ai-v2.js` e o servidor `server/ai-worker.mjs` foram adicionados à ramificação de desenvolvimento. **Nenhum servidor foi publicado e nenhuma chave real foi configurada.** A versão pública original permanece inalterada.
+O backend Node está hospedado no Render com o nome clip-musical-ai-ia.
+- Backend: https://clip-musical-ai-ia.onrender.com
+- Painel: https://dashboard.render.com/web/srv-db3mj62j9qps73894iag
+- Código: branch feat/clip-musical-ai-v2
+- A versão original do site NÃO foi substituída.
 
-## Fluxo
-1. O usuário seleciona uma música, o gênero, o estilo e, opcionalmente, uma imagem.
-2. O painel cria descrições de cenas usando gênero, tema e trechos da letra. Não transcreve áudio nem detecta BPM automaticamente.
-3. Após confirmação explícita de possíveis custos, o navegador solicita imagens ao servidor configurado.
-4. O servidor usa a chave secreta da API para chamar geração de imagens; com imagem de referência (PNG, JPEG ou WebP), usa edição de imagem.
-5. As imagens recebidas são incorporadas à montagem WebM já existente.
+## Provedor
+- Cloudflare Workers AI com FLUX.1 Schnell: @cf/black-forest-labs/flux-1-schnell
+- Disponível para geração de imagens a partir de texto.
+- A Cloudflare informa 10.000 Neurons gratuitos/dia no Workers Free: isso não é quantidade de imagens.
+- O modelo NÃO aceita foto de referência nessa integração. A foto enviada é mantida na montagem, não enviada à Cloudflare.
+- Os formatos 16:9/9:16/1:1 são solicitados por texto; a saída exata não é garantida.
+- Esta etapa gera imagens estáticas, e o navegador monta o videoclipe WebM com música e transições.
 
-## Arquitetura segura
-A chave do provedor de imagens **não pode** ser inserida no HTML, JavaScript do navegador, GitHub ou variável pública do Hatchable. Ela pertence ao servidor intermediário.
+## Configuração privada no Render (feita pelo proprietário)
+Abra o serviço clip-musical-ai-ia no Render e entre em Environment.
+Adicione estas variáveis com seus valores verdadeiros:
+- CF_ACCOUNT_ID: Account ID da conta Cloudflare (32 caracteres hexadecimais).
+- CF_API_TOKEN: token secreto Workers AI da Cloudflare, com permissões adequadas.
+- CLIP_OWNER_TOKEN: senha particular longa, inventada pelo proprietário, diferente do CF_API_TOKEN.
 
-O exemplo é compatível com Cloudflare Workers. Configurar como segredos privados:
-- `OPENAI_API_KEY`: chave de API do provedor (cobrança independente do ChatGPT).
-- `CLIP_OWNER_TOKEN`: token privado de acesso para uso exclusivo do proprietário.
-- `ALLOWED_ORIGIN`: origem exata do site que fará chamadas (por exemplo, `https://clip-musical-ai.hatchable.site`).
-- `IMAGE_MODEL` (opcional): modelo de imagens autorizado.
+Já configurada pelo projeto: ALLOWED_ORIGIN = https://clip-musical-ai.hatchable.site.
+Opcional: CF_IMAGE_MODEL = @cf/black-forest-labs/flux-1-schnell. O código fixa esse modelo.
+NUNCA coloque essas credenciais em código público, no GitHub, no chat, nem em capturas de tela.
 
-O endpoint disponibilizado pelo servidor é `POST /api/generate-scene`. O navegador recebe apenas a URL pública do Worker e um token de acesso do proprietário em uma sessão; nenhuma chave do provedor é enviada ao navegador.
+Na interface do aplicativo, o campo Senha de acesso ao servidor usa somente CLIP_OWNER_TOKEN.
+**Não digite o token da Cloudflare nesse campo.**
 
-## Limitações e segurança antes de lançar
-- O exemplo é **somente para uso privado do proprietário**. Antes de disponibilizar a usuários externos, implementar login robusto, limites por usuário, limites de custo e monitoramento.
-- A geração de imagens custa créditos na API. O projeto solicita confirmação antes de enviar pedidos.
-- A imagem de referência é enviada ao servidor da IA. Não é garantida fidelidade absoluta do personagem.
-- Esta etapa gera **imagens estáticas**, não vídeos generativos. O movimento vem do mecanismo local (zoom/transição).
-- Testes automáticos simulam a resposta da API e não representam cobrança nem validação com o provedor real.
-- A integração não funciona no site público até configurar, publicar e testar um servidor autorizado.
-- O Hatchable pode não importar automaticamente esta ramificação: verificar a configuração antes de publicar.
+## Testes
+- GET /health confirma funcionamento do Node.
+- POST /api/generate-scene solicita a geração ao modelo, quando credenciais e cota estão disponíveis.
+- Testes de GitHub Actions usam uma API simulada e não consomem a cota da Cloudflare.
 
-## Testar
-```sh
-node tests/check-v2.mjs
-node tests/ai-worker.test.mjs
-```
-O GitHub Actions também realiza um teste em Chromium na versão móvel simulada.
+## Segurança e limites
+O servidor foi desenhado para uso pessoal protegido por senha; antes de disponibilizar a muitos usuários, implementar contas, rate limits e limite de custos. A Cloudflare pode cobrar se o proprietário escolher um plano pago; no plano Workers Free, a cota é limitada.
+Antes de divulgar publicamente, testar origem, limites e navegador móvel.
+
+## Próximos passos
+1. Preencher as três variáveis privadas no Render.
+2. Testar uma geração real na cota gratuita da Cloudflare.
+3. Publicar a interface V2 na origem permitida, só depois de confirmar com o proprietário.
