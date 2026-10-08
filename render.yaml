@@ -1,0 +1,17 @@
+# Implantação opcional do motor de IA. Não implanta o site do Hatchable.
+services:
+  - type: web
+    name: clip-musical-ai-ia
+    runtime: node
+    buildCommand: node --version
+    startCommand: node server/index.mjs
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CLIP_OWNER_TOKEN
+        sync: false
+      - key: ALLOWED_ORIGIN
+        value: https://clip-musical-ai.hatchable.site
+      - key: IMAGE_MODEL
+        value: gpt-image-1
