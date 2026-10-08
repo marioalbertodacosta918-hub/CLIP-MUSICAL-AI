@@ -63,6 +63,7 @@ button:disabled{opacity:.5}
 .eng-grid{grid-template-columns:1fr 1fr}.verso-item{grid-template-columns:45px 1fr 68px}
 }
 </style>
+<link rel="stylesheet" href="v2.css">
 </head>
 <body>
 <div class="container">
@@ -375,7 +376,7 @@ async function gerarVideo(duracaoAlvo,tituloModo){
  try{
   if(!musicaSelecionada)return alert("Selecione a música.");
   if(!imagensSelecionadas.length)return alert("Selecione pelo menos uma imagem.");
-  const versos=obterVersos();if(!versos.length)return alert("Cole a letra do louvor.");
+  const versos=obterVersos();
   const duracaoMusica=audioPreview.duration;if(!isFinite(duracaoMusica)||duracaoMusica<=0)return alert("Aguarde o carregamento da música.");
   let inicio=0;
   if(tituloModo==="ENGAJAMENTO"){inicio=Math.max(0,Math.min(parseFloat(inicioEngajamento.value)||0,Math.max(0,duracaoMusica-.2)))}
@@ -388,7 +389,7 @@ async function gerarVideo(duracaoAlvo,tituloModo){
   statusElemento.textContent="Carregando imagens...";
 
   const imagens=[];for(const item of imagensSelecionadas)imagens.push(await carregarImagem(item.src));
-  const canvas=document.createElement("canvas");if(formato.value==="9:16"){canvas.width=720;canvas.height=1280}else{canvas.width=1280;canvas.height=720}
+  const canvas=document.createElement("canvas");if(formato.value==="9:16"){canvas.width=720;canvas.height=1280}else if(formato.value==="1:1"){canvas.width=900;canvas.height=900}else{canvas.width=1280;canvas.height=720}
   const ctx=canvas.getContext("2d");if(!ctx)throw new Error("Não foi possível criar o Canvas.");
 
   // IMPORTANTE: 30 FPS reais em vez de captureStream(0).
@@ -484,10 +485,10 @@ $("botaoPacote").addEventListener("click",()=>{
  if(!musicaSelecionada)return alert("Selecione a música primeiro.");
  const nome=musicaSelecionada.name.replace(/\.[^/.]+$/,"");
  const versos=obterVersos();
- const primeiro=versos[0]||"Um novo louvor para ouvir, cantar e compartilhar.";
+ const primeiro=versos[0]||"Uma música para ouvir e compartilhar.";
  const titulo=nome+" | Clipe Musical";
- const desc=primeiro+"\n\n🎬 Assista ao clipe completo e compartilhe com alguém que precisa ouvir esta mensagem.\n\nMúsica: "+nome+"\nEstilo: "+estilo.value+"\n\n#Louvor #MúsicaGospel #Adoração #ClipeMusical #Jesus";
- $("tituloSugerido").value=titulo;$("descricaoSugerida").value=desc;$("hashtagsSugeridas").value="#Louvor #MúsicaGospel #Adoração #ClipeMusical #Jesus #Gospel";
+ const desc=primeiro+"\n\n🎬 Assista ao clipe completo e compartilhe com alguém que precisa ouvir esta mensagem.\n\nMúsica: "+nome+"\nEstilo: "+estilo.value+"\n\n#ClipeMusical #Musica #Videoclipe";
+ $("tituloSugerido").value=titulo;$("descricaoSugerida").value=desc;$("hashtagsSugeridas").value="#ClipeMusical #Musica #Videoclipe";
  $("pacote").style.display="block";
 });
 $("botaoMiniatura").addEventListener("click",()=>{
@@ -507,5 +508,6 @@ $("botaoMiniatura").addEventListener("click",()=>{
 window.addEventListener("beforeunload",()=>{if(videoURL)try{URL.revokeObjectURL(videoURL)}catch(e){}if(miniaturaURL)try{URL.revokeObjectURL(miniaturaURL)}catch(e){}});
 
 </script>
+<script src="v2.js"></script>
 </body>
 </html>
