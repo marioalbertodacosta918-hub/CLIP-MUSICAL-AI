@@ -15,3 +15,17 @@
 .v2-hidden{display:none!important}
 #v2Genero{margin-bottom:13px}
 @media(max-width:420px){.v2-modes{grid-template-columns:1fr}.v2-mode{min-height:69px}}
+
+
+/* Painel opcional: imagens com IA externa */
+.ai-v2-card{border-color:#4f4677}
+.ai-v2-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:12px}
+.ai-v2-grid input,.ai-v2-grid select{width:100%}
+.ai-v2-card textarea{min-height:88px}
+.ai-v2-help{padding:10px 12px;border:1px solid #44485d;background:#1b2132;color:#c6ccdf;font-size:13px;line-height:1.5;border-radius:10px;margin-bottom:12px}
+.ai-v2-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ai-v2-actions button{margin:0}
+.ai-v2-preview{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+.ai-v2-prompt{padding:12px;background:#101222;border:1px solid #333850;border-radius:10px;font-size:12px;line-height:1.55}
+.ai-v2-prompt p{color:#b4bace;margin-top:6px;overflow-wrap:anywhere}
+@media(max-width:580px){.ai-v2-grid,.ai-v2-actions{grid-template-columns:1fr}}
