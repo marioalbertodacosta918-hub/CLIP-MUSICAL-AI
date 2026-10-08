@@ -103,8 +103,9 @@
   const previous=imagensSelecionadas.slice();
   const generated=[];
   const originalPhoto=activeMode()==="imagem"?originals().find(x=>x.tipo!=="video"&&/^data:image\/(png|jpeg|webp);base64,/.test(x.src))?.src:null;
-  const reference=originalPhoto?await optimizeReference(originalPhoto):null;
+  let reference=null;
   try{
+   reference=originalPhoto?await optimizeReference(originalPhoto):null;
    for(let i=0;i<scenes.length;i++){
     status.textContent="IA criando cena "+(i+1)+" de "+scenes.length+"…";
     const res=await fetch(base+"/api/generate-scene",{
