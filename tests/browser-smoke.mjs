@@ -85,7 +85,7 @@ try{
    }
    requests++;
    const payload=JSON.parse(req.postData()||"{}");
-   if(payload.reference_image?.startsWith("data:image/png;base64,"))referenceRequests++;
+   if(/^data:image\/jpeg;base64,/.test(payload.reference_image||""))referenceRequests++;
    return route.fulfill({
      status:200,contentType:"application/json",
      headers:{"access-control-allow-origin":"*"},
