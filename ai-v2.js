@@ -18,6 +18,7 @@
   '<label>Senha de acesso ao servidor<input id="aiV2Token" type="password" autocomplete="off" placeholder="Token privado do proprietário"></label>',
   '<div class="ai-v2-help">A senha é usada somente durante esta sessão; não é salva no GitHub nem no navegador. A geração externa pode ter custos. Não use sua chave de API aqui.</div>',
   '<div class="ai-v2-actions"><button type="button" id="aiV2Plan" class="btn-azul">📝 Preparar cenas</button><button type="button" id="aiV2Generate" class="btn-verde">✨ Gerar imagens com IA</button></div>',
+  '<button id="aiV2FullClip" type="button" class="btn-verde">🎬 CRIAR CLIPE COM IA (TESTE DE 10 SEGUNDOS)</button>',
   '<div id="aiV2Status" class="status" role="status">Serviço externo ainda não configurado.</div>',
   '<div id="aiV2Preview" class="ai-v2-preview"></div>'
  ].join("");
@@ -69,17 +70,17 @@
  }
  $("aiV2Plan").addEventListener("click",makePlan);
  async function generate(){
-  if(running)return;
-  if(!musicaSelecionada){status.textContent="Primeiro escolha uma música.";return;}
+  if(running)return false;
+  if(!musicaSelecionada){status.textContent="Primeiro escolha uma música.";return false;}
   const base=($("aiV2Endpoint").value||"").trim().replace(/\/+$/,"");
   const token=$("aiV2Token").value;
   if(!/^https:\/\/[A-Za-z0-9.-]+(?::\d+)?$/.test(base)||!token){
    status.textContent="Configure o endereço HTTPS e a senha do seu servidor de IA. Sem servidor, esta opção não gera imagens reais.";
-   return;
+   return false;
   }
-  const scenes=makePlan();if(!scenes.length)return;
+  const scenes=makePlan();if(!scenes.length)return false;
   const costConfirm=confirm("Serão solicitadas "+scenes.length+" imagens à API de IA. Isso pode gerar cobranças no serviço conectado. Deseja continuar?");
-  if(!costConfirm)return;
+  if(!costConfirm)return false;
   running=true;
   const button=$("aiV2Generate");button.disabled=true;
   const previous=imagensSelecionadas.slice();
@@ -102,11 +103,26 @@
    imagensSelecionadas=activeMode()==="musica"?generated:keep.concat(generated);
    atualizarImagens();
    status.textContent="✅ "+generated.length+" imagens novas geradas. Agora use GERAR CLIPE para montar o vídeo.";
+   return true;
   }catch(err){
    console.error("Falha IA:",err);
    status.textContent="❌ "+String(err.message||"Falha ao gerar imagens.")+" Nenhuma cena anterior foi apagada.";
+   return false;
   }finally{running=false;button.disabled=false;}
  }
  $("aiV2Generate").addEventListener("click",generate);
+ // O botão único tenta liberar o áudio durante o gesto do usuário, antes da chamada remota.
+ $("aiV2FullClip").addEventListener("click",async()=>{
+   const btn=$("aiV2FullClip");btn.disabled=true;
+   try{
+     if(typeof prepararAudio==="function" && musicaSelecionada){
+       try{await prepararAudio()}catch(e){/* Mensagem de áudio será exibida pelo gerador. */}
+     }
+     if(await generate()){
+       status.textContent="Imagens prontas. Montando teste de 10 segundos com a música…";
+       await gerarVideo(10,"COMPLETO");
+     }
+   }finally{btn.disabled=false;}
+ });
  window.clipMusicalAIV2Engine={makePlan,generate};
 })();
