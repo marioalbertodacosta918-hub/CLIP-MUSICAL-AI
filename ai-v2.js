@@ -1,5 +1,5 @@
 /* CLIP MUSICAL AI — interface opcional para cenas geradas por IA.
-   A chave da OpenAI só existe no servidor; esta interface requer autenticação
+   O token Cloudflare só existe no servidor; esta interface requer autenticação
    do proprietário e um endereço de backend próprio, não incluídos no site estático. */
 (function(){
  "use strict";
@@ -10,13 +10,13 @@
  panel.className="card ai-v2-card";
  panel.innerHTML=[
   '<h2>🤖 Estúdio de cenas com IA</h2>',
-  '<p class="dica">Crie imagens inéditas a partir do gênero e da letra. Com uma imagem enviada, a IA recebe essa imagem como referência. A consistência visual não é garantida.</p>',
+  '<p class="dica">Gere imagens pela descrição do gênero e da letra usando Cloudflare FLUX Schnell. Se você enviar uma foto, ela será mantida na montagem, mas o modelo gratuito não usa a foto para gerar imagens.</p>',
   '<label for="aiV2Theme">Tema e direção criativa</label>',
   '<textarea id="aiV2Theme" rows="3" placeholder="Ex.: um casal caminhando ao pôr do sol; manter o mesmo personagem em todas as cenas."></textarea>',
   '<div class="ai-v2-grid"><label>Quantidade de cenas<select id="aiV2Count"><option>2</option><option selected>3</option><option>4</option><option>5</option><option>6</option></select></label>',
-  '<label>Endereço do servidor de IA<input id="aiV2Endpoint" type="url" placeholder="https://meu-servidor.workers.dev" autocomplete="off"></label></div>',
+  '<label>Endereço do servidor de IA<input id="aiV2Endpoint" type="url" value="https://clip-musical-ai-ia.onrender.com" autocomplete="off"></label></div>',
   '<label>Senha de acesso ao servidor<input id="aiV2Token" type="password" autocomplete="off" placeholder="Token privado do proprietário"></label>',
-  '<div class="ai-v2-help">A senha é usada somente durante esta sessão; não é salva no GitHub nem no navegador. A geração externa pode ter custos. Não use sua chave de API aqui.</div>',
+  '<div class="ai-v2-help">Aqui use apenas a senha CLIP_OWNER_TOKEN, nunca o API Token da Cloudflare. Ela não é salva. A Cloudflare tem cota gratuita diária no plano Workers Free; uso fora da cota pode falhar ou ser cobrado em planos pagos.</div>',
   '<div class="ai-v2-actions"><button type="button" id="aiV2Plan" class="btn-azul">📝 Preparar cenas</button><button type="button" id="aiV2Generate" class="btn-verde">✨ Gerar imagens com IA</button></div>',
   '<button id="aiV2FullClip" type="button" class="btn-verde">🎬 CRIAR CLIPE COM IA (TESTE DE 10 SEGUNDOS)</button>',
   '<div id="aiV2Status" class="status" role="status">Serviço externo ainda não configurado.</div>',
@@ -52,7 +52,6 @@
    ];
    if(theme)prompt.push("Art direction: "+theme);
    if(verse)prompt.push("Inspired by this lyric: "+verse);
-   if(activeMode()==="imagem"&&originals().length)prompt.push("Use the uploaded reference image to preserve the subject and mood");
    return {number:i+1,stage,verse,prompt:prompt.join(". ").slice(0,1900)};
   });
   preview.replaceChildren();
@@ -69,23 +68,6 @@
   return plan;
  }
  $("aiV2Plan").addEventListener("click",makePlan);
- async function optimizeReference(src){
-  // Reduz fotos grandes enviadas por celular sem modificar a imagem original.
-  if(!/^data:image\/(?:png|jpeg|webp);base64,/.test(src||""))return null;
-  const img=new Image();
-  await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error("Imagem de referência inválida."));img.src=src;});
-  const max=1280,ratio=Math.min(1,max/Math.max(img.width,img.height));
-  const canvas=document.createElement("canvas");
-  canvas.width=Math.max(1,Math.round(img.width*ratio));
-  canvas.height=Math.max(1,Math.round(img.height*ratio));
-  const ctx=canvas.getContext("2d");
-  if(!ctx)throw new Error("Seu navegador não consegue preparar a foto.");
-  ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.drawImage(img,0,0,canvas.width,canvas.height);
-  const encoded=canvas.toDataURL("image/jpeg",.78);
-  if(encoded.length>6000000)throw new Error("Foto grande demais para o serviço de IA.");
-  return encoded;
- }
  async function generate(){
   if(running)return false;
   if(!musicaSelecionada){status.textContent="Primeiro escolha uma música.";return false;}
@@ -96,21 +78,18 @@
    return false;
   }
   const scenes=makePlan();if(!scenes.length)return false;
-  const costConfirm=confirm("Serão solicitadas "+scenes.length+" imagens à API de IA. Isso pode gerar cobranças no serviço conectado. Deseja continuar?");
+  const costConfirm=confirm("Serão solicitadas "+scenes.length+" imagens da Cloudflare, consumindo a cota gratuita quando disponível. Em plano pago, pode haver cobrança. Deseja continuar?");
   if(!costConfirm)return false;
   running=true;
   const button=$("aiV2Generate");button.disabled=true;
   const previous=imagensSelecionadas.slice();
   const generated=[];
-  const originalPhoto=activeMode()==="imagem"?originals().find(x=>x.tipo!=="video"&&/^data:image\/(png|jpeg|webp);base64,/.test(x.src))?.src:null;
-  let reference=null;
   try{
-   reference=originalPhoto?await optimizeReference(originalPhoto):null;
    for(let i=0;i<scenes.length;i++){
     status.textContent="IA criando cena "+(i+1)+" de "+scenes.length+"…";
     const res=await fetch(base+"/api/generate-scene",{
      method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
-     body:JSON.stringify({prompt:scenes[i].prompt,format:$("formato").value,reference_image:reference||undefined})
+     body:JSON.stringify({prompt:scenes[i].prompt,format:$("formato").value})
     });
     let body={};try{body=await res.json()}catch{}
     if(!res.ok)throw new Error(body.error||"Servidor respondeu "+res.status);
@@ -121,7 +100,7 @@
    const keep=previous.filter(x=>!x.aiV2&&!x.gerada);
    imagensSelecionadas=activeMode()==="musica"?generated:keep.concat(generated);
    atualizarImagens();
-   status.textContent="✅ "+generated.length+" imagens novas geradas. Agora use GERAR CLIPE para montar o vídeo.";
+   status.textContent="✅ "+generated.length+" imagens novas geradas por Cloudflare AI. Agora use GERAR CLIPE para montar o vídeo.";
    return true;
   }catch(err){
    console.error("Falha IA:",err);
