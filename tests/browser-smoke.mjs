@@ -74,6 +74,35 @@ try{
  await page.waitForFunction(()=>document.getElementById("download").style.display==="block");
  assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
  console.log("PASS navegador: música + uma imagem gerou WebM");
+
+ // Integração completa com serviço simulado, sem cobranças de API.
+ let requests=0, referenceRequests=0;
+ page.on("dialog",dialog=>dialog.accept());
+ await page.route("https://ai-test.example/api/generate-scene",async route=>{
+   const req=route.request();
+   if(req.method()==="OPTIONS"){
+     return route.fulfill({status:204,headers:{"access-control-allow-origin":"*","access-control-allow-headers":"content-type,authorization","access-control-allow-methods":"POST, OPTIONS"}});
+   }
+   requests++;
+   const payload=JSON.parse(req.postData()||"{}");
+   if(payload.reference_image?.startsWith("data:image/png;base64,"))referenceRequests++;
+   return route.fulfill({
+     status:200,contentType:"application/json",
+     headers:{"access-control-allow-origin":"*"},
+     body:JSON.stringify({image:"data:image/png;base64,"+pngBase64})
+   });
+ });
+ await page.locator("#aiV2Endpoint").fill("https://ai-test.example");
+ await page.locator("#aiV2Token").fill("fake-local-test-token");
+ await page.locator("#aiV2FullClip").click();
+ await page.waitForFunction(()=>!document.getElementById("aiV2FullClip").disabled,{timeout:25000});
+ assert.equal(requests,3);
+ assert.equal(referenceRequests,3);
+ assert.equal(await page.locator(".preview-item").count(),4);
+ assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
+ assert.equal(errors.length,0,errors.join(" | "));
+ console.log("PASS navegador: fluxo música + imagem de referência → 3 cenas IA simuladas → WebM, preservando arquivo original");
+
  // Modo várias imagens: mantém mais de um arquivo.
  await page.locator('[data-v2-modo="imagens"]').click();
  await page.locator("#inputImagens").setInputFiles([
