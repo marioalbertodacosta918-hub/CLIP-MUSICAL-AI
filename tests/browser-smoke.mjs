@@ -52,6 +52,57 @@ try{
  });
  assert.ok(videoInfo.size>500,"Clipe gerado não pode ser vazio");
  assert.match(videoInfo.type,/webm/);
+ // Modo Música + Imagem: a imagem enviada realmente participa da exportação.
+ const pngBase64=await page.evaluate(()=>{
+   const c=document.createElement("canvas");c.width=320;c.height=180;
+   const ctx=c.getContext("2d");ctx.fillStyle="#2158af";ctx.fillRect(0,0,320,180);
+   ctx.fillStyle="#fae04f";ctx.fillRect(30,30,260,120);
+   return c.toDataURL("image/png").split(",")[1];
+ });
+ const png=Buffer.from(pngBase64,"base64");
+ await page.locator('[data-v2-modo="imagem"]').click();
+ await page.locator("#inputImagens").setInputFiles({name:"imagem.png",mimeType:"image/png",buffer:png});
+ await page.waitForFunction(()=>document.getElementById("contadorImagens").textContent.includes("1 arquivo"));
+ await page.locator("#botaoGerar").click();
+ await page.waitForFunction(()=>document.getElementById("download").style.display==="block");
+ assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
+ console.log("PASS navegador: música + uma imagem gerou WebM");
+ // Modo várias imagens: mantém mais de um arquivo.
+ await page.locator('[data-v2-modo="imagens"]').click();
+ await page.locator("#inputImagens").setInputFiles([
+   {name:"foto-1.png",mimeType:"image/png",buffer:png},
+   {name:"foto-2.png",mimeType:"image/png",buffer:png}
+ ]);
+ await page.waitForFunction(()=>document.getElementById("contadorImagens").textContent.includes("2 arquivos"));
+ await page.locator("#botaoGerar").click();
+ await page.waitForFunction(()=>document.getElementById("download").style.display==="block");
+ assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
+ console.log("PASS navegador: música + duas imagens gerou WebM");
+ // Modo vídeos: cria um WebM de entrada legítimo antes de importá-lo.
+ const bytesVideo=await page.evaluate(async()=>{
+   const c=document.createElement("canvas");c.width=160;c.height=90;
+   const ctx=c.getContext("2d");
+   ctx.fillStyle="#6548db";ctx.fillRect(0,0,160,90);
+   const stream=c.captureStream(15);
+   const media=new MediaRecorder(stream,{mimeType:"video/webm"});
+   const partes=[];
+   media.ondataavailable=e=>{if(e.data.size)partes.push(e.data)};
+   media.start(200);
+   const timer=setInterval(()=>{ctx.fillStyle="#f8cb46";ctx.fillRect(Math.floor(Math.random()*160),25,30,50)},90);
+   await new Promise(r=>setTimeout(r,1250));
+   clearInterval(timer);
+   const parado=new Promise(resolve=>media.addEventListener("stop",resolve,{once:true}));
+   media.stop();await parado;
+   stream.getTracks().forEach(t=>t.stop());
+   return Array.from(new Uint8Array(await new Blob(partes,{type:"video/webm"}).arrayBuffer()));
+ });
+ await page.locator('[data-v2-modo="videos"]').click();
+ await page.locator("#inputImagens").setInputFiles({name:"filmagem.webm",mimeType:"video/webm",buffer:Buffer.from(bytesVideo)});
+ await page.waitForFunction(()=>document.getElementById("contadorImagens").textContent.includes("1 arquivo"));
+ await page.locator("#botaoGerar").click();
+ await page.waitForFunction(()=>document.getElementById("download").style.display==="block",{timeout:20000});
+ assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
+ console.log("PASS navegador: música + vídeo importado gerou WebM");
  assert.equal(errors.length,0,"Erros de JavaScript: "+errors.join(" | "));
  console.log("PASS navegador: vídeo real WebM criado com música e cenas abstratas — "+videoInfo.size+" bytes");
 }catch(e){
