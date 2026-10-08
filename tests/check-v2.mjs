@@ -13,6 +13,8 @@ const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
 assert.ok(scripts.length>0,"A página precisa de código principal");
 for(let i=0;i<scripts.length;i++)new Script(scripts[i][1],{filename:"index.inline."+i+".js"});
 new Script(v2,{filename:"v2.js"});
+new Script(readFileSync("ai-v2.js","utf8"),{filename:"ai-v2.js"});
+assert.match(html,/<script src="ai-v2\.js"><\/script>/,"Motor de IA precisa estar ligado à página");
 console.log("PASS: JavaScript principal e V2 são sintaticamente válidos");
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 assert.equal(new Set(ids).size,ids.length,"IDs HTML duplicados na página original");
