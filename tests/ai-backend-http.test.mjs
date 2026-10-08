@@ -1,17 +1,22 @@
 import { strict as assert } from "node:assert";
 import { createAppServer } from "../server/index.mjs";
-
-const env={OPENAI_API_KEY:"fake-key",CLIP_OWNER_TOKEN:"private-token",ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site"};
+const env={
+ CF_ACCOUNT_ID:"0123456789abcdef0123456789abcdef",
+ CF_API_TOKEN:"fake-cloudflare-key",
+ CLIP_OWNER_TOKEN:"private-token",
+ ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site"
+};
 const server=createAppServer(env);
 await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
 const base="http://127.0.0.1:"+server.address().port;
 const nativeFetch=globalThis.fetch;
 let upstreamCalls=0;
 globalThis.fetch=async(url,opts)=>{
- if(String(url).startsWith("https://api.openai.com/")){
+ if(String(url).startsWith("https://api.cloudflare.com/")){
   upstreamCalls++;
-  assert.equal(opts.headers.Authorization,"Bearer fake-key");
-  return new Response(JSON.stringify({data:[{b64_json:"AAEC"}]}),{status:200,headers:{"content-type":"application/json"}});
+  assert.equal(opts.headers.Authorization,"Bearer fake-cloudflare-key");
+  return new Response(JSON.stringify({success:true,result:{image:"QUJDREVGR0g="}}),
+   {status:200,headers:{"content-type":"application/json"}});
  }
  return nativeFetch(url,opts);
 };
@@ -29,9 +34,9 @@ try{
  assert.equal(upstreamCalls,0);
  const generated=await req({prompt:"Paisagem cinematográfica de montanhas ao amanhecer",format:"16:9"});
  assert.equal(generated.status,200);
- assert.match((await generated.json()).image,/^data:image\/png;base64,/);
+ assert.match((await generated.json()).image,/^data:image\/jpeg;base64,/);
  assert.equal(upstreamCalls,1);
- console.log("PASS: hospedagem Node/Render responde /health, bloqueia token inválido e gera imagem via API simulada");
+ console.log("PASS: Render Node /health, Cloudflare FLUX gratuita simulada e proteção por senha");
 }finally{
  globalThis.fetch=nativeFetch;
  await new Promise(resolve=>server.close(resolve));
