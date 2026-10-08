@@ -85,7 +85,7 @@ try{
    }
    requests++;
    const payload=JSON.parse(req.postData()||"{}");
-   if(/^data:image\/jpeg;base64,/.test(payload.reference_image||""))referenceRequests++;
+   if(payload.reference_image)referenceRequests++;
    return route.fulfill({
      status:200,contentType:"application/json",
      headers:{"access-control-allow-origin":"*"},
@@ -97,11 +97,11 @@ try{
  await page.locator("#aiV2FullClip").click();
  await page.waitForFunction(()=>!document.getElementById("aiV2FullClip").disabled,{timeout:25000});
  assert.equal(requests,3);
- assert.equal(referenceRequests,3);
+ assert.equal(referenceRequests,0);
  assert.equal(await page.locator(".preview-item").count(),4);
  assert.match(await page.locator("#resultadoInfo").innerText(),/criada/i);
  assert.equal(errors.length,0,errors.join(" | "));
- console.log("PASS navegador: fluxo música + imagem de referência → 3 cenas IA simuladas → WebM, preservando arquivo original");
+ console.log("PASS navegador: fluxo música + imagem de referência → 3 cenas FLUX simuladas sem enviar foto ao provedor → WebM, preservando foto original");
 
  // Modo várias imagens: mantém mais de um arquivo.
  await page.locator('[data-v2-modo="imagens"]').click();
