@@ -1,33 +1,54 @@
 import assert from "node:assert/strict";
 import worker from "../server/ai-worker.mjs";
-const env={OPENAI_API_KEY:"fake-secret",CLIP_OWNER_TOKEN:"private-token",ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site",IMAGE_MODEL:"gpt-image-1"};
-const base="https://my-worker.example/api/generate-scene";
-function req({method="POST",origin=env.ALLOWED_ORIGIN,auth="Bearer private-token",body={prompt:"Um cenário cinematográfico ao pôr do sol",format:"16:9"}}={}){
- return new Request(base,{method,headers:{"Origin":origin,"Authorization":auth,"Content-Type":"application/json"},body:method==="POST"?JSON.stringify(body):undefined});
+
+const env={
+ CF_ACCOUNT_ID:"0123456789abcdef0123456789abcdef",
+ CF_API_TOKEN:"fake-cloudflare-api-token",
+ CF_IMAGE_MODEL:"@cf/black-forest-labs/flux-1-schnell",
+ CLIP_OWNER_TOKEN:"private-owner-token",
+ ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site"
+};
+const base="https://my-backend.example/api/generate-scene";
+function req({
+ method="POST",origin=env.ALLOWED_ORIGIN,auth="Bearer private-owner-token",
+ body={prompt:"Paisagem musical cinematográfica ao pôr do sol",format:"16:9"}
+}={}){
+ return new Request(base,{
+  method,headers:{Origin:origin,Authorization:auth,"Content-Type":"application/json"},
+  body:method==="POST"?JSON.stringify(body):undefined
+ });
 }
-let bad=await worker.fetch(req({origin:"https://evil.example"}),env);
-assert.equal(bad.status,403);
-bad=await worker.fetch(req({auth:"Bearer incorrect"}),env);
-assert.equal(bad.status,401);
-bad=await worker.fetch(req({body:{prompt:"curto"}}),env);
-assert.equal(bad.status,400);
-const options=await worker.fetch(req({method:"OPTIONS"}),env);
-assert.equal(options.status,204);
-let called="";
-const realFetch=globalThis.fetch;
-globalThis.fetch=async (url,options)=>{
- called=url;
- assert.equal(options.headers.Authorization,"Bearer fake-secret");
- return new Response(JSON.stringify({data:[{b64_json:"AAEC"}]}),{status:200,headers:{"Content-Type":"application/json"}});
+async function call(options={},environment=env){
+ return worker.fetch(req(options),environment);
+}
+assert.equal((await call({origin:"https://evil.example"})).status,403);
+assert.equal((await call({auth:"Bearer incorrect"})).status,401);
+assert.equal((await call({body:{prompt:"short"}})).status,400);
+assert.equal((await call({body:{prompt:"Cena cinematográfica romântica",format:"4:5"}})).status,400);
+assert.equal((await call({body:{prompt:"Cena cinematográfica romântica",reference_image:"data:image/png;base64,AAEC"}})).status,400);
+assert.equal((await call({}, {...env,CF_API_TOKEN:""})).status,503);
+assert.equal((await call({}, {...env,CF_IMAGE_MODEL:"@cf/something-paid"})).status,503);
+const preflight=await call({method:"OPTIONS"});
+assert.equal(preflight.status,204);
+assert.equal(preflight.headers.get("access-control-allow-origin"),env.ALLOWED_ORIGIN);
+
+const rawFetch=globalThis.fetch;
+let calls=0;
+globalThis.fetch=async(url,options)=>{
+ calls++;
+ assert.equal(url,"https://api.cloudflare.com/client/v4/accounts/"+env.CF_ACCOUNT_ID+"/ai/run/@cf/black-forest-labs/flux-1-schnell");
+ assert.equal(options.headers.Authorization,"Bearer "+env.CF_API_TOKEN);
+ const sent=JSON.parse(options.body);
+ assert.equal(sent.steps,4);
+ assert.match(sent.prompt,/cinematic 16:9/i);
+ return new Response(JSON.stringify({success:true,result:{image:"QUJDREVGR0g="}}),{status:200,headers:{"Content-Type":"application/json"}});
 };
 try{
- let good=await worker.fetch(req(),env);
- assert.equal(good.status,200);
- assert.equal((await good.json()).image,"data:image/png;base64,AAEC");
- assert.ok(called.endsWith("/images/generations"));
- const tiny="data:image/png;base64,"+Buffer.from([137,80,78,71]).toString("base64");
- good=await worker.fetch(req({body:{prompt:"Outra cena romântica cinematográfica",format:"9:16",reference_image:tiny}}),env);
- assert.equal(good.status,200);
- assert.ok(called.endsWith("/images/edits"));
- console.log("PASS: autenticação, origem, geração e edição com referência (API simulada)");
-}finally{globalThis.fetch=realFetch;}
+ const response=await call();
+ assert.equal(response.status,200);
+ assert.equal((await response.json()).image,"data:image/jpeg;base64,QUJDREVGR0g=");
+ assert.equal(calls,1);
+ globalThis.fetch=async()=>new Response(JSON.stringify({success:false,errors:[{message:"quota reached"}]}),{status:429,headers:{"Content-Type":"application/json"}});
+ assert.equal((await call()).status,429);
+ console.log("PASS: Cloudflare FLUX Schnell, proteção de credenciais, origem, referência não suportada e cota (API simulada)");
+}finally{globalThis.fetch=rawFetch;}
