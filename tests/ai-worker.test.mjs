@@ -6,11 +6,11 @@ const env={
  CF_API_TOKEN:"fake-cloudflare-api-token",
  CF_IMAGE_MODEL:"@cf/black-forest-labs/flux-1-schnell",
  CLIP_OWNER_TOKEN:"private-owner-token",
- ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site"
+ ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site,https://marioalbertodacosta918-hub.github.io"
 };
 const base="https://my-backend.example/api/generate-scene";
 function req({
- method="POST",origin=env.ALLOWED_ORIGIN,auth="Bearer private-owner-token",
+ method="POST",origin="https://clip-musical-ai.hatchable.site",auth="Bearer private-owner-token",
  body={prompt:"Paisagem musical cinematográfica ao pôr do sol",format:"16:9"}
 }={}){
  return new Request(base,{
@@ -30,7 +30,10 @@ assert.equal((await call({}, {...env,CF_API_TOKEN:""})).status,503);
 assert.equal((await call({}, {...env,CF_IMAGE_MODEL:"@cf/something-paid"})).status,503);
 const preflight=await call({method:"OPTIONS"});
 assert.equal(preflight.status,204);
-assert.equal(preflight.headers.get("access-control-allow-origin"),env.ALLOWED_ORIGIN);
+assert.equal(preflight.headers.get("access-control-allow-origin"),"https://clip-musical-ai.hatchable.site");
+const pages=await call({origin:"https://marioalbertodacosta918-hub.github.io",method:"OPTIONS"});
+assert.equal(pages.status,204);
+assert.equal(pages.headers.get("access-control-allow-origin"),"https://marioalbertodacosta918-hub.github.io");
 
 const rawFetch=globalThis.fetch;
 let calls=0;
