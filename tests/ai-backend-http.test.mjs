@@ -4,7 +4,7 @@ const env={
  CF_ACCOUNT_ID:"0123456789abcdef0123456789abcdef",
  CF_API_TOKEN:"fake-cloudflare-key",
  CLIP_OWNER_TOKEN:"private-token",
- ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site"
+ ALLOWED_ORIGIN:"https://clip-musical-ai.hatchable.site,https://marioalbertodacosta918-hub.github.io"
 };
 const server=createAppServer(env);
 await new Promise(resolve=>server.listen(0,"127.0.0.1",resolve));
@@ -22,7 +22,7 @@ globalThis.fetch=async(url,opts)=>{
 };
 const req=(body,token="private-token")=>nativeFetch(base+"/api/generate-scene",{
  method:"POST",
- headers:{Origin:env.ALLOWED_ORIGIN,Authorization:"Bearer "+token,"Content-Type":"application/json"},
+ headers:{Origin:"https://clip-musical-ai.hatchable.site",Authorization:"Bearer "+token,"Content-Type":"application/json"},
  body:JSON.stringify(body)
 });
 try{
