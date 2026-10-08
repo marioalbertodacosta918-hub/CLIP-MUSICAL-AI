@@ -1,0 +1,9 @@
+# Dados privados e arquivos locais de implantação
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+node_modules/
+*.log
