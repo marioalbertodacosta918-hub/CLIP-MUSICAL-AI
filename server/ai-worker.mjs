@@ -18,10 +18,12 @@ export default {
  async fetch(request,env){
   const url=new URL(request.url);
   if(url.pathname!=="/api/generate-scene")return respond({error:"Not found"},404);
-  if(request.headers.get("origin")!==env.ALLOWED_ORIGIN || !env.ALLOWED_ORIGIN)
+  const origin=request.headers.get("origin");
+  const permitted=String(env.ALLOWED_ORIGIN||"").split(",").map(s=>s.trim()).filter(Boolean);
+  if(!origin||!permitted.includes(origin))
    return respond({error:"Origem não autorizada."},403);
   const cors={
-   "access-control-allow-origin":env.ALLOWED_ORIGIN,
+   "access-control-allow-origin":origin,
    "access-control-allow-methods":"POST, OPTIONS",
    "access-control-allow-headers":"content-type, authorization",
    "vary":"Origin"
