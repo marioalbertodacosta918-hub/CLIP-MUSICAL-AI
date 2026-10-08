@@ -19,3 +19,9 @@ jobs:
           node-version: '22'
       - name: Conferir estrutura e scripts
         run: node tests/check-v2.mjs
+      - name: Instalar Playwright Core
+        run: npm install --no-save playwright-core
+      - name: Teste funcional em navegador móvel
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node tests/browser-smoke.mjs
