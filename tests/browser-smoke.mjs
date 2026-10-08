@@ -39,6 +39,13 @@ try{
  console.log("PASS navegador: seletores, quatro modos, gênero e formato 1:1");
  await page.locator("#inputMusica").setInputFiles({name:"teste.wav",mimeType:"audio/wav",buffer:wav()});
  await page.waitForFunction(()=>document.getElementById("audioPreview").duration>0,{timeout:10000});
+ await page.locator("#aiV2Theme").fill("paisagem cinematográfica ao anoitecer");
+ await page.locator("#aiV2Plan").click();
+ assert.equal(await page.locator(".ai-v2-prompt").count(),3);
+ assert.match(await page.locator("#aiV2Status").innerText(),/Plano preparado/);
+ await page.locator("#aiV2Generate").click();
+ assert.match(await page.locator("#aiV2Status").innerText(),/Configure o endereço HTTPS/);
+ console.log("PASS navegador: prompts de cenas e bloqueio seguro quando não existe servidor externo");
  await page.locator('[data-v2-modo="musica"]').click();
  assert.equal(await page.locator("#inputImagens").isVisible(),false);
  await page.locator("#botaoGerar").click();
