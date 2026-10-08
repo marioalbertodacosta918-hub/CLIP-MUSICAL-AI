@@ -26,7 +26,7 @@
   const campoGenero=document.createElement("div");
   campoGenero.innerHTML='<label for="v2Genero">🎼 Categoria musical</label>'+
     '<select id="v2Genero">'+
-    ['Gospel','Worship','Pop','Romântico','Funk','Rap','Trap','Sertanejo','Rock','MPB','Eletrônica','Lo-fi','Infantil','Instrumental','Motivacional','Cinemático','Outros'].map(g=>'<option value="'+g+'">'+g+'</option>').join('')+
+    ['Não definido','Gospel','Worship','Pop','Romântico','Funk','Rap','Trap','Sertanejo','Rock','MPB','Eletrônica','Lo-fi','Infantil','Instrumental','Motivacional','Cinemático','Outros'].map(g=>'<option value="'+g+'">'+g+'</option>').join('')+
     '</select>';
   estiloCard.insertBefore(campoGenero,estiloCard.firstElementChild.nextSibling);
   const estiloSelect=el("estilo");
@@ -46,7 +46,7 @@
     modoResumo.innerHTML='<strong>🎬 Modo</strong><span id="v2ResumoModo">Música + imagem</span>';
     const generoResumo=document.createElement("div");
     generoResumo.className="resumo-box";
-    generoResumo.innerHTML='<strong>🎼 Categoria</strong><span id="v2ResumoGenero">Gospel</span>';
+    generoResumo.innerHTML='<strong>🎼 Categoria</strong><span id="v2ResumoGenero">Não definido</span>';
     res.append(modoResumo,generoResumo);
   }
   const inputMidia=el("inputImagens");
@@ -81,6 +81,10 @@
   bloco.querySelectorAll("[data-v2-modo]").forEach(btn=>btn.addEventListener("click",()=>definirModo(btn.dataset.v2Modo)));
   generoSelect.addEventListener("change",()=>{
     el("v2ResumoGenero").textContent=generoSelect.value;
+    if(modo==="musica"&&imagensSelecionadas.some(x=>x.gerada)){
+      imagensSelecionadas=[];
+      atualizarImagens();
+    }
     roteiroAtual="";
   });
   const cores={
@@ -92,7 +96,9 @@
     Motivacional:["#422960","#febd46"],Cinemático:["#111d4e","#cb7eb8"],Outros:["#29385b","#77baff"]
   };
   function produzirImagensAbstratas(){
-    if(modo!=="musica"||imagensSelecionadas.length)return;
+    if(modo!=="musica")return;
+    if(imagensSelecionadas.length&&imagensSelecionadas.every(x=>x.gerada))return;
+    if(imagensSelecionadas.length)return;
     const paleta=cores[generoSelect.value]||cores.Outros;
     for(let cena=0;cena<6;cena++){
       const canvas=document.createElement("canvas");
