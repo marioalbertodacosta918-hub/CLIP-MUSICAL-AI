@@ -379,16 +379,39 @@ async function carregarImagem(item){
 
 function desenharCena(ctx,canvas,img,p,indice,pulso=0){
  const cw=canvas.width,ch=canvas.height;
- const zoom=(indice%2===0?1.15+p*.40:1.55-p*.40)+Math.max(0,Math.min(pulso,.4))*.14;
- let dx=0,dy=0;
- if(indice%4===0)dx=(p-.5)*cw*.24;
- else if(indice%4===1)dx=(.5-p)*cw*.24;
- else if(indice%4===2)dy=(p-.5)*ch*.24;
- else dy=(.5-p)*ch*.24;
  const iw=img.videoWidth||img.width,ih=img.videoHeight||img.height;
  if(!iw||!ih)return;
- const base=Math.max(cw/iw,ch/ih),esc=base*zoom,w=iw*esc,h=ih*esc;
- ctx.drawImage(img,(cw-w)/2+dx,(ch-h)/2+dy,w,h);
+ const vertical=ch>cw;
+ ctx.save();
+ ctx.clearRect(0,0,cw,ch);
+ if(vertical){
+  // Fill the canvas with a softened background, while keeping the complete
+  // source image visible in the foreground (no cropped faces or black bars).
+  const cover=Math.max(cw/iw,ch/ih),bw=iw*cover,bh=ih*cover;
+  ctx.save();
+  ctx.filter="blur(34px) brightness(0.55)";
+  ctx.drawImage(img,(cw-bw)/2-40,(ch-bh)/2-40,bw+80,bh+80);
+  ctx.restore();
+  const fit=Math.min(cw/iw,ch/ih);
+  const scale=fit*0.98;
+  const w=iw*scale,h=ih*scale;
+  // Only pan within the available free space, never outside the frame.
+  const freeX=Math.max(0,cw-w),freeY=Math.max(0,ch-h);
+  const move=(p-.5)*0.12;
+  const x=(cw-w)/2+move*freeX;
+  const y=(ch-h)/2+(indice%2?move:-move)*freeY;
+  ctx.drawImage(img,x,y,w,h);
+ }else{
+  const zoom=(indice%2===0?1.15+p*.40:1.55-p*.40)+Math.max(0,Math.min(pulso,.4))*.14;
+  const base=Math.max(cw/iw,ch/ih),esc=base*zoom,w=iw*esc,h=ih*esc;
+  let dx=0,dy=0;
+  if(indice%4===0)dx=(p-.5)*cw*.24;
+  else if(indice%4===1)dx=(.5-p)*cw*.24;
+  else if(indice%4===2)dy=(p-.5)*ch*.24;
+  else dy=(.5-p)*ch*.24;
+  ctx.drawImage(img,(cw-w)/2+dx,(ch-h)/2+dy,w,h);
+ }
+ ctx.restore();
 }
 function desenharLetra(ctx,canvas,text){
  if(!text?.trim())return;
